@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.WelcomeController">
+<children>
+    <ImageView fitHeight="600.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <image>
+            <Image url="@../images/hotel.jpg" />
+        </image>
+    </ImageView>
+    <AnchorPane fx:id="back" layoutX="164.0" layoutY="92.0" opacity="0.32" prefHeight="353.0" prefWidth="627.0" style="-fx-background-color: #000000;" stylesheets="@../css/welcome.css" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="100.0">
+        <children>
+            <Line endX="140.0" fill="WHITE" layoutX="146.0" layoutY="87.0" startX="-100.0" strokeWidth="23.0" />
+        </children></AnchorPane>
+    <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="171.0" prefHeight="34.0" prefWidth="899.0" text="Welcome to Hotel Management" textFill="WHITE">
+        <font>
+            <Font name="Montserrat SemiBold" size="28.0" />
+        </font>
+    </Label>
+    <Button fx:id="customerLoginBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="256.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="214.0" text="Customer Login" textOverrun="CENTER_ELLIPSIS">
+        <font>
+            <Font name="Montserrat Black" size="20.0" />
+        </font>
+    </Button>
+    <Button fx:id="employeeLoginBtn" layoutX="343.0" layoutY="329.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="214.0" text="Employee Login">
+        <font>
+            <Font name="Montserrat SemiBold" size="20.0" />
+        </font>
+    </Button>
+    <Button fx:id="adminLoginBtn" layoutX="343.0" layoutY="400.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="214.0" text="Admin Login">
+        <font>
+            <Font name="Montserrat SemiBold" size="20.0" />
+        </font>
+    </Button>
+    <Button fx:id="closeBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="861.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="23.0" prefWidth="38.0" text="x" textFill="WHITE">
+        <cursor>
+            <Cursor fx:constant="DEFAULT" />
+        </cursor>
+        <font>
+            <Font size="21.0" />
+        </font>
+    </Button>
+</children>
+   <stylesheets>
+      <URL value="@../css/welcome.css" />
+      <URL value="@../css/welcome.css" />
+   </stylesheets>
+</AnchorPane>
