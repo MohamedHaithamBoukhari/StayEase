@@ -5,10 +5,10 @@ public class Invoice {
     private int customerId;
     private int serviceId;
     private int status;
-    private int invoiceDate;
+    private String invoiceDate;
 
-    public Invoice(int invoiceId, int customerId, int serviceId, int status, int invoiceDate) {
-        this.invoiceId = invoiceId;
+    public Invoice(){}
+    public Invoice(int customerId, int serviceId, int status, String invoiceDate) {
         this.customerId = customerId;
         this.serviceId = serviceId;
         this.status = status;
@@ -47,11 +47,22 @@ public class Invoice {
         this.status = status;
     }
 
-    public int getInvoiceDate() {
+    public String getInvoiceDate() {
         return invoiceDate;
     }
 
-    public void setInvoiceDate(int invoiceDate) {
+    public void setInvoiceDate(String invoiceDate) {
         this.invoiceDate = invoiceDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "invoiceId=" + invoiceId +
+                ", customerId=" + customerId +
+                ", serviceId=" + serviceId +
+                ", status=" + status +
+                ", invoiceDate='" + invoiceDate + '\'' +
+                '}';
     }
 }

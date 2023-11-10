@@ -1,7 +1,7 @@
 package com.example.hotelmanagement.beans;
 
 public class Customer {
-    private int clientId;
+    private int customerId;
     private String fullName;
     private String cin;
     private String phone;
@@ -9,8 +9,8 @@ public class Customer {
     private String password;
     private String address;
 
-    public Customer(int clientId, String fullName, String cin, String phone, String email, String password, String address) {
-        this.clientId = clientId;
+    public  Customer(){}
+    public Customer(String fullName, String cin, String phone, String email, String password, String address) {
         this.fullName = fullName;
         this.cin = cin;
         this.phone = phone;
@@ -20,11 +20,11 @@ public class Customer {
     }
 
     public int getClientId() {
-        return clientId;
+        return customerId;
     }
 
     public void setClientId(int clientId) {
-        this.clientId = clientId;
+        this.customerId = clientId;
     }
 
     public String getFullName() {
@@ -73,5 +73,18 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", fullName='" + fullName + '\'' +
+                ", cin='" + cin + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

@@ -6,10 +6,10 @@ public class CleaningAssignment {
     private int cleaningId;
     private int employeeId;
     private int roomId;
-    private Date date;
+    private String date;
+    public CleaningAssignment(){}
 
-    public CleaningAssignment(int cleaningId, int employeeId, int roomId, Date date) {
-        this.cleaningId = cleaningId;
+    public CleaningAssignment(int employeeId, int roomId, String date) {
         this.employeeId = employeeId;
         this.roomId = roomId;
         this.date = date;
@@ -39,11 +39,21 @@ public class CleaningAssignment {
         this.roomId = roomId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "CleaningAssignment{" +
+                "cleaningId=" + cleaningId +
+                ", employeeId=" + employeeId +
+                ", roomId=" + roomId +
+                ", date='" + date + '\'' +
+                '}';
     }
 }

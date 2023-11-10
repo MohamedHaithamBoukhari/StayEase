@@ -7,12 +7,12 @@ public class Declaration {
     private int declarantId;
     private String declarantStatus;
     private String declaration;
-    private Date declarationDate;
+    private String declarationDate;
     private String response;
-    private Date responseDate;
+    private String responseDate;
 
-    public Declaration(int declarationId, int declarantId, String declarantStatus, String declaration, Date declarationDate, String response, Date responseDate) {
-        this.declarationId = declarationId;
+    public Declaration(){}
+    public Declaration(int declarantId, String declarantStatus, String declaration, String declarationDate, String response, String responseDate) {
         this.declarantId = declarantId;
         this.declarantStatus = declarantStatus;
         this.declaration = declaration;
@@ -53,11 +53,11 @@ public class Declaration {
         this.declaration = declaration;
     }
 
-    public Date getDeclarationDate() {
+    public String getDeclarationDate() {
         return declarationDate;
     }
 
-    public void setDeclarationDate(Date declarationDate) {
+    public void setDeclarationDate(String declarationDate) {
         this.declarationDate = declarationDate;
     }
 
@@ -69,11 +69,24 @@ public class Declaration {
         this.response = response;
     }
 
-    public Date getResponseDate() {
+    public String getResponseDate() {
         return responseDate;
     }
 
-    public void setResponseDate(Date responseDate) {
+    public void setResponseDate(String responseDate) {
         this.responseDate = responseDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Declaration{" +
+                "declarationId=" + declarationId +
+                ", declarantId=" + declarantId +
+                ", declarantStatus='" + declarantStatus + '\'' +
+                ", declaration='" + declaration + '\'' +
+                ", declarationDate='" + declarationDate + '\'' +
+                ", response='" + response + '\'' +
+                ", responseDate='" + responseDate + '\'' +
+                '}';
     }
 }

@@ -14,9 +14,10 @@ public class Feedback {
     private int view_rate;
     private int serviceVSprice_rate;
     private int review_rate;
+    private String feedback_date;
 
-    public Feedback(int feedbackId, int customertId, String visibility, int priority, int customerService_rate, int cleanliness_rate, int roomComfort_rate, int location_rate, int safety_rate, int environnement_rate, int view_rate, int serviceVSprice_rate, int review_rate) {
-        this.feedbackId = feedbackId;
+    public Feedback(){}
+    public Feedback(int customertId, String visibility, int priority, int customerService_rate, int cleanliness_rate, int roomComfort_rate, int location_rate, int safety_rate, int environnement_rate, int view_rate, int serviceVSprice_rate, int review_rate, String feedback_date) {
         this.customertId = customertId;
         this.visibility = visibility;
         this.priority = priority;
@@ -29,6 +30,7 @@ public class Feedback {
         this.view_rate = view_rate;
         this.serviceVSprice_rate = serviceVSprice_rate;
         this.review_rate = review_rate;
+        this.feedback_date = feedback_date;
     }
 
     public int getFeedbackId() {
@@ -133,5 +135,33 @@ public class Feedback {
 
     public void setReview_rate(int review_rate) {
         this.review_rate = review_rate;
+    }
+
+    public String getFeedback_date() {
+        return feedback_date;
+    }
+
+    public void setFeedback_date(String feedback_date) {
+        this.feedback_date = feedback_date;
+    }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "feedbackId=" + feedbackId +
+                ", customertId=" + customertId +
+                ", visibility='" + visibility + '\'' +
+                ", priority=" + priority +
+                ", customerService_rate=" + customerService_rate +
+                ", cleanliness_rate=" + cleanliness_rate +
+                ", roomComfort_rate=" + roomComfort_rate +
+                ", location_rate=" + location_rate +
+                ", safety_rate=" + safety_rate +
+                ", environnement_rate=" + environnement_rate +
+                ", view_rate=" + view_rate +
+                ", serviceVSprice_rate=" + serviceVSprice_rate +
+                ", review_rate=" + review_rate +
+                ", feedback_date='" + feedback_date + '\'' +
+                '}';
     }
 }

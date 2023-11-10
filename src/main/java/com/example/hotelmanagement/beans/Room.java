@@ -7,8 +7,8 @@ public class Room {
     private int capacity;
     private String status;
 
-    public Room(int roomId, int numRoom, String type, int capacity, String status) {
-        this.roomId = roomId;
+    public Room(){}
+    public Room(int numRoom, String type, int capacity, String status) {
         this.numRoom = numRoom;
         this.type = type;
         this.capacity = capacity;
@@ -53,5 +53,16 @@ public class Room {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomId=" + roomId +
+                ", numRoom=" + numRoom +
+                ", type='" + type + '\'' +
+                ", capacity=" + capacity +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

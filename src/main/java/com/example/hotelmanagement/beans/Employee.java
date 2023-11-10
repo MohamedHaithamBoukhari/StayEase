@@ -12,8 +12,8 @@ public class Employee {
     private String workingHours;
     private String workingDays;
 
-    public Employee(int employeeId, String fullName, String cin, String phone, String email, String password, String position, int salary, String workingHours, String workingDays) {
-        this.employeeId = employeeId;
+    public Employee(){}
+    public Employee(String fullName, String cin, String phone, String email, String password, String position, int salary, String workingHours, String workingDays) {
         this.fullName = fullName;
         this.cin = cin;
         this.phone = phone;
@@ -103,5 +103,21 @@ public class Employee {
 
     public void setWorkingDays(String workingDays) {
         this.workingDays = workingDays;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", fullName='" + fullName + '\'' +
+                ", cin='" + cin + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", position='" + position + '\'' +
+                ", salary=" + salary +
+                ", workingHours='" + workingHours + '\'' +
+                ", workingDays='" + workingDays + '\'' +
+                '}';
     }
 }

@@ -6,8 +6,8 @@ public class Service {
     private String descreption;
     private String correspondingTable;
 
-    public Service(int serviceId, String serviceName, String descreption, String correspondingTable) {
-        this.serviceId = serviceId;
+    public Service(){}
+    public Service(String serviceName, String descreption, String correspondingTable) {
         this.serviceName = serviceName;
         this.descreption = descreption;
         this.correspondingTable = correspondingTable;
@@ -43,5 +43,15 @@ public class Service {
 
     public void setCorrespondingTable(String correspondingTable) {
         this.correspondingTable = correspondingTable;
+    }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "serviceId=" + serviceId +
+                ", serviceName='" + serviceName + '\'' +
+                ", descreption='" + descreption + '\'' +
+                ", correspondingTable='" + correspondingTable + '\'' +
+                '}';
     }
 }
