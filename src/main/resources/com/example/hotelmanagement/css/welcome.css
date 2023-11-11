@@ -1,38 +1,18 @@
-#back{
--fx-background-radius:0 40;
-}
 #customerLoginBtn{
+    -fx-background-radius:0 20;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
     -fx-background-color:#f59d51;
 }
-#closeBtn {
-    -fx-background-color:transparent;
-}
-#closeBtn:hover {
-    -fx-background-color:red;
-
-}
 #employeeLoginBtn{
+    -fx-background-radius:0 20;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
     -fx-background-color:#b380b5;
 }
 #adminLoginBtn{
-    -fx-background-color:#2dd0bd;
-}
-
-.button {
-    -fx-font-size: 20;
     -fx-background-radius:0 20;
+    -fx-font-size: 20;
     -fx-font-weight: bold;
-}
-.button:hover {
-    -fx-scale-X: 1.10;
-    -fx-scale-y: 1.05;
-}
-
-.button:pressed {
-    -fx-scale-y: .95;
-    -fx-scale-x: 1;
-}
-
-.button:selected{
-    -fx-background-color: lightgreen;
+    -fx-background-color:#2dd0bd;
 }

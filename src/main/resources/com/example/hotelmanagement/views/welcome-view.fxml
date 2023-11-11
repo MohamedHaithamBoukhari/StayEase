@@ -17,7 +17,7 @@
             <Image url="@../images/hotel.jpg" />
         </image>
     </ImageView>
-    <AnchorPane fx:id="back" layoutX="164.0" layoutY="92.0" opacity="0.32" prefHeight="353.0" prefWidth="627.0" style="-fx-background-color: #000000;" stylesheets="@../css/welcome.css" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="100.0">
+    <AnchorPane fx:id="back" layoutX="164.0" layoutY="92.0" opacity="0.5" prefHeight="353.0" prefWidth="627.0" style="-fx-background-color: #000000;" stylesheets="@../css/welcome.css" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="100.0">
         <children>
             <Line endX="140.0" fill="WHITE" layoutX="146.0" layoutY="87.0" startX="-100.0" strokeWidth="23.0" />
         </children></AnchorPane>
@@ -26,7 +26,7 @@
             <Font name="Montserrat SemiBold" size="28.0" />
         </font>
     </Label>
-    <Button fx:id="customerLoginBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="256.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="214.0" text="Customer Login" textOverrun="CENTER_ELLIPSIS">
+    <Button fx:id="customerLoginBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="256.0" mnemonicParsing="false" onAction="#switchToCustomerLogin" prefHeight="34.0" prefWidth="214.0" text="Customer Login" textOverrun="CENTER_ELLIPSIS">
         <font>
             <Font name="Montserrat Black" size="20.0" />
         </font>
@@ -52,6 +52,6 @@
 </children>
    <stylesheets>
       <URL value="@../css/welcome.css" />
-      <URL value="@../css/welcome.css" />
+      <URL value="@../css/general.css" />
    </stylesheets>
 </AnchorPane>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.CustomerLoginController">
+<children>
+    <ImageView fitHeight="600.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <image>
+            <Image url="@../../images/hotel.jpg" />
+        </image>
+    </ImageView>
+    <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" stylesheets="@../../css/welcome.css" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
+    <Button fx:id="closeBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="861.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="23.0" prefWidth="38.0" text="x" textFill="WHITE">
+        <cursor>
+            <Cursor fx:constant="DEFAULT" />
+        </cursor>
+        <font>
+            <Font size="21.0" />
+        </font>
+    </Button>
+      <TextField fx:id="usernameField" layoutX="340.0" layoutY="218.0" prefHeight="35.0" prefWidth="220.0" text="Username" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Button fx:id="loginBtn" layoutX="340.0" layoutY="349.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="80.0" text="Log In">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Hyperlink fx:id="signUpLink" layoutX="415.0" layoutY="408.0" text="Sign Up" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Hyperlink>
+      <TextField fx:id="passwordField" layoutX="340.0" layoutY="278.0" prefHeight="35.0" prefWidth="220.0" text="Password">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Button fx:id="backBtn" layoutX="480.0" layoutY="349.0" mnemonicParsing="false" onAction="#previousScene" prefHeight="38.0" prefWidth="80.0" text="Back" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Customer Login" />
+</children>
+<stylesheets>
+    <URL value="@../../css/general.css" />
+    <URL value="@../../css/customer/customerLogin.css" />
+</stylesheets>
+</AnchorPane>

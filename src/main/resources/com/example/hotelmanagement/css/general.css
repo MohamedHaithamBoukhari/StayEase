@@ -1,0 +1,31 @@
+.root {
+
+}
+#back{
+-fx-background-radius:0 40;
+-fx-background-color:rgba(0,0,0,0.1);
+}
+#closeBtn {
+    -fx-background-radius:0 20;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color:transparent;
+}
+#closeBtn:hover {
+    -fx-background-color:red;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-scale-X: 1.10;
+    -fx-scale-y: 1.05;
+}
+
+.button:pressed {
+    -fx-scale-y: .95;
+    -fx-scale-x: 1;
+}
+
+.button:selected{
+    -fx-background-color: lightgreen;
+}

@@ -12,6 +12,8 @@ module com.example.hotelmanagement {
     opens com.example.hotelmanagement.controllers to javafx.fxml;
     exports com.example.hotelmanagement.dao;
     opens com.example.hotelmanagement.dao to javafx.fxml;
+    exports com.example.hotelmanagement.scenes;
+    opens com.example.hotelmanagement.scenes to javafx.fxml;
 
 
 }
