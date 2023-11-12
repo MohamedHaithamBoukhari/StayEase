@@ -14,6 +14,10 @@ module com.example.hotelmanagement {
     opens com.example.hotelmanagement.dao to javafx.fxml;
     exports com.example.hotelmanagement.scenes;
     opens com.example.hotelmanagement.scenes to javafx.fxml;
+    exports com.example.hotelmanagement.scenes.customer;
+    opens com.example.hotelmanagement.scenes.customer to javafx.fxml;
+    exports com.example.hotelmanagement.controllers.customer;
+    opens com.example.hotelmanagement.controllers.customer to javafx.fxml;
 
 
 }

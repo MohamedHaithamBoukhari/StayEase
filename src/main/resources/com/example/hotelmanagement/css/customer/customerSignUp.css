@@ -1,0 +1,35 @@
+#back{
+-fx-background-radius:40;
+-fx-background-color:rgba(0,0,0);
+}
+Button{
+    -fx-background-radius:10;
+}
+TextField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+
+TextField:focused{
+    -fx-border-color:#7EDDD6;
+}
+
+#signUpBtn{
+    -fx-background-color: #3AD2CD;
+    -fx-text-fill: black;
+}
+#backBtn{
+    -fx-background-color: #547371;
+    -fx-text-fill: white;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+    -fx-border-color:#3E5856;
+}
+#signUpTitle{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+}

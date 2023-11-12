@@ -1,14 +1,20 @@
 package com.example.hotelmanagement.dao;
 
+import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Feedback;
 import com.example.hotelmanagement.beans.Invoice;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 
 import java.util.List;
+import java.util.Map;
 
 public class InvoiceDao extends CummonDbFcts {
     public static final String TABLE_NAME = "invoice";
     public static final String[] TABLE_COLUMNS = {"invoiceId", "customertId", "serviceId","status","invoiceDate"};
+    public static List<Object> select(Map<String, Object> whereMap) {
+        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        return rows;
+    }
     public static void insert(Invoice invoice){
         superInsert(invoice, TABLE_COLUMNS, TABLE_NAME);
     }

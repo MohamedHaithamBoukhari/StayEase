@@ -6,10 +6,16 @@ import com.example.hotelmanagement.beans.RoomType;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 
 import java.util.List;
+import java.util.Map;
 
 public class CustomerDao extends CummonDbFcts {
     public static final String TABLE_NAME = "customer";
     public static final String[] TABLE_COLUMNS = {"customerId", "fullName", "cin","phone", "email", "password", "address"};
+    public static List<Object> select(Map<String, Object> whereMap) {
+        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        return rows;
+    }
+
     public static void insert(Customer customer){
         superInsert(customer, TABLE_COLUMNS, TABLE_NAME);
     }

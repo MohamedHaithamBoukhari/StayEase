@@ -5,7 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CummonDbFcts<T> {
     public static Connection connection = null;
@@ -37,6 +39,51 @@ public class CummonDbFcts<T> {
         }
 
         return rowCount;
+    }
+    public static List<Object> superSelect(Class<?> objectClass, String tableName, String[] columnNames, Map<String, Object> whereMap) {
+        List<Object> objects = new ArrayList<>();
+
+        String whereClause = "";
+        //create where clause from map that contain columnName and value
+        for (Map.Entry<String, Object> elmt : whereMap.entrySet()) {
+            String key = elmt.getKey();
+            Object value = elmt.getValue();
+
+            whereClause += key + " = \"" + value + "\" AND ";
+        }
+        whereClause = whereClause.substring(0, whereClause.length() - 5); //delete last " AND "
+
+        try {
+            connection = DaoFactory.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM " + tableName + " WHERE " + whereClause);
+
+            while (resultSet.next()) {
+                Object obj = objectClass.getDeclaredConstructor().newInstance();
+
+                for (String columnName : columnNames) {
+
+                    Field field = objectClass.getDeclaredField(columnName);
+                    field.setAccessible(true);
+
+                    if (field.getType() == int.class) {
+                        field.set(obj, resultSet.getInt(columnName));
+                    } else if (field.getType() == String.class) {
+                        field.set(obj, resultSet.getString(columnName));
+                    }
+                }
+
+                objects.add(obj);
+            }
+        } catch (SQLException | NoSuchFieldException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } finally {
+            closeConn();
+            closeStatement();
+            closeResultSet();
+        }
+
+        return objects;
     }
     public static void superInsert(Object obj, String[] columns, String tableName){
 

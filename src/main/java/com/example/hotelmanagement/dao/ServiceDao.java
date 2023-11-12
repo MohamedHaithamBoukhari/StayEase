@@ -1,15 +1,21 @@
 package com.example.hotelmanagement.dao;
 
+import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Service;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 
 import java.io.Serial;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceDao extends CummonDbFcts {
     public static final String TABLE_NAME = "service";
     public static final String[] TABLE_COLUMNS = {"serviceId", "serviceName", "descreption","correspondingTable"};
 
+    public static List<Object> select(Map<String, Object> whereMap) {
+        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        return rows;
+    }
     public static void insert(Service service){
         superInsert(service, TABLE_COLUMNS, TABLE_NAME);
     }

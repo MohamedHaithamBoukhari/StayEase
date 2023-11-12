@@ -1,14 +1,20 @@
 package com.example.hotelmanagement.dao;
 
+import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.beans.Feedback;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 
 import java.util.List;
+import java.util.Map;
 
 public class FeedbackDao extends CummonDbFcts {
     public static final String TABLE_NAME = "feedback";
     public static final String[] TABLE_COLUMNS = {"feedbackId", "customertId", "visibility","priority","customerService_rate", "cleanliness_rate", "roomComfort_rate", "location_rate",  "safety_rate", "environnement_rate","view_rate","serviceVSprice_rate", "review_rate", "feedback_date"};
+    public static List<Object> select(Map<String, Object> whereMap) {
+        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        return rows;
+    }
     public static void insert(Feedback feedback){
         superInsert(feedback, TABLE_COLUMNS, TABLE_NAME);
     }
