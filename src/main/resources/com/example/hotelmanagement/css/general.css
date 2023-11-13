@@ -2,9 +2,10 @@
 
 }
 #back{
--fx-background-radius:0 40;
--fx-background-color:rgba(0,0,0,0.1);
+-fx-background-radius:40;
+-fx-background-color:rgba(0,0,0);
 }
+
 #closeBtn {
     -fx-background-radius:0 20;
     -fx-font-size: 20;

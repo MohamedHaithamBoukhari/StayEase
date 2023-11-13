@@ -1,0 +1,29 @@
+#homeLabel {
+    -fx-background-color:rgb(28,36,58);
+    -fx-font-size: 13;
+    -fx-text-fill: white;
+    -fx-padding:5px 40px;
+}
+#sideBar {
+    -fx-background-color:rgb(28,36,58);
+    -fx-font-size: 13;
+    -fx-text-fill: white;
+    -fx-padding:5px 40px;
+}
+#splitPane{
+    fx-border-width:0px;
+}
+#logoutLink{
+    -fx-font-size: 13;
+    -fx-text-fill: white;
+}
+#logoutLink:hover{
+    -fx-font-size: 13.3;
+}
+#logoutBtn{
+    -fx-background-color:transparent;
+    -fx-padding:0px
+}#logoutBtn:hover{
+    -fx-scale-X: 1.04;
+    -fx-scale-y: 1.04;
+}
