@@ -31,3 +31,10 @@ TextField:focused{
 #error1, #error2, #error3, #error4, #error5, #error6 {
     -fx-text-fill: red;
 }
+#succesMsg{
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #15ff00;
+    -fx-border-color:#15ff00;
+    -fx-border-radius:10;
+}

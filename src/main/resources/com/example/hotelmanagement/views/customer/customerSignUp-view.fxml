@@ -73,6 +73,11 @@
                 <Font size="17.0" />
             </font>
         </Button>
+      <Label fx:id="succesMsg" alignment="CENTER" layoutX="357.0" layoutY="136.0" prefHeight="40.0" prefWidth="232.0" text="Account created successfully" textFill="#15ff00" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="323.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/general.css" />

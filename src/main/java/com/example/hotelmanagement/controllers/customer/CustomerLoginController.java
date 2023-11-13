@@ -3,6 +3,7 @@ package com.example.hotelmanagement.controllers.customer;
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.config.PathConfig;
+import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.dao.CustomerDao;
 import com.example.hotelmanagement.scenes.customer.CustomerHomePage;
 import com.example.hotelmanagement.scenes.templates.MessageBox;
@@ -32,12 +33,13 @@ public class CustomerLoginController {
     @FXML
     private TextField usernameField, passwordField;
     @FXML
-    private Label usernameError, passwordError;
+    private Label errorInfoLabel, usernameError, passwordError;
 
     public boolean verifyFields(ActionEvent event, String username, String password){
         boolean verified = false;
+        errorInfoLabel.setText("");
 
-        if(username.isEmpty()){
+        if(!Validation.isValidEmail(username)){
 //            errors.add("Field must be not empty");
             usernameError.setText("Field must be not empty");
             verified = false;
@@ -46,7 +48,7 @@ public class CustomerLoginController {
             verified = true;
         }
 
-        if (password.isEmpty() || password.length() < 8) {
+        if (!Validation.isValidPassword(password)) {
             passwordError.setText("Password must be at least 8 characters long");
             verified = false;
         }
@@ -69,20 +71,20 @@ public class CustomerLoginController {
             List<Object> custumers = CustomerDao.select(map);
             if(custumers.size() == 1){
                 Customer customer = (Customer) custumers.get(0);
-                switchToCustumerHomePage(event, customer.getClientId());
+                switchToCustumerHomePage(event, customer.getClientId(), customer.getFullName());
             }else {
-                System.out.println("incorrect informations");
+                errorInfoLabel.setText("Email or password is incorrect :(");
             }
         }
 
     }
-    public void switchToCustumerHomePage(ActionEvent event, int customerId) throws IOException {
+    public void switchToCustumerHomePage(ActionEvent event, int customerId, String fullname) throws IOException {
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
         root = loader.load();
 
         CustomerHomePageController homeController = loader.getController();//create instance of controller
         homeController.setCustomerId(customerId);//set var that we want pass from this ctrl to omeCtrl
-
+        homeController.setFullname(fullname);
 //        root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

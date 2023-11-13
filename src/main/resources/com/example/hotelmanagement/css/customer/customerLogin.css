@@ -1,11 +1,14 @@
 Button{
     -fx-background-radius:10;
 }
-TextField{
+TextField, PasswordField{
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-border-width:0 0 2px 0;
     -fx-border-color:white;
+}
+PasswordField:focused{
+    -fx-border-color:#7EDDD6;
 }
 TextField:focused{
     -fx-border-color:#7EDDD6;
@@ -27,4 +30,6 @@ TextField:focused{
     -fx-font-weight: bold;
     -fx-text-fill: white;
 
+}
+#errorInfoLabel{
 }

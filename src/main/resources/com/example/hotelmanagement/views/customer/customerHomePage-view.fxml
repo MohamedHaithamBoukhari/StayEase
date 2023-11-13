@@ -17,6 +17,7 @@
             <Image url="@../../images/user.png" />
          </image>
       </ImageView>
+      <Hyperlink fx:id="logoutLink" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
       <Button fx:id="logoutBtn" layoutX="870.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" prefHeight="18.0" prefWidth="25.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
          <graphic>
             <ImageView fx:id="logoutBtn1" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -40,10 +41,13 @@
       </AnchorPane>
       <Button mnemonicParsing="false" onAction="#switchToCustomerInfos" prefHeight="32.0" prefWidth="58.0" text="infos" AnchorPane.bottomAnchor="400.0" AnchorPane.rightAnchor="34.0" />
       <AnchorPane fx:id="sideBar" prefHeight="568.0" prefWidth="163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="735.0" AnchorPane.topAnchor="32.0" />
-      <Hyperlink fx:id="logoutLink" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
+      <Button layoutX="2.0" layoutY="39.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" text="Button" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="39.0" />
+      <Button layoutX="2.0" layoutY="99.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" text="Button" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="99.0" />
+      <Button layoutX="2.0" layoutY="159.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" text="Button" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="159.0" />
+      <Button layoutX="2.0" layoutY="219.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" text="Button" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="219.0" />
+      <Label fx:id="fullnameLabel" alignment="CENTER" layoutX="310.0" layoutY="1.0" prefHeight="25.0" prefWidth="280.0" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" />
     </children>
     <stylesheets>
-        <URL value="@../../css/general.css" />
         <URL value="@../../css/customer/customerHomePage.css" />
     </stylesheets>
 </AnchorPane>

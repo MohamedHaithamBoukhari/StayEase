@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,14 +29,10 @@
     </Button>
     <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" stylesheets="@../../css/welcome.css" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
       <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Customer Login" />
+      <Label fx:id="errorInfoLabel" alignment="CENTER" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="200.0" />
       <Label fx:id="usernameError" layoutX="341.0" layoutY="258.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="325.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="258.0" />
       <Label fx:id="passwordError" layoutX="340.0" layoutY="319.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="264.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="319.0" />
-      <TextField fx:id="usernameField" layoutX="340.0" layoutY="218.0" prefHeight="35.0" prefWidth="220.0" promptText="Username" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="passwordField" layoutX="340.0" layoutY="278.0" prefHeight="35.0" prefWidth="220.0" promptText="Password" AnchorPane.bottomAnchor="282.0" AnchorPane.topAnchor="278.0">
+      <TextField fx:id="usernameField" layoutX="340.0" layoutY="218.0" prefHeight="35.0" prefWidth="220.0" promptText="Email" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
          <font>
             <Font size="17.0" />
          </font>
@@ -55,6 +52,11 @@
             <Font size="15.0" />
          </font>
       </Hyperlink>
+      <PasswordField fx:id="passwordField" layoutX="340.0" layoutY="278.0" promptText="Password" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="278.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </PasswordField>
 </children>
 <stylesheets>
     <URL value="@../../css/general.css" />
