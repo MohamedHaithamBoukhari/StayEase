@@ -85,7 +85,6 @@ public class CustomerLoginController {
         CustomerHomePageController homeController = loader.getController();//create instance of controller
         homeController.setCustomerId(customerId);//set var that we want pass from this ctrl to omeCtrl
         homeController.setFullname(fullname);
-//        root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

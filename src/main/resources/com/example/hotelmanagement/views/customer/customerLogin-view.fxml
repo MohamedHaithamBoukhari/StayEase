@@ -27,7 +27,7 @@
             <Font size="21.0" />
         </font>
     </Button>
-    <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" stylesheets="@../../css/welcome.css" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
+    <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
       <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Customer Login" />
       <Label fx:id="errorInfoLabel" alignment="CENTER" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="200.0" />
       <Label fx:id="usernameError" layoutX="341.0" layoutY="258.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="325.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="258.0" />
@@ -59,7 +59,7 @@
       </PasswordField>
 </children>
 <stylesheets>
-    <URL value="@../../css/general.css" />
     <URL value="@../../css/customer/customerLogin.css" />
+    <URL value="@../../css/general.css" />
 </stylesheets>
 </AnchorPane>

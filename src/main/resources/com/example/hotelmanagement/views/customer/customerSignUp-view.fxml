@@ -17,7 +17,7 @@
                 <Image url="@../../images/hotel.jpg" />
             </image>
         </ImageView>
-        <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" stylesheets="@../../css/welcome.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="70.0" />
+        <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="70.0" />
         <Button fx:id="closeBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="861.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="23.0" prefWidth="38.0" text="x" textFill="WHITE">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />

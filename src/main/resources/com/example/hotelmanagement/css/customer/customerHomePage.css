@@ -27,3 +27,9 @@
     -fx-scale-X: 1.04;
     -fx-scale-y: 1.04;
 }
+
+Button{
+    -fx-font-size: 17;
+    -fx-text-fill: white;
+    -fx-background-color:rgba(21,25,37,255);
+}
