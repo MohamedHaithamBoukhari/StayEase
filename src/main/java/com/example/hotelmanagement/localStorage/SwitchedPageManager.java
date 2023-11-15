@@ -1,4 +1,4 @@
-package com.example.hotelmanagement.config;
+package com.example.hotelmanagement.localStorage;
 
 public class SwitchedPageManager {
     private static SwitchedPageManager instance;

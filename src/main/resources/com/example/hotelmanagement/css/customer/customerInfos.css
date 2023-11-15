@@ -38,3 +38,10 @@ PasswordField{
 PasswordField:focused{
     -fx-border-color:#7EDDD6;
 }
+#succesMsg{
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #15ff00;
+    -fx-border-color:#15ff00;
+    -fx-border-radius:10;
+}

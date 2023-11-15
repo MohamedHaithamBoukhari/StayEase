@@ -1,12 +1,13 @@
 package com.example.hotelmanagement.controllers.customer;
 
 import com.example.hotelmanagement.beans.Customer;
-import com.example.hotelmanagement.config.CustomerManager;
+import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.dao.CustomerDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,18 +21,20 @@ import java.util.ResourceBundle;
 public class EditInfosController implements Initializable {
     private List<String> errors = new ArrayList<>((Collections.nCopies(6, "")));
     @FXML private Label error1 = new Label(), error2 = new Label(), error3 = new Label(), error4 = new Label(), error5 = new Label(), error6 = new Label();
-    @FXML TextField fullNameField_, cinField_, emailAddressField_, passwordField_, phoneField_, addressField_;//fields of user edit infos
-
+    @FXML TextField fullNameField_, cinField_, emailAddressField_, passwordField_, phoneField_, addressField_;//fields of user edit infos view
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Customer customer = CustomerManager.getInstance().getCustomer();
-        System.out.println(customer);
-            fullNameField_.setText(customer.getFullName());
-            cinField_.setText(customer.getCin());
-            emailAddressField_.setText(customer.getEmail());
-            passwordField_.setText(customer.getPassword());
-            phoneField_.setText(customer.getPhone());
-            addressField_.setText(customer.getAddress());
+        initializeFields_(customer);
+
+    }
+    public void initializeFields_(Customer customer){
+        fullNameField_.setText(customer.getFullName());
+        cinField_.setText(customer.getCin());
+        emailAddressField_.setText(customer.getEmail());
+        passwordField_.setText(customer.getPassword());
+        phoneField_.setText(customer.getPhone());
+        addressField_.setText(customer.getAddress());
     }
     public void saveChanges(ActionEvent event){
         String fullName = fullNameField_.getText();
@@ -42,12 +45,19 @@ public class EditInfosController implements Initializable {
         String address = addressField_.getText();
 
         if(verifyFields(event,fullName, cin, emailAddress, password, phone, address)){
-            String[] updatedColumns = {"fullName", "cin","phone", "email", "password", "address"};
+            String[] updatedColumns = {"fullName", "cin", "email", "password", "phone", "address"};
             Object[] newColumnsValue = {fullName, cin, emailAddress, password, phone, address};
             String testColumn = "customerId";
             Object testColumnValue = CustomerManager.getInstance().getCustomer().getCustomerId();
 
-            CustomerDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+            int i = CustomerDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+            if(i == 1){
+                CustomerHomePageController.updated = true;
+                Customer customer = new Customer(fullName, cin, phone, emailAddress, password, address);
+                CustomerManager.getInstance().setCustomer(customer);
+                closeStage(event);
+
+            }
 
         }else{
             error1.setText(errors.get(0));

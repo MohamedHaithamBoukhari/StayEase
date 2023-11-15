@@ -112,6 +112,11 @@
                 <Font size="17.0" />
             </font>
         </TextField>
+        <Label fx:id="succesMsg" alignment="CENTER" layoutX="420.0" layoutY="140.0" prefHeight="40.0" prefWidth="232.0" text="Account created successfully" textFill="#15ff00" AnchorPane.rightAnchor="248.0">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
         <TextField fx:id="cinField" editable="false" layoutX="266.0" layoutY="252.0" prefHeight="35.0" prefWidth="220.0" promptText="CIN" AnchorPane.leftAnchor="266.0">
             <font>
                 <Font size="17.0" />

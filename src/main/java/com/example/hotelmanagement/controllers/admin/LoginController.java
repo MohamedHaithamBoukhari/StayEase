@@ -1,4 +1,4 @@
-package com.example.hotelmanagement.controllers.customer;
+package com.example.hotelmanagement.controllers.admin;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerLoginController {
+public class LoginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -60,14 +60,11 @@ public class CustomerLoginController {
         String password = passwordField.getText();
 
         if(verifyFields(event, username, password)){
-            System.out.println("verivied");
             Map<String, Object> map = new HashMap<>();
             map.put("email", username);
             map.put("password", password);
-            System.out.println(username+ " "+password);
 
             List<Object> custumers = CustomerDao.select(map);
-            System.out.println(custumers);
             if(custumers.size() == 1){
                 Customer customer = (Customer) custumers.get(0);
                 CustomerManager.getInstance().setCustomer(customer);

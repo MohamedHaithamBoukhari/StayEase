@@ -1,4 +1,4 @@
-package com.example.hotelmanagement.controllers.customer;
+package com.example.hotelmanagement.controllers.admin;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
@@ -21,17 +21,13 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
-public class CustomerHomePageController implements Initializable{
+public class HomePageController implements Initializable{
     private Stage stage;
     public static Stage childStage;
-    public static boolean updated = false;
     private Scene scene;
     private Parent root;
-    private Customer currentCustomer;
-
-    @FXML private Label succesMsg;
     @FXML private AnchorPane rootPane;
     @FXML private Label fullnameLabel;
     @FXML TextField fullNameField, cinField, emailAddressField, passwordField, phoneField, addressField;//fields of user infos
@@ -40,14 +36,12 @@ public class CustomerHomePageController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
-        currentCustomer = CustomerManager.getInstance().getCustomer();
-        System.out.println(currentCustomer);
-        System.out.println(currentPage);
-        System.out.println(currentPage.equals("CustomerInfos"));
-        fullnameLabel.setText("- " + currentCustomer.getFullName() + " -");
+        Customer customer = CustomerManager.getInstance().getCustomer();
+
+        fullnameLabel.setText("- " + customer.getFullName() + " -");
+
         if(currentPage.equals("CustomerInfos")){
-            succesMsg.setVisible(false);
-            initializeFields(currentCustomer);
+            initializeFields(customer);
         }
     }
     public void initializeFields(Customer customer){
@@ -143,13 +137,7 @@ public class CustomerHomePageController implements Initializable{
         childStage.initOwner(parentStage);
         childStage.initModality(Modality.WINDOW_MODAL);
 
-        childStage.showAndWait();
-
-        if(updated){//if we update customer infos the values of updated is set to true
-            initializeFields(CustomerManager.getInstance().getCustomer());
-            succesMsg.setVisible(true);
-        }
-
+        childStage.show();
     }
     public void logout(ActionEvent event){
         CustomerManager.getInstance().setCustomer(new Customer("","","","","",""));
