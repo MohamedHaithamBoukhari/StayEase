@@ -19,11 +19,11 @@ public class Customer {
         this.address = address;
     }
 
-    public int getClientId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setClientId(int clientId) {
+    public void setCustomerId(int clientId) {
         this.customerId = clientId;
     }
 

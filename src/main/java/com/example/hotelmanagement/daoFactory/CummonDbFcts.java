@@ -125,7 +125,6 @@ public class CummonDbFcts<T> {
                 preparedStatement = connection.prepareStatement("UPDATE "+tableName+" SET "+updatedColumn+" = ? WHERE "+testColumn+" = ?");
                 preparedStatement.setObject(1, newColumnValue);
                 preparedStatement.setObject(2, testColumnValue);
-
                 rowsAffected = preparedStatement.executeUpdate();
 
             } catch (SQLException e) {

@@ -1,3 +1,7 @@
+#back{
+-fx-background-radius:25;
+-fx-background-color:rgb(28,36,58);
+}
 #homeLabel {
     -fx-background-color:rgb(28,36,58);
     -fx-font-size: 13;
@@ -29,6 +33,7 @@
 }
 
 Button{
+    -fx-background-radius:8;
     -fx-font-size: 17;
     -fx-text-fill: white;
     -fx-background-color:rgba(21,25,37,255);

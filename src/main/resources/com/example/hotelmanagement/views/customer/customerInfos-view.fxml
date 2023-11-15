@@ -5,11 +5,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.customer.CustomerHomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.customer.CustomerHomePageController">
     <children>
         <ImageView fitHeight="567.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
             <image>
@@ -98,8 +101,45 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Button fx:id="editBtn" layoutX="504.0" layoutY="469.0" mnemonicParsing="false" onAction="#newEditInfoWindow" prefHeight="38.0" prefWidth="80.0" text="Edit" textFill="WHITE" AnchorPane.rightAnchor="316.0" AnchorPane.topAnchor="469.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Button>
+      <Label fx:id="customerInfosTitle" layoutX="427.0" layoutY="97.0" text="Customer Informations" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="97.0" />
+        <TextField fx:id="fullNameField" editable="false" layoutX="266.0" layoutY="192.0" prefHeight="35.0" prefWidth="220.0" promptText="Full Name" AnchorPane.leftAnchor="266.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="cinField" editable="false" layoutX="266.0" layoutY="252.0" prefHeight="35.0" prefWidth="220.0" promptText="CIN" AnchorPane.leftAnchor="266.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="emailAddressField" editable="false" layoutX="266.0" layoutY="312.0" prefHeight="35.0" prefWidth="220.0" promptText="Email Address" AnchorPane.leftAnchor="266.0" AnchorPane.rightAnchor="414.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+      <PasswordField fx:id="passwordField" editable="false" layoutX="266.0" layoutY="368.0" promptText="Password" AnchorPane.bottomAnchor="192.0" AnchorPane.leftAnchor="266.0" AnchorPane.rightAnchor="414.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </PasswordField>
+        <TextField fx:id="phoneField" editable="false" layoutX="586.0" layoutY="237.0" prefHeight="35.0" prefWidth="220.0" promptText="Phone" AnchorPane.rightAnchor="94.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="addressField" alignment="TOP_LEFT" editable="false" layoutX="586.0" layoutY="301.0" prefHeight="99.0" prefWidth="220.0" promptText="Address" AnchorPane.rightAnchor="94.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
     </children>
     <stylesheets>
         <URL value="@../../css/customer/customerHomePage.css" />
+        <URL value="@../../css/customer/customerInfos.css" />
     </stylesheets>
 </AnchorPane>

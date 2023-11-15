@@ -2,8 +2,10 @@ package com.example.hotelmanagement.controllers.customer;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.config.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.config.SwitchedPageManager;
+import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.dao.CustomerDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,35 +15,46 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CustomerHomePageController implements Initializable{
     private Stage stage;
+    public static Stage childStage;
     private Scene scene;
     private Parent root;
-    private int customerId;
+    @FXML private AnchorPane rootPane;
     @FXML private Label fullnameLabel;
-
-    public void setFullname(String fullname){
-        fullnameLabel.setText("- "+fullname+" -");
-    }
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
+    @FXML TextField fullNameField, cinField, emailAddressField, passwordField, phoneField, addressField;//fields of user infos
+//------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
-        System.out.println(currentPage);
-    }
 
+        String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
+        Customer customer = CustomerManager.getInstance().getCustomer();
+        System.out.println(customer);
+        System.out.println(currentPage);
+        System.out.println(currentPage.equals("CustomerInfos"));
+        fullnameLabel.setText("- " + customer.getFullName() + " -");
+        if(currentPage.equals("CustomerInfos")){
+            fullNameField.setText(customer.getFullName());
+            cinField.setText(customer.getCin());
+            emailAddressField.setText(customer.getEmail());
+            passwordField.setText(customer.getPassword());
+            phoneField.setText(customer.getPhone());
+            addressField.setText(customer.getAddress());
+        }
+    }
+//------------------------------------------------------------------------------------------
     public void switchToHome(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
@@ -105,8 +118,32 @@ public class CustomerHomePageController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+//-------------------------------------------------------------------------------
+    public void newEditInfoWindow(ActionEvent event) throws IOException {
+//        rootPane.setStyle(" -fx-background-color:rgb(28,36,58);");
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/editInfo-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerSignUp.css"));
+        scene.getStylesheets().add(cssFile);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.show();
+    }
     public void logout(ActionEvent event){
+        CustomerManager.getInstance().setCustomer(new Customer("","","","","",""));
         HelloApplication.stage.close();
     }
-    
+
 }

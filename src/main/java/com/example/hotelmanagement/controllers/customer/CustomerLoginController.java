@@ -2,7 +2,9 @@ package com.example.hotelmanagement.controllers.customer;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.config.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
+import com.example.hotelmanagement.config.SwitchedPageManager;
 import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.dao.CustomerDao;
 import com.example.hotelmanagement.scenes.customer.CustomerHomePage;
@@ -71,7 +73,9 @@ public class CustomerLoginController {
             List<Object> custumers = CustomerDao.select(map);
             if(custumers.size() == 1){
                 Customer customer = (Customer) custumers.get(0);
-                switchToCustumerHomePage(event, customer.getClientId(), customer.getFullName());
+                CustomerManager.getInstance().setCustomer(customer);
+
+                switchToCustumerHomePage(event, customer.getCustomerId(), customer.getFullName());
             }else {
                 errorInfoLabel.setText("Email or password is incorrect :(");
             }
@@ -81,10 +85,6 @@ public class CustomerLoginController {
     public void switchToCustumerHomePage(ActionEvent event, int customerId, String fullname) throws IOException {
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
         root = loader.load();
-
-        CustomerHomePageController homeController = loader.getController();//create instance of controller
-        homeController.setCustomerId(customerId);//set var that we want pass from this ctrl to omeCtrl
-        homeController.setFullname(fullname);
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

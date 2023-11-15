@@ -1,0 +1,40 @@
+TextField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+
+TextField:focused{
+    -fx-border-color:#7EDDD6;
+}
+
+#editBtn{
+    -fx-background-color: #3AD2CD;
+    -fx-text-fill: black;
+    -fx-background-radius:10;
+
+}
+
+#editBtn:pressed {
+    -fx-scale-y: .95;
+    -fx-scale-x: 1;
+}
+#editBtn:hover {
+    -fx-scale-X: 1.10;
+    -fx-scale-y: 1.05;
+}
+#customerInfosTitle{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+PasswordField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+PasswordField:focused{
+    -fx-border-color:#7EDDD6;
+}

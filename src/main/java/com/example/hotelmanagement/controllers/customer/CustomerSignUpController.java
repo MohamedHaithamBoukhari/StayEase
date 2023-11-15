@@ -112,7 +112,6 @@ public class CustomerSignUpController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
     public void closeStage(ActionEvent event){
         HelloApplication.stage.close();
     }
