@@ -14,10 +14,10 @@ public class Login {
     public Login(Stage primaryStage){
         Parent root = null;
         try {
-            root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customerLogin-view.fxml"));
+            root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/Login-view.fxml"));
             Scene scene = new Scene(root);
 
-            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerLogin.css"));
+            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/Login.css"));
             scene.getStylesheets().add(cssFile);
 
             primaryStage.initStyle(StageStyle.TRANSPARENT);

@@ -17,7 +17,7 @@ public class CustomerHomePage {
             root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
             Scene scene = new Scene(root);
 
-            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerHomePage.css"));
+            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/HomePage.css"));
             scene.getStylesheets().add(cssFile);
 
             primaryStage.initStyle(StageStyle.TRANSPARENT);

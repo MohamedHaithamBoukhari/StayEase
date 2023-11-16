@@ -14,10 +14,10 @@ public class HomePage {
     public HomePage(Stage primaryStage){
         Parent root = null;
         try {
-            root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
+            root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/HomePage-view.fxml"));
             Scene scene = new Scene(root);
 
-            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerHomePage.css"));
+            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/HomePage.css"));
             scene.getStylesheets().add(cssFile);
 
             primaryStage.initStyle(StageStyle.TRANSPARENT);

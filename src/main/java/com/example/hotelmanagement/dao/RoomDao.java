@@ -11,7 +11,7 @@ public class RoomDao extends CummonDbFcts {
     public static final String TABLE_NAME = "room";
     public static final String[] TABLE_COLUMNS = {"roomId", "numRoom", "type","capacity","status"};
     public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        List<Object> rows = superSelect(Room.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(Room room){

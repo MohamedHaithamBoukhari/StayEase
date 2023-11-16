@@ -2,6 +2,8 @@ package com.example.hotelmanagement.controllers.admin;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.beans.Employee;
+import com.example.hotelmanagement.localStorage.AdminManager;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
@@ -36,22 +38,13 @@ public class HomePageController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
-        Customer customer = CustomerManager.getInstance().getCustomer();
+        Employee admin = AdminManager.getInstance().getAdmin();
 
-        fullnameLabel.setText("- " + customer.getFullName() + " -");
+        fullnameLabel.setText("- " + admin.getFullName() + " -");
 
-        if(currentPage.equals("CustomerInfos")){
-            initializeFields(customer);
-        }
+
     }
-    public void initializeFields(Customer customer){
-        fullNameField.setText(customer.getFullName());
-        cinField.setText(customer.getCin());
-        emailAddressField.setText(customer.getEmail());
-        passwordField.setText(customer.getPassword());
-        phoneField.setText(customer.getPhone());
-        addressField.setText(customer.getAddress());
-    }
+
 //------------------------------------------------------------------------------------------
     public void switchToHome(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
@@ -140,7 +133,7 @@ public class HomePageController implements Initializable{
         childStage.show();
     }
     public void logout(ActionEvent event){
-        CustomerManager.getInstance().setCustomer(new Customer("","","","","",""));
+        AdminManager.getInstance().setAdmin(new Employee("","","","","","",0,"",""));
         HelloApplication.stage.close();
     }
 

@@ -3,7 +3,6 @@
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.customer.CustomerLoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.LoginController">
 <children>
     <ImageView fitHeight="600.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <image>
@@ -28,31 +27,26 @@
         </font>
     </Button>
     <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
-      <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Customer Login" />
+      <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Manager Login" />
       <Label fx:id="errorInfoLabel" alignment="CENTER" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="200.0" />
-      <Label fx:id="usernameError" layoutX="341.0" layoutY="258.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="325.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="258.0" />
-      <Label fx:id="passwordError" layoutX="340.0" layoutY="319.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="264.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="319.0" />
-      <TextField fx:id="usernameField" layoutX="340.0" layoutY="218.0" prefHeight="35.0" prefWidth="220.0" promptText="Email" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
+      <Label fx:id="usernameError" layoutX="340.0" layoutY="261.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="322.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="261.0" />
+      <Label fx:id="passwordError" layoutX="340.0" layoutY="325.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.leftAnchor="340.0" />
+      <TextField fx:id="usernameField" layoutX="340.0" layoutY="221.0" prefHeight="35.0" prefWidth="220.0" promptText="Email" AnchorPane.bottomAnchor="339.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="loginBtn" layoutX="340.0" layoutY="349.0" mnemonicParsing="false" onAction="#logInAction" prefHeight="38.0" prefWidth="80.0" text="Log In">
+      <Button fx:id="loginBtn" layoutX="340.0" layoutY="363.0" mnemonicParsing="false" onAction="#logInAction" prefHeight="38.0" prefWidth="80.0" text="Log In" AnchorPane.topAnchor="370.0">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="backBtn" layoutX="480.0" layoutY="349.0" mnemonicParsing="false" onAction="#switchToPreviousScene" prefHeight="38.0" prefWidth="80.0" text="Back" textFill="WHITE">
+      <Button fx:id="backBtn" layoutX="480.0" layoutY="363.0" mnemonicParsing="false" onAction="#switchToPreviousScene" prefHeight="38.0" prefWidth="80.0" text="Back" textFill="WHITE" AnchorPane.topAnchor="370.0">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Hyperlink fx:id="signUpLink" layoutX="415.0" layoutY="408.0" onAction="#switchToSignUpScene" text="Sign Up" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Hyperlink>
-      <PasswordField fx:id="passwordField" layoutX="340.0" layoutY="278.0" promptText="Password" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="278.0">
+      <PasswordField fx:id="passwordField" layoutX="340.0" layoutY="284.0" promptText="Password" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
          <font>
             <Font size="17.0" />
          </font>

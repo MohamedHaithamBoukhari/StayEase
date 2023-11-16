@@ -13,7 +13,7 @@ public class ServiceDao extends CummonDbFcts {
     public static final String[] TABLE_COLUMNS = {"serviceId", "serviceName", "descreption","correspondingTable"};
 
     public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        List<Object> rows = superSelect(Service.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(Service service){

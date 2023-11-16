@@ -4,7 +4,7 @@ import com.example.hotelmanagement.beans.Employee;
 
 public class AdminManager {
     private static AdminManager instance;
-    private Employee employee = new Employee();
+    private Employee admin = new Employee();
 
     private AdminManager() {
         // Private constructor to prevent direct instantiation
@@ -18,19 +18,19 @@ public class AdminManager {
     }
 
     public Employee getAdmin() {
-        return employee;
+        return admin;
     }
 
-    public void setCustomer(Employee employee) {
-        this.employee.setEmployeeId(employee.getEmployeeId());
-        this.employee.setFullName(employee.getFullName());
-        this.employee.setCin(employee.getCin());
-        this.employee.setPhone(employee.getPhone());
-        this.employee.setEmail(employee.getEmail());
-        this.employee.setPassword(employee.getPassword());
-        this.employee.setPosition(employee.getPosition());
-        this.employee.setSalary(employee.getSalary());
-        this.employee.setWorkingHours(employee.getWorkingHours());
-        this.employee.setWorkingDays(employee.getWorkingDays());
+    public void setAdmin(Employee employee) {
+        this.admin.setEmployeeId(employee.getEmployeeId());
+        this.admin.setFullName(employee.getFullName());
+        this.admin.setCin(employee.getCin());
+        this.admin.setPhone(employee.getPhone());
+        this.admin.setEmail(employee.getEmail());
+        this.admin.setPassword(employee.getPassword());
+        this.admin.setPosition(employee.getPosition());
+        this.admin.setSalary(employee.getSalary());
+        this.admin.setWorkingHours(employee.getWorkingHours());
+        this.admin.setWorkingDays(employee.getWorkingDays());
     }
 }

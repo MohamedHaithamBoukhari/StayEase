@@ -144,7 +144,7 @@
         </TextField>
     </children>
     <stylesheets>
-        <URL value="@../../css/customer/customerHomePage.css" />
+        <URL value="@../../css/HomePage.css" />
         <URL value="@../../css/customer/customerInfos.css" />
     </stylesheets>
 </AnchorPane>

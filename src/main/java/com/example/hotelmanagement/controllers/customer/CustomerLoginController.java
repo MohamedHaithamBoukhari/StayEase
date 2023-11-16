@@ -37,7 +37,7 @@ public class CustomerLoginController {
 
         if(!Validation.isValidEmail(username)){
 //            errors.add("Field must be not empty");
-            usernameError.setText("Field must be not empty");
+            usernameError.setText("Please Enter Valid email");
             verified = false;
         }else {
             usernameError.setText("");

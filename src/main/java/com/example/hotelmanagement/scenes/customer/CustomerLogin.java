@@ -17,7 +17,7 @@ public class CustomerLogin {
             root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customerLogin-view.fxml"));
             Scene scene = new Scene(root);
 
-            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerLogin.css"));
+            String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/Login.css"));
             scene.getStylesheets().add(cssFile);
 
             primaryStage.initStyle(StageStyle.TRANSPARENT);

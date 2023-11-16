@@ -12,7 +12,7 @@ public class EmployeeDao extends CummonDbFcts {
     public static final String TABLE_NAME = "employee";
     public static final String[] TABLE_COLUMNS = {"employeeId", "fullName", "cin","phone","email", "password", "position","salary", "workingHours", "workingDays"};
     public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(Customer.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+        List<Object> rows = superSelect(Employee.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(Employee employee){
@@ -28,7 +28,7 @@ public class EmployeeDao extends CummonDbFcts {
     }
 
 
-    public static List<Object> selectAll() {
+    public static List<Object> selectall() {
         List<Object> rows = superSelectAll(Employee.class, TABLE_NAME, TABLE_COLUMNS);
         return rows;
     }

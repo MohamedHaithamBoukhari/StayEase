@@ -46,6 +46,20 @@ public class WelcomeController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToAdminLogin(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/Login-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToManagerLogin(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/Login-view.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void closeStage(ActionEvent event){
         HelloApplication.stage.close();
     }

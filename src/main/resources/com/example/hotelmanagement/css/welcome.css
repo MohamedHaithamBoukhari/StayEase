@@ -4,7 +4,7 @@
     -fx-font-weight: bold;
     -fx-background-color:#f59d51;
 }
-#employeeLoginBtn{
+#managerLoginBtn{
     -fx-background-radius:0 20;
     -fx-font-size: 20;
     -fx-font-weight: bold;

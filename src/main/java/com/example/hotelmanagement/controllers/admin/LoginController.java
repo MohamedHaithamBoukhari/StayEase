@@ -2,6 +2,9 @@ package com.example.hotelmanagement.controllers.admin;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.beans.Employee;
+import com.example.hotelmanagement.dao.EmployeeDao;
+import com.example.hotelmanagement.localStorage.AdminManager;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.config.Validation;
@@ -37,7 +40,7 @@ public class LoginController {
 
         if(!Validation.isValidEmail(username)){
 //            errors.add("Field must be not empty");
-            usernameError.setText("Field must be not empty");
+            usernameError.setText("Please Enter Valid email");
             verified = false;
         }else {
             usernameError.setText("");
@@ -63,21 +66,22 @@ public class LoginController {
             Map<String, Object> map = new HashMap<>();
             map.put("email", username);
             map.put("password", password);
+            map.put("position", "admin");
 
-            List<Object> custumers = CustomerDao.select(map);
-            if(custumers.size() == 1){
-                Customer customer = (Customer) custumers.get(0);
-                CustomerManager.getInstance().setCustomer(customer);
+            List<Object> employees = EmployeeDao.select(map);
+            if(employees.size() == 1){
+                Employee employee= (Employee) employees.get(0);
+                AdminManager.getInstance().setAdmin(employee);
 
-                switchToCustumerHomePage(event, customer.getCustomerId(), customer.getFullName());
+                switchToHomePage(event);
             }else {
                 errorInfoLabel.setText("Email or password is incorrect :(");
             }
         }
 
     }
-    public void switchToCustumerHomePage(ActionEvent event, int customerId, String fullname) throws IOException {
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
+    public void switchToHomePage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/HomePage-view.fxml"));
         root = loader.load();
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -87,13 +91,6 @@ public class LoginController {
     }
     public void switchToPreviousScene(ActionEvent event) throws IOException {
         root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/welcome-view.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void switchToSignUpScene(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerSignUp-view.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

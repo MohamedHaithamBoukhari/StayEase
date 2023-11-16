@@ -100,6 +100,6 @@
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
     </children>
     <stylesheets>
-        <URL value="@../../css/customer/customerHomePage.css" />
+        <URL value="@../../css/HomePage.css" />
     </stylesheets>
 </AnchorPane>
