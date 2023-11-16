@@ -39,10 +39,9 @@ public class HomePageController implements Initializable{
 
         String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
         Employee manager = ManagerManager.getInstance().getManager();
-        System.out.println(manager);
-        System.out.println(currentPage);
-        System.out.println(currentPage.equals("CustomerInfos"));
+
         fullnameLabel.setText("- " + manager.getFullName() + " -");
+
         if(currentPage.equals("Home")){
 
         } else if (currentPage.equals("RoomsDetail")) {
