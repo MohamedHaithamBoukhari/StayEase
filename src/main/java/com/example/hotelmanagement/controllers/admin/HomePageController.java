@@ -30,12 +30,17 @@ public class HomePageController implements Initializable{
     private Stage stage;
     private Scene scene;
     private Parent root;
+    public static Stage childStage;
+    public static boolean empAdded = false;
+    private String currentPage;
+    private Employee admin;
+    @FXML private Label succesMsg;
     @FXML private Label fullnameLabel;
 //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
-        Employee admin = AdminManager.getInstance().getAdmin();
+        currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
+        admin = AdminManager.getInstance().getAdmin();
         System.out.println(admin);
         System.out.println(currentPage);
         System.out.println(currentPage.equals("CustomerInfos"));
@@ -112,6 +117,31 @@ public class HomePageController implements Initializable{
         stage.show();
     }
 //-------------------------------------------------------------------------------
+    public void newEmployeeWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/NewEmployee-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerSignUp.css"));
+        scene.getStylesheets().add(cssFile);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(empAdded){//if we update customer infos the values of updated is set to true
+            //this.initialize(null,null);
+            succesMsg.setVisible(true);
+        }
+    }
     public void logout(ActionEvent event){
         AdminManager.getInstance().setAdmin(new Employee("","","","","","",0,"",""));
         HelloApplication.stage.close();

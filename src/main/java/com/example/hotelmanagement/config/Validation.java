@@ -24,4 +24,17 @@ public class Validation {
     public static boolean isValidAddress(String address) {
         return address.matches("^[a-zA-Z0-9,\\s-]+$");
     }
+
+    public static boolean isValidSalary(String salary) {
+        return salary.matches("[0-9]+");
+    }
+    public static boolean isValidPosition(String position) {
+        return !position.isEmpty();
+    }
+    public static boolean isValidWorkingHours(String workingHours) {
+        return false;
+    }
+    public static boolean isValidWorkingDays(String workingDays) {
+        return false;
+    }
 }

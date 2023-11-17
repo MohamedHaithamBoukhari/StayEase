@@ -1,0 +1,49 @@
+Button{
+    -fx-background-radius:10;
+}
+TextField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+
+TextField:focused{
+    -fx-border-color:#7EDDD6;
+}
+
+#addBtn, #saveBtn{
+    -fx-background-color: #3AD2CD;
+    -fx-text-fill: black;
+}
+#backBtn, #closeButton{
+    -fx-background-color: #547371;
+    -fx-text-fill: white;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+}
+#title{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+#error1, #error2, #error3, #error4, #error5, #error6 {
+    -fx-text-fill: red;
+}
+#succesMsg{
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #15ff00;
+    -fx-border-color:#15ff00;
+    -fx-border-radius:10;
+}
+#homeLabel {
+    -fx-background-color:rgb(28,36,58);
+    -fx-font-size: 13;
+    -fx-text-fill: white;
+    -fx-padding:5px 40px;
+}
+#paneBorder{
+    -fx-border-width:1px;
+    -fx-border-color:white;
+}

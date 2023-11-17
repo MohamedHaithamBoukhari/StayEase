@@ -30,6 +30,7 @@ public class CustomerHomePageController implements Initializable{
     private Scene scene;
     private Parent root;
     private Customer currentCustomer;
+    private String currentPage;
 
     @FXML private Label succesMsg;
     @FXML private AnchorPane rootPane;
@@ -39,7 +40,7 @@ public class CustomerHomePageController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
+        currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
         currentCustomer = CustomerManager.getInstance().getCustomer();
         System.out.println(currentCustomer);
         System.out.println(currentPage);
