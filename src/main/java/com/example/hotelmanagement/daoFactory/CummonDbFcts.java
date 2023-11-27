@@ -40,7 +40,7 @@ public class CummonDbFcts<T> {
 
         return rowCount;
     }
-    public static List<Object> superSelect(Class<?> objectClass, String tableName, String[] columnNames, Map<String, Object> whereMap) {
+    public static List<Object> superSelect(Class<?> objectClass, String tableName, String selectedCols, String[] columnNames, Map<String, Object> whereMap) {
         List<Object> objects = new ArrayList<>();
 
         String whereClause = "";
@@ -56,7 +56,7 @@ public class CummonDbFcts<T> {
         try {
             connection = DaoFactory.getConnection();
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM " + tableName + " WHERE " + whereClause);
+            resultSet = statement.executeQuery("SELECT " + selectedCols +" FROM " + tableName + " WHERE " + whereClause);
             System.out.println("SELECT * FROM " + tableName + " WHERE " + whereClause);
             while (resultSet.next()) {
                 Object obj = objectClass.getDeclaredConstructor().newInstance();
@@ -189,6 +189,25 @@ public class CummonDbFcts<T> {
         }
 
         return objects;
+    }
+    public static int selectMaxVal(String tableName, String columnName){
+        int maxValue = 0;
+        try {
+            connection = DaoFactory.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT MAX(" + columnName + ") FROM " + tableName);
+
+            if (resultSet.next()) {
+                maxValue = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConn();
+            closeStatement();
+            closeResultSet();
+        }
+        return maxValue;
     }
     public static void closeConn(){
         if (connection != null) {

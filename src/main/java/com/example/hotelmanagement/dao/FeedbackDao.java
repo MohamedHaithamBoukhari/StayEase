@@ -11,8 +11,8 @@ import java.util.Map;
 public class FeedbackDao extends CummonDbFcts {
     public static final String TABLE_NAME = "feedback";
     public static final String[] TABLE_COLUMNS = {"feedbackId", "customertId", "visibility","priority","customerService_rate", "cleanliness_rate", "roomComfort_rate", "location_rate",  "safety_rate", "environnement_rate","view_rate","serviceVSprice_rate", "review_rate", "feedback_date"};
-    public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(Feedback.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+    public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
+        List<Object> rows = superSelect(Feedback.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(Feedback feedback){

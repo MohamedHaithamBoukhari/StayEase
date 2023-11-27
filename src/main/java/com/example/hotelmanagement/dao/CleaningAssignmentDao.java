@@ -11,8 +11,8 @@ import java.util.Map;
 public class CleaningAssignmentDao extends CummonDbFcts {
     public static final String TABLE_NAME = "cleaningAssignment";
     public static final String[] TABLE_COLUMNS = {"cleaningId", "employeeId", "roomId","date"};
-    public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(CleaningAssignment.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+    public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
+        List<Object> rows = superSelect(CleaningAssignment.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
 

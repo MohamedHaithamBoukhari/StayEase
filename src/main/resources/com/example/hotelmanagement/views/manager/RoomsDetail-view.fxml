@@ -97,7 +97,9 @@
             <Image url="@../../images/hotelIcon.png" />
          </image>
       </ImageView>
+
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Button fx:id="addRoomBtn" layoutX="327.0" layoutY="440.0" mnemonicParsing="false" onAction="#newRoomWindow" text="Add Room" />
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />

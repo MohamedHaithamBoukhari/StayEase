@@ -138,7 +138,6 @@ public class HomePageController implements Initializable{
         childStage.showAndWait();
 
         if(empAdded){//if we update customer infos the values of updated is set to true
-            //this.initialize(null,null);
             succesMsg.setVisible(true);
         }
     }

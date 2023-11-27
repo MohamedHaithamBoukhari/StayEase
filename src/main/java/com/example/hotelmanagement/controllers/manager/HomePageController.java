@@ -31,7 +31,9 @@ public class HomePageController implements Initializable{
     public static Stage childStage;
     private Scene scene;
     private Parent root;
+    public static boolean roomAdded = false;
     @FXML private AnchorPane rootPane;
+    @FXML private Label succesMsg;
     @FXML private Label fullnameLabel;
 //------------------------------------------------------------------------------------------
     @Override
@@ -70,7 +72,7 @@ public class HomePageController implements Initializable{
     }
     public void switchToRoomsDetail(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("RoomsDetail");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/HomePage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/RoomsDetail-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -122,6 +124,30 @@ public class HomePageController implements Initializable{
         stage.setScene(scene);
         stage.show();}
 //-------------------------------------------------------------------------------
+    public void newRoomWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/NewRoom-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerSignUp.css"));
+        scene.getStylesheets().add(cssFile);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+//        if(roomAdded){
+//            succesMsg.setVisible(true);
+//        }
+    }
     public void logout(ActionEvent event){
         ManagerManager.getInstance().setManager(new Employee("","","","","","",0,"",""));
         HelloApplication.stage.close();

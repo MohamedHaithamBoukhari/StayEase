@@ -11,8 +11,8 @@ import java.util.Map;
 public class InvoiceDao extends CummonDbFcts {
     public static final String TABLE_NAME = "invoice";
     public static final String[] TABLE_COLUMNS = {"invoiceId", "customertId", "serviceId","status","invoiceDate"};
-    public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(Invoice.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+    public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
+        List<Object> rows = superSelect(Invoice.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(Invoice invoice){

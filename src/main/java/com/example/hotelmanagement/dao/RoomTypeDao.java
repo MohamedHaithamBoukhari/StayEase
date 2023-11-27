@@ -10,8 +10,8 @@ import java.util.Map;
 public class RoomTypeDao extends CummonDbFcts {
     public static final String TABLE_NAME = "roomType";
     public static final String[] TABLE_COLUMNS = {"typeId", "type", "description","price_day"};
-    public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(RoomType.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+    public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
+        List<Object> rows = superSelect(RoomType.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(RoomType type){

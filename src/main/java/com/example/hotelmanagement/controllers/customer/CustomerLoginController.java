@@ -66,7 +66,7 @@ public class CustomerLoginController {
             map.put("password", password);
             System.out.println(username+ " "+password);
 
-            List<Object> custumers = CustomerDao.select(map);
+            List<Object> custumers = CustomerDao.select(map, "*");
             System.out.println(custumers);
             if(custumers.size() == 1){
                 Customer customer = (Customer) custumers.get(0);

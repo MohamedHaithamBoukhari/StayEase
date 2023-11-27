@@ -68,7 +68,7 @@ public class LoginController {
             map.put("password", password);
             map.put("position", "admin");
 
-            List<Object> employees = EmployeeDao.select(map);
+            List<Object> employees = EmployeeDao.select(map, "*");
             if(employees.size() == 1){
                 Employee employee= (Employee) employees.get(0);
                 AdminManager.getInstance().setAdmin(employee);

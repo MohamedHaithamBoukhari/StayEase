@@ -10,8 +10,8 @@ import java.util.Map;
 public class RoomDao extends CummonDbFcts {
     public static final String TABLE_NAME = "room";
     public static final String[] TABLE_COLUMNS = {"roomId", "numRoom", "type","capacity","status"};
-    public static List<Object> select(Map<String, Object> whereMap) {
-        List<Object> rows = superSelect(Room.class, TABLE_NAME, TABLE_COLUMNS, whereMap);
+    public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
+        List<Object> rows = superSelect(Room.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
     public static void insert(Room room){
@@ -26,9 +26,9 @@ public class RoomDao extends CummonDbFcts {
         return superDelete(TABLE_NAME, testColumn, testColumnValue);
     }
 
-
     public static List<Object> selectAll() {
         List<Object> rows = superSelectAll(Room.class, TABLE_NAME, TABLE_COLUMNS);
         return rows;
     }
+
 }
