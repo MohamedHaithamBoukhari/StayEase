@@ -19,7 +19,7 @@
             </image>
         </ImageView>
         <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="70.0" />
-        <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="118.0" text="Add Room" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="118.0" text="Edit Room" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
         <TextField fx:id="roomNumberField_" disable="true" layoutX="180.0" layoutY="215.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Number" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="215.0">
             <font>
                 <Font size="17.0" />
@@ -47,7 +47,7 @@
       </TextField>
       <ComboBox fx:id="roomStatusComboBox_" layoutX="605.0" layoutY="289.0" prefHeight="40.0" prefWidth="115.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="289.0" />
       <Label fx:id="roomStatusError" layoutX="500.0" layoutY="328.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="328.0" />
-        <Button fx:id="addBtn" layoutX="340.0" layoutY="420.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="38.0" prefWidth="86.0" text="Add">
+        <Button fx:id="editBtn" layoutX="340.0" layoutY="420.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="38.0" prefWidth="86.0" text="Add">
             <font>
                 <Font size="17.0" />
             </font>

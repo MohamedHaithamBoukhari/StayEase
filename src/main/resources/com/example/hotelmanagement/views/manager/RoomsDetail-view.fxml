@@ -5,9 +5,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.HomePageController">
     <children>
@@ -91,17 +94,59 @@
                   <Image url="@../../images/complaintIcon.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+      </Button>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="32.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="768.0">
          <image>
             <Image url="@../../images/hotelIcon.png" />
          </image>
       </ImageView>
-
-      <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
-        <Button fx:id="addRoomBtn" layoutX="327.0" layoutY="440.0" mnemonicParsing="false" onAction="#newRoomWindow" text="Add Room" />
+        <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+      <Label fx:id="pageTitle" text="Rooms Detail" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TableView fx:id="roomsTable" layoutX="217.0" layoutY="173.0" prefHeight="352.0" prefWidth="624.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="173.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="82.0" text="#" />
+          <TableColumn fx:id="roomNumberCol" prefWidth="98.0" text="Room Number" />
+            <TableColumn fx:id="typeCol" prefWidth="99.0" text="Type" />
+            <TableColumn fx:id="capacityCol" prefWidth="92.0" text="Capacity" />
+            <TableColumn fx:id="statusCol" prefWidth="128.0" text="Status" />
+            <TableColumn fx:id="price_dayCol" prefWidth="124.0" text="Price/day" />
+        </columns>
+      </TableView>
+        <Label fx:id="roomAddedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Room added successfully" AnchorPane.rightAnchor="272.0" />
+        <Label fx:id="roomUpdatedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Room updated successfully" AnchorPane.rightAnchor="272.0" />
+        <Label fx:id="roomDeletedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Room deleted successfully" AnchorPane.rightAnchor="272.0" />
+        <Button fx:id="addRoomBtn" alignment="CENTER" layoutX="597.0" layoutY="539.0" mnemonicParsing="false" onAction="#newRoomWindow" prefHeight="30.0" prefWidth="75.0" text="Add" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="228.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/addIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="editBtn" layoutX="680.0" layoutY="539.0" mnemonicParsing="false" onAction="#editRoomWindow" prefHeight="30.0" prefWidth="75.0" text="edit" AnchorPane.bottomAnchor="31.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/editIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="deleteBtn" layoutX="765.0" layoutY="539.0" mnemonicParsing="false" onAction="#deleteRoomWindow" prefHeight="30.0" prefWidth="75.0" text="delete" AnchorPane.bottomAnchor="31.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/deleteIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/manager/roomDetails.css" />
     </stylesheets>
 </AnchorPane>

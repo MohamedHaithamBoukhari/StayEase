@@ -38,3 +38,8 @@ Button{
     -fx-text-fill: white;
     -fx-background-color:rgba(21,25,37,255);
 }
+#pageTitle{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}

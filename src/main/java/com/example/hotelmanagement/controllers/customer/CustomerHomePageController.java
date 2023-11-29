@@ -46,9 +46,21 @@ public class CustomerHomePageController implements Initializable{
         System.out.println(currentPage);
         System.out.println(currentPage.equals("CustomerInfos"));
         fullnameLabel.setText("- " + currentCustomer.getFullName() + " -");
-        if(currentPage.equals("CustomerInfos")){
+        if(currentPage.equals("Home")){
+
+        } else if (currentPage.equals("CustomerInfos")){
             succesMsg.setVisible(false);
             initializeFields(currentCustomer);
+        } else if (currentPage.equals("RoomsDetail")) {
+
+        } else if (currentPage.equals("Services")) {
+
+        } else if (currentPage.equals("Invoices")) {
+
+        } else if (currentPage.equals("Feedback")) {
+
+        } else if (currentPage.equals("About")) {
+
         }
     }
     public void initializeFields(Customer customer){

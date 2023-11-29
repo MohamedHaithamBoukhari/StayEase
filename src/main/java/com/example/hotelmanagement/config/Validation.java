@@ -32,9 +32,9 @@ public class Validation {
         return !position.isEmpty();
     }
     public static boolean isValidWorkingHours(String workingHours) {
-        return false;
+        return true;
     }
     public static boolean isValidWorkingDays(String workingDays) {
-        return false;
+        return true;
     }
 }

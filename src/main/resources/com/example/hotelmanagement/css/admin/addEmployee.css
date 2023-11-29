@@ -27,7 +27,8 @@ TextField:focused{
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
-#error1, #error2, #error3, #error4, #error5, #error6 {
+#fullNameError, #cinError, #phoneError, #emailAddressError,
+#passwordError, #positionError, #salaryError, #workingHoursError, #workingDaysError {
     -fx-text-fill: red;
 }
 #succesMsg{
