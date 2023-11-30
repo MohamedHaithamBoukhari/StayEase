@@ -12,6 +12,7 @@ public class RoomsTableView {
     private Object capacity;
     private Object status;
     private Object price_day;
+    private Object price;
 
     public RoomsTableView(Object roomId, Object numRoom, Object type, Object capacity, Object status, Object price_day) {
         this.i = NBR;
@@ -21,6 +22,7 @@ public class RoomsTableView {
         this.capacity = capacity;
         this.status = status;
         this.price_day = price_day;
+        this.price = (int)price_day*(1+(int)capacity) - ((int) capacity*40);
         incrementId();
     }
     public static void incrementId(){
@@ -91,6 +93,14 @@ public class RoomsTableView {
         return i;
     }
 
+    public Object getPrice() {
+        return price;
+    }
+
+    public void setPrice(Object price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "RoomsTableView{" +
@@ -101,6 +111,7 @@ public class RoomsTableView {
                 ", capacity=" + capacity +
                 ", status=" + status +
                 ", price_day=" + price_day +
+                ", price=" + price +
                 '}';
     }
 }
