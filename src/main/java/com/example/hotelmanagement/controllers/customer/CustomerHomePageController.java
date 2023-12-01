@@ -185,9 +185,9 @@ public class CustomerHomePageController implements Initializable{
         roomsTable.getItems().clear();
         RoomsTableView.setNBR(1);
 
-        List<String> colToSelect =  new ArrayList<String>(List.of("room.roomId","room.numRoom","room.type","room.capacity","room.status","roomType.price_day"));
+        List<String> colToSelect =  new ArrayList<String>(List.of("r.roomId","r.numRoom","r.type","r.capacity","r.status","rT.price_day"));
         if(statusList.isEmpty() && price.isEmpty() && capacity.isEmpty()){
-            List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, RoomTypeDao.TABLE_NAME,"type","type", colToSelect, "");
+            List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, "");
             for (Object[] row : roomsdetails) {
                 RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
                 //System.out.println(roomRow);
@@ -195,7 +195,7 @@ public class CustomerHomePageController implements Initializable{
             }
         }else{
             //join and select rooms with status checked and price < priceSelected and capacite< capacity
-            String col1 = "room.status", col2 = "roomType.price_day * (1 + room.capacity) - (room.capacity * 40)", col3 = "room.capacity";
+            String col1 = "r.status", col2 = "rT.price_day * (1 + r.capacity) - (r.capacity * 40)", col3 = "r.capacity";
             String whereClause = " WHERE ";
             if(!statusList.isEmpty()){
                 whereClause += "(";
@@ -214,7 +214,7 @@ public class CustomerHomePageController implements Initializable{
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
             System.out.println(whereClause);
 
-            List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, RoomTypeDao.TABLE_NAME,"type","type", colToSelect, whereClause);
+            List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
             for (Object[] row : roomsdetails) {
                 RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
                 //System.out.println(roomRow);

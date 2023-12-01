@@ -11,9 +11,6 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         HelloApplication.stage = stage;
-//        RoomTypeDao.insert(new RoomType("aaa","e",1));
-//        RoomTypeDao.update("description","desc", "typeId", 1);
-//        RoomTypeDao.delete("typeId",11);
         Welcome welcomePane = new Welcome(stage);
     }
 

@@ -33,7 +33,7 @@ public class NewEmployeeController{
 //
             Employee newEmployee = new Employee(fullName, cin, phone, emailAddress, password, position, Integer.parseInt(salary), workingHours, workingDays);
             EmployeeDao.insert(newEmployee);
-            HomePageController.empAdded = true;
+//            HomePageController.empAdded = true;
             closeStage(event);
 
         }

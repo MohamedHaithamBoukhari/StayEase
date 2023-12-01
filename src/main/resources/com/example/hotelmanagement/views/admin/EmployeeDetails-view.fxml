@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.admin.HomePageController">
+    <children>
+        <ImageView fitHeight="567.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+            <image>
+                <Image url="@../../images/hotel.jpg" />
+            </image>
+        </ImageView>
+      <Label fx:id="homeLabel" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="42.0" text="Admin Dashboard" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="fullnameLabel" alignment="CENTER" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="280.0" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" />
+      <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/user.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="logoutLink" focusTraversable="false" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
+      <Button fx:id="logoutBtn" layoutX="870.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" prefHeight="18.0" prefWidth="25.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
+         <graphic>
+            <ImageView fx:id="logoutBtn1" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <AnchorPane fx:id="sideBar" prefHeight="568.0" prefWidth="163.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="735.0" AnchorPane.topAnchor="32.0" />
+      <Button fx:id="homeBtn" layoutX="2.0" layoutY="39.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="50.0" prefWidth="156.0" text="Home" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="40.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/homeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="employeeBtn" layoutX="2.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchToEmployee" prefHeight="50.0" prefWidth="156.0" text="Employees" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="100.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/employeeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="servicesBtn" layoutX="2.0" layoutY="220.0" mnemonicParsing="false" onAction="#switchToServices" prefHeight="50.0" prefWidth="156.0" text="Services" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="160.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/servicesIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="feedbackBtn" layoutX="2.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToFeedback" prefHeight="50.0" prefWidth="156.0" text="FeedBack" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="220.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/invoiceIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="earningBtn" layoutX="12.0" layoutY="290.0" mnemonicParsing="false" onAction="#switchToEarning" prefHeight="50.0" prefWidth="156.0" text="Earning" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="280.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/earningIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="emailBtn" layoutX="22.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToEmail" prefHeight="50.0" prefWidth="156.0" text="Send Email" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="340.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/emailIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="32.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="768.0">
+         <image>
+            <Image url="@../../images/hotelIcon.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <AnchorPane fx:id="filters" layoutX="217.0" layoutY="113.0" prefHeight="55.0" prefWidth="618.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="113.0">
+            <children>
+                <CheckBox fx:id="Admin" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterEmployees" text="Admin" textFill="WHITE" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="OtherJob" layoutX="190.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterEmployees" text="Other job" textFill="WHITE" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="32.0" />
+                <CheckBox fx:id="Manager" layoutX="79.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterEmployees" text="Manager" textFill="WHITE" AnchorPane.leftAnchor="79.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="Cleaner" layoutX="159.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterEmployees" text="Cleaner" textFill="WHITE" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="MaintenanceStaff" layoutX="12.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterEmployees" text="Maintenance Staff" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="32.0" />
+                <AnchorPane layoutX="255.0" layoutY="8.0" opacity="0.22" prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="8.0" />
+            <Label layoutX="282.0" layoutY="7.0" text="FullName" textFill="WHITE" AnchorPane.topAnchor="7.0" />
+            <TextField fx:id="fullnameField" layoutX="344.0" layoutY="3.0" onAction="#filterEmployees" prefHeight="21.0" prefWidth="95.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="3.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+                <Label layoutX="282.0" layoutY="32.0" text="Phone" textFill="WHITE" AnchorPane.leftAnchor="282.0" AnchorPane.topAnchor="32.0" />
+                <TextField fx:id="phoneField" layoutX="344.0" layoutY="28.0" onAction="#filterEmployees" prefHeight="21.0" prefWidth="95.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="184.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="474.0" layoutY="7.0" text="CIN" textFill="WHITE" AnchorPane.leftAnchor="474.0" AnchorPane.topAnchor="7.0" />
+                <TextField fx:id="cinField" layoutX="537.0" layoutY="3.0" onAction="#filterEmployees" prefHeight="9.0" prefWidth="75.0" AnchorPane.leftAnchor="517.0" AnchorPane.rightAnchor="11.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+            <Label layoutX="474.0" layoutY="32.0" text="Email" textFill="WHITE" AnchorPane.leftAnchor="474.0" AnchorPane.topAnchor="32.0" />
+            <TextField fx:id="emailField" layoutX="517.0" layoutY="28.0" onAction="#filterEmployees" prefHeight="21.0" prefWidth="95.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+            </children>
+        </AnchorPane>
+        <Label fx:id="pageTitle" text="Rooms Detail" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="50.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Label>
+        <Label fx:id="empAddedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Employee added successfully" AnchorPane.rightAnchor="272.0" />
+        <Label fx:id="empUpdatedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Employee updated successfully" AnchorPane.rightAnchor="272.0" />
+        <Label fx:id="empDeletedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Employee deleted successfully" AnchorPane.rightAnchor="272.0" />
+        <TableView fx:id="empsTable" layoutX="217.0" layoutY="173.0" prefHeight="352.0" prefWidth="624.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="173.0">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="46.0" text="#" />
+                <TableColumn fx:id="fullNameCol" prefWidth="134.0" text="Full Name" />
+                <TableColumn fx:id="cinCol" prefWidth="78.0" text="CIN" />
+                <TableColumn fx:id="emailCol" prefWidth="145.0" text="Address Email" />
+                <TableColumn fx:id="positionCol" prefWidth="109.0" text="Position" />
+            <TableColumn fx:id="phoneCol" prefWidth="115.0" text="Phone" />
+            </columns>
+        </TableView>
+        <Label fx:id="rowSelectedError" layoutX="219.0" layoutY="542.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="219.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/errorIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Button fx:id="addEmpBtn" alignment="CENTER" layoutX="520.0" layoutY="539.0" mnemonicParsing="false" onAction="#newEmployeeWindow" prefHeight="30.0" prefWidth="75.0" text="add" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="305.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/addIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Button fx:id="editBtn" layoutX="601.0" layoutY="539.0" mnemonicParsing="false" onAction="#editEmployeeWindow" prefHeight="30.0" prefWidth="75.0" text="edit" AnchorPane.bottomAnchor="31.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/editIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Button fx:id="deleteBtn" layoutX="684.0" layoutY="539.0" mnemonicParsing="false" onAction="#deleteEmployeeWindow" prefHeight="30.0" prefWidth="75.0" text="delete" AnchorPane.bottomAnchor="31.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/deleteIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Label fx:id="noRowsMsg" layoutX="380.0" layoutY="330.0" prefHeight="30.0" prefWidth="317.0" text="No employee match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="330.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+      <Button fx:id="detailsBtn" alignment="CENTER" layoutX="766.0" layoutY="539.0" mnemonicParsing="false" onAction="#empDetailsWindow" prefHeight="30.0" prefWidth="75.0" text="details" AnchorPane.bottomAnchor="31.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/addIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+    </children>
+    <stylesheets>
+        <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/admin/empDetails.css" />
+    </stylesheets>
+</AnchorPane>

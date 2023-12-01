@@ -85,6 +85,6 @@
     </children>
     <stylesheets>
         <URL value="@../../css/general.css" />
-        <URL value="@../../css/admin/addEmployee.css" />
+        <URL value="@../../css/admin/EmpActions.css" />
     </stylesheets>
 </AnchorPane>

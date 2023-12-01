@@ -209,16 +209,16 @@ public class CummonDbFcts<T> {
         }
         return maxValue;
     }
-    public static List<Object[]> performJoinAndSelect(String table1, String table2, String column1, String column2, List<String> columnsToSelect, String whereClause) {
+    public static List<Object[]> performJoinAndSelect(String table1, String alias1, String table2, String alias2, String column1, String column2, List<String> columnsToSelect, String whereClause) {
         List<Object[]> resultList = new ArrayList<>();
 
         try {
             connection = DaoFactory.getConnection();
             statement = connection.createStatement();
             String query = "SELECT " + String.join(", ", columnsToSelect) +
-                    " FROM " + table1 +
-                    " INNER JOIN " + table2 +
-                    " ON " + table1 + "." + column1 + " = " + table2 + "." + column2
+                    " FROM " + table1 + " "  + alias1 +
+                    " INNER JOIN " + table2 + " "  + alias2 +
+                    " ON " + alias1 + "." + column1 + " = " + alias2 + "." + column2
                     + whereClause;
             System.out.println(query);
             resultSet = statement.executeQuery(query);
