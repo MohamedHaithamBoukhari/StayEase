@@ -79,7 +79,6 @@ public class HomePageController implements Initializable{
 
         }
     }
-
 //------------------------------------------------------------------------------------------
     public void switchToHome(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
@@ -140,7 +139,7 @@ public class HomePageController implements Initializable{
         noRowsMsg.setVisible(false);
         List<EmployeesTableView> empsList = new ArrayList<>();
         empsTable.getItems().clear();
-        RoomsTableView.setNBR(1);
+        EmployeesTableView.setNBR(1);
 
         List<String> colToSelect =  new ArrayList<String>(List.of("emp.employeeId", "emp.fullName", "emp.cin", "emp.email", "emp.position", "emp.phone"));
         if(jobsList.isEmpty() && fullname.isEmpty() && phone.isEmpty() && cin.isEmpty() && email.isEmpty()){
@@ -221,15 +220,16 @@ public class HomePageController implements Initializable{
     }
     public void empDetailsWindow(ActionEvent event) throws IOException {
         rowSelectedError.setVisible(false);
+        if(empsTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/NewEmployee-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/InfoDetailEmployee-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();
         childStage.setScene(scene);
-
-        String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerSignUp.css"));
-        scene.getStylesheets().add(cssFile);
 
         childStage.initStyle(StageStyle.TRANSPARENT);
         childStage.setScene(scene);
@@ -241,12 +241,6 @@ public class HomePageController implements Initializable{
 
         childStage.showAndWait();
 
-        if(VarsManager.actionCompleted.equals("update")){
-            empDeletedMsg.setVisible(false);
-            empUpdatedMsg.setVisible(false);
-            empAddedMsg.setVisible(true);
-            hideMsg(empAddedMsg,4);
-        }
         loadDataOnTable(new ArrayList<>(),"","","","");
     }
     public void newEmployeeWindow(ActionEvent event) throws IOException {
@@ -258,9 +252,6 @@ public class HomePageController implements Initializable{
         scene = new Scene(root);
         childStage = new Stage();
         childStage.setScene(scene);
-
-        String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerSignUp.css"));
-        scene.getStylesheets().add(cssFile);
 
         childStage.initStyle(StageStyle.TRANSPARENT);
         childStage.setScene(scene);
@@ -289,7 +280,7 @@ public class HomePageController implements Initializable{
         VarsManager.actionStarted = "update";
         VarsManager.selectedEmpId = (int) empsTable.getSelectionModel().getSelectedItem().getEmployeeId();
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/EditRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/EditEmployee-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();
@@ -323,7 +314,7 @@ public class HomePageController implements Initializable{
         VarsManager.actionStarted = "delete";
         VarsManager.selectedEmpId = (int) empsTable.getSelectionModel().getSelectedItem().getEmployeeId();
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/DeleteRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/DeleteEmployee-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();

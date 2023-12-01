@@ -32,7 +32,6 @@ public class RoomActionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
         if (VarsManager.actionStarted.equals("delete")) {
             roomIdLabel.setText(String.valueOf(VarsManager.selectedRoomId));
         }else {
@@ -66,9 +65,8 @@ public class RoomActionsController implements Initializable {
                 roomStatusComboBox_.getSelectionModel().select(((Room) room).getStatus());
             }
         }
-
     }
-
+    //----------------- Actions-------------------------------------
     public void addRoom(ActionEvent event){
         roomNbr = roomNumberSpinner_.getValue();
         capacity = roomCapacitySpinner_.getValue();

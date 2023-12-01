@@ -17,67 +17,62 @@
             </image>
         </ImageView>
         <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0" />
-        <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="62.0" text="Add Employee" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
-        <TextField fx:id="fullNameField_" layoutX="180.0" layoutY="124.0" prefHeight="35.0" prefWidth="220.0" promptText="Full Name" AnchorPane.leftAnchor="180.0">
+        <Label fx:id="title" alignment="CENTER" layoutX="334.0" layoutY="62.0" prefHeight="30.0" prefWidth="220.0" text="Employee Informations" AnchorPane.leftAnchor="334.0" AnchorPane.rightAnchor="334.0" />
+        <TextField fx:id="fullNameField_" editable="false" layoutX="180.0" layoutY="124.0" prefHeight="35.0" prefWidth="220.0" promptText="Full Name" AnchorPane.leftAnchor="180.0">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
         <Label fx:id="fullNameError" layoutX="480.0" layoutY="132.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="163.0" />
-        <TextField fx:id="cinField_" layoutX="180.0" layoutY="184.0" prefHeight="35.0" prefWidth="220.0" promptText="CIN" AnchorPane.leftAnchor="180.0">
+        <TextField fx:id="cinField_" editable="false" layoutX="180.0" layoutY="184.0" prefHeight="35.0" prefWidth="220.0" promptText="CIN" AnchorPane.leftAnchor="180.0">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
       <Label fx:id="cinError" layoutX="490.0" layoutY="142.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="224.0" />
-        <TextField fx:id="phoneField_" layoutX="180.0" layoutY="244.0" prefHeight="35.0" prefWidth="220.0" promptText="Phone" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="244.0">
+        <TextField fx:id="phoneField_" editable="false" layoutX="180.0" layoutY="244.0" prefHeight="35.0" prefWidth="220.0" promptText="Phone" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="244.0">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
       <Label fx:id="phoneError" layoutX="180.0" layoutY="284.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="284.0" />
-        <TextField fx:id="emailAddressField_" layoutX="180.0" layoutY="244.0" prefHeight="35.0" prefWidth="220.0" promptText="Email Address" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="304.0">
+        <TextField fx:id="emailAddressField_" editable="false" layoutX="180.0" layoutY="244.0" prefHeight="35.0" prefWidth="220.0" promptText="Email Address" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="304.0">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
       <Label fx:id="emailAddressError" layoutX="190.0" layoutY="294.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="344.0" />
-        <TextField fx:id="passwordField_" layoutX="180.0" layoutY="304.0" prefHeight="35.0" prefWidth="220.0" promptText="Password" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="364.0">
+        <TextField fx:id="passwordField_" editable="false" layoutX="180.0" layoutY="304.0" prefHeight="35.0" prefWidth="220.0" promptText="Password" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="364.0">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
       <Label fx:id="passwordError" layoutX="200.0" layoutY="304.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="404.0" />
-      <TextField fx:id="positionField_" layoutX="500.0" layoutY="169.0" prefHeight="35.0" prefWidth="220.0" promptText="Position" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="150.0">
+      <TextField fx:id="positionField_" editable="false" layoutX="500.0" layoutY="169.0" prefHeight="35.0" prefWidth="220.0" promptText="Position" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
       <Label fx:id="positionError" layoutX="230.0" layoutY="334.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="190.0" />
-      <TextField fx:id="salaryField_" layoutX="520.0" layoutY="269.0" prefHeight="35.0" prefWidth="220.0" promptText="Salary" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="210.0">
+      <TextField fx:id="salaryField_" editable="false" layoutX="520.0" layoutY="269.0" prefHeight="35.0" prefWidth="220.0" promptText="Salary" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="210.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
       <Label fx:id="salaryError" layoutX="210.0" layoutY="314.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="250.0" />
-      <TextField fx:id="workingHoursField_" layoutX="530.0" layoutY="323.0" prefHeight="35.0" prefWidth="220.0" promptText="workingHours" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="270.0">
+      <TextField fx:id="workingHoursField_" editable="false" layoutX="530.0" layoutY="323.0" prefHeight="35.0" prefWidth="220.0" promptText="workingHours" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="270.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
       <Label fx:id="workingHoursError" layoutX="220.0" layoutY="324.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="310.0" />
-      <TextField fx:id="workingDaysField_" layoutX="540.0" layoutY="357.0" prefHeight="35.0" prefWidth="220.0" promptText="workingDays" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="330.0">
+      <TextField fx:id="workingDaysField_" editable="false" layoutX="540.0" layoutY="357.0" prefHeight="35.0" prefWidth="220.0" promptText="workingDays" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="330.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
       <Label fx:id="workingDaysError" layoutX="200.0" layoutY="304.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="370.0" />
-        <Button fx:id="addBtn" layoutX="340.0" layoutY="454.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="38.0" prefWidth="86.0" text="Add">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Button>
-        <Button fx:id="backBtn" layoutX="480.0" layoutY="454.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="80.0" text="Cancel" textFill="WHITE">
+        <Button fx:id="backBtn" layoutX="412.0" layoutY="454.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="80.0" text="Cancel" textFill="WHITE">
             <font>
                 <Font size="17.0" />
             </font>

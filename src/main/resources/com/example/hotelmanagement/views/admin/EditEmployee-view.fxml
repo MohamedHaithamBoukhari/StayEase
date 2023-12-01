@@ -17,7 +17,7 @@
             </image>
         </ImageView>
         <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0" />
-        <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="62.0" text="Add Employee" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="62.0" text="Edit Employee" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
         <TextField fx:id="fullNameField_" layoutX="180.0" layoutY="124.0" prefHeight="35.0" prefWidth="220.0" promptText="Full Name" AnchorPane.leftAnchor="180.0">
             <font>
                 <Font size="17.0" />
@@ -72,7 +72,7 @@
          </font>
       </TextField>
       <Label fx:id="workingDaysError" layoutX="200.0" layoutY="304.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="370.0" />
-        <Button fx:id="addBtn" layoutX="340.0" layoutY="454.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="38.0" prefWidth="86.0" text="Add">
+        <Button fx:id="addBtn" layoutX="340.0" layoutY="454.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="38.0" prefWidth="86.0" text="Save">
             <font>
                 <Font size="17.0" />
             </font>
