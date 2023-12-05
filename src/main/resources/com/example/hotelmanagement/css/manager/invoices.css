@@ -1,0 +1,29 @@
+#payBtn {
+        -fx-padding: 0;
+        -fx-background-color: blue;
+        -fx-font-size: 15;
+}
+#confirmPayBtn {
+    -fx-padding: 0;
+    -fx-background-color: green;
+    -fx-font-size: 15;
+}
+#hideConfirmPayBtn {
+    -fx-padding: 0;
+    -fx-background-color: grey;
+    -fx-font-size: 15;
+}
+#confirmPayMsg, #changeStatusError {
+    -fx-font-size: 15;
+    -fx-text-fill: #eeff00;
+    -fx-font-weight: bold;
+    -fx-border-radius:9;
+    -fx-padding: 1px 2px 1px 2px;
+    -fx-border-color:#eeff00;
+}
+
+#updatedMsg{
+    -fx-border-color:#15ff00;
+    -fx-text-fill: #15ff00;
+
+}

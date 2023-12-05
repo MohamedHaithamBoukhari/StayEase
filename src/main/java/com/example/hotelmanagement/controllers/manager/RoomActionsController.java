@@ -3,6 +3,7 @@ package com.example.hotelmanagement.controllers.manager;
 import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Room;
 import com.example.hotelmanagement.beans.RoomType;
+import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.controllers.customer.CustomerHomePageController;
 import com.example.hotelmanagement.dao.CustomerDao;
 import com.example.hotelmanagement.dao.RoomDao;
@@ -112,56 +113,28 @@ public class RoomActionsController implements Initializable {
         }
     }
     //----------------- verification-------------------------------------
-    boolean isValidRoomNbr(int roomNbr, String action){
-        Map<String, Object> map = new HashMap<>();
-        map.put("numRoom", roomNbr);
-        List<Object> rooms = RoomDao.select(map,"*");
-
-        if(action.equals("add")){
-            if(rooms.size() == 1){
-                return false; //room nbr exists
-            }
-            return true;
-        } else if (action.equals("update")) {
-            if(roomNbr == VarsManager.selectedRoomId || rooms.size() != 1){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        return false;
-    }
-    boolean isValidCapacity(int capacity){
-        return true;
-    }
-    boolean isValidRoomType(String type){
-        return type != null;
-    }
-    boolean isValidRoomStatus(String status){
-        return status != null;
-    }
     public boolean verifyFields(ActionEvent event, int roomNbr, int capacity, String type, String status, String action){
         int i = 0;
         roomNumberError.setText("");
         roomCapacityError.setText("");
         roomStatusError.setText("");
         roomTypeError.setText("");
-        if (!isValidRoomNbr(roomNbr, action)) {
+        if (!Validation.isValidRoomNbr(roomNbr, action)) {
             roomNumberError.setText("-Room number already exist");
             i++;
         }
 
-        if (!isValidCapacity(capacity)) {
+        if (!Validation.isValidCapacity(capacity)) {
             roomCapacityError.setText("-Enter capacity");
             i++;
         }
 
-        if (!isValidRoomType(type)) {
+        if (!Validation.isValidRoomType(type)) {
             roomTypeError.setText("-Chise room type");
             i++;
         }
 
-        if (!isValidRoomStatus(status)) {
+        if (!Validation.isValidRoomStatus(status)) {
             roomStatusError.setText("-Choise roome status");
             i++;
         }
@@ -173,6 +146,4 @@ public class RoomActionsController implements Initializable {
         HomePageController.childStage.close();
         VarsManager.actionStarted = "";
     }
-
-
 }

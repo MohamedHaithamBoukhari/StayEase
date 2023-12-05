@@ -2,13 +2,19 @@ package com.example.hotelmanagement.controllers.customer;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.dao.ReservationDao;
 import com.example.hotelmanagement.dao.RoomDao;
 import com.example.hotelmanagement.dao.RoomTypeDao;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
+import com.example.hotelmanagement.localStorage.VarsManager;
+import com.example.hotelmanagement.tablesView.EmployeesTableView;
+import com.example.hotelmanagement.tablesView.ReservationTableView;
 import com.example.hotelmanagement.tablesView.RoomsTableView;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,14 +48,18 @@ public class CustomerHomePageController implements Initializable{
     @FXML private Label fullnameLabel;
     @FXML TextField fullNameField, cinField, emailAddressField, passwordField, phoneField, addressField;//fields of user infos
 
-    @FXML private Label noRowsMsg;
     @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
     @FXML private TextField priceField, capacityField;
+    @FXML private Label noRowsMsg, rowSelectedError;
     @FXML private TableView<RoomsTableView> roomsTable;
     @FXML private TableColumn<RoomsTableView, Object> idCol, roomNumberCol, typeCol, capacityCol, statusCol, price_dayCol;
+    @FXML private TableView<ReservationTableView> reservationTable;
+    @FXML private TableColumn<ReservationTableView, Object> id_Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
+    @FXML public CheckBox Upcoming, InProgress, CompletedStay, Cancelled;
+    @FXML public Label addedMsg, updatedMsg, deletedMsg;
 
 
-//------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -64,10 +75,17 @@ public class CustomerHomePageController implements Initializable{
             succesMsg.setVisible(false);
             initializeFields(currentCustomer);
         } else if (currentPage.equals("RoomsDetail")) {
-            loadDataOnTable(new ArrayList<>(), "", "");
+            loadDataOnRoomTable(new ArrayList<>(), "", "");
             noRowsMsg.setVisible(false);
         } else if (currentPage.equals("Services")) {
 
+        }else if (currentPage.equals("BookingService")) {
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            deletedMsg.setVisible(false);
+            loadDataOnReservationTable(new ArrayList<>());
+            noRowsMsg.setVisible(false);
+            rowSelectedError.setVisible(false);
         } else if (currentPage.equals("Invoices")) {
 
         } else if (currentPage.equals("Feedback")) {
@@ -121,6 +139,15 @@ public class CustomerHomePageController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToBookingService(ActionEvent event) throws IOException {
+        SwitchedPageManager.getInstance().setSwitchedPage("BookingService");
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/BookingRoom-view.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void switchToInvoices(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Invoices");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/Invoices-view.fxml"));
@@ -150,16 +177,12 @@ public class CustomerHomePageController implements Initializable{
     }
 //-------------------------------------------------------------------------------
     public void newEditInfoWindow(ActionEvent event) throws IOException {
-//        rootPane.setStyle(" -fx-background-color:rgb(28,36,58);");
 
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/editInfo-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();
         childStage.setScene(scene);
-
-        String cssFile = String.valueOf(new URL(PathConfig.RESSOURCES_ABS_PATH + "css/customer/customerSignUp.css"));
-        scene.getStylesheets().add(cssFile);
 
         childStage.initStyle(StageStyle.TRANSPARENT);
         childStage.setScene(scene);
@@ -174,11 +197,12 @@ public class CustomerHomePageController implements Initializable{
         if(updated){//if we update customer infos the values of updated is set to true
             initializeFields(CustomerManager.getInstance().getCustomer());
             succesMsg.setVisible(true);
+            hideMsg(succesMsg, 4);
         }
 
     }
 //----------------------------------- room details fcts--------------------------------------------
-    public void loadDataOnTable(List<String> statusList, String price, String capacity){
+    public void loadDataOnRoomTable(List<String> statusList, String price, String capacity){
         noRowsMsg.setVisible(false);
 
         List<RoomsTableView> roomsList = new ArrayList<>();
@@ -256,12 +280,175 @@ public class CustomerHomePageController implements Initializable{
         String price = priceField.getText();
         String capacity = capacityField.getText();
 
-        loadDataOnTable(statusList, price, capacity);
+        loadDataOnRoomTable(statusList, price, capacity);
 
         System.out.println(statusList.toString());
         System.out.println(price);
         System.out.println(capacity);
 
+    }
+//----------------------------------- services fcts--------------------------------------------
+    public void loadDataOnReservationTable(List<String> statusList){
+        noRowsMsg.setVisible(false);
+
+        List<ReservationTableView> reservationList = new ArrayList<>();
+        reservationTable.getItems().clear();
+        ReservationTableView.setNBR(1);
+
+        List<String> colToSelect =  new ArrayList<String>(List.of("res.reservationId", "res.reservationDate", "res.check_inDate", "res.check_outDate", "r.roomNbr", "r.roomtype", "res.resStatus", "r.capacity"));
+        if(statusList.isEmpty()){
+            List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, "");
+            for (Object[] row : reservationsDetail) {
+                ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                //System.out.println(roomRow);
+                reservationList.add(resRow);
+            }
+        }else{
+            String col1 = "res.resStatus";
+            String whereClause = " WHERE ";
+
+            for (String status: statusList){
+                whereClause = whereClause + col1 + " = '" + status + "' OR ";
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
+            System.out.println(whereClause);
+
+            List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, whereClause);
+            for (Object[] row : reservationsDetail) {
+                ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                reservationList.add(resRow);
+            }
+        }
+
+        id_Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        ReservationDateCol.setCellValueFactory(new PropertyValueFactory<>("reservationDate"));
+        CheckInDateCol.setCellValueFactory(new PropertyValueFactory<>("CheckInDateCol"));
+        CheckOutDate.setCellValueFactory(new PropertyValueFactory<>("CheckOutDate"));
+        DurationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        roomNbrCol.setCellValueFactory(new PropertyValueFactory<>("roomNbr"));
+        RoomTypeCol.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        PriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        StatusCol.setCellValueFactory(new PropertyValueFactory<>("resStatus"));
+
+        reservationTable.getItems().addAll(reservationList);
+        if(reservationList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+    }
+    public void filteReservations(){
+        List<String> statusList = new ArrayList<>();
+
+        if(Upcoming.isSelected()) statusList.add("Upcoming");
+
+        if(InProgress.isSelected()) statusList.add("In Progress");
+
+        if(CompletedStay.isSelected()) statusList.add("Completed Stay");
+
+        if(Cancelled.isSelected()) statusList.add("Cancelled");
+
+        loadDataOnReservationTable(statusList);
+    }
+    public void newReservationWindow(ActionEvent event) throws IOException {
+        rowSelectedError.setVisible(false);
+        VarsManager.actionStarted = "add";
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/NewReservation-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("update")){
+            deletedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            addedMsg.setVisible(true);
+            hideMsg(addedMsg,4);
+        }
+        loadDataOnReservationTable(new ArrayList<>());
+    }
+    public void editReservationWindow(ActionEvent event) throws IOException {
+        rowSelectedError.setVisible(false);
+        if(reservationTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        VarsManager.actionStarted = "update";
+        VarsManager.selectedResId = (int) reservationTable.getSelectionModel().getSelectedItem().getReservationId();
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/EditReservation-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("update")){
+            deletedMsg.setVisible(false);
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(true);
+            hideMsg(updatedMsg,4);
+        }
+        loadDataOnReservationTable(new ArrayList<>());
+    }
+    public void deleteReservationWindow(ActionEvent event) throws IOException {
+        rowSelectedError.setVisible(false);
+        if(reservationTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+
+        VarsManager.actionStarted = "delete";
+        VarsManager.selectedResId = (int) reservationTable.getSelectionModel().getSelectedItem().getReservationId();
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/DeleteReservation-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("delete")){
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            deletedMsg.setVisible(true);
+            hideMsg(deletedMsg,4);
+        }
+        loadDataOnReservationTable(new ArrayList<>());
+    }
+//----------------------------------- --------------------------------------------
+    public void hideMsg(Label msg,double time){
+        Duration duration = Duration.seconds(time);
+        Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
     }
     public void logout(ActionEvent event){
         CustomerManager.getInstance().setCustomer(new Customer("","","","","",""));

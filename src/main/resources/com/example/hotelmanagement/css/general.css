@@ -3,7 +3,7 @@
 }
 #back{
 -fx-background-radius:40;
--fx-background-color:rgba(0,0,0);
+-fx-background-color:rgb(28,36,58);
 }
 
 #closeBtn {

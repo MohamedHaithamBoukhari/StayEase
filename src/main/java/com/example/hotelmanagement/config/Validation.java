@@ -1,5 +1,13 @@
 package com.example.hotelmanagement.config;
 
+import com.example.hotelmanagement.dao.RoomDao;
+import com.example.hotelmanagement.localStorage.VarsManager;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Validation {
     public static boolean isValidFullName(String fullName) {
         return fullName.matches("^[a-zA-Z\\s'-]+$");
@@ -36,5 +44,42 @@ public class Validation {
     }
     public static boolean isValidWorkingDays(String workingDays) {
         return true;
+    }
+
+    public static boolean isValidRoomNbr(int roomNbr, String action){
+        Map<String, Object> map = new HashMap<>();
+        map.put("numRoom", roomNbr);
+        List<Object> rooms = RoomDao.select(map,"*");
+
+        if(action.equals("add")){
+            if(rooms.size() == 1){
+                return false; //room nbr exists
+            }
+            return true;
+        } else if (action.equals("update")) {
+            if(roomNbr == VarsManager.selectedRoomId || rooms.size() != 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+    public static boolean isValidCapacity(int capacity){
+        return true;
+    }
+    public static boolean isValidRoomType(String type){
+        return type != null;
+    }
+    public static boolean isValidRoomStatus(String status){
+        return status != null;
+    }
+
+    public static boolean isValidCheckInDate(LocalDate checkInDate){
+        LocalDate currentDate = LocalDate.now();
+        return !checkInDate.isBefore(currentDate);
+    }
+    public static boolean isValidCheckOutDate(LocalDate checkInDate, LocalDate checkOutDate){
+        return !checkOutDate.isBefore(checkInDate);
     }
 }

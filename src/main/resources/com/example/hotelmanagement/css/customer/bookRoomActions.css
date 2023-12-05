@@ -1,0 +1,102 @@
+#title{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+Button{
+    -fx-background-radius:10;
+}
+TextField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+.text-field:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+}
+
+.spinner,
+.spinner .text-field,
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+TextField:focused{
+    -fx-border-color:#7EDDD6;
+}
+
+#addBtn, #editBtn, #deleteBtn, #saveBtn{
+    -fx-background-color: #3AD2CD;
+    -fx-text-fill: black;
+}
+#backBtn, #closeButton{
+    -fx-background-color: #547371;
+    -fx-text-fill: white;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+}
+
+
+.date-picker {
+    -fx-background-color: transparent;
+}
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+}
+.date-picker  {
+    -fx-border-color: white;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+.date-picker .date-cell {
+    -fx-background-color: #2a4069;
+    -fx-border-color: transparent;
+}
+
+.date-picker .date-cell {
+    -fx-text-fill: white;
+}
+
+
+#line{
+-fx-background-color: white;}
+#suggestedRoom{
+    -fx-border-color:white;
+
+}
+#noRoomFound_{
+    -fx-text-fill: red;
+    -fx-font-size: 15px;
+    -fx-border-color:red;
+    -fx-border-radius:7;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}
+#roomFound_{
+    -fx-text-fill: #30f50e;
+    -fx-font-size: 15px;
+    -fx-border-color:#30f50e;
+    -fx-border-radius:7;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}
+#confirmation{
+    -fx-text-fill: blue;
+    -fx-font-size: 15px;
+    -fx-border-color:blue;
+    -fx-border-radius:7;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}

@@ -1,0 +1,28 @@
+Button{
+    -fx-background-radius:10;
+}
+TextField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+TextField:focused{
+    -fx-border-color:#7EDDD6;
+}
+#bookBtn{
+    -fx-background-color: #547371;
+    -fx-text-fill: white;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+}
+#title{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#paneBorder{
+    -fx-border-width:1px;
+    -fx-border-color:white;
+}

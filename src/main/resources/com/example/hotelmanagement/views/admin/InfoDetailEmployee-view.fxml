@@ -81,5 +81,6 @@
     <stylesheets>
         <URL value="@../../css/general.css" />
         <URL value="@../../css/admin/EmpActions.css" />
+        <URL value="@../../css/tableView.css" />
     </stylesheets>
 </AnchorPane>

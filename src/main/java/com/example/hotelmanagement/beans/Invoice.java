@@ -3,16 +3,18 @@ package com.example.hotelmanagement.beans;
 public class Invoice {
     private int invoiceId;
     private int customerId;
-    private int serviceId;
-    private int status;
+    private int reservationId;
+    private String status;
     private String invoiceDate;
+    private int amount;
 
     public Invoice(){}
-    public Invoice(int customerId, int serviceId, int status, String invoiceDate) {
+    public Invoice(int customerId, int reservationId, String status, String invoiceDate, int amount) {
         this.customerId = customerId;
-        this.serviceId = serviceId;
+        this.reservationId = reservationId;
         this.status = status;
         this.invoiceDate = invoiceDate;
+        this.amount = amount;
     }
 
     public int getInvoiceId() {
@@ -32,18 +34,18 @@ public class Invoice {
     }
 
     public int getServiceId() {
-        return serviceId;
+        return reservationId;
     }
 
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
+    public void setServiceId(int reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -55,14 +57,23 @@ public class Invoice {
         this.invoiceDate = invoiceDate;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
                 "invoiceId=" + invoiceId +
                 ", customerId=" + customerId +
-                ", serviceId=" + serviceId +
+                ", reservationId=" + reservationId +
                 ", status=" + status +
                 ", invoiceDate='" + invoiceDate + '\'' +
+                ", amount='" + amount + '\'' +
                 '}';
     }
 }

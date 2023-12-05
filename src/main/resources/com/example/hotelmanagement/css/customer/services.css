@@ -1,0 +1,13 @@
+#serviceCadre {
+    -fx-background-color: #455d88;
+    -fx-background-radius: 10px
+}
+#serviceLabel{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+#serviceImage {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
