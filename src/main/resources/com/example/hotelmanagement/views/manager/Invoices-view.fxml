@@ -104,6 +104,12 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="pageTitle" layoutX="495.0" layoutY="49.0" text="Invoices" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="49.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Label>
+        <Label fx:id="updatedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Status updated successfully" AnchorPane.rightAnchor="272.0" />
         <AnchorPane fx:id="filters" layoutX="217.0" layoutY="113.0" prefHeight="55.0" prefWidth="618.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="113.0">
             <children>
                 <CheckBox fx:id="Paid" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterInvoices" text="Paid" textFill="WHITE" AnchorPane.topAnchor="7.0" />
@@ -127,12 +133,6 @@
             <DatePicker fx:id="invoiceDate" layoutX="467.0" layoutY="20.0" onAction="#filterInvoices" prefHeight="18.0" prefWidth="127.0" />
             </children>
         </AnchorPane>
-        <Label fx:id="pageTitle" layoutX="495.0" layoutY="50.0" text="Invoices" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="50.0">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <Label fx:id="updatedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Status updated successfully" AnchorPane.rightAnchor="272.0" />
         <TableView fx:id="invoicesTable" layoutX="217.0" layoutY="173.0" prefHeight="352.0" prefWidth="624.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="173.0">
             <columns>
                 <TableColumn fx:id="id_Col" prefWidth="37.0" text="#" />
@@ -169,7 +169,7 @@
       </Label>
       <Label fx:id="changeStatusError" layoutX="221.0" layoutY="539.0" prefHeight="30.0" prefWidth="249.0" text="You can not change invoice status" textFill="#ff9900" />
         <Button fx:id="payBtn" layoutX="764.0" layoutY="539.0" mnemonicParsing="false" onAction="#displayConfirmation" prefHeight="30.0" prefWidth="66.0" text="Pay" AnchorPane.bottomAnchor="31.0" />
-      <Button fx:id="confirmPayBtn" layoutX="693.0" layoutY="538.0" mnemonicParsing="false" onAction="#payInvoice" prefHeight="30.0" prefWidth="60.0" text="Yes" />
+      <Button fx:id="confirmPayBtn" layoutX="697.0" layoutY="538.0" mnemonicParsing="false" onAction="#payInvoice" prefHeight="30.0" prefWidth="60.0" text="Yes" />
       <Button fx:id="hideConfirmPayBtn" layoutX="769.0" layoutY="539.0" mnemonicParsing="false" onAction="#hideConfirmation" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
     </children>
     <stylesheets>

@@ -132,7 +132,7 @@
             </TextField>
             </children>
         </AnchorPane>
-        <Label fx:id="pageTitle" text="Rooms Detail" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="50.0">
+        <Label fx:id="pageTitle" text="Employees Detail" AnchorPane.rightAnchor="302.0" AnchorPane.topAnchor="50.0">
             <font>
                 <Font size="17.0" />
             </font>

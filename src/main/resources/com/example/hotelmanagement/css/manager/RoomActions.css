@@ -47,7 +47,7 @@ TextField:focused{
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
-#roomStatusError, #roomTypeError, #roomCapacityError, #roomNumberError {
+#roomStatusError, #roomTypeError, #roomCapacityError, #roomNumberError, #rateError {
     -fx-text-fill: red;
 }
 

@@ -2,7 +2,7 @@ package com.example.hotelmanagement.beans;
 
 public class Feedback {
     private int feedbackId;
-    private int customertId;
+    private int customerId;
     private String visibility;
     private int priority;
     private int customerService_rate;
@@ -13,12 +13,13 @@ public class Feedback {
     private int environnement_rate;
     private int view_rate;
     private int serviceVSprice_rate;
-    private int review_rate;
-    private String feedback_date;
+    private String review_rate;
+    private int totalRate;
+    private Object feedback_date;
 
     public Feedback(){}
-    public Feedback(int customertId, String visibility, int priority, int customerService_rate, int cleanliness_rate, int roomComfort_rate, int location_rate, int safety_rate, int environnement_rate, int view_rate, int serviceVSprice_rate, int review_rate, String feedback_date) {
-        this.customertId = customertId;
+    public Feedback(int customerId, String visibility, int priority, int customerService_rate, int cleanliness_rate, int roomComfort_rate, int location_rate, int safety_rate, int environnement_rate, int view_rate, int serviceVSprice_rate, String review_rate, int totalRate, Object feedback_date) {
+        this.customerId = customerId;
         this.visibility = visibility;
         this.priority = priority;
         this.customerService_rate = customerService_rate;
@@ -30,6 +31,7 @@ public class Feedback {
         this.view_rate = view_rate;
         this.serviceVSprice_rate = serviceVSprice_rate;
         this.review_rate = review_rate;
+        this.totalRate = totalRate;
         this.feedback_date = feedback_date;
     }
 
@@ -41,12 +43,12 @@ public class Feedback {
         this.feedbackId = feedbackId;
     }
 
-    public int getCustomertId() {
-        return customertId;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomertId(int customertId) {
-        this.customertId = customertId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getVisibility() {
@@ -129,27 +131,35 @@ public class Feedback {
         this.serviceVSprice_rate = serviceVSprice_rate;
     }
 
-    public int getReview_rate() {
+    public String getReview_rate() {
         return review_rate;
     }
 
-    public void setReview_rate(int review_rate) {
+    public void setReview_rate(String review_rate) {
         this.review_rate = review_rate;
     }
 
-    public String getFeedback_date() {
+    public Object getFeedback_date() {
         return feedback_date;
     }
 
-    public void setFeedback_date(String feedback_date) {
+    public void setFeedback_date(Object feedback_date) {
         this.feedback_date = feedback_date;
+    }
+
+    public int getTotalRate() {
+        return totalRate;
+    }
+
+    public void setTotalRate(int totalRate) {
+        this.totalRate = totalRate;
     }
 
     @Override
     public String toString() {
         return "Feedback{" +
                 "feedbackId=" + feedbackId +
-                ", customertId=" + customertId +
+                ", customerId=" + customerId +
                 ", visibility='" + visibility + '\'' +
                 ", priority=" + priority +
                 ", customerService_rate=" + customerService_rate +
@@ -161,6 +171,7 @@ public class Feedback {
                 ", view_rate=" + view_rate +
                 ", serviceVSprice_rate=" + serviceVSprice_rate +
                 ", review_rate=" + review_rate +
+                ", totalRate=" + totalRate +
                 ", feedback_date='" + feedback_date + '\'' +
                 '}';
     }

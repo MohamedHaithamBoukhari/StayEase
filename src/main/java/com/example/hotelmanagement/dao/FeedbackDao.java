@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class FeedbackDao extends CummonDbFcts {
     public static final String TABLE_NAME = "feedback";
-    public static final String[] TABLE_COLUMNS = {"feedbackId", "customertId", "visibility","priority","customerService_rate", "cleanliness_rate", "roomComfort_rate", "location_rate",  "safety_rate", "environnement_rate","view_rate","serviceVSprice_rate", "review_rate", "feedback_date"};
+    public static final String[] TABLE_COLUMNS = {"feedbackId", "customerId", "visibility","priority","customerService_rate", "cleanliness_rate", "roomComfort_rate", "location_rate",  "safety_rate", "environnement_rate","view_rate","serviceVSprice_rate", "totalRate", "review_rate", "feedback_date"};
     public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
         List<Object> rows = superSelect(Feedback.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
@@ -21,6 +21,15 @@ public class FeedbackDao extends CummonDbFcts {
 
     public static int update(String updatedColumn, Object newColumnValue, String testColumn,Object testColumnValue){
         return superUpdate(TABLE_NAME, updatedColumn, newColumnValue, testColumn, testColumnValue);
+    }
+
+    public static int updateColumns(String[] updatedColumns, Object[] newColumnsValue, String testColumn, Object testColumnValue){
+        int i = updatedColumns.length;
+        int columnsUpdated = 0;
+        for (int j=0; j<i; j++){
+            columnsUpdated = superUpdate(TABLE_NAME, updatedColumns[j], newColumnsValue[j], testColumn, testColumnValue);
+        }
+        return columnsUpdated;
     }
 
     public static int delete(String testColumn,Object testColumnValue){

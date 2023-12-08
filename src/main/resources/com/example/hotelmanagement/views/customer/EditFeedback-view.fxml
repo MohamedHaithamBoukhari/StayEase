@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.customer.FeedbackActionsController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="915.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.83966064453125" AnchorPane.topAnchor="4.0">
+            <image>
+                <Image url="@../../images/hotel.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="30.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="39.0" text="Edit Feedback" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
+        <TextField fx:id="roomNumberField_" disable="true" layoutX="160.0" layoutY="114.0" prefHeight="35.0" prefWidth="220.0" promptText="CustomerService rate" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="114.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+      <Spinner fx:id="customerService_rateSpinner_" layoutX="326.0" layoutY="113.0" prefHeight="40.0" prefWidth="74.0" AnchorPane.leftAnchor="326.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="113.0" />
+      <TextField fx:id="roomCapacityField_" disable="true" layoutX="500.0" layoutY="114.0" prefHeight="35.0" prefWidth="220.0" promptText="Safety rate" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="114.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="safety_rateSpinner_" layoutX="660.0" layoutY="113.0" prefHeight="40.0" prefWidth="74.0" AnchorPane.leftAnchor="660.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="113.0" />
+        <Button fx:id="addBtn" layoutX="340.0" layoutY="498.0" mnemonicParsing="false" onAction="#editFeedback" prefHeight="38.0" prefWidth="86.0" text="Save">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Button>
+        <Button fx:id="backBtn" layoutX="480.0" layoutY="498.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="80.0" text="Close" textFill="WHITE">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Button>
+      <TextField fx:id="cleanliness_rateField" disable="true" layoutX="160.0" layoutY="189.0" prefHeight="35.0" prefWidth="220.0" promptText="Cleanliness rate" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="500.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="cleanliness_rateSpinner_" layoutX="326.0" layoutY="188.0" prefHeight="40.0" prefWidth="74.0" AnchorPane.rightAnchor="500.0" />
+      <TextField fx:id="roomCapacityField_1" disable="true" layoutX="500.0" layoutY="189.0" prefHeight="35.0" prefWidth="220.0" promptText="Environnement rate" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="160.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="environnement_rateSpinner_" layoutX="660.0" layoutY="188.0" prefHeight="40.0" prefWidth="80.0" AnchorPane.leftAnchor="660.0" AnchorPane.rightAnchor="160.0" />
+      <TextField fx:id="roomNumberField_2" disable="true" layoutX="160.0" layoutY="264.0" prefHeight="35.0" prefWidth="220.0" promptText="RoomComfort rate" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="500.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="roomComfort_rateSpinner_" layoutX="326.0" layoutY="263.0" prefHeight="40.0" prefWidth="74.0" AnchorPane.rightAnchor="500.0" />
+      <TextField fx:id="roomCapacityField_2" disable="true" layoutX="500.0" layoutY="264.0" prefHeight="35.0" prefWidth="220.0" promptText="View rate" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="160.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="view_rateSpinner_" layoutX="660.0" layoutY="263.0" prefHeight="40.0" prefWidth="80.0" AnchorPane.leftAnchor="660.0" AnchorPane.rightAnchor="160.0" />
+      <TextField fx:id="roomNumberField_11" disable="true" layoutX="160.0" layoutY="339.0" prefHeight="35.0" prefWidth="220.0" promptText="Location rate" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="500.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="location_rateSpinner_" layoutX="326.0" layoutY="338.0" prefHeight="40.0" prefWidth="74.0" AnchorPane.rightAnchor="500.0" />
+      <TextField fx:id="roomCapacityField_11" disable="true" layoutX="500.0" layoutY="339.0" prefHeight="35.0" prefWidth="220.0" promptText="Service VS Price rate" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="160.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <Spinner fx:id="serviceVSprice_rateSpinner_" layoutX="660.0" layoutY="338.0" prefHeight="40.0" prefWidth="80.0" AnchorPane.leftAnchor="660.0" AnchorPane.rightAnchor="160.0" />
+      <TextField fx:id="commentField_" layoutX="256.0" layoutY="412.0" prefHeight="37.0" prefWidth="483.0" />
+      <Label layoutX="171.0" layoutY="417.0" text="Comment :" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="rateError" alignment="CENTER" layoutX="343.0" layoutY="87.0" prefHeight="17.0" prefWidth="220.0" text="The rate must be between 1 and 10" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+    </children>
+    <stylesheets>
+        <URL value="@../../css/general.css" />
+        <URL value="@../../css/manager/RoomActions.css" />
+    </stylesheets>
+</AnchorPane>

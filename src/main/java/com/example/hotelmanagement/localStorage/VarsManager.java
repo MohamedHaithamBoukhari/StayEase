@@ -7,4 +7,5 @@ public class VarsManager {
     public static int selectedEmpId;
     public static int selectedResId;//reservationID
     public static int selectedInvoiceId;
+    public static int selectedFeedbackId;
 }

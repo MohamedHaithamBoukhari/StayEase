@@ -2,17 +2,14 @@ package com.example.hotelmanagement.controllers.customer;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
-import com.example.hotelmanagement.dao.ReservationDao;
-import com.example.hotelmanagement.dao.RoomDao;
-import com.example.hotelmanagement.dao.RoomTypeDao;
+import com.example.hotelmanagement.beans.Feedback;
+import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
-import com.example.hotelmanagement.tablesView.EmployeesTableView;
-import com.example.hotelmanagement.tablesView.ReservationTableView;
-import com.example.hotelmanagement.tablesView.RoomsTableView;
+import com.example.hotelmanagement.tablesView.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -32,6 +29,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class CustomerHomePageController implements Initializable{
@@ -48,16 +46,27 @@ public class CustomerHomePageController implements Initializable{
     @FXML private Label fullnameLabel;
     @FXML TextField fullNameField, cinField, emailAddressField, passwordField, phoneField, addressField;//fields of user infos
 
-    @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
     @FXML private TextField priceField, capacityField;
     @FXML private Label noRowsMsg, rowSelectedError;
     @FXML private TableView<RoomsTableView> roomsTable;
     @FXML private TableColumn<RoomsTableView, Object> idCol, roomNumberCol, typeCol, capacityCol, statusCol, price_dayCol;
+    @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
     @FXML private TableView<ReservationTableView> reservationTable;
     @FXML private TableColumn<ReservationTableView, Object> id_Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
     @FXML public CheckBox Upcoming, InProgress, CompletedStay, Cancelled;
     @FXML public Label addedMsg, updatedMsg, deletedMsg;
 
+    @FXML private TableView<InvoicesTableView> invoicesTable;
+    @FXML private TableColumn<InvoicesTableView, Object> id__Col, invoiceDateCol, resDurationCol, amountCol, status_Col;
+    @FXML private CheckBox Paid, Unpaid, Cancelled_;
+    @FXML private DatePicker invoiceDate;
+
+    @FXML private TableView<FeedbackTableView> feedbackTable;
+    @FXML private TableColumn<FeedbackTableView, Object> id___Col, fullNameCol, feedbackDateCol, rateCol, commentCol;
+    @FXML private DatePicker feedbackDate;
+    @FXML private TextField fullnameField;
+    @FXML private CheckBox MyFeedbacks, RateAsc, RateDesc;
+    @FXML private Label updatemsgError, deletemsgError;
 
     //------------------------------------------------------------------------------------------
     @Override
@@ -87,9 +96,17 @@ public class CustomerHomePageController implements Initializable{
             noRowsMsg.setVisible(false);
             rowSelectedError.setVisible(false);
         } else if (currentPage.equals("Invoices")) {
-
+            noRowsMsg.setVisible(false);
+            loadDataOnInvoicesTable(new ArrayList<>(), null);
         } else if (currentPage.equals("Feedback")) {
-
+            noRowsMsg.setVisible(false);
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            deletedMsg.setVisible(false);
+            loadDataOnFeedbackTable("",null, false,"");
+            rowSelectedError.setVisible(false);
+            updatemsgError.setVisible(false);
+            deletemsgError.setVisible(false);
         } else if (currentPage.equals("About")) {
 
         }
@@ -442,6 +459,307 @@ public class CustomerHomePageController implements Initializable{
             hideMsg(deletedMsg,4);
         }
         loadDataOnReservationTable(new ArrayList<>());
+    }
+//----------------------------------- invoices fcts--------------------------------------------
+    public void loadDataOnInvoicesTable(List<String> statusList, LocalDate invDate){
+        noRowsMsg.setVisible(false);
+
+        List<InvoicesTableView> invoiceList = new ArrayList<>();
+        invoicesTable.getItems().clear();
+        InvoicesTableView.setNBR(1);
+
+        List<String> colToSelect =  new ArrayList<String>(List.of("inv.invoiceId", "inv.customerId", "cust.fullName", "cust.cin", "inv.reservationId", "inv.status", "inv.amount", "inv.invoiceDate"));
+        if(statusList.isEmpty() && invDate == null){
+            List<Object[]> invoicesdetails = CummonDbFcts.performJoinAndSelect(InvoiceDao.TABLE_NAME, "inv", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, " WHERE cust.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId());
+            for (Object[] row : invoicesdetails) {
+                InvoicesTableView invoiceRow = new InvoicesTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                //System.out.println(roomRow);
+                invoiceList.add(invoiceRow);
+            }
+        }else{
+            //join and select rooms with status checked and price < priceSelected and capacite< capacity
+            String col1 = "inv.status", col2 = "inv.invoiceDate";
+            String whereClause = " WHERE cust.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId() + " AND ";
+            if(!statusList.isEmpty()){
+                whereClause += "(";
+                for (String status: statusList){
+                    whereClause = whereClause + col1 + " = '" + status + "' OR ";
+                }
+                whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
+                whereClause += ") AND ";
+            }
+            if(invDate != null){
+                whereClause += "("+ col2 + " LIKE '%" + invDate + "%') AND ";
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
+            System.out.println(whereClause);
+
+            List<Object[]> invoicesdetails = CummonDbFcts.performJoinAndSelect(InvoiceDao.TABLE_NAME, "inv", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
+            for (Object[] row : invoicesdetails) {
+                InvoicesTableView invoiceRow = new InvoicesTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                //System.out.println(roomRow);
+                invoiceList.add(invoiceRow);
+            }
+        }
+
+        id__Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        invoiceDateCol.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
+        resDurationCol.setCellValueFactory(new PropertyValueFactory<>("reservationDuration"));
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        status_Col.setCellValueFactory(new PropertyValueFactory<>("status"));
+        invoicesTable.getItems().addAll(invoiceList);
+
+        System.out.println(invoiceList);
+
+        if(invoiceList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+    }
+    public void filterInvoices(ActionEvent event){
+        List<String> statusList = new ArrayList<>();
+
+        if(Paid.isSelected()) statusList.add("Paid");
+
+        if(Unpaid.isSelected()) statusList.add("Unpaid");
+
+        if(Cancelled_.isSelected()) statusList.add("Cancelled");
+
+        LocalDate invDate = invoiceDate.getValue();
+
+        loadDataOnInvoicesTable(statusList, invDate);
+    }
+//----------------------------------- Feedback fcts --------------------------------------------
+    public void loadDataOnFeedbackTable(String fullname, LocalDate fbDate, boolean myFeedback, String rateOrder){
+        noRowsMsg.setVisible(false);
+
+        List<FeedbackTableView> feedbackList = new ArrayList<>();
+        feedbackTable.getItems().clear();
+        FeedbackTableView.setNBR(1);
+
+        List<String> colToSelect =  new ArrayList<String>(List.of ("f.feedbackId", "f.customerId", "cust.fullName", "f.visibility", "f.priority", "f.customerService_rate", "f.cleanliness_rate", "f.roomComfort_rate", "f.location_rate", "f.safety_rate", "f.environnement_rate", "f.view_rate", "f.serviceVSprice_rate", "f.review_rate", "f.feedback_date"));
+            System.out.println(fullname);
+            System.out.println(rateOrder);
+            System.out.println(fbDate);
+            System.out.println(myFeedback);
+        if(fullname.isEmpty() && rateOrder.isEmpty() && fbDate == null && myFeedback == false){
+            List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, "");
+            for (Object[] row : feedbackdetails) {
+                FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
+                System.out.println(feedbackRow);
+                feedbackList.add(feedbackRow);
+            }
+        }else{
+            String whereClause = " WHERE ";
+            int i = 0;
+            if(!fullname.isEmpty()){
+                whereClause = whereClause + "cust.fullName LIKE '%" + fullname + "%' AND ";
+                i++;
+            }
+            if(fbDate != null){
+                whereClause = whereClause + "f.feedback_date LIKE '%" + fbDate + "%' AND ";
+                i++;
+            }
+            if(myFeedback == true){
+                whereClause = whereClause + "f.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId() + " AND ";
+                i++;
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
+
+
+            if(!rateOrder.equals("")){
+                if(i==0){
+                    whereClause = whereClause.substring(0, whereClause.length() - 2);
+                }
+                whereClause = whereClause + " ORDER BY f.totalRate " + rateOrder;
+            }
+
+            System.out.println(whereClause);
+            List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
+            for (Object[] row : feedbackdetails) {
+                FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
+                System.out.println(feedbackRow);
+                feedbackList.add(feedbackRow);
+            }
+        }
+
+        id___Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        fullNameCol.setCellValueFactory(new PropertyValueFactory<>("customerFullName"));
+        feedbackDateCol.setCellValueFactory(new PropertyValueFactory<>("feedback_date"));
+        rateCol.setCellValueFactory(new PropertyValueFactory<>("total_rate"));
+        commentCol.setCellValueFactory(new PropertyValueFactory<>("review_comment"));
+
+        feedbackTable.getItems().addAll(feedbackList);
+        if(feedbackList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+    }
+    public void filterFeedbacks(ActionEvent event){
+        boolean myFeedback = false;
+        String rateOrder = "";
+        LocalDate fbDate = feedbackDate.getValue();
+        String fullname = fullnameField.getText();
+
+        if(MyFeedbacks.isSelected()) myFeedback = true ;
+
+        if(RateDesc.isSelected()) {
+            rateOrder = "DESC";
+            RateAsc.setSelected(false);
+        }
+
+        if(RateAsc.isSelected()) {
+            rateOrder = "ASC";
+            RateDesc.setSelected(false);
+        }
+
+        loadDataOnFeedbackTable(fullname, fbDate, myFeedback, rateOrder);
+    }
+    public void feedbackDetailsWindow(ActionEvent event) throws IOException {
+        updatemsgError.setVisible(false);
+        deletemsgError.setVisible(false);
+        rowSelectedError.setVisible(false);
+        VarsManager.actionStarted = "details";
+
+        if(feedbackTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/FeedbackDetail-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        loadDataOnFeedbackTable("",null,false,"");
+    }
+    public void newFeedbackWindow(ActionEvent event) throws IOException {
+        updatemsgError.setVisible(false);
+        deletemsgError.setVisible(false);
+        rowSelectedError.setVisible(false);
+        VarsManager.actionStarted = "add";
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/NewFeedback-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("add")){
+            deletedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            addedMsg.setVisible(true);
+            hideMsg(addedMsg,4);
+        }
+        loadDataOnFeedbackTable("",null,false,"");
+    }
+    public void editFeedbackWindow(ActionEvent event) throws IOException {
+        updatemsgError.setVisible(false);
+        deletemsgError.setVisible(false);
+        rowSelectedError.setVisible(false);
+        if(feedbackTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        VarsManager.actionStarted = "update";
+        VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
+
+        Map map = new HashMap<>();
+        map.put("feedbackId", VarsManager.selectedFeedbackId);
+        int selectedCustomerId = ((Feedback)(FeedbackDao.select(map, "*").get(0))).getCustomerId();
+        if(selectedCustomerId != CustomerManager.getInstance().getCustomer().getCustomerId()){
+            updatemsgError.setVisible(true);
+            return;//You cannot update feedback that is not yours.
+        }
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/EditFeedback-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("update")){
+            deletedMsg.setVisible(false);
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(true);
+            hideMsg(updatedMsg,4);
+        }
+        loadDataOnFeedbackTable("",null,false,"");
+    }
+    public void deleteFeedbackWindow(ActionEvent event) throws IOException {
+        updatemsgError.setVisible(false);
+        deletemsgError.setVisible(false);
+        rowSelectedError.setVisible(false);
+        if(feedbackTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+
+        VarsManager.actionStarted = "delete";
+        VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
+
+        Map map = new HashMap<>();
+        map.put("feedbackId", VarsManager.selectedFeedbackId);
+        int selectedCustomerId = ((Feedback)(FeedbackDao.select(map, "*").get(0))).getCustomerId();
+        if(selectedCustomerId != CustomerManager.getInstance().getCustomer().getCustomerId()){
+            deletemsgError.setVisible(true);
+            return;//You cannot delete feedback that is not yours.
+        }
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/DeleteFeedback-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("delete")){
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            deletedMsg.setVisible(true);
+            hideMsg(deletedMsg,4);
+
+        }
+        loadDataOnFeedbackTable("",null,false,"");
     }
 //----------------------------------- --------------------------------------------
     public void hideMsg(Label msg,double time){

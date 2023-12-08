@@ -2,17 +2,17 @@ package com.example.hotelmanagement.controllers.admin;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Employee;
-import com.example.hotelmanagement.dao.EmployeeDao;
-import com.example.hotelmanagement.dao.PositionDao;
-import com.example.hotelmanagement.dao.RoomDao;
-import com.example.hotelmanagement.dao.RoomTypeDao;
+import com.example.hotelmanagement.beans.Feedback;
+import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.AdminManager;
 import com.example.hotelmanagement.config.PathConfig;
+import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
 import com.example.hotelmanagement.scenes.Welcome;
 import com.example.hotelmanagement.tablesView.EmployeesTableView;
+import com.example.hotelmanagement.tablesView.FeedbackTableView;
 import com.example.hotelmanagement.tablesView.RoomsTableView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -32,9 +32,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class HomePageController implements Initializable{
     private Stage stage;
@@ -50,7 +49,15 @@ public class HomePageController implements Initializable{
     @FXML private TextField fullnameField, phoneField, cinField, emailField;
     @FXML private TableView<EmployeesTableView> empsTable;
     @FXML private TableColumn<EmployeesTableView, Object> idCol, fullNameCol, cinCol, emailCol, positionCol, phoneCol;
-//------------------------------------------------------------------------------------------
+
+    @FXML private TableView<FeedbackTableView> feedbackTable;
+    @FXML private TableColumn<FeedbackTableView, Object> id___Col, fullName_Col, feedbackDateCol, rateCol, visibilityCol, commentCol;
+    @FXML private DatePicker feedbackDate;
+    @FXML private TextField fullname_Field;
+    @FXML private CheckBox Visible, Invisible, RateAsc, RateDesc;
+    @FXML private Label visibilityMsg, updatedMsg;
+
+    //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
@@ -72,7 +79,11 @@ public class HomePageController implements Initializable{
         } else if (currentPage.equals("Services")) {
 
         } else if (currentPage.equals("Feedback")) {
-
+            noRowsMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            visibilityMsg.setVisible(false);
+            loadDataOnFeedbackTable(false,false,"",null,"");
+            rowSelectedError.setVisible(false);
         } else if (currentPage.equals("Earning")) {
 
         } else if (currentPage.equals("Email")) {
@@ -224,6 +235,7 @@ public class HomePageController implements Initializable{
             rowSelectedError.setVisible(true);
             return;
         }
+        VarsManager.selectedEmpId = (int) empsTable.getSelectionModel().getSelectedItem().getEmployeeId();
 
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/InfoDetailEmployee-view.fxml"));
         Parent root = loader.load();
@@ -338,6 +350,162 @@ public class HomePageController implements Initializable{
 
         }
         loadDataOnTable(new ArrayList<>(),"","","","");
+    }
+    //----------------------------------- Feedback fcts --------------------------------------------
+    public void loadDataOnFeedbackTable(Boolean visible, Boolean invisible, String fullname, LocalDate fbDate, String rateOrder){
+        noRowsMsg.setVisible(false);
+
+        List<FeedbackTableView> feedbackList = new ArrayList<>();
+        feedbackTable.getItems().clear();
+        FeedbackTableView.setNBR(1);
+
+        List<String> colToSelect =  new ArrayList<String>(List.of ("f.feedbackId", "f.customerId", "cust.fullName", "f.visibility", "f.priority", "f.customerService_rate", "f.cleanliness_rate", "f.roomComfort_rate", "f.location_rate", "f.safety_rate", "f.environnement_rate", "f.view_rate", "f.serviceVSprice_rate", "f.review_rate", "f.feedback_date"));
+        System.out.println(fullname);
+        System.out.println(rateOrder);
+        System.out.println(fbDate);
+        if(fullname.isEmpty() && rateOrder.isEmpty() && fbDate == null && visible == false && invisible == false){
+            List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, "");
+            for (Object[] row : feedbackdetails) {
+                FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
+                System.out.println(feedbackRow);
+                feedbackList.add(feedbackRow);
+            }
+        }else{
+            String whereClause = " WHERE ";
+            int i = 0;
+            List<String> visibilityList = new ArrayList<>();
+
+            if(visible == true){
+                visibilityList.add("Visible");
+                i++;
+            }
+            if(invisible == true){
+                visibilityList.add("Invisible");
+                i++;
+            }
+            for (String vis: visibilityList){
+                whereClause = whereClause + "visibility = '" +vis +"' OR ";
+            }
+            if (i!=0){
+                whereClause = whereClause.substring(0, whereClause.length() - 4);//delete last " OR "
+                whereClause += " AND ";
+            }
+            if(!fullname.isEmpty()){
+                whereClause = whereClause + "cust.fullName LIKE '%" + fullname + "%' AND ";
+                i++;
+            }
+            if(fbDate != null){
+                whereClause = whereClause + "f.feedback_date LIKE '%" + fbDate + "%' AND ";
+                i++;
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
+
+
+            if(!rateOrder.equals("")){
+                if(i==0){
+                    whereClause = whereClause.substring(0, whereClause.length() - 2);
+                }
+                whereClause = whereClause + " ORDER BY f.totalRate " + rateOrder;
+            }
+
+            System.out.println(whereClause);
+            List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
+            for (Object[] row : feedbackdetails) {
+                FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
+                System.out.println(feedbackRow);
+                feedbackList.add(feedbackRow);
+            }
+        }
+
+        id___Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        fullName_Col.setCellValueFactory(new PropertyValueFactory<>("customerFullName"));
+        feedbackDateCol.setCellValueFactory(new PropertyValueFactory<>("feedback_date"));
+        rateCol.setCellValueFactory(new PropertyValueFactory<>("total_rate"));
+        visibilityCol.setCellValueFactory(new PropertyValueFactory<>("visibility"));
+        commentCol.setCellValueFactory(new PropertyValueFactory<>("review_comment"));
+
+        feedbackTable.getItems().addAll(feedbackList);
+        if(feedbackList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+    }
+    public void filterFeedbacks(ActionEvent event){
+        String rateOrder = "";
+        boolean visible = false;
+        boolean invisible = false;
+        LocalDate fbDate = feedbackDate.getValue();
+        String fullname = fullname_Field.getText();
+
+        if(Visible.isSelected()) visible = true ;
+        if(Invisible.isSelected()) invisible = true ;
+
+        if(RateDesc.isSelected()) {
+            rateOrder = "DESC";
+            RateAsc.setSelected(false);
+        }
+
+        if(RateAsc.isSelected()) {
+            rateOrder = "ASC";
+            RateDesc.setSelected(false);
+        }
+
+        loadDataOnFeedbackTable(visible, invisible, fullname, fbDate, rateOrder);
+    }
+    public void feedbackDetailsWindow(ActionEvent event) throws IOException {
+
+        rowSelectedError.setVisible(false);
+        VarsManager.actionStarted = "details";
+
+        if(feedbackTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/FeedbackDetail-view.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        loadDataOnFeedbackTable(false,false,"",null,"");
+    }
+    public void setFeedbackVisible(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        if(feedbackTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
+        Map map = new HashMap<>();
+        map.put("feedbackId", VarsManager.selectedFeedbackId);
+        String oldVisibility = ((Feedback) FeedbackDao.select(map,"*").get(0)).getVisibility();
+
+        String newVsibility = oldVisibility.equals("Visible")? "Invisible":"Visible";
+        String[] updatedColumns = {"visibility"};
+        Object[] newColumnsValue = {newVsibility};
+        String testColumn = "feedbackId";
+        Object testColumnValue = VarsManager.selectedFeedbackId;
+
+        int i = FeedbackDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+        if(i == 1){
+            updatedMsg.setVisible(true);
+            visibilityMsg.setVisible(true);
+            hideMsg(updatedMsg, 4);
+            hideMsg(visibilityMsg, 4);
+        }
+        loadDataOnFeedbackTable(false,false,"",null,"");
+
     }
 //-------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){

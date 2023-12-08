@@ -470,8 +470,6 @@ public class HomePageController implements Initializable{
         loadDataOnInvoicesTable(new ArrayList<>(), "", "",null);
         hideConfirmation(event);
     }
-
-
 //-------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){
         Duration duration = Duration.seconds(time);

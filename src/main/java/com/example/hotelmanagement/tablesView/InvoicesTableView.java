@@ -1,5 +1,11 @@
 package com.example.hotelmanagement.tablesView;
 
+import com.example.hotelmanagement.beans.Reservation;
+import com.example.hotelmanagement.dao.ReservationDao;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class InvoicesTableView {
     private static Integer NBR=1;
     private Object i;
@@ -11,6 +17,7 @@ public class InvoicesTableView {
     private Object status;
     private Object amount;
     private Object invoiceDate;
+    private Object reservationDuration;
 
     public InvoicesTableView(Object invoiceId, Object customerId, Object customerFullName, Object customerCin, Object reservationId, Object status, Object amount, Object invoiceDate) {
         this.i = NBR;
@@ -22,6 +29,7 @@ public class InvoicesTableView {
         this.status = status;
         this.amount = amount;
         this.invoiceDate = invoiceDate;
+        this.setReservationDuration(reservationId);
         incrementId();
     }
 
@@ -105,6 +113,17 @@ public class InvoicesTableView {
         this.invoiceDate = invoiceDate;
     }
 
+    public Object getReservationDuration() {
+        return reservationDuration;
+    }
+
+    public void setReservationDuration(Object reservationId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("reservationId",(int)reservationId);
+        Reservation reservation = (Reservation) ReservationDao.select(map,"*").get(0);
+        this.reservationDuration = " From " + reservation.getCheck_inDate() + " to " + reservation.getCheck_outDate();
+    }
+
     public static void incrementId(){
         NBR ++;
     }
@@ -120,6 +139,7 @@ public class InvoicesTableView {
                 ", status=" + status +
                 ", amount=" + amount +
                 ", invoiceDate=" + invoiceDate +
+                ", reservationDuration=" + reservationDuration +
                 '}';
     }
 
