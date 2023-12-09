@@ -1,0 +1,30 @@
+Button{
+    -fx-background-radius:10;
+}
+TextField{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-width:0 0 2px 0;
+    -fx-border-color:white;
+}
+
+TextField:focused{
+    -fx-border-color:#7EDDD6;
+}
+#addServicePane, #editServicePane, #deleteServicePane{
+    -fx-background-color: rgba(0,0,0,0.3);
+    -fx-background-radius: 10px;
+}
+
+#addServiceBtn, #editServiceBtn, #deleteServiceBtn{
+    -fx-background-color: #3AD2CD;
+    -fx-text-fill: black;
+    -fx-font-size:12px;
+    -fx-font-weight:bold;
+}
+#hideAddSBtn, #hideEditSBtn, #hideDeleteSBtn{
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+    -fx-font-size:12px;
+    -fx-font-weight:bold;
+}

@@ -24,7 +24,6 @@ public class RoomActionsController implements Initializable {
     @FXML private Label roomNumberError = new Label(), roomCapacityError = new Label(), roomTypeError = new Label(), roomStatusError = new Label();
     @FXML private Spinner<Integer> roomNumberSpinner_, roomCapacitySpinner_;
     @FXML private ComboBox<String> roomTypeComboBox_, roomStatusComboBox_;
-
     @FXML private Label roomIdLabel;
     int roomNbr, capacity;
     String type, status;

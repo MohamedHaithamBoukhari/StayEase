@@ -3,6 +3,7 @@ package com.example.hotelmanagement.controllers.admin;
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.beans.Feedback;
+import com.example.hotelmanagement.beans.Service;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.AdminManager;
@@ -14,6 +15,7 @@ import com.example.hotelmanagement.scenes.Welcome;
 import com.example.hotelmanagement.tablesView.EmployeesTableView;
 import com.example.hotelmanagement.tablesView.FeedbackTableView;
 import com.example.hotelmanagement.tablesView.RoomsTableView;
+import com.example.hotelmanagement.tablesView.ServiceTableView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -25,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -56,11 +59,16 @@ public class HomePageController implements Initializable{
     @FXML private DatePicker feedbackDate;
     @FXML private TextField fullname_Field;
     @FXML private CheckBox Visible, Invisible, RateAsc, RateDesc;
-    @FXML private Label visibilityMsg, updatedMsg;
+    @FXML private Label visibilityMsg;
 
     @FXML private Label employeesNbr, reservationsNbr, feedbacksNbr, ratingAverage, roomsNbr, occupiedRoomNbr, roomTYpesNbr;
     @FXML private Label monthEarning, yearEarning, totalEarning;
 
+    @FXML public Label addedMsg, updatedMsg, deletedMsg, deletedServiceName;
+    @FXML private TableView<ServiceTableView> servicesTable;
+    @FXML private TableColumn<ServiceTableView, Object> id____Col, serviceNameCol, tableCorreCol, descriptionCol;
+    @FXML private TextField serviceNameField, corrTableField, descriptionField,serviceNameField1, corrTableField1, descriptionField1;
+    @FXML private AnchorPane addServicePane, editServicePane, deleteServicePane;
     //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,13 +97,23 @@ public class HomePageController implements Initializable{
             noRowsMsg.setVisible(false);
             rowSelectedError.setVisible(false);
         } else if (currentPage.equals("Services")) {
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            deletedMsg.setVisible(false);
+            addServicePane.setVisible(false);
+            editServicePane.setVisible(false);
+            deleteServicePane.setVisible(false);
+            loadDataOnServiceTable();
+            rowSelectedError.setVisible(false);
 
         } else if (currentPage.equals("Feedback")) {
             noRowsMsg.setVisible(false);
             updatedMsg.setVisible(false);
             visibilityMsg.setVisible(false);
+
             loadDataOnFeedbackTable(false,false,"",null,"");
             rowSelectedError.setVisible(false);
+
         } else if (currentPage.equals("Earning")) {
             monthEarning.setText(InvoiceDao.monthEarning() + " DH");
             yearEarning.setText(InvoiceDao.yearEarning()   + " DH");
@@ -244,6 +262,7 @@ public class HomePageController implements Initializable{
         loadDataOnTable(jobList, fullname, phone, cin, email);
     }
     public void empDetailsWindow(ActionEvent event) throws IOException {
+        VarsManager.actionStarted = "details";
         rowSelectedError.setVisible(false);
         if(empsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
@@ -521,8 +540,139 @@ public class HomePageController implements Initializable{
         loadDataOnFeedbackTable(false,false,"",null,"");
 
     }
-//---------------------------------------- ---------------------------------------
+//---------------------------------------- SERVICES ---------------------------------------
+    public void loadDataOnServiceTable(){
+    rowSelectedError.setVisible(false);
 
+    List<ServiceTableView> serviceList = new ArrayList<>();
+    servicesTable.getItems().clear();
+    ServiceTableView.setNBR(1);
+
+    List<String> colToSelect =  new ArrayList<String>(List.of ("s.serviceId", "s.serviceName", "s.descreption", "s.correspondingTable"));
+    List<Object> servicesdetails = ServiceDao.selectAll();
+    for (Object row : servicesdetails) {
+        Service service = (Service) row;
+        ServiceTableView serviceRow = new ServiceTableView(service.getServiceId(),service.getServiceName(),service.getDescreption(),service.getCorrespondingTable());
+        serviceList.add(serviceRow);
+    }
+    id____Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+    serviceNameCol.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
+    tableCorreCol.setCellValueFactory(new PropertyValueFactory<>("correspondingTable"));
+    descriptionCol.setCellValueFactory(new PropertyValueFactory<>("descreption"));
+
+    servicesTable.getItems().addAll(serviceList);
+}
+    public void displayAddPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+
+        deletedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        addedMsg.setVisible(false);
+
+        hideEditPane(event);
+        hideDeletePane(event);
+        addServicePane.setVisible(true);
+    }
+    public void displayEditPane(ActionEvent event){
+        deletedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        addedMsg.setVisible(false);
+        rowSelectedError.setVisible(false);
+        if(servicesTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+
+        int selectedServiceId = (int) servicesTable.getSelectionModel().getSelectedItem().getServiceId();
+        Map map = new HashMap<>();
+        map.put("serviceId",selectedServiceId);
+        Service selectedService = (Service) (ServiceDao.select(map, "*").get(0));
+        //traitement
+        System.out.println(selectedService);
+        serviceNameField1.setText(selectedService.getServiceName());
+        corrTableField1.setText(selectedService.getCorrespondingTable());
+        descriptionField1.setText(selectedService.getDescreption());
+
+        hideAddPane(event);
+        hideDeletePane(event);
+        editServicePane.setVisible(true);
+    }
+    public void displayDeletePane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        if(servicesTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+
+        deletedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        addedMsg.setVisible(false);
+
+        String selectedServiceName = (String)servicesTable.getSelectionModel().getSelectedItem().getServiceName();
+        deletedServiceName.setText(selectedServiceName + " service");
+
+        hideAddPane(event);
+        hideEditPane(event);
+        deleteServicePane.setVisible(true);
+    }
+    public void hideAddPane(ActionEvent event){
+        addServicePane.setVisible(false);
+    }
+    public void hideEditPane(ActionEvent event){
+        editServicePane.setVisible(false);
+    }
+    public void hideDeletePane(ActionEvent event){
+        deleteServicePane.setVisible(false);
+    }
+    public void newService(ActionEvent event) throws IOException {
+
+        String serviceName = serviceNameField.getText();
+        String serviceTable = corrTableField.getText();
+        String serviceDesc = descriptionField.getText();
+
+        if(!serviceName.isEmpty()){
+            Service service = new Service(serviceName, serviceDesc, serviceTable);
+            ServiceDao.insert(service);
+        }else{
+
+            return;
+        }
+        hideAddPane(event);
+        loadDataOnServiceTable();
+        addedMsg.setVisible(true);
+        hideMsg(addedMsg,4);
+    }
+    public void editService(ActionEvent event) throws IOException {
+
+        String serviceName = serviceNameField1.getText();
+        String serviceTable = corrTableField1.getText();
+        String serviceDesc = descriptionField1.getText();
+
+        if(!serviceName.isEmpty()){
+            String[] updatedColumns = {"serviceName", "correspondingTable", "descreption"};
+            Object[] newColumnsValue = {serviceName, serviceTable, serviceDesc};
+            String testColumn = "serviceId";
+            Object testColumnValue = servicesTable.getSelectionModel().getSelectedItem().getServiceId();
+            System.out.println("testColumnValue = "+testColumnValue);
+            int i =ServiceDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+            System.out.println("i = "+i);
+        }else{
+
+            return;
+        }
+        hideEditPane(event);
+        loadDataOnServiceTable();
+        updatedMsg.setVisible(true);
+        hideMsg(updatedMsg,4);
+    }
+    public void deleteService(ActionEvent event) throws IOException {
+        int selectedServiceId = (int) servicesTable.getSelectionModel().getSelectedItem().getServiceId();
+        ServiceDao.delete("serviceId",selectedServiceId);
+        loadDataOnServiceTable();
+        hideDeletePane(event);
+        deletedMsg.setVisible(true);
+        hideMsg(deletedMsg,4);
+    }
 //-------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){
     Duration duration = Duration.seconds(time);

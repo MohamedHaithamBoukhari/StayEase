@@ -3,7 +3,7 @@ package com.example.hotelmanagement.beans;
 public class Position {
     private int positionId;
     private String empPosition;
-
+    public Position(){}
     public Position(String empPosition) {
         this.empPosition = empPosition;
     }

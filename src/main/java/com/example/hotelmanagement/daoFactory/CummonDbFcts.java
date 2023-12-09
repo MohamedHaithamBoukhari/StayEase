@@ -107,6 +107,7 @@ public class CummonDbFcts<T> {
                 Object value = getter.invoke(obj);
                 preparedStatement.setObject(i, value);
             }
+            System.out.println(preparedStatement);
 
             preparedStatement.executeUpdate();
 

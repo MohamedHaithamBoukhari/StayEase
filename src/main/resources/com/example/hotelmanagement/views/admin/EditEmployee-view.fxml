@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.admin.EmployeeActionsController">
     <children>
         <ImageView fitHeight="600.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -48,11 +49,12 @@
             </font>
         </TextField>
       <Label fx:id="passwordError" layoutX="200.0" layoutY="304.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="404.0" />
-      <TextField fx:id="positionField_" layoutX="500.0" layoutY="169.0" prefHeight="35.0" prefWidth="220.0" promptText="Position" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="150.0">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </TextField>
+        <TextField disable="true" layoutX="500.0" layoutY="148.0" prefHeight="35.0" prefWidth="220.0" promptText="Position" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="148.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <ComboBox fx:id="positionComboBox_" layoutX="596.0" layoutY="148.0" prefHeight="40.0" prefWidth="124.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="148.0" />
       <Label fx:id="positionError" layoutX="230.0" layoutY="334.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="190.0" />
       <TextField fx:id="salaryField_" layoutX="520.0" layoutY="269.0" prefHeight="35.0" prefWidth="220.0" promptText="Salary" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="210.0">
          <font>

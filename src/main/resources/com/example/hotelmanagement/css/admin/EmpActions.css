@@ -28,7 +28,7 @@ TextField:focused{
     -fx-text-fill: white;
 }
 #fullNameError, #cinError, #phoneError, #emailAddressError,
-#passwordError, #positionError, #salaryError, #workingHoursError, #workingDaysError {
+#passwordError, #positionError, #salaryError, #workingHoursError, #workingDaysError, #newpositionError {
     -fx-text-fill: red;
 }
 #succesMsg{
@@ -47,4 +47,35 @@ TextField:focused{
 #paneBorder{
     -fx-border-width:1px;
     -fx-border-color:white;
+}
+
+.text-field:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+}
+
+#addPositionBtn {
+    -fx-marging:0px;
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+}
+
+#newPositionPane {
+    -fx-background-color: #1572a4;
+    -fx-background-radius:0 10 10 10;
+
+}
+#hidePositionBtn{
+    -fx-background-color: grey;
+    -fx-text-fill: white;
+}
+#addPositionPaneBtn{
+    -fx-background-color: #3AD2CD;
+    -fx-text-fill: black;
 }
