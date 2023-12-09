@@ -9,6 +9,7 @@ import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.dao.CustomerDao;
+import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +82,7 @@ public class LoginController {
 
     }
     public void switchToHomePage(ActionEvent event) throws IOException {
+        SwitchedPageManager.getInstance().setSwitchedPage("Home");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/HomePage-view.fxml"));
         root = loader.load();
 

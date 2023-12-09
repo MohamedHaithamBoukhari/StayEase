@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.admin.HomePageController">
     <children>
@@ -93,8 +94,101 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="448.0" layoutY="69.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="282.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font></Label>
+        <Label fx:id="stat1" alignment="CENTER" layoutX="288.0" layoutY="137.0" prefHeight="94.0" prefWidth="195.0" text="Employees" textFill="#00ffed" AnchorPane.leftAnchor="288.0" AnchorPane.rightAnchor="417.0" AnchorPane.topAnchor="137.0" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="342.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="184.0">
+         <image>
+            <Image url="@../../images/employeeIcon.png" />
+         </image>
+      </ImageView>
+        <Label fx:id="employeesNbr" contentDisplay="CENTER" layoutX="394.0" layoutY="187.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="430.0">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+      <Label fx:id="stat2" alignment="CENTER" layoutX="288.0" layoutY="247.0" prefHeight="94.0" prefWidth="195.0" text="Reservations" textFill="#00ffed" AnchorPane.leftAnchor="288.0" AnchorPane.topAnchor="247.0" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="342.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="342.0">
+         <image>
+            <Image url="@../../images/reservationIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="reservationsNbr" contentDisplay="CENTER" layoutX="394.0" layoutY="297.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="stat3" alignment="CENTER" layoutX="288.0" layoutY="357.0" prefHeight="94.0" prefWidth="195.0" text="Feedbacks" textFill="#00ffed" AnchorPane.leftAnchor="288.0" />
+      <Label fx:id="stat4" alignment="CENTER" layoutX="288.0" layoutY="465.0" prefHeight="94.0" prefWidth="195.0" text="Average Rating" textFill="#00ffed" AnchorPane.leftAnchor="288.0" />
+      <Label fx:id="stat5" alignment="CENTER" layoutX="584.0" layoutY="137.0" prefHeight="94.0" prefWidth="195.0" text="Rooms" textFill="#00ffed" AnchorPane.topAnchor="137.0" />
+      <Label fx:id="stat6" alignment="CENTER" layoutX="584.0" layoutY="247.0" prefHeight="94.0" prefWidth="195.0" text="Occupied Rooms" textFill="#00ffed" AnchorPane.topAnchor="247.0" />
+      <Label fx:id="stat7" alignment="CENTER" layoutX="584.0" layoutY="357.0" prefHeight="94.0" prefWidth="195.0" text="Room types" textFill="#00ffed" />
+      <Label fx:id="stat8" alignment="CENTER" layoutX="584.0" layoutY="465.0" prefHeight="94.0" prefWidth="195.0" textFill="#00ffed" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="343.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/feedbackIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="feedbacksNbr" contentDisplay="CENTER" layoutX="395.0" layoutY="403.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="343.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/ratingIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="ratingAverage" contentDisplay="CENTER" layoutX="395.0" layoutY="513.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="638.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/roomIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="roomsNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="187.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="638.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/roomIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="occupiedRoomNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="297.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="639.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/employeeIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="roomTYpesNbr" contentDisplay="CENTER" layoutX="691.0" layoutY="403.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="639.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/ratingIcon.png" />
+         </image>
+      </ImageView>
+      <Label contentDisplay="CENTER" layoutX="691.0" layoutY="513.0" prefHeight="27.0" prefWidth="76.0" text="." textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/admin/earning.css" />
     </stylesheets>
 </AnchorPane>

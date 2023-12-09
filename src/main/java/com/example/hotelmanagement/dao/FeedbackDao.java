@@ -4,7 +4,11 @@ import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.beans.Feedback;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
+import com.example.hotelmanagement.daoFactory.DaoFactory;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -40,5 +44,18 @@ public class FeedbackDao extends CummonDbFcts {
     public static List<Object> selectAll() {
         List<Object> rows = superSelectAll(Feedback.class, TABLE_NAME, TABLE_COLUMNS);
         return rows;
+    }
+    public static double calculateAverageRating() {
+        double averageRating = 0.0;
+        try (Statement statement = DaoFactory.getConnection().createStatement()) {
+            String query = "SELECT AVG(totalRate) AS average_rating FROM feedback";
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                averageRating = resultSet.getDouble("average_rating");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return averageRating;
     }
 }

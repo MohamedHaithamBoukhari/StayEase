@@ -32,6 +32,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -57,6 +58,9 @@ public class HomePageController implements Initializable{
     @FXML private CheckBox Visible, Invisible, RateAsc, RateDesc;
     @FXML private Label visibilityMsg, updatedMsg;
 
+    @FXML private Label employeesNbr, reservationsNbr, feedbacksNbr, ratingAverage, roomsNbr, occupiedRoomNbr, roomTYpesNbr;
+    @FXML private Label monthEarning, yearEarning, totalEarning;
+
     //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,7 +72,15 @@ public class HomePageController implements Initializable{
         fullnameLabel.setText("- " + admin.getFullName() + " -");
 
         if(currentPage.equals("Home")){
-
+            employeesNbr.setText(String.valueOf(CummonDbFcts.countRows(EmployeeDao.TABLE_NAME)));
+            reservationsNbr.setText(String.valueOf(CummonDbFcts.countRows(ReservationDao.TABLE_NAME)));
+            feedbacksNbr.setText(String.valueOf(CummonDbFcts.countRows(FeedbackDao.TABLE_NAME)));
+            ratingAverage.setText(String.valueOf(FeedbackDao.calculateAverageRating()));
+            roomsNbr.setText(String.valueOf(CummonDbFcts.countRows(RoomDao.TABLE_NAME)));
+            Map map = new HashMap<>();
+            map.put("status", "Occupied");
+            occupiedRoomNbr.setText(String.valueOf((RoomDao.select(map,"*")).size()));
+            roomTYpesNbr.setText(String.valueOf(CummonDbFcts.countRows(RoomTypeDao.TABLE_NAME)));
         } else if (currentPage.equals("Employee")) {
             empAddedMsg.setVisible(false);
             empUpdatedMsg.setVisible(false);
@@ -85,7 +97,9 @@ public class HomePageController implements Initializable{
             loadDataOnFeedbackTable(false,false,"",null,"");
             rowSelectedError.setVisible(false);
         } else if (currentPage.equals("Earning")) {
-
+            monthEarning.setText(InvoiceDao.monthEarning() + " DH");
+            yearEarning.setText(InvoiceDao.yearEarning()   + " DH");
+            totalEarning.setText(InvoiceDao.totalEarning() + " DH");
         } else if (currentPage.equals("Email")) {
 
         }
@@ -507,6 +521,8 @@ public class HomePageController implements Initializable{
         loadDataOnFeedbackTable(false,false,"",null,"");
 
     }
+//---------------------------------------- ---------------------------------------
+
 //-------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){
     Duration duration = Duration.seconds(time);

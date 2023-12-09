@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.admin.HomePageController">
     <children>
@@ -93,8 +94,31 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="448.0" layoutY="77.0" text="Total Earnings" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="282.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="label1" layoutX="356.0" layoutY="197.0" prefHeight="53.0" prefWidth="320.0" text="  Earning this month : " textFill="#00ffed" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="197.0" />
+      <Label fx:id="monthEarning" alignment="TOP_RIGHT" layoutX="575.0" layoutY="212.0" prefHeight="25.0" prefWidth="140.0" text="1400000 dhs " textFill="WHITE" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="207.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="label2" layoutX="356.0" layoutY="270.0" prefHeight="47.0" prefWidth="320.0" text="  Earning this year :" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="270.0" />
+      <Label fx:id="yearEarning" alignment="TOP_RIGHT" layoutX="575.0" layoutY="282.0" prefHeight="25.0" prefWidth="140.0" text="1400000 dhs " textFill="WHITE" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="207.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="label3" layoutX="356.0" layoutY="340.0" prefHeight="47.0" prefWidth="320.0" text="  Total earning  of all year :" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="340.0" />
+      <Label fx:id="totalEarning" alignment="TOP_RIGHT" layoutX="575.0" layoutY="351.0" prefHeight="25.0" prefWidth="140.0" text="1400000 dhs " textFill="WHITE" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="207.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/admin/earning.css" />
     </stylesheets>
 </AnchorPane>
