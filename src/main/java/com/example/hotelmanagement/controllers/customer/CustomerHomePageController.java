@@ -51,6 +51,7 @@ public class CustomerHomePageController implements Initializable{
     @FXML private TableView<RoomsTableView> roomsTable;
     @FXML private TableColumn<RoomsTableView, Object> idCol, roomNumberCol, typeCol, capacityCol, statusCol, price_dayCol;
     @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
+
     @FXML private TableView<ReservationTableView> reservationTable;
     @FXML private TableColumn<ReservationTableView, Object> id_Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
     @FXML public CheckBox Upcoming, InProgress, CompletedStay, Cancelled;
@@ -230,7 +231,7 @@ public class CustomerHomePageController implements Initializable{
         if(statusList.isEmpty() && price.isEmpty() && capacity.isEmpty()){
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, "");
             for (Object[] row : roomsdetails) {
-                RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
+                RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
                 //System.out.println(roomRow);
                 roomsList.add(roomRow);
             }
@@ -257,7 +258,7 @@ public class CustomerHomePageController implements Initializable{
 
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
             for (Object[] row : roomsdetails) {
-                RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
+                RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
                 //System.out.println(roomRow);
                 roomsList.add(roomRow);
             }
@@ -304,25 +305,27 @@ public class CustomerHomePageController implements Initializable{
         System.out.println(capacity);
 
     }
-//----------------------------------- services fcts--------------------------------------------
+//----------------------------------- services(Reservations) fcts--------------------------------------------
     public void loadDataOnReservationTable(List<String> statusList){
         noRowsMsg.setVisible(false);
 
         List<ReservationTableView> reservationList = new ArrayList<>();
         reservationTable.getItems().clear();
         ReservationTableView.setNBR(1);
+        int customerId = CustomerManager.getInstance().getCustomer().getCustomerId();
 
-        List<String> colToSelect =  new ArrayList<String>(List.of("res.reservationId", "res.reservationDate", "res.check_inDate", "res.check_outDate", "r.roomNbr", "r.roomtype", "res.resStatus", "r.capacity"));
+        List<String> colToSelect =  new ArrayList<String>(List.of("res.reservationId", "res.reservationDate", "res.check_inDate", "res.check_outDate", "r.numRoom", "r.type", "res.status", "r.capacity"));
         if(statusList.isEmpty()){
-            List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, "");
+            String whereClause = " WHERE res.customerId = " + customerId;
+            List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, whereClause);
             for (Object[] row : reservationsDetail) {
                 ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
                 //System.out.println(roomRow);
                 reservationList.add(resRow);
             }
         }else{
-            String col1 = "res.resStatus";
-            String whereClause = " WHERE ";
+            String col1 = "res.status";
+            String whereClause = " WHERE res.customerId = " + customerId + " AND ";
 
             for (String status: statusList){
                 whereClause = whereClause + col1 + " = '" + status + "' OR ";
@@ -339,8 +342,8 @@ public class CustomerHomePageController implements Initializable{
 
         id_Col.setCellValueFactory(new PropertyValueFactory<>("i"));
         ReservationDateCol.setCellValueFactory(new PropertyValueFactory<>("reservationDate"));
-        CheckInDateCol.setCellValueFactory(new PropertyValueFactory<>("CheckInDateCol"));
-        CheckOutDate.setCellValueFactory(new PropertyValueFactory<>("CheckOutDate"));
+        CheckInDateCol.setCellValueFactory(new PropertyValueFactory<>("check_inDate"));
+        CheckOutDate.setCellValueFactory(new PropertyValueFactory<>("check_outDate"));
         DurationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
         roomNbrCol.setCellValueFactory(new PropertyValueFactory<>("roomNbr"));
         RoomTypeCol.setCellValueFactory(new PropertyValueFactory<>("roomType"));
@@ -369,7 +372,7 @@ public class CustomerHomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         VarsManager.actionStarted = "add";
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/NewReservation-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/NewReservation-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();

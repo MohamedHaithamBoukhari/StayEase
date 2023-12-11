@@ -122,13 +122,13 @@
             <columns>
                 <TableColumn fx:id="id_Col" prefWidth="36.0" text="#" />
             <TableColumn fx:id="ReservationDateCol" prefWidth="101.0" text="Reservation Date" />
-                <TableColumn fx:id="CheckInDateCol" prefWidth="100.0" text="Check In Date" />
-                <TableColumn fx:id="CheckOutDate" prefWidth="100.0" text="Check Out Date" />
-                <TableColumn fx:id="DurationCol" prefWidth="59.0" text="Duration" />
+                <TableColumn fx:id="CheckInDateCol" prefWidth="95.0" text="Check In Date" />
+                <TableColumn fx:id="CheckOutDate" prefWidth="96.0" text="Check Out Date" />
+                <TableColumn fx:id="DurationCol" prefWidth="57.0" text="Duration" />
                 <TableColumn fx:id="roomNbrCol" prefWidth="38.0" text="Room" />
                 <TableColumn fx:id="RoomTypeCol" prefWidth="57.0" text="Type" />
             <TableColumn fx:id="PriceCol" prefWidth="70.0" text="Price" />
-            <TableColumn fx:id="StatusCol" prefWidth="62.0" text="Status" />
+            <TableColumn fx:id="StatusCol" prefWidth="73.0" text="Status" />
             </columns>
         </TableView>
         <Label fx:id="rowSelectedError" layoutX="219.0" layoutY="542.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="219.0">
@@ -169,10 +169,17 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button fx:id="backBtn" layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#switchToServices" prefHeight="38.0" prefWidth="64.0" text="Back" textFill="WHITE" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="54.0">
+        <Button fx:id="backBtn" layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#switchToServices" prefHeight="38.0" prefWidth="64.0" textFill="WHITE" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="54.0">
             <font>
                 <Font size="17.0" />
             </font>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/backIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
         </Button>
     </children>
     <stylesheets>

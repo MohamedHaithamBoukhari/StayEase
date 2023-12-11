@@ -1,7 +1,12 @@
 package com.example.hotelmanagement.tablesView;
 
 import com.example.hotelmanagement.beans.Room;
+import com.example.hotelmanagement.beans.RoomType;
+import com.example.hotelmanagement.dao.RoomTypeDao;
 import javafx.scene.control.Button;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RoomsTableView {
     private static Integer NBR=1;
@@ -11,18 +16,23 @@ public class RoomsTableView {
     private Object type;
     private Object capacity;
     private Object status;
-    private Object price_day;
-    private Object price;
+    private Object price_day;//price day of type
+    private Object price;//price day of type+capacity
+    private Object reservationPrice;//price day of type+capacity
 
-    public RoomsTableView(Object roomId, Object numRoom, Object type, Object capacity, Object status, Object price_day) {
+    public RoomsTableView(Object roomId, Object numRoom, Object type, Object capacity, Object status, Object price_day, Object duration) {
         this.i = NBR;
         this.roomId = roomId;
         this.numRoom = numRoom;
         this.type = type;
         this.capacity = capacity;
         this.status = status;
-        this.price_day = price_day;
-        this.price = (int)price_day*(1+(int)capacity) - ((int) capacity*40);
+
+            this.setPrice_day(price_day,type);
+            System.out.println(this.price_day);
+
+        this.price = (int)this.price_day*(1+(int)capacity) - ((int) capacity*40);
+        this.reservationPrice = (int)this.price * (long)duration;
         incrementId();
     }
     public static void incrementId(){
@@ -73,8 +83,19 @@ public class RoomsTableView {
         return price_day;
     }
 
-    public void setPrice_day(Object price_day) {
-        this.price_day = price_day;
+    public void setPrice_day(Object price_day, Object type) {
+        if(price_day != null){ // if we pass a value of priceDay we assigned it, else we select it from roomType dao
+            this.price_day = price_day;
+            System.out.println(price_day);
+        }else {
+            Map map = new HashMap<>();
+            map.put("type", type);
+            RoomType roomType = (RoomType)(RoomTypeDao.select(map, "*").get(0));
+            this.price_day = roomType.getPrice_day();
+            System.out.println( "price_day rom db  " + roomType.getPrice_day());
+            System.out.println( "priceday from setter"+this.getPrice_day());
+        }
+
     }
 
     public static Integer getNBR() {
@@ -101,6 +122,14 @@ public class RoomsTableView {
         this.price = price;
     }
 
+    public Object getReservationPrice() {
+        return reservationPrice;
+    }
+
+    public void setReservationPrice(Object reservationPrice) {
+        this.reservationPrice = reservationPrice;
+    }
+
     @Override
     public String toString() {
         return "RoomsTableView{" +
@@ -112,6 +141,7 @@ public class RoomsTableView {
                 ", status=" + status +
                 ", price_day=" + price_day +
                 ", price=" + price +
+                ", reservationPrice=" + reservationPrice +
                 '}';
     }
 }

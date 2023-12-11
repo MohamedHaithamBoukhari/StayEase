@@ -3,6 +3,9 @@ package com.example.hotelmanagement.tablesView;
 import com.example.hotelmanagement.beans.RoomType;
 import com.example.hotelmanagement.dao.RoomTypeDao;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,11 +92,13 @@ public class ReservationTableView {
     }
 
     public Object getDuration() {
-        return "not calculate !!!!!!!!!!!";
+        return duration;
     }
 
     public void setDuration(Object check_inDate, Object check_outDate) {
-        this.duration = duration;
+        LocalDate check_in = LocalDate.parse((CharSequence) check_inDate);
+        LocalDate check_out = LocalDate.parse((CharSequence) check_outDate);
+        this.duration = ChronoUnit.DAYS.between(check_in, check_out);
     }
 
     public Object getRoomNbr() {
@@ -112,7 +117,7 @@ public class ReservationTableView {
         Map<String, Object> map = new HashMap<>();
         map.put("type", roomType);
         RoomType roomtype = (RoomType)RoomTypeDao.select(map,"*").get(0);
-        this.price_day = (int)roomtype.getPrice_day()*(1+(int)capacity) - ((int) capacity*40);
+        this.price_day =(int)roomtype.getPrice_day()*(1+(int)capacity) - ((int) capacity*40);
     }
 
     public Object getPrice() {
@@ -120,7 +125,7 @@ public class ReservationTableView {
     }
 
     public void setPrice(Object price_day, Object duration) {
-        this.price = (int)price_day * (int)duration;
+        this.price = (int)price_day * (long)duration;
     }
 
     public Object getResStatus() {

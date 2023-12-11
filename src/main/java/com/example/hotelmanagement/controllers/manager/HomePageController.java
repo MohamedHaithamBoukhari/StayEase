@@ -172,10 +172,11 @@ public class HomePageController implements Initializable{
         roomsTable.getItems().clear();
         RoomsTableView.setNBR(1);
 
-        List<String> colToSelect =  new ArrayList<String>(List.of("r.roomId","r.numRoom","r.type","r.capacity","r.status","rT.price_day"));        if(statusList.isEmpty() && price.isEmpty() && capacity.isEmpty()){
+        List<String> colToSelect =  new ArrayList<String>(List.of("r.roomId","r.numRoom","r.type","r.capacity","r.status","rT.price_day"));
+        if(statusList.isEmpty() && price.isEmpty() && capacity.isEmpty()){
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, "");
             for (Object[] row : roomsdetails) {
-                    RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
+                    RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
                     //System.out.println(roomRow);
                     roomsList.add(roomRow);
             }
@@ -202,7 +203,7 @@ public class HomePageController implements Initializable{
 
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
             for (Object[] row : roomsdetails) {
-                RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
+                RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
                 //System.out.println(roomRow);
                 roomsList.add(roomRow);
             }
