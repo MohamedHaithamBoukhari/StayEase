@@ -4,10 +4,7 @@ import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.beans.Room;
-import com.example.hotelmanagement.dao.CustomerDao;
-import com.example.hotelmanagement.dao.InvoiceDao;
-import com.example.hotelmanagement.dao.RoomDao;
-import com.example.hotelmanagement.dao.RoomTypeDao;
+import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
@@ -15,6 +12,7 @@ import com.example.hotelmanagement.localStorage.ManagerManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
 import com.example.hotelmanagement.tablesView.InvoicesTableView;
+import com.example.hotelmanagement.tablesView.ReservationTableView;
 import com.example.hotelmanagement.tablesView.RoomsTableView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -56,6 +54,10 @@ public class HomePageController implements Initializable{
     @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
     @FXML private TextField priceField, capacityField;
 
+    @FXML private TableView<ReservationTableView> reservationTable;
+    @FXML private TableColumn<ReservationTableView, Object> id__Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
+    @FXML public CheckBox Upcoming, InProgress, CompletedStay, Cancelled_;
+
     @FXML private TableView<InvoicesTableView> invoicesTable;
     @FXML private TableColumn<InvoicesTableView, Object> id_Col, invoiceIdCol, invoiceDateCol, fullnameCol, cinCol, amountCol, status_Col;
     @FXML private CheckBox Paid, Unpaid, Cancelled;
@@ -81,7 +83,8 @@ public class HomePageController implements Initializable{
             noRowsMsg.setVisible(false);
             rowSelectedError.setVisible(false);
         } else if (currentPage.equals("Reservation")) {
-
+            loadDataOnReservationTable(new ArrayList<>());
+            noRowsMsg.setVisible(false);
         } else if (currentPage.equals("Cleaning")) {
 
         } else if (currentPage.equals("Maintenance")) {
@@ -349,6 +352,68 @@ public class HomePageController implements Initializable{
 
         }
         loadDataOnTable(new ArrayList<>(), "", "");
+    }
+//--------------------------------------Reservations -----------------------------------------
+    public void loadDataOnReservationTable(List<String> statusList){
+        noRowsMsg.setVisible(false);
+
+        List<ReservationTableView> reservationList = new ArrayList<>();
+        reservationTable.getItems().clear();
+        ReservationTableView.setNBR(1);
+        int customerId = CustomerManager.getInstance().getCustomer().getCustomerId();
+
+        List<String> colToSelect =  new ArrayList<String>(List.of("res.reservationId", "res.reservationDate", "res.check_inDate", "res.check_outDate", "r.numRoom", "r.type", "res.status", "r.capacity"));
+        if(statusList.isEmpty()){
+            List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, "");
+            for (Object[] row : reservationsDetail) {
+                ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                //System.out.println(roomRow);
+                reservationList.add(resRow);
+            }
+        }else{
+            String col1 = "res.status";
+            String whereClause = " WHERE ";
+
+            for (String status: statusList){
+                whereClause = whereClause + col1 + " = '" + status + "' OR ";
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
+            System.out.println(whereClause);
+
+            List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, whereClause);
+            for (Object[] row : reservationsDetail) {
+                ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                reservationList.add(resRow);
+            }
+        }
+
+        id__Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        ReservationDateCol.setCellValueFactory(new PropertyValueFactory<>("reservationDate"));
+        CheckInDateCol.setCellValueFactory(new PropertyValueFactory<>("check_inDate"));
+        CheckOutDate.setCellValueFactory(new PropertyValueFactory<>("check_outDate"));
+        DurationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        roomNbrCol.setCellValueFactory(new PropertyValueFactory<>("roomNbr"));
+        RoomTypeCol.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+        PriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        StatusCol.setCellValueFactory(new PropertyValueFactory<>("resStatus"));
+
+        reservationTable.getItems().addAll(reservationList);
+        if(reservationList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+    }
+    public void filteReservations(){
+        List<String> statusList = new ArrayList<>();
+
+        if(Upcoming.isSelected()) statusList.add("Upcoming");
+
+        if(InProgress.isSelected()) statusList.add("In Progress");
+
+        if(CompletedStay.isSelected()) statusList.add("Completed Stay");
+
+        if(Cancelled_.isSelected()) statusList.add("Cancelled");
+
+        loadDataOnReservationTable(statusList);
     }
 //--------------------------------------Invoices -----------------------------------------
     public void loadDataOnInvoicesTable(List<String> statusList, String cin, String fullname, LocalDate invDate){

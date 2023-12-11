@@ -3,6 +3,7 @@ package com.example.hotelmanagement.controllers.customer;
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Feedback;
+import com.example.hotelmanagement.beans.Reservation;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.CustomerManager;
@@ -30,6 +31,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
 public class CustomerHomePageController implements Initializable{
@@ -55,7 +57,7 @@ public class CustomerHomePageController implements Initializable{
     @FXML private TableView<ReservationTableView> reservationTable;
     @FXML private TableColumn<ReservationTableView, Object> id_Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
     @FXML public CheckBox Upcoming, InProgress, CompletedStay, Cancelled;
-    @FXML public Label addedMsg, updatedMsg, deletedMsg;
+    @FXML public Label addedMsg, updatedMsg, deletedMsg, editNotAllowedError;
 
     @FXML private TableView<InvoicesTableView> invoicesTable;
     @FXML private TableColumn<InvoicesTableView, Object> id__Col, invoiceDateCol, resDurationCol, amountCol, status_Col;
@@ -90,6 +92,7 @@ public class CustomerHomePageController implements Initializable{
         } else if (currentPage.equals("Services")) {
 
         }else if (currentPage.equals("BookingService")) {
+            editNotAllowedError.setVisible(false);
             addedMsg.setVisible(false);
             updatedMsg.setVisible(false);
             deletedMsg.setVisible(false);
@@ -308,6 +311,7 @@ public class CustomerHomePageController implements Initializable{
 //----------------------------------- services(Reservations) fcts--------------------------------------------
     public void loadDataOnReservationTable(List<String> statusList){
         noRowsMsg.setVisible(false);
+        editNotAllowedError.setVisible(false);
 
         List<ReservationTableView> reservationList = new ArrayList<>();
         reservationTable.getItems().clear();
@@ -370,6 +374,8 @@ public class CustomerHomePageController implements Initializable{
     }
     public void newReservationWindow(ActionEvent event) throws IOException {
         rowSelectedError.setVisible(false);
+        editNotAllowedError.setVisible(false);
+
         VarsManager.actionStarted = "add";
 
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/NewReservation-view.fxml"));
@@ -397,39 +403,6 @@ public class CustomerHomePageController implements Initializable{
         }
         loadDataOnReservationTable(new ArrayList<>());
     }
-    public void editReservationWindow(ActionEvent event) throws IOException {
-        rowSelectedError.setVisible(false);
-        if(reservationTable.getSelectionModel().getSelectedItem() == null){
-            rowSelectedError.setVisible(true);
-            return;
-        }
-        VarsManager.actionStarted = "update";
-        VarsManager.selectedResId = (int) reservationTable.getSelectionModel().getSelectedItem().getReservationId();
-
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/EditReservation-view.fxml"));
-        Parent root = loader.load();
-        scene = new Scene(root);
-        childStage = new Stage();
-        childStage.setScene(scene);
-
-        childStage.initStyle(StageStyle.TRANSPARENT);
-        childStage.setScene(scene);
-
-        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        parentStage.setResizable(false);
-        childStage.initOwner(parentStage);
-        childStage.initModality(Modality.WINDOW_MODAL);
-
-        childStage.showAndWait();
-
-        if(VarsManager.actionCompleted.equals("update")){
-            deletedMsg.setVisible(false);
-            addedMsg.setVisible(false);
-            updatedMsg.setVisible(true);
-            hideMsg(updatedMsg,4);
-        }
-        loadDataOnReservationTable(new ArrayList<>());
-    }
     public void deleteReservationWindow(ActionEvent event) throws IOException {
         rowSelectedError.setVisible(false);
         if(reservationTable.getSelectionModel().getSelectedItem() == null){
@@ -440,7 +413,14 @@ public class CustomerHomePageController implements Initializable{
         VarsManager.actionStarted = "delete";
         VarsManager.selectedResId = (int) reservationTable.getSelectionModel().getSelectedItem().getReservationId();
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/DeleteReservation-view.fxml"));
+        Map map = new HashMap<>();
+        map.put("reservationId", VarsManager.selectedResId);
+        Reservation reservation = (Reservation) (ReservationDao.select(map,"*").get(0));
+        if(LocalDate.now().plusDays(1).isBefore(LocalDate.parse(reservation.getCheck_inDate()))){
+            editNotAllowedError.setVisible(true);
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/DeleteReservation-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();

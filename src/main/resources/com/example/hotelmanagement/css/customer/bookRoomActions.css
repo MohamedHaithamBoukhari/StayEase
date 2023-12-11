@@ -38,7 +38,8 @@ TextField:focused{
 
 #addBtn, #editBtn, #deleteBtn, #saveBtn{
     -fx-background-color: #3AD2CD;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }
 #backBtn, #closeButton{
     -fx-background-color: #547371;
@@ -118,4 +119,17 @@ TextField:focused{
 #bookRoomBtn{
     -fx-background-color:rgba(14,102,185);
 
+}
+
+#backBtn{
+    -fx-background-color:rgba(0,0,0,0.4);
+}
+
+#editNotAllowedError{
+    -fx-font-size: 15;
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-border-radius:9;
+    -fx-padding: 1px 2px 1px 2px;
+    -fx-border-color:red;
 }

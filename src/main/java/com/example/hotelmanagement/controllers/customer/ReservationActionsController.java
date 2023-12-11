@@ -50,6 +50,7 @@ public class ReservationActionsController implements Initializable {
     @FXML private TableView<RoomsTableView> availableRoomsTable;
     @FXML private TableColumn<RoomsTableView, Object> idCol, roomNumberCol, typeCol, capacityCol, price_dayCol, totalPriceCol;
     @FXML private Label CurrentDateField, ReservationIdField, EmailField, RoomNbrField, RoomTypeField, RoomCapacityField, CheckInDateField, CheckOutDateField, DurationField, AmountField;
+    @FXML private Label reservInfoTodelete;
     Map<String, Object> confirmationValMap = new HashMap<>();
     private boolean validDates = false;
     List<String> types = new ArrayList<>();
@@ -96,6 +97,11 @@ public class ReservationActionsController implements Initializable {
             CheckOutDateField.setText(checkOutDate);
             DurationField.setText(String.valueOf(duration + " Day"));
             AmountField.setText(String.valueOf(amount + " Dh"));
+        } else if(VarsManager.actionStarted.equals("delete")){
+            Map map = new HashMap<>();
+            map.put("reservationId", VarsManager.selectedResId);
+            Reservation reservation = ((Reservation)(ReservationDao.select(map,"*").get(0)));
+            reservInfoTodelete.setText("from " + reservation.getCheck_inDate() + " to " + reservation.getCheck_outDate() + " ?");
         }
     }
     //-------------------------------------------------------------------------------------------
@@ -110,7 +116,7 @@ public class ReservationActionsController implements Initializable {
                     "FROM room r " +
                     "LEFT JOIN Reservation res " +
                     "ON r.roomId = res.roomId " +
-                    "AND res.status IN ('Upcoming', 'In Progress') " +
+                    "AND res.status IN ('Upcoming', 'In Progress', 'Cancelled') " +
                     "AND ( " +
                     "("+checkIn+" >= res.check_inDate AND "+checkIn+" < res.check_outDate) " +
                     "OR ("+checkOut+" > res.check_inDate AND "+checkOut+" <= res.check_outDate) " +
@@ -284,6 +290,16 @@ public class ReservationActionsController implements Initializable {
     public void cancelReservation(ActionEvent event){
         ReservationActionsController.childStage.close();
     }
+    public void deleteReservation(ActionEvent event){
+        String[] updatedColumns = {"status"};
+        Object[] newColumnsValue = {"Cancelled"};
+        String testColumn = "reservationId";
+        Object testColumnValue = VarsManager.selectedResId;
+        ReservationDao.updateColumns(updatedColumns,newColumnsValue,testColumn,testColumnValue);
+        VarsManager.actionCompleted = "delete";
+        CustomerHomePageController.childStage.close();
+    }
+
     //-------------------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){
         Duration duration = Duration.seconds(time);

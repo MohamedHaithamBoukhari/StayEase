@@ -115,10 +115,10 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-        <Label fx:id="addedMsg" alignment="CENTER" layoutX="443.0" layoutY="85.0" prefHeight="30.0" prefWidth="185.0" text="Reservation added successfully" AnchorPane.rightAnchor="272.0" />
+        <Label fx:id="addedMsg" alignment="CENTER" layoutX="443.0" layoutY="85.0" prefHeight="30.0" prefWidth="185.0" text="Reservation added successfully" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="254.0" />
         <Label fx:id="updatedMsg" alignment="CENTER" layoutX="443.0" layoutY="85.0" prefHeight="30.0" prefWidth="185.0" text="Reservation updated successfully" AnchorPane.rightAnchor="272.0" />
-        <Label fx:id="deletedMsg" alignment="CENTER" layoutX="443.0" layoutY="85.0" prefHeight="30.0" prefWidth="185.0" text="Reservation deleted successfully" AnchorPane.rightAnchor="272.0" />
-        <TableView fx:id="reservationTable" layoutX="217.0" layoutY="167.0" prefHeight="352.0" prefWidth="624.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="167.0">
+        <Label fx:id="deletedMsg" alignment="CENTER" layoutX="443.0" layoutY="85.0" prefHeight="30.0" prefWidth="185.0" text="Reservation cancelled successfully" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="254.0" />
+        <TableView fx:id="reservationTable" layoutX="217.0" layoutY="167.0" prefHeight="333.0" prefWidth="624.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="167.0">
             <columns>
                 <TableColumn fx:id="id_Col" prefWidth="36.0" text="#" />
             <TableColumn fx:id="ReservationDateCol" prefWidth="101.0" text="Reservation Date" />
@@ -128,10 +128,10 @@
                 <TableColumn fx:id="roomNbrCol" prefWidth="38.0" text="Room" />
                 <TableColumn fx:id="RoomTypeCol" prefWidth="57.0" text="Type" />
             <TableColumn fx:id="PriceCol" prefWidth="70.0" text="Price" />
-            <TableColumn fx:id="StatusCol" prefWidth="73.0" text="Status" />
+            <TableColumn fx:id="StatusCol" prefWidth="71.0" text="Status" />
             </columns>
         </TableView>
-        <Label fx:id="rowSelectedError" layoutX="219.0" layoutY="542.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="219.0">
+        <Label fx:id="rowSelectedError" layoutX="215.0" layoutY="539.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="215.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -140,30 +140,28 @@
                 </ImageView>
             </graphic>
         </Label>
-        <Button fx:id="addBtn" alignment="CENTER" layoutX="603.0" layoutY="539.0" mnemonicParsing="false" onAction="#newReservationWindow" prefHeight="30.0" prefWidth="75.0" text="add" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="222.0">
+        <Button fx:id="addBtn" alignment="CENTER" layoutX="624.0" layoutY="539.0" mnemonicParsing="false" onAction="#newReservationWindow" prefHeight="30.0" prefWidth="75.0" text="add" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="140.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../images/addIcon.png" />
                     </image>
                 </ImageView>
-            </graphic></Button>
-        <Button fx:id="editBtn" layoutX="684.0" layoutY="539.0" mnemonicParsing="false" onAction="#editReservationWindow" prefHeight="30.0" prefWidth="75.0" text="edit" AnchorPane.bottomAnchor="31.0">
-            <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../images/editIcon.png" />
-                    </image>
-                </ImageView>
-            </graphic></Button>
-        <Button fx:id="deleteBtn" layoutX="766.0" layoutY="539.0" mnemonicParsing="false" onAction="#deleteReservationWindow" prefHeight="30.0" prefWidth="75.0" text="delete" AnchorPane.bottomAnchor="31.0">
+            </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <Button fx:id="deleteBtn" layoutX="766.0" layoutY="539.0" mnemonicParsing="false" onAction="#deleteReservationWindow" prefHeight="30.0" prefWidth="75.0" text="delete" textFill="WHITE" AnchorPane.bottomAnchor="31.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../images/deleteIcon.png" />
                     </image>
                 </ImageView>
-            </graphic></Button>
+            </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
         <Label fx:id="noRowsMsg" layoutX="367.0" layoutY="333.0" prefHeight="30.0" prefWidth="323.0" text="No reservation match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="367.0" AnchorPane.topAnchor="333.0">
             <font>
                 <Font size="18.0" />
@@ -174,13 +172,22 @@
                 <Font size="17.0" />
             </font>
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="backIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/backIcon.png" />
                </image>
             </ImageView>
          </graphic>
         </Button>
+      <Label fx:id="editNotAllowedError" layoutX="214.0" layoutY="504.0" prefHeight="30.0" prefWidth="623.0" text="Changes to the reservation are not permitted within 24 hours of the check-in date !!" AnchorPane.topAnchor="504.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/errorIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
