@@ -115,3 +115,7 @@ TextField:focused{
     -fx-border-radius:10px;
     -fx-background-radius:10px;
 }
+#bookRoomBtn{
+    -fx-background-color:rgba(14,102,185);
+
+}

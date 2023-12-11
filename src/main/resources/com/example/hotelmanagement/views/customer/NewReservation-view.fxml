@@ -55,7 +55,7 @@
                 </TextField>
             </children>
         </AnchorPane>
-        <TableView fx:id="availableRoomsTable" layoutX="124.0" layoutY="242.0" prefHeight="226.0" prefWidth="650.0" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="242.0">
+        <TableView fx:id="availableRoomsTable" layoutX="124.0" layoutY="242.0" minWidth="-Infinity" prefHeight="226.0" prefWidth="650.0" AnchorPane.leftAnchor="124.0" AnchorPane.topAnchor="242.0">
             <columns>
                 <TableColumn fx:id="idCol" prefWidth="48.0" text="#" />
                 <TableColumn fx:id="roomNumberCol" prefWidth="88.0" text="Room Number" />
@@ -70,7 +70,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="rowSelectedError" layoutX="219.0" layoutY="517.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="200.0">
+        <Label fx:id="rowSelectedError" layoutX="125.0" layoutY="496.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="125.0">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -79,9 +79,9 @@
                 </ImageView>
             </graphic>
         </Label>
-        <Button fx:id="backBtn" layoutX="407.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="80.0" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="350.0">
+        <Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="694.0" layoutY="492.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#closeStage" prefHeight="30.0" prefWidth="80.0" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="74.0" AnchorPane.rightAnchor="126.0">
             <font>
-                <Font size="17.0" />
+                <Font size="14.0" />
             </font>
         </Button>
       <Label fx:id="noRowsMsg" alignment="CENTER" layoutX="306.0" layoutY="356.0" prefHeight="30.0" prefWidth="287.0" text="No available room match the selected filters" textFill="#02bfe3">
@@ -89,6 +89,11 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="bookRoomBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="590.0" layoutY="496.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#bookRoomWindow" prefHeight="30.0" prefWidth="91.0" text="Book Room" textFill="WHITE" AnchorPane.bottomAnchor="74.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
     </children>
     <stylesheets>
         <URL value="@../../css/general.css" />

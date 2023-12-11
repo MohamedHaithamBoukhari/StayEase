@@ -388,11 +388,12 @@ public class CustomerHomePageController implements Initializable{
 
         childStage.showAndWait();
 
-        if(VarsManager.actionCompleted.equals("update")){
+        if(VarsManager.actionCompleted.equals("confirmReservation")){
             deletedMsg.setVisible(false);
             updatedMsg.setVisible(false);
             addedMsg.setVisible(true);
             hideMsg(addedMsg,4);
+            VarsManager.actionCompleted = "";
         }
         loadDataOnReservationTable(new ArrayList<>());
     }

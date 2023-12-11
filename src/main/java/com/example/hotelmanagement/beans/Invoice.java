@@ -17,6 +17,14 @@ public class Invoice {
         this.amount = amount;
     }
 
+    public int getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
+    }
+
     public int getInvoiceId() {
         return invoiceId;
     }
