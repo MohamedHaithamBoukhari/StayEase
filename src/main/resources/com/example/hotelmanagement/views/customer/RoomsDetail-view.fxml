@@ -105,14 +105,14 @@
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
         <AnchorPane fx:id="filters" layoutX="217.0" layoutY="113.0" prefHeight="55.0" prefWidth="618.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="113.0">
             <children>
-                <CheckBox fx:id="Available" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Available" textFill="WHITE" AnchorPane.topAnchor="7.0" />
-                <CheckBox fx:id="Occupied" layoutX="12.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Occupied" textFill="WHITE" AnchorPane.topAnchor="32.0" />
-                <CheckBox fx:id="Cleaned" layoutX="96.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Cleaned" textFill="WHITE" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="7.0" />
-                <CheckBox fx:id="Maintenance" layoutX="96.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Maintenance" textFill="WHITE" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="32.0" />
-                <CheckBox fx:id="CheckedOut" layoutX="199.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Checked Out" textFill="WHITE" AnchorPane.leftAnchor="199.0" AnchorPane.topAnchor="7.0" />
-                <CheckBox fx:id="OutofService" layoutX="199.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Out of Service" textFill="WHITE" AnchorPane.leftAnchor="199.0" AnchorPane.topAnchor="32.0" />
-                <CheckBox fx:id="UnderCleaning" layoutX="308.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Under Cleaning" textFill="WHITE" AnchorPane.leftAnchor="308.0" AnchorPane.topAnchor="7.0" />
-                <CheckBox fx:id="NeedsMaintenance" layoutX="308.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Needs Maintenance" textFill="WHITE" AnchorPane.leftAnchor="308.0" AnchorPane.topAnchor="32.0" />
+                <CheckBox fx:id="Available" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Available" textFill="WHITE" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="Occupied" layoutX="10.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Occupied" textFill="WHITE" AnchorPane.topAnchor="32.0" />
+                <CheckBox fx:id="NeedsCleaning" layoutX="201.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Needs Cleaning" textFill="WHITE" AnchorPane.leftAnchor="201.0" AnchorPane.topAnchor="32.0" />
+                <CheckBox fx:id="UnderMaintenance" layoutX="318.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Under Maintenance" textFill="WHITE" AnchorPane.leftAnchor="318.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="CheckedOut" layoutX="93.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Checked Out" textFill="WHITE" AnchorPane.leftAnchor="93.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="OutofService" layoutX="93.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Out of Service" textFill="WHITE" AnchorPane.leftAnchor="93.0" AnchorPane.topAnchor="32.0" />
+                <CheckBox fx:id="UnderCleaning" layoutX="201.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterRooms" text="Under Cleaning" textFill="WHITE" AnchorPane.leftAnchor="201.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="NeedsMaintenance" layoutX="318.0" layoutY="32.0" mnemonicParsing="false" onAction="#filterRooms" text="Needs Maintenance" textFill="WHITE" AnchorPane.leftAnchor="318.0" AnchorPane.topAnchor="32.0" />
                 <Label fx:id="capacityLabel" layoutX="484.0" layoutY="32.0" text="Capacity" textFill="WHITE" AnchorPane.leftAnchor="484.0" AnchorPane.topAnchor="32.0" />
                 <Label fx:id="priceLabel" layoutX="484.0" layoutY="7.0" text="Price" textFill="WHITE" AnchorPane.leftAnchor="484.0" AnchorPane.topAnchor="7.0" />
                 <AnchorPane layoutX="458.0" layoutY="8.0" opacity="0.22" prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="458.0" AnchorPane.topAnchor="8.0" />

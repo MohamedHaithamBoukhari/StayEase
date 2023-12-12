@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.MaintenanceRoomController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="915.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.83966064453125" AnchorPane.topAnchor="4.0">
+            <image>
+                <Image url="@../../images/hotel.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0" />
+        <AnchorPane fx:id="filters" layoutX="140.0" layoutY="113.0" prefHeight="55.0" prefWidth="618.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="137.0" AnchorPane.topAnchor="113.0">
+            <children>
+                <CheckBox fx:id="Admin" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" text="Admin" textFill="WHITE" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="OtherJob" layoutX="190.0" layoutY="32.0" mnemonicParsing="false" text="Other job" textFill="WHITE" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="32.0" />
+                <CheckBox fx:id="Manager" layoutX="79.0" layoutY="7.0" mnemonicParsing="false" text="Manager" textFill="WHITE" AnchorPane.leftAnchor="79.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="Cleaner" layoutX="159.0" layoutY="7.0" mnemonicParsing="false" text="Cleaner" textFill="WHITE" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="MaintenanceStaff" layoutX="12.0" layoutY="32.0" mnemonicParsing="false" text="Maintenance Staff" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="32.0" />
+                <AnchorPane layoutX="255.0" layoutY="8.0" opacity="0.22" prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="8.0" />
+                <Label layoutX="282.0" layoutY="7.0" text="FullName" textFill="WHITE" AnchorPane.topAnchor="7.0" />
+                <TextField fx:id="fullnameField" layoutX="344.0" layoutY="3.0" prefHeight="21.0" prefWidth="95.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="3.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="282.0" layoutY="32.0" text="Phone" textFill="WHITE" AnchorPane.leftAnchor="282.0" AnchorPane.topAnchor="32.0" />
+                <TextField fx:id="phoneField" layoutX="344.0" layoutY="28.0" prefHeight="21.0" prefWidth="95.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="184.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="474.0" layoutY="7.0" text="CIN" textFill="WHITE" AnchorPane.leftAnchor="474.0" AnchorPane.topAnchor="7.0" />
+                <TextField fx:id="cinField" layoutX="537.0" layoutY="3.0" prefHeight="9.0" prefWidth="75.0" AnchorPane.leftAnchor="517.0" AnchorPane.rightAnchor="11.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="474.0" layoutY="32.0" text="Email" textFill="WHITE" AnchorPane.leftAnchor="474.0" AnchorPane.topAnchor="32.0" />
+                <TextField fx:id="emailField" layoutX="517.0" layoutY="28.0" prefHeight="21.0" prefWidth="95.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <Label fx:id="pageTitle" layoutX="397.0" layoutY="50.0" text="Assign Room" AnchorPane.rightAnchor="379.0" AnchorPane.topAnchor="50.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Label>
+        <Label fx:id="addedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Employee added successfully" AnchorPane.rightAnchor="349.0" />
+        <Label fx:id="updatedMsg" alignment="CENTER" layoutX="420.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Employee updated successfully" AnchorPane.rightAnchor="349.0" />
+        <Label fx:id="deletedMsg" alignment="CENTER" layoutX="366.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Employee deleted successfully" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="349.0" />
+        <TableView fx:id="empsTable" layoutX="140.0" layoutY="173.0" prefHeight="352.0" prefWidth="624.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="173.0">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="46.0" text="#" />
+                <TableColumn fx:id="fullNameCol" prefWidth="134.0" text="Full Name" />
+                <TableColumn fx:id="cinCol" prefWidth="78.0" text="CIN" />
+                <TableColumn fx:id="emailCol" prefWidth="145.0" text="Address Email" />
+                <TableColumn fx:id="positionCol" prefWidth="109.0" text="Position" />
+                <TableColumn fx:id="phoneCol" prefWidth="115.0" text="Phone" />
+            </columns>
+        </TableView>
+        <Label fx:id="rowSelectedError" layoutX="142.0" layoutY="539.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="142.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/errorIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Button fx:id="addBtn" alignment="CENTER" layoutX="443.0" layoutY="539.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="add" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="382.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/addIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Button fx:id="editBtn" layoutX="513.0" layoutY="539.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="edit" AnchorPane.bottomAnchor="31.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/editIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Button fx:id="deleteBtn" layoutX="596.0" layoutY="539.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="delete" AnchorPane.bottomAnchor="31.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/deleteIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <Label fx:id="noRowsMsg" layoutX="303.0" layoutY="330.0" prefHeight="30.0" prefWidth="317.0" text="No employee match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="330.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="detailsBtn" alignment="CENTER" layoutX="680.0" layoutY="539.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" text="details" AnchorPane.bottomAnchor="31.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/addIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </children>
+    <stylesheets>
+        <URL value="@../../css/general.css" />
+        <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/manager/roomDetails.css" />
+        <URL value="@../../css/tableView.css" />
+    </stylesheets>
+</AnchorPane>

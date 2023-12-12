@@ -32,7 +32,7 @@ public class RoomsTableView {
             System.out.println(this.price_day);
 
         this.price = (int)this.price_day*(1+(int)capacity) - ((int) capacity*40);
-        this.reservationPrice = (int)this.price * (long)duration;
+        this.reservationPrice = (int)this.price * (int)duration;
         incrementId();
     }
     public static void incrementId(){

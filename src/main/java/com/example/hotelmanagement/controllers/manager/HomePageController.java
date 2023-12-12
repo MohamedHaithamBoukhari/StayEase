@@ -49,10 +49,17 @@ public class HomePageController implements Initializable{
     @FXML private Label fullnameLabel;
     @FXML private Label noRowsMsg, rowSelectedError, confirmPayMsg, changeStatusError;
 
+    @FXML private CheckBox Available, Occupied, NeedsCleaning, UnderCleaning, UnderMaintenance, NeedsMaintenance, OutofService, CheckedOut;
+    @FXML private TextField priceField, capacityField, typeField;
+
     @FXML private TableView<RoomsTableView> roomsTable;
     @FXML private TableColumn<RoomsTableView, Object> idCol, roomNumberCol, typeCol, capacityCol, statusCol, price_dayCol;
-    @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
-    @FXML private TextField priceField, capacityField;
+
+    @FXML private TableView<RoomsTableView> maintenanceTable;
+    @FXML private Label maintenanceAssigningError;
+
+    @FXML private TableView<RoomsTableView> cleaningTable;
+    @FXML private Label cleaningAssigningError;
 
     @FXML private TableView<ReservationTableView> reservationTable;
     @FXML private TableColumn<ReservationTableView, Object> id__Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
@@ -86,9 +93,17 @@ public class HomePageController implements Initializable{
             loadDataOnReservationTable(new ArrayList<>());
             noRowsMsg.setVisible(false);
         } else if (currentPage.equals("Cleaning")) {
-
+            rowSelectedError.setVisible(false);
+            cleaningAssigningError.setVisible(false);
+            rowSelectedError.setVisible(false);
+            addedMsg.setVisible(false);
+            loadDataOnCleaningTable(new ArrayList<>(), "", "");
         } else if (currentPage.equals("Maintenance")) {
-
+            rowSelectedError.setVisible(false);
+            maintenanceAssigningError.setVisible(false);
+            rowSelectedError.setVisible(false);
+            addedMsg.setVisible(false);
+            loadDataOnMaintenanceTable(new ArrayList<>(), "", "");
         } else if (currentPage.equals("Invoices")) {
             updatedMsg.setVisible(false);
             loadDataOnInvoicesTable(new ArrayList<>(), "", "", null);
@@ -98,9 +113,6 @@ public class HomePageController implements Initializable{
             changeStatusError.setVisible(false);
             confirmPayBtn.setVisible(false);
             hideConfirmPayBtn.setVisible(false);
-
-
-
         } else if (currentPage.equals("Complaint")) {
 
         }
@@ -231,13 +243,13 @@ public class HomePageController implements Initializable{
 
         if(Occupied.isSelected()) statusList.add("Occupied");
 
-        if(UnderCleaning.isSelected()) statusList.add("Under Cleaning");
+        if(NeedsCleaning.isSelected()) statusList.add("Needs Cleaning");
 
-        if(Cleaned.isSelected()) statusList.add("Cleaned");
+        if(UnderCleaning.isSelected()) statusList.add("Under Cleaning");
 
         if(NeedsMaintenance.isSelected()) statusList.add("Needs Maintenance");
 
-        if(Maintenance.isSelected()) statusList.add("Maintenance");
+        if(UnderMaintenance.isSelected()) statusList.add("Under Maintenance");
 
         if(OutofService.isSelected()) statusList.add("Out of Service");
 
@@ -414,6 +426,220 @@ public class HomePageController implements Initializable{
         if(Cancelled_.isSelected()) statusList.add("Cancelled");
 
         loadDataOnReservationTable(statusList);
+    }
+//--------------------------------------Cleaning -----------------------------------------
+    public void loadDataOnCleaningTable(List<String> statusList, String type, String capacity){
+    noRowsMsg.setVisible(false);
+    List<RoomsTableView> roomsList = new ArrayList<>();
+    cleaningTable.getItems().clear();
+    RoomsTableView.setNBR(1);
+
+    List<String> colToSelect =  new ArrayList<String>(List.of("r.roomId","r.numRoom","r.type","r.capacity","r.status","rT.price_day"));
+    if(statusList.isEmpty() && type.isEmpty() && capacity.isEmpty()){
+        List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, " WHERE r.status IN ('Needs Cleaning', 'Under Cleaning')");
+        for (Object[] row : roomsdetails) {
+            RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
+            //System.out.println(roomRow);
+            roomsList.add(roomRow);
+        }
+    }else{
+        //join and select rooms with status checked and price < priceSelected and capacite< capacity
+        String col1 = "r.status", col2 = "r.type", col3 = "r.capacity";
+        String whereClause = " WHERE ";
+        if(!statusList.isEmpty()){
+            whereClause += "(";
+            for (String status: statusList){
+                whereClause = whereClause + col1 + " = '" + status + "' OR ";
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
+            whereClause += ") AND ";
+        }else{
+            whereClause += "r.status IN ('Needs Cleaning', 'Under Cleaning') AND ";
+        }
+        if(!type.isEmpty()){
+            whereClause += "("+ col2 + " Like '%" + type + "%' ) AND ";
+        }
+        if(!capacity.isEmpty()){
+            whereClause += "("+ col3 + " <= " + capacity +") AND ";
+        }
+        whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
+        System.out.println(whereClause);
+
+        List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
+        for (Object[] row : roomsdetails) {
+            RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
+            //System.out.println(roomRow);
+            roomsList.add(roomRow);
+        }
+    }
+
+
+    idCol.setCellValueFactory(new PropertyValueFactory<>("i"));
+    roomNumberCol.setCellValueFactory(new PropertyValueFactory<>("numRoom"));
+    typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+    capacityCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+    statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+    cleaningTable.getItems().addAll(roomsList);
+    if(roomsList.isEmpty()){
+        noRowsMsg.setVisible(true);
+    }
+}
+    public void filterCleaningRooms(ActionEvent event){
+        List<String> statusList = new ArrayList<>();
+
+        if(NeedsCleaning.isSelected()) statusList.add("Needs Cleaning");
+
+        if(UnderCleaning.isSelected()) statusList.add("Under Cleaning");
+
+        String type = typeField.getText();
+        String capacity = capacityField.getText();
+
+        loadDataOnCleaningTable(statusList, type, capacity);
+    }
+    public void assignCleanignRoomWindow(ActionEvent event) throws IOException {
+        rowSelectedError.setVisible(false);
+        cleaningAssigningError.setVisible(false);
+        if(cleaningTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(cleaningTable.getSelectionModel().getSelectedItem().getStatus().equals("Under Cleaning")){
+            cleaningAssigningError.setVisible(true);
+            return;
+        }
+
+        VarsManager.selectedRoomId = (int) cleaningTable.getSelectionModel().getSelectedItem().getRoomId();
+        VarsManager.actionStarted ="assignCleaningTask";
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignMaintenanceRoom-view.fxml"));
+        Parent root = loader.load();
+
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("assignCleaningTask")){
+            addedMsg.setVisible(true);
+            hideMsg(addedMsg,4);
+        }
+        loadDataOnCleaningTable(new ArrayList<>(), "", "");
+    }
+    //--------------------------------------Maintenance -----------------------------------------
+    public void loadDataOnMaintenanceTable(List<String> statusList, String type, String capacity){
+    noRowsMsg.setVisible(false);
+    List<RoomsTableView> roomsList = new ArrayList<>();
+    maintenanceTable.getItems().clear();
+    RoomsTableView.setNBR(1);
+
+    List<String> colToSelect =  new ArrayList<String>(List.of("r.roomId","r.numRoom","r.type","r.capacity","r.status","rT.price_day"));
+    if(statusList.isEmpty() && type.isEmpty() && capacity.isEmpty()){
+        List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, " WHERE r.status IN ('Needs Maintenance', 'Under Maintenance')");
+        for (Object[] row : roomsdetails) {
+            RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
+            //System.out.println(roomRow);
+            roomsList.add(roomRow);
+        }
+    }else{
+        //join and select rooms with status checked and price < priceSelected and capacite< capacity
+        String col1 = "r.status", col2 = "r.type", col3 = "r.capacity";
+        String whereClause = " WHERE ";
+        if(!statusList.isEmpty()){
+            whereClause += "(";
+            for (String status: statusList){
+                whereClause = whereClause + col1 + " = '" + status + "' OR ";
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
+            whereClause += ") AND ";
+        }else{
+            whereClause += "r.status IN ('Needs Maintenance', 'Under Maintenance') AND ";
+        }
+        if(!type.isEmpty()){
+            whereClause += "("+ col2 + " Like '%" + type + "%' ) AND ";
+        }
+        if(!capacity.isEmpty()){
+            whereClause += "("+ col3 + " <= " + capacity +") AND ";
+        }
+        whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
+        System.out.println(whereClause);
+
+        List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
+        for (Object[] row : roomsdetails) {
+            RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
+            //System.out.println(roomRow);
+            roomsList.add(roomRow);
+        }
+    }
+
+
+    idCol.setCellValueFactory(new PropertyValueFactory<>("i"));
+    roomNumberCol.setCellValueFactory(new PropertyValueFactory<>("numRoom"));
+    typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+    capacityCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+    statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+    maintenanceTable.getItems().addAll(roomsList);
+    if(roomsList.isEmpty()){
+        noRowsMsg.setVisible(true);
+    }
+}
+    public void filterMaintenanceRooms(ActionEvent event){
+        List<String> statusList = new ArrayList<>();
+
+        if(NeedsMaintenance.isSelected()) statusList.add("Needs Maintenance");
+
+        if(UnderMaintenance.isSelected()) statusList.add("Under Maintenance");
+
+        String type = typeField.getText();
+        String capacity = capacityField.getText();
+
+        loadDataOnMaintenanceTable(statusList, type, capacity);
+    }
+    public void assignMaintenanceRoomWindow(ActionEvent event) throws IOException {
+        rowSelectedError.setVisible(false);
+        maintenanceAssigningError.setVisible(false);
+        if(maintenanceTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(maintenanceTable.getSelectionModel().getSelectedItem().getStatus().equals("Under Maintenance")){
+            maintenanceAssigningError.setVisible(true);
+            return;
+        }
+
+        VarsManager.selectedRoomId = (int) maintenanceTable.getSelectionModel().getSelectedItem().getRoomId();
+        VarsManager.actionStarted ="assignMaintenanceTask";
+
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignMaintenanceRoom-view.fxml"));
+        Parent root = loader.load();
+
+        scene = new Scene(root);
+        childStage = new Stage();
+        childStage.setScene(scene);
+
+        childStage.initStyle(StageStyle.TRANSPARENT);
+        childStage.setScene(scene);
+
+        Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        parentStage.setResizable(false);
+        childStage.initOwner(parentStage);
+        childStage.initModality(Modality.WINDOW_MODAL);
+
+        childStage.showAndWait();
+
+        if(VarsManager.actionCompleted.equals("assignMaintenanceTask")){
+            addedMsg.setVisible(true);
+            hideMsg(addedMsg,4);
+        }
+        loadDataOnTable(new ArrayList<>(), "", "");
     }
 //--------------------------------------Invoices -----------------------------------------
     public void loadDataOnInvoicesTable(List<String> statusList, String cin, String fullname, LocalDate invDate){

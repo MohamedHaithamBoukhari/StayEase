@@ -33,7 +33,12 @@
 #filters {
     -fx-background-color: rgba(21,25,37,255);
     -fx-background-radius:5;
-
-
-
+}
+#maintenanceAssigningError, #cleaningAssigningError{
+ -fx-font-size: 15;
+ -fx-text-fill: yellow;
+ -fx-font-weight: bold;
+ -fx-border-radius:9;
+ -fx-padding: 1px 2px 1px 2px;
+ -fx-border-color:yellow;
 }

@@ -52,7 +52,7 @@ public class CustomerHomePageController implements Initializable{
     @FXML private Label noRowsMsg, rowSelectedError;
     @FXML private TableView<RoomsTableView> roomsTable;
     @FXML private TableColumn<RoomsTableView, Object> idCol, roomNumberCol, typeCol, capacityCol, statusCol, price_dayCol;
-    @FXML private CheckBox Available, Occupied, UnderCleaning, Cleaned, Maintenance, NeedsMaintenance, OutofService, CheckedOut;
+    @FXML private CheckBox Available, Occupied, UnderCleaning, NeedsCleaning, UnderMaintenance, NeedsMaintenance, OutofService, CheckedOut;
 
     @FXML private TableView<ReservationTableView> reservationTable;
     @FXML private TableColumn<ReservationTableView, Object> id_Col, ReservationDateCol, CheckInDateCol, CheckOutDate, DurationCol, roomNbrCol, RoomTypeCol, PriceCol, StatusCol;
@@ -288,11 +288,11 @@ public class CustomerHomePageController implements Initializable{
 
         if(UnderCleaning.isSelected()) statusList.add("Under Cleaning");
 
-        if(Cleaned.isSelected()) statusList.add("Cleaned");
+        if(NeedsCleaning.isSelected()) statusList.add("Needs Cleaning");
 
         if(NeedsMaintenance.isSelected()) statusList.add("Needs Maintenance");
 
-        if(Maintenance.isSelected()) statusList.add("Maintenance");
+        if(UnderMaintenance.isSelected()) statusList.add("Under Maintenance");
 
         if(OutofService.isSelected()) statusList.add("Out of Service");
 

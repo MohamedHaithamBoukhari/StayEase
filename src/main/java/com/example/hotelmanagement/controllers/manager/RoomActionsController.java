@@ -28,7 +28,7 @@ public class RoomActionsController implements Initializable {
     int roomNbr, capacity;
     String type, status;
     List<String> types = new ArrayList<>();
-    String[] states ={"Available", "Occupied", "Under Cleaning","Maintenance","Cleaned", "Needs Maintenance", "Out of Service", "Checked Out"};
+    String[] states ={"Available", "Occupied", "Needs Cleaning", "Under Cleaning", "Needs Maintenance","Under Maintenance", "Out of Service", "Checked Out"};
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
