@@ -26,12 +26,12 @@
             <Font name="Montserrat SemiBold" size="28.0" />
         </font>
     </Label>
-    <Button fx:id="customerLoginBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="256.0" mnemonicParsing="false"  onAction="#switchToCustomerLogin" prefHeight="34.0" prefWidth="214.0" text="Customer Login" textOverrun="CENTER_ELLIPSIS">
+    <Button fx:id="customerLoginBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="256.0" mnemonicParsing="false" onAction="#switchToCustomerLogin" prefHeight="34.0" prefWidth="214.0" text="Customer Login" textOverrun="CENTER_ELLIPSIS">
         <font>
             <Font name="Montserrat Black" size="20.0" />
         </font>
     </Button>
-    <Button fx:id="managerLoginBtn" layoutX="343.0" layoutY="329.0" mnemonicParsing="false" onAction="#switchToManagerLogin" prefHeight="34.0" prefWidth="214.0" text="Manager Login">
+    <Button fx:id="managerLoginBtn" layoutX="343.0" layoutY="329.0" mnemonicParsing="false" onAction="#switchToEmployeeLogin" prefHeight="34.0" prefWidth="214.0" text="Employee Login">
         <font>
             <Font name="Montserrat SemiBold" size="20.0" />
         </font>

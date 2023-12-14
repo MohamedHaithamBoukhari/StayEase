@@ -1,24 +1,17 @@
-package com.example.hotelmanagement.controllers.manager;
+package com.example.hotelmanagement.controllers.employee.manager;
 
-import com.example.hotelmanagement.beans.Customer;
-import com.example.hotelmanagement.beans.Position;
 import com.example.hotelmanagement.beans.Room;
 import com.example.hotelmanagement.beans.RoomType;
 import com.example.hotelmanagement.config.Validation;
-import com.example.hotelmanagement.controllers.customer.CustomerHomePageController;
-import com.example.hotelmanagement.dao.CustomerDao;
-import com.example.hotelmanagement.dao.PositionDao;
 import com.example.hotelmanagement.dao.RoomDao;
 import com.example.hotelmanagement.dao.RoomTypeDao;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
-import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.*;

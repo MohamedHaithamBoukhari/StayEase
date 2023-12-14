@@ -9,18 +9,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.HomePageController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.manager.HomePageController">
     <children>
         <ImageView fitHeight="567.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
             <image>
-                <Image url="@../../images/hotel.jpg" />
+                <Image url="@../../../images/hotel.jpg" />
             </image>
         </ImageView>
       <Label fx:id="homeLabel" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="42.0" text="Manager Dashboard" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="fullnameLabel" alignment="CENTER" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="280.0" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" />
       <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/user.png" />
+            <Image url="@../../../images/user.png" />
          </image>
       </ImageView>
       <Hyperlink fx:id="logoutLink" focusTraversable="false" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
@@ -28,7 +28,7 @@
          <graphic>
             <ImageView fx:id="logoutBtn1" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/logout.png" />
+                  <Image url="@../../../images/logout.png" />
                </image>
             </ImageView>
          </graphic>
@@ -41,7 +41,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/homeIcon.png" />
+                  <Image url="@../../../images/homeIcon.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -49,14 +49,14 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/roomIcon.png" />
+                  <Image url="@../../../images/roomIcon.png" />
                </image></ImageView>
          </graphic></Button>
       <Button fx:id="reservationBtn" layoutX="2.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchToReservation" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Reservations" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="160.0">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/reservationIcon.png" />
+                  <Image url="@../../../images/reservationIcon.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -64,7 +64,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/cleaningIcon.png" />
+                  <Image url="@../../../images/cleaningIcon.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -72,7 +72,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/maintenanceIcon.png" />
+                  <Image url="@../../../images/maintenanceIcon.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -80,7 +80,7 @@
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/invoiceIcon.png" />
+                  <Image url="@../../../images/invoiceIcon.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -88,18 +88,18 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/complaintIcon.png" />
+                  <Image url="@../../../images/complaintIcon.png" />
                </image>
             </ImageView>
          </graphic></Button>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="32.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="768.0">
          <image>
-            <Image url="@../../images/hotelIcon.png" />
+            <Image url="@../../../images/hotelIcon.png" />
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
     </children>
     <stylesheets>
-        <URL value="@../../css/HomePage.css" />
+        <URL value="@../../../css/HomePage.css" />
     </stylesheets>
 </AnchorPane>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.LoginController">
 <children>
     <ImageView fitHeight="600.0" fitWidth="915.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <image>
@@ -27,7 +27,7 @@
         </font>
     </Button>
     <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="125.0" />
-      <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Manager Login" />
+      <Label fx:id="loginTitle" layoutX="376.0" layoutY="160.0" text="Employee Login" />
       <Label fx:id="errorInfoLabel" alignment="CENTER" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="200.0" />
       <Label fx:id="usernameError" layoutX="340.0" layoutY="261.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.bottomAnchor="322.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="261.0" />
       <Label fx:id="passwordError" layoutX="340.0" layoutY="325.0" prefHeight="17.0" prefWidth="220.0" textFill="RED" AnchorPane.leftAnchor="340.0" />

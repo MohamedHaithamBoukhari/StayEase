@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.manager.HomePageController">
+    <children>
+        <ImageView fitHeight="567.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+            <image>
+                <Image url="@../../../images/hotel.jpg" />
+            </image>
+        </ImageView>
+      <Label fx:id="homeLabel" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="42.0" text="Manager Dashboard" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="fullnameLabel" alignment="CENTER" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="280.0" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" />
+      <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/user.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="logoutLink" focusTraversable="false" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
+      <Button fx:id="logoutBtn" layoutX="870.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" prefHeight="18.0" prefWidth="25.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
+         <graphic>
+            <ImageView fx:id="logoutBtn1" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <AnchorPane fx:id="sideBar" prefHeight="568.0" prefWidth="163.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="735.0" AnchorPane.topAnchor="32.0" />
+      <Button fx:id="homeBtn" layoutX="2.0" layoutY="39.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Home" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="40.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/homeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="roomsBtn" layoutX="2.0" layoutY="160.0" mnemonicParsing="false" onAction="#switchToRoomsDetail" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Rooms detail" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="100.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/roomIcon.png" />
+               </image></ImageView>
+         </graphic></Button>
+      <Button fx:id="reservationBtn" layoutX="2.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchToReservation" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Reservations" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="160.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/reservationIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="cleaningBtn" layoutX="2.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchToCleaning" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="room cleaning" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="220.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/cleaningIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="maintenanceBtn" layoutX="2.0" layoutY="220.0" mnemonicParsing="false" onAction="#switchToMaintenance" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="room maintenance" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="280.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/maintenanceIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="invoiceBtn" layoutX="2.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToInvoices" prefHeight="50.0" prefWidth="156.0" text="Invoices" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="340.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/invoiceIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="complaintBtn" layoutX="2.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToComplaint" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Complaints" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="400.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/complaintIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="32.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="768.0">
+         <image>
+            <Image url="@../../../images/hotelIcon.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="pageTitle" layoutX="495.0" layoutY="49.0" text="Invoices" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="49.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Label>
+        <Label fx:id="updatedMsg" alignment="CENTER" layoutX="443.0" layoutY="77.0" prefHeight="30.0" prefWidth="185.0" text="Status updated successfully" AnchorPane.rightAnchor="272.0" />
+        <AnchorPane fx:id="filters" layoutX="217.0" layoutY="113.0" prefHeight="55.0" prefWidth="618.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="113.0">
+            <children>
+                <CheckBox fx:id="Paid" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterInvoices" text="Paid" textFill="WHITE" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="Unpaid" layoutX="96.0" layoutY="7.0" mnemonicParsing="false" onAction="#filterInvoices" text="Unpaid" textFill="WHITE" AnchorPane.leftAnchor="96.0" AnchorPane.topAnchor="7.0" />
+                <CheckBox fx:id="Cancelled" layoutX="12.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterInvoices" text="Cancelled" textFill="WHITE" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="30.0" />
+            <AnchorPane layoutX="173.0" layoutY="8.0" opacity="0.22" prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="173.0" AnchorPane.topAnchor="8.0" />
+                <Label layoutX="193.0" layoutY="32.0" text="Customer Fullname" textFill="WHITE" AnchorPane.leftAnchor="193.0" AnchorPane.topAnchor="32.0" />
+                <Label layoutX="193.0" layoutY="7.0" text="Customer CIN" textFill="WHITE" AnchorPane.leftAnchor="193.0" AnchorPane.topAnchor="7.0" />
+                <AnchorPane layoutX="431.0" layoutY="8.0" opacity="0.22" prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="431.0" AnchorPane.topAnchor="8.0" />
+                <TextField fx:id="cinField" layoutX="300.0" layoutY="3.0" onAction="#filterInvoices" prefHeight="21.0" prefWidth="111.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="fullnameField" layoutX="300.0" layoutY="28.0" onAction="#filterInvoices" prefHeight="21.0" prefWidth="111.0" AnchorPane.leftAnchor="300.0">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </TextField>
+            <Label layoutX="468.0" layoutY="3.0" text="Invoice Date" textFill="WHITE" />
+            <DatePicker fx:id="invoiceDate" layoutX="467.0" layoutY="20.0" onAction="#filterInvoices" prefHeight="18.0" prefWidth="127.0" />
+            </children>
+        </AnchorPane>
+        <TableView fx:id="invoicesTable" layoutX="217.0" layoutY="173.0" prefHeight="352.0" prefWidth="624.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="173.0">
+            <columns>
+                <TableColumn fx:id="id_Col" prefWidth="37.0" text="#" />
+                <TableColumn fx:id="invoiceIdCol" prefWidth="58.0" text="InvoiceId" />
+            <TableColumn fx:id="invoiceDateCol" prefWidth="97.0" text="Invoice Date" />
+                <TableColumn fx:id="fullnameCol" prefWidth="156.0" text="Customer FullName" />
+                <TableColumn fx:id="cinCol" prefWidth="102.0" text="Customer CIN" />
+                <TableColumn fx:id="amountCol" prefWidth="95.0" text="Amount" />
+                <TableColumn fx:id="status_Col" prefWidth="78.0" text="Status" />
+            </columns>
+        </TableView>
+        <Label fx:id="noRowsMsg" layoutX="398.0" layoutY="303.0" prefHeight="30.0" prefWidth="293.0" text="No invoice match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="398.0" AnchorPane.topAnchor="330.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="rowSelectedError" layoutX="219.0" layoutY="542.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="219.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/errorIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+      <Label fx:id="confirmPayMsg" layoutX="219.0" layoutY="539.0" prefHeight="30.0" prefWidth="407.0" text="Are you sure you want change invoice status to paid?">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/errorIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label fx:id="changeStatusError" layoutX="221.0" layoutY="539.0" prefHeight="30.0" prefWidth="249.0" text="You can not change invoice status" textFill="#ff9900" />
+        <Button fx:id="payBtn" layoutX="764.0" layoutY="539.0" mnemonicParsing="false" onAction="#displayConfirmation" prefHeight="30.0" prefWidth="66.0" text="Pay" AnchorPane.bottomAnchor="31.0" />
+      <Button fx:id="confirmPayBtn" layoutX="697.0" layoutY="538.0" mnemonicParsing="false" onAction="#payInvoice" prefHeight="30.0" prefWidth="60.0" text="Yes" />
+      <Button fx:id="hideConfirmPayBtn" layoutX="769.0" layoutY="539.0" mnemonicParsing="false" onAction="#hideConfirmation" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
+    </children>
+    <stylesheets>
+        <URL value="@../../../css/HomePage.css" />
+        <URL value="@../../../css/tableView.css" />
+        <URL value="@../../../css/manager/invoices.css" />
+    </stylesheets>
+</AnchorPane>

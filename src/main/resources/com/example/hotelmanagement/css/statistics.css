@@ -14,3 +14,10 @@
     -fx-border-radius:10;
     -fx-padding:10px 10px 50px 10px;
 }
+
+.default-color0.chart-pie{
+    -fx-pie-color:#137390;
+}
+.default-color1.chart-pie{
+    -fx-pie-color:#76bec9;
+}

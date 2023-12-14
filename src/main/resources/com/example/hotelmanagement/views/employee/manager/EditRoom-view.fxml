@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.RoomActionsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.manager.RoomActionsController">
     <children>
         <ImageView fitHeight="600.0" fitWidth="915.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.83966064453125" AnchorPane.topAnchor="4.0">
             <image>
-                <Image url="@../../images/hotel.jpg" />
+                <Image url="@../../../images/hotel.jpg" />
             </image>
         </ImageView>
         <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="70.0" />
@@ -60,7 +60,7 @@
       <Label fx:id="roomCapacityError" layoutX="500.0" layoutY="255.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="255.0" />
     </children>
     <stylesheets>
-        <URL value="@../../css/general.css" />
-        <URL value="@../../css/manager/RoomActions.css" />
+        <URL value="@../../../css/general.css" />
+        <URL value="@../../../css/manager/RoomActions.css" />
     </stylesheets>
 </AnchorPane>

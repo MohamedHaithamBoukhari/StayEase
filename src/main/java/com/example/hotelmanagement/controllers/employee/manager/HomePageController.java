@@ -1,14 +1,12 @@
-package com.example.hotelmanagement.controllers.manager;
+package com.example.hotelmanagement.controllers.employee.manager;
 
 import com.example.hotelmanagement.HelloApplication;
-import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Employee;
-import com.example.hotelmanagement.beans.Room;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
-import com.example.hotelmanagement.localStorage.ManagerManager;
+import com.example.hotelmanagement.localStorage.EmployeeManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
 import com.example.hotelmanagement.tablesView.InvoicesTableView;
@@ -25,14 +23,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
@@ -75,7 +71,7 @@ public class HomePageController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         String currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
-        Employee manager = ManagerManager.getInstance().getManager();
+        Employee manager = EmployeeManager.getInstance().getEmployee();
 
         fullnameLabel.setText("- " + manager.getFullName() + " -");
 
@@ -144,7 +140,7 @@ public class HomePageController implements Initializable{
 //------------------------------------------------------------------------------------------
     public void switchToHome(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/HomePage-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/HomePage-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -153,7 +149,7 @@ public class HomePageController implements Initializable{
     }
     public void switchToRoomsDetail(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("RoomsDetail");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/RoomsDetail-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/RoomsDetail-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -162,7 +158,7 @@ public class HomePageController implements Initializable{
     }
     public void switchToReservation(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Reservation");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/Reservation-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/Reservation-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -171,7 +167,7 @@ public class HomePageController implements Initializable{
     }
     public void switchToCleaning(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Cleaning");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/Cleaning-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/Cleaning-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -180,7 +176,7 @@ public class HomePageController implements Initializable{
     }
     public void switchToMaintenance(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Maintenance");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/Maintenance-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/Maintenance-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -189,7 +185,7 @@ public class HomePageController implements Initializable{
     }
     public void switchToInvoices(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Invoices");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/Invoices-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/Invoices-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -198,12 +194,13 @@ public class HomePageController implements Initializable{
     }
     public void switchToComplaint(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Complaint");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/Complaint-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/Complaint-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();}
+        stage.show();
+    }
 //----------------------------------- room details fcts--------------------------------------------
     public void loadDataOnTable(List<String> statusList, String price, String capacity){
         noRowsMsg.setVisible(false);
@@ -796,7 +793,7 @@ public class HomePageController implements Initializable{
         timeline.play();
     }
     public void logout(ActionEvent event){
-        ManagerManager.getInstance().setManager(new Employee("","","","","","",0,"",""));
+        EmployeeManager.getInstance().setManager(new Employee("","","","","","",0,"",""));
         HelloApplication.stage.close();
     }
 

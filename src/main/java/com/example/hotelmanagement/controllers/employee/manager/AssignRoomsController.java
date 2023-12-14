@@ -1,10 +1,9 @@
-package com.example.hotelmanagement.controllers.manager;
+package com.example.hotelmanagement.controllers.employee.manager;
 
 import com.example.hotelmanagement.beans.Task;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.VarsManager;
-import com.example.hotelmanagement.tablesView.EmployeesTableView;
 import com.example.hotelmanagement.tablesView.TasksTableView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;

@@ -1,15 +1,11 @@
-package com.example.hotelmanagement.controllers.manager;
+package com.example.hotelmanagement.controllers.employee;
 
 import com.example.hotelmanagement.HelloApplication;
-import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.dao.EmployeeDao;
-import com.example.hotelmanagement.localStorage.AdminManager;
-import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.config.Validation;
-import com.example.hotelmanagement.dao.CustomerDao;
-import com.example.hotelmanagement.localStorage.ManagerManager;
+import com.example.hotelmanagement.localStorage.EmployeeManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,12 +64,11 @@ public class LoginController {
             Map<String, Object> map = new HashMap<>();
             map.put("email", username);
             map.put("password", password);
-            map.put("position", "manager");
 
             List<Object> employees = EmployeeDao.select(map, "*");
             if(employees.size() == 1){
                 Employee employee= (Employee) employees.get(0);
-                ManagerManager.getInstance().setManager(employee);
+                EmployeeManager.getInstance().setManager(employee);
 
                 switchToHomePage(event);
             }else {
@@ -84,7 +79,17 @@ public class LoginController {
     }
     public void switchToHomePage(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/HomePage-view.fxml"));
+        String empPosition = EmployeeManager.getInstance().getEmployee().getPosition();
+        FXMLLoader loader;
+        if (empPosition.equals("Manager")){
+            loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/HomePage-view.fxml"));
+        }else if (empPosition.equals("Maintenance Staff")){
+            loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/maintenanceStaff/HomePage-view.fxml"));
+        } else if (empPosition.equals("Cleaner")) {
+            loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/cleaner/HomePage-view.fxml"));
+        }else {
+            loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/otherPosition/HomePage-view.fxml"));
+        }
         root = loader.load();
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
