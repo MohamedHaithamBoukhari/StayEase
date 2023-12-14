@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.manager.HomePageController">
     <children>
@@ -98,8 +99,145 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="452.0" layoutY="69.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="452.0" AnchorPane.rightAnchor="278.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font></Label>
+        <Label fx:id="stat1" alignment="CENTER" layoutX="221.0" layoutY="135.0" prefHeight="94.0" prefWidth="195.0" text="Maintenance Staff" textFill="#00ffed" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="484.0" AnchorPane.topAnchor="135.0" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="275.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="182.0">
+            <image>
+                <Image url="@../../images/maintenanceStaffIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="maintenanceStaffNbr" contentDisplay="CENTER" layoutX="327.0" layoutY="185.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="497.0">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <Label fx:id="stat2" alignment="CENTER" layoutX="221.0" layoutY="245.0" prefHeight="94.0" prefWidth="195.0" text="Cleaners" textFill="#00ffed" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="245.0" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="275.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="275.0">
+            <image>
+                <Image url="@../../images/cleanerIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="cleanersNbr" contentDisplay="CENTER" layoutX="327.0" layoutY="295.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <Label fx:id="stat3" alignment="CENTER" layoutX="221.0" layoutY="355.0" prefHeight="94.0" prefWidth="195.0" text="Customers" textFill="#00ffed" AnchorPane.leftAnchor="221.0" />
+        <Label fx:id="stat4" alignment="CENTER" layoutX="221.0" layoutY="463.0" prefHeight="94.0" prefWidth="195.0" text="Reservations" textFill="#00ffed" AnchorPane.leftAnchor="221.0" />
+        <Label fx:id="stat9" alignment="CENTER" layoutX="670.0" layoutY="137.0" prefHeight="94.0" prefWidth="195.0" text="Rooms" textFill="#00ffed" AnchorPane.topAnchor="137.0" />
+        <Label fx:id="stat10" alignment="CENTER" layoutX="670.0" layoutY="247.0" prefHeight="94.0" prefWidth="195.0" text="Occupied Rooms" textFill="#00ffed" AnchorPane.topAnchor="247.0" />
+        <Label fx:id="stat11" alignment="CENTER" layoutX="670.0" layoutY="357.0" prefHeight="94.0" prefWidth="195.0" text="Rooms Needs Maintenance" textFill="#00ffed" />
+        <Label fx:id="stat12" alignment="CENTER" layoutX="670.0" layoutY="465.0" prefHeight="94.0" prefWidth="195.0" text="Rooms Needs Cleaning" textFill="#00ffed" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="276.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/customersIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="customersNbr" contentDisplay="CENTER" layoutX="328.0" layoutY="401.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="276.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/reservationIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="reservationsNbr" contentDisplay="CENTER" layoutX="328.0" layoutY="511.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="724.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/roomIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="roomsNbr" contentDisplay="CENTER" layoutX="776.0" layoutY="187.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="724.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/roomIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="occupiedRoomNbr" contentDisplay="CENTER" layoutX="777.0" layoutY="297.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="725.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/maintenanceIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="roomNeedsMaintenanceNbr" contentDisplay="CENTER" layoutX="777.0" layoutY="403.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="725.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/cleaningIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="roomNeedsCleaningNbr" contentDisplay="CENTER" layoutX="777.0" layoutY="513.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+      <Label fx:id="stat5" alignment="CENTER" layoutX="438.0" layoutY="134.0" prefHeight="94.0" prefWidth="195.0" text="Complaints" textFill="#00ffed" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="492.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/complaintIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="complaintsNbr" contentDisplay="CENTER" layoutX="544.0" layoutY="184.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="stat6" alignment="CENTER" layoutX="438.0" layoutY="244.0" prefHeight="94.0" prefWidth="195.0" text="Tasks" textFill="#00ffed" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="492.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/tasksIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="tasksNbr" contentDisplay="CENTER" layoutX="544.0" layoutY="294.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="stat7" alignment="CENTER" layoutX="438.0" layoutY="354.0" prefHeight="94.0" prefWidth="195.0" text="Completed Tasks" textFill="#00ffed" />
+      <Label fx:id="stat8" alignment="CENTER" layoutX="438.0" layoutY="462.0" prefHeight="94.0" prefWidth="195.0" text="Tasks On Hold" textFill="#00ffed" />
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="493.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/completedTaskIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="completedTasksNbr" contentDisplay="CENTER" layoutX="545.0" layoutY="400.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="493.0" layoutY="507.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/incompletedTasksIcon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="onHoldTasksNbr" contentDisplay="CENTER" layoutX="545.0" layoutY="510.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/statistics.css" />
     </stylesheets>
 </AnchorPane>

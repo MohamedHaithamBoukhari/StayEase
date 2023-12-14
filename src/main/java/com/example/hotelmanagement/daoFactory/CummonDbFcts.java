@@ -57,7 +57,7 @@ public class CummonDbFcts<T> {
             connection = DaoFactory.getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT " + selectedCols +" FROM " + tableName + " WHERE " + whereClause);
-            System.out.println("SELECT * FROM " + tableName + " WHERE " + whereClause);
+            System.out.println("SELECT "+ selectedCols + " FROM " + tableName + " WHERE " + whereClause);
             while (resultSet.next()) {
                 Object obj = objectClass.getDeclaredConstructor().newInstance();
 

@@ -3,9 +3,11 @@ package com.example.hotelmanagement.beans;
 public class Position {
     private int positionId;
     private String empPosition;
+    private String description;
     public Position(){}
-    public Position(String empPosition) {
+    public Position(String empPosition, String description) {
         this.empPosition = empPosition;
+        this.description = description;
     }
 
     public int getPositionId() {
@@ -22,5 +24,13 @@ public class Position {
 
     public void setEmpPosition(String empPosition) {
         this.empPosition = empPosition;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

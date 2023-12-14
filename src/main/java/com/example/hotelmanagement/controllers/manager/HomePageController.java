@@ -35,15 +35,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HomePageController implements Initializable{
     private Stage stage;
     public static Stage childStage;
     private Scene scene;
     private Parent root;
+    @FXML private Label maintenanceStaffNbr,cleanersNbr,customersNbr, reservationsNbr, complaintsNbr,tasksNbr, completedTasksNbr, onHoldTasksNbr, roomsNbr, occupiedRoomNbr, roomTYpesNbr, roomNeedsMaintenanceNbr, roomNeedsCleaningNbr;
     @FXML public Label roomAddedMsg, roomUpdatedMsg, roomDeletedMsg;
     @FXML public Label addedMsg, updatedMsg, deletedMsg;
     @FXML private Label fullnameLabel;
@@ -81,7 +80,32 @@ public class HomePageController implements Initializable{
         fullnameLabel.setText("- " + manager.getFullName() + " -");
 
         if(currentPage.equals("Home")){
-
+            Map map1 = new HashMap<>();
+            map1.put("position", "Maintenance Staff");
+            maintenanceStaffNbr.setText(String.valueOf(EmployeeDao.select(map1, "*").size()));
+            Map map2 = new HashMap<>();
+            map2.put("position", "Cleaner");
+            cleanersNbr.setText(String.valueOf(EmployeeDao.select(map2, "*").size()));
+            customersNbr.setText(String.valueOf(CummonDbFcts.countRows(CustomerDao.TABLE_NAME)));
+            reservationsNbr.setText(String.valueOf(CummonDbFcts.countRows(ReservationDao.TABLE_NAME)));
+            complaintsNbr.setText(String.valueOf(CummonDbFcts.countRows(DeclarationDao.TABLE_NAME)));
+            tasksNbr.setText(String.valueOf(CummonDbFcts.countRows(TaskDao.TABLE_NAME)));
+            Map map3 = new HashMap<>();
+            map3.put("status", "Completed");
+            completedTasksNbr.setText(String.valueOf(TaskDao.select(map3, "*").size()));
+            Map map4 = new HashMap<>();
+            map4.put("status", "On Hold");
+            onHoldTasksNbr.setText(String.valueOf(TaskDao.select(map4, "*").size()));
+            roomsNbr.setText(String.valueOf(CummonDbFcts.countRows(RoomDao.TABLE_NAME)));
+            Map map5 = new HashMap<>();
+            map5.put("status", "Occupied");
+            occupiedRoomNbr.setText(String.valueOf((RoomDao.select(map5,"*")).size()));
+            Map map6 = new HashMap<>();
+            map6.put("status", "Needs Maintenance");
+            roomNeedsMaintenanceNbr.setText(String.valueOf((RoomDao.select(map6,"*")).size()));
+            Map map7 = new HashMap<>();
+            map7.put("status", "Needs Cleaning");
+            roomNeedsCleaningNbr.setText(String.valueOf((RoomDao.select(map7,"*")).size()));
         } else if (currentPage.equals("RoomsDetail")) {
             roomAddedMsg.setVisible(false);
             roomUpdatedMsg.setVisible(false);
@@ -511,7 +535,7 @@ public class HomePageController implements Initializable{
         VarsManager.selectedRoomId = (int) cleaningTable.getSelectionModel().getSelectedItem().getRoomId();
         VarsManager.actionStarted ="assignCleaningTask";
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignMaintenanceRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignRooms-view.fxml"));
         Parent root = loader.load();
 
         scene = new Scene(root);
@@ -531,6 +555,7 @@ public class HomePageController implements Initializable{
         if(VarsManager.actionCompleted.equals("assignCleaningTask")){
             addedMsg.setVisible(true);
             hideMsg(addedMsg,4);
+            VarsManager.actionCompleted = "";
         }
         loadDataOnCleaningTable(new ArrayList<>(), "", "");
     }
@@ -618,7 +643,7 @@ public class HomePageController implements Initializable{
         VarsManager.selectedRoomId = (int) maintenanceTable.getSelectionModel().getSelectedItem().getRoomId();
         VarsManager.actionStarted ="assignMaintenanceTask";
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignMaintenanceRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignRooms-view.fxml"));
         Parent root = loader.load();
 
         scene = new Scene(root);
@@ -638,8 +663,9 @@ public class HomePageController implements Initializable{
         if(VarsManager.actionCompleted.equals("assignMaintenanceTask")){
             addedMsg.setVisible(true);
             hideMsg(addedMsg,4);
+            VarsManager.actionCompleted = "";
         }
-        loadDataOnTable(new ArrayList<>(), "", "");
+        loadDataOnMaintenanceTable(new ArrayList<>(), "", "");
     }
 //--------------------------------------Invoices -----------------------------------------
     public void loadDataOnInvoicesTable(List<String> statusList, String cin, String fullname, LocalDate invDate){

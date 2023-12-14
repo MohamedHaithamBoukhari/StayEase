@@ -463,24 +463,24 @@ public class HomePageController implements Initializable{
         }
     }
     public void filterFeedbacks(ActionEvent event){
-        String rateOrder = "";
-        boolean visible = false;
-        boolean invisible = false;
-        LocalDate fbDate = feedbackDate.getValue();
-        String fullname = fullname_Field.getText();
+            String rateOrder = "";
+            boolean visible = false;
+            boolean invisible = false;
+            LocalDate fbDate = feedbackDate.getValue();
+            String fullname = fullname_Field.getText();
 
-        if(Visible.isSelected()) visible = true ;
-        if(Invisible.isSelected()) invisible = true ;
+            if(Visible.isSelected()) visible = true ;
+            if(Invisible.isSelected()) invisible = true ;
 
-        if(RateDesc.isSelected()) {
-            rateOrder = "DESC";
-            RateAsc.setSelected(false);
-        }
+            if(RateDesc.isSelected()) {
+                rateOrder = "DESC";
+                RateAsc.setSelected(false);
+            }
 
-        if(RateAsc.isSelected()) {
-            rateOrder = "ASC";
-            RateDesc.setSelected(false);
-        }
+            if(RateAsc.isSelected()) {
+                rateOrder = "ASC";
+                RateDesc.setSelected(false);
+            }
 
         loadDataOnFeedbackTable(visible, invisible, fullname, fbDate, rateOrder);
     }

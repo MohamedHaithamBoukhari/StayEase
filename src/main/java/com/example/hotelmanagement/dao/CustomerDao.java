@@ -1,6 +1,5 @@
 package com.example.hotelmanagement.dao;
 
-import com.example.hotelmanagement.beans.CleaningAssignment;
 import com.example.hotelmanagement.beans.Customer;
 import com.example.hotelmanagement.beans.RoomType;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;

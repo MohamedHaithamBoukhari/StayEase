@@ -1,0 +1,41 @@
+#back_Btn{
+    -fx-padding: 0;
+    -fx-background-color: grey;
+    -fx-font-size: 15;
+}
+#assignBtn{
+    -fx-padding: 0;
+    -fx-background-color: green;
+    -fx-font-size: 15;
+}
+#confirmAssigningBtn{
+    -fx-padding: 0;
+    -fx-background-color: green;
+    -fx-font-size: 15;
+}
+#cancelAssigningBtn{
+    -fx-padding: 0;
+    -fx-background-color: red;
+    -fx-font-size: 15;
+}
+#maintenanceAssignError{
+    -fx-font-size: 15;
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+    -fx-border-radius:9;
+    -fx-padding: 1px 2px 1px 2px;
+    -fx-border-color:yellow;
+}
+#cleaningAssignError{
+    -fx-font-size: 15;
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+    -fx-border-radius:9;
+    -fx-padding: 1px 2px 1px 2px;
+    -fx-border-color:yellow;
+}
+#confirmAssigningPane{
+    -fx-background-color: rgba(0,0,0,0.3);
+    -fx-background-radius: 10px;
+
+}

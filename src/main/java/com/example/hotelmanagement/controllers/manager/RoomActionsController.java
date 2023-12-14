@@ -1,11 +1,13 @@
 package com.example.hotelmanagement.controllers.manager;
 
 import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.beans.Position;
 import com.example.hotelmanagement.beans.Room;
 import com.example.hotelmanagement.beans.RoomType;
 import com.example.hotelmanagement.config.Validation;
 import com.example.hotelmanagement.controllers.customer.CustomerHomePageController;
 import com.example.hotelmanagement.dao.CustomerDao;
+import com.example.hotelmanagement.dao.PositionDao;
 import com.example.hotelmanagement.dao.RoomDao;
 import com.example.hotelmanagement.dao.RoomTypeDao;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
@@ -15,16 +17,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.*;
 
 public class RoomActionsController implements Initializable {
-    @FXML private Label roomNumberError = new Label(), roomCapacityError = new Label(), roomTypeError = new Label(), roomStatusError = new Label();
+    @FXML private Label roomNumberError = new Label(), roomCapacityError = new Label(), roomTypeError = new Label(), roomStatusError = new Label(), newRoomTypeError = new Label(), newPriceDayError = new Label();
     @FXML private Spinner<Integer> roomNumberSpinner_, roomCapacitySpinner_;
     @FXML private ComboBox<String> roomTypeComboBox_, roomStatusComboBox_;
     @FXML private Label roomIdLabel;
+    @FXML private AnchorPane newRoomTypePane;
+    @FXML private TextField newRoomTypeField_,newDescriptionField_, newPriceDayField_;
+    List<String> roomTypesList = new ArrayList<>();
+
     int roomNbr, capacity;
     String type, status;
     List<String> types = new ArrayList<>();
@@ -35,6 +42,9 @@ public class RoomActionsController implements Initializable {
         if (VarsManager.actionStarted.equals("delete")) {
             roomIdLabel.setText(String.valueOf(VarsManager.selectedRoomId));
         }else {
+            if (newRoomTypePane!=null){
+                newRoomTypePane.setVisible(false);
+            }
             List<Object> roomTypes = RoomTypeDao.selectAll();
             System.out.println(roomTypes);
             for (int i=0; i<roomTypes.size(); i++){
@@ -110,6 +120,54 @@ public class RoomActionsController implements Initializable {
             VarsManager.actionCompleted = "delete";
             closeStage(event);
         }
+    }
+    //--------------------------------------------------------------------
+    public void showNewRoomTypePaneBtn(ActionEvent event){
+        newRoomTypeField_.setText("");
+        newDescriptionField_.setText("");
+        newPriceDayField_.setText("");
+
+        newRoomTypePane.setVisible(true);
+    }
+    public void addRoomType(ActionEvent event){
+        String roomType = newRoomTypeField_.getText();
+        String description = newDescriptionField_.getText();
+        String priceDayString = newPriceDayField_.getText();
+        int priceDay = 0;
+        try {
+            priceDay = Integer.parseInt(priceDayString);
+            if(priceDay <= 0){
+                priceDay = 0;
+            }
+            newPriceDayError.setText("");
+        } catch (NumberFormatException e) {
+            newPriceDayError.setText("Invalid price");
+        }
+
+        if(roomType.isEmpty()){
+            newRoomTypeError.setText("Invalid room type");
+            return;
+        }else {
+            newRoomTypeError.setText("");
+        }
+        if(priceDay == 0){
+            return;
+        }
+        RoomType newRoomType = new RoomType(roomType,description,priceDay);
+        RoomTypeDao.insert(newRoomType);
+        hideRoomTypePane(event);
+
+        roomTypesList.clear();
+        List<Object> roomTypes = RoomTypeDao.selectAll();
+        for (int i=0; i<roomTypes.size(); i++){
+            RoomType rT = (RoomType) roomTypes.get(i);
+            roomTypesList.add(rT.getType());
+        }
+        roomStatusComboBox_.getItems().clear();
+        roomTypeComboBox_.getItems().addAll(roomTypesList);
+    }
+    public void hideRoomTypePane(ActionEvent event){
+        newRoomTypePane.setVisible(false);
     }
     //----------------- verification-------------------------------------
     public boolean verifyFields(ActionEvent event, int roomNbr, int capacity, String type, String status, String action){

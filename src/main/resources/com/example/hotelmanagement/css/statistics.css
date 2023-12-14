@@ -6,7 +6,7 @@
     -fx-border-radius:10;
     -fx-padding:10px;
 }
-#stat1, #stat2,#stat3, #stat4,#stat5, #stat6, #stat7, #stat8 {
+#stat1, #stat2,#stat3, #stat4,#stat5, #stat6, #stat7, #stat8,#stat9, #stat10, #stat11, #stat12 {
     -fx-font-size: 16;
     -fx-font-weight: bold;
     -fx-text-fill: #00ffed;

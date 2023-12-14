@@ -1,21 +1,20 @@
 package com.example.hotelmanagement.dao;
 
-import com.example.hotelmanagement.beans.CleaningTask;
-import com.example.hotelmanagement.beans.MaintenanceTask;
+import com.example.hotelmanagement.beans.Task;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 
 import java.util.List;
 import java.util.Map;
 
-public class CleaningTaskDao extends CummonDbFcts {
-    public static final String TABLE_NAME = "cleaningTasks";
-    public static final String[] TABLE_COLUMNS = {"cleaningId", "employeeId", "roomId", "status", "taskDate"};
+public class TaskDao extends CummonDbFcts {
+    public static final String TABLE_NAME = "task";
+    public static final String[] TABLE_COLUMNS = {"taskId", "employeeId", "roomId", "status", "taskDate", "taskType"};
     public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
-        List<Object> rows = superSelect(CleaningTask.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
+        List<Object> rows = superSelect(Task.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
 
-    public static void insert(CleaningTask task){
+    public static void insert(Task task){
         superInsert(task, TABLE_COLUMNS, TABLE_NAME);
     }
 
@@ -38,7 +37,7 @@ public class CleaningTaskDao extends CummonDbFcts {
 
 
     public static List<Object> selectAll() {
-        List<Object> rows = superSelectAll(CleaningTask.class, TABLE_NAME, TABLE_COLUMNS);
+        List<Object> rows = superSelectAll(Task.class, TABLE_NAME, TABLE_COLUMNS);
         return rows;
     }
 }

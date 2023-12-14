@@ -189,6 +189,6 @@
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
-        <URL value="@../../css/admin/earning.css" />
+        <URL value="@../../css/statistics.css" />
     </stylesheets>
 </AnchorPane>

@@ -20,44 +20,76 @@
         </ImageView>
         <AnchorPane fx:id="back" layoutX="331.0" layoutY="118.0" opacity="0.5" prefHeight="349.0" prefWidth="320.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="70.0" />
         <Label fx:id="title" alignment="CENTER" layoutX="365.0" layoutY="118.0" text="Add Room" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="365.0" />
-        <TextField fx:id="roomNumberField_" disable="true" layoutX="180.0" layoutY="215.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Number" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="215.0">
+        <TextField fx:id="roomNumberField_" disable="true" layoutX="190.0" layoutY="212.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Number" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="212.0">
             <font>
                 <Font size="17.0" />
             </font>
         </TextField>
-      <Spinner fx:id="roomNumberSpinner_" layoutX="307.0" layoutY="214.0" prefHeight="40.0" prefWidth="93.0" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="214.0" />
-        <Label fx:id="roomNumberError" layoutX="180.0" layoutY="255.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="255.0" />
-      <TextField fx:id="roomCapacityField_" disable="true" layoutX="500.0" layoutY="215.0" prefHeight="35.0" prefWidth="220.0" promptText="Capacity" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="215.0">
+      <Spinner fx:id="roomNumberSpinner_" layoutX="317.0" layoutY="211.0" prefHeight="40.0" prefWidth="93.0" AnchorPane.leftAnchor="317.0" AnchorPane.topAnchor="211.0" />
+        <Label fx:id="roomNumberError" layoutX="190.0" layoutY="252.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="252.0" />
+      <TextField fx:id="roomCapacityField_" disable="true" layoutX="490.0" layoutY="212.0" prefHeight="35.0" prefWidth="220.0" promptText="Capacity" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="212.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Spinner fx:id="roomCapacitySpinner_" layoutX="616.0" layoutY="214.0" prefHeight="40.0" prefWidth="104.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="214.0" />
-      <TextField fx:id="roomType_" disable="true" layoutX="180.0" layoutY="290.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Type" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="290.0">
+      <Spinner fx:id="roomCapacitySpinner_" layoutX="606.0" layoutY="211.0" prefHeight="40.0" prefWidth="104.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="211.0" />
+      <TextField fx:id="roomType_" disable="true" layoutX="490.0" layoutY="290.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Type" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="290.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="roomTypeComboBox_" layoutX="276.0" layoutY="289.0" prefHeight="40.0" prefWidth="124.0" AnchorPane.leftAnchor="276.0" AnchorPane.topAnchor="289.0" />
-      <Label fx:id="roomTypeError" layoutX="180.0" layoutY="328.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="328.0" />
-      <TextField fx:id="roomStatusField_" disable="true" layoutX="500.0" layoutY="289.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Status" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="289.0">
+      <ComboBox fx:id="roomTypeComboBox_" layoutX="586.0" layoutY="289.0" prefHeight="40.0" prefWidth="124.0" AnchorPane.leftAnchor="586.0" AnchorPane.topAnchor="289.0" />
+      <Label fx:id="roomTypeError" layoutX="490.0" layoutY="328.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="328.0" />
+        <AnchorPane fx:id="newRoomTypePane" layoutX="724.0" layoutY="315.0" prefHeight="205.0" prefWidth="148.0" AnchorPane.leftAnchor="724.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="315.0">
+            <children>
+                <TextField fx:id="newRoomTypeField_" layoutX="5.0" layoutY="5.0" prefHeight="40.0" prefWidth="163.0" promptText="New Room Type" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+                <Label fx:id="newRoomTypeError" layoutX="5.0" layoutY="43.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="43.0" />
+                <Button fx:id="addRoomTypePaneBtn" layoutX="5.0" layoutY="168.0" mnemonicParsing="false" onAction="#addRoomType" prefHeight="28.0" prefWidth="60.0" text="Add" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="168.0" />
+                <Button fx:id="hideRoomTypeBtn" layoutX="73.0" layoutY="168.0" mnemonicParsing="false" onAction="#hideRoomTypePane" prefHeight="28.0" prefWidth="60.0" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="168.0" />
+            <TextField fx:id="newPriceDayField_" layoutX="5.0" layoutY="59.0" prefHeight="40.0" prefWidth="163.0" promptText="Price_Day" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label fx:id="newPriceDayError" layoutX="5.0" layoutY="97.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+            <TextField fx:id="newDescriptionField_" layoutX="5.0" layoutY="114.0" prefHeight="40.0" prefWidth="163.0" promptText="Description" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            </children>
+        </AnchorPane>
+        <Button fx:id="addRoomTypeBtn" layoutX="710.0" layoutY="300.0" mnemonicParsing="false" onAction="#showNewRoomTypePaneBtn" AnchorPane.leftAnchor="710.0" AnchorPane.topAnchor="300.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/addIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <TextField fx:id="roomStatusField_" disable="true" layoutX="191.0" layoutY="290.0" prefHeight="35.0" prefWidth="220.0" promptText="Room Status" AnchorPane.rightAnchor="489.0" AnchorPane.topAnchor="290.0">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="roomStatusComboBox_" layoutX="605.0" layoutY="289.0" prefHeight="40.0" prefWidth="115.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="289.0" />
-      <Label fx:id="roomStatusError" layoutX="500.0" layoutY="328.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="328.0" />
-        <Button fx:id="addBtn" layoutX="340.0" layoutY="420.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="38.0" prefWidth="86.0" text="Add">
+      <ComboBox fx:id="roomStatusComboBox_" layoutX="296.0" layoutY="290.0" prefHeight="40.0" prefWidth="115.0" AnchorPane.rightAnchor="489.0" AnchorPane.topAnchor="290.0" />
+      <Label fx:id="roomStatusError" layoutX="191.0" layoutY="329.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="489.0" AnchorPane.topAnchor="329.0" />
+        <Button fx:id="addBtn" layoutX="340.0" layoutY="446.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="38.0" prefWidth="86.0" text="Add">
             <font>
                 <Font size="17.0" />
             </font>
         </Button>
-        <Button fx:id="backBtn" layoutX="480.0" layoutY="420.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="80.0" text="Close" textFill="WHITE">
+        <Button fx:id="backBtn" layoutX="480.0" layoutY="446.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="80.0" text="Close" textFill="WHITE">
             <font>
                 <Font size="17.0" />
             </font>
         </Button>
-      <Label fx:id="roomCapacityError" layoutX="500.0" layoutY="255.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="255.0" />
+      <Label fx:id="roomCapacityError" layoutX="490.0" layoutY="252.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="252.0" />
     </children>
     <stylesheets>
         <URL value="@../../css/general.css" />

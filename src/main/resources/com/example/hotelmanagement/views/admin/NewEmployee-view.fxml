@@ -56,7 +56,7 @@
         </TextField>
         <ComboBox fx:id="positionComboBox_" layoutX="596.0" layoutY="148.0" prefHeight="40.0" prefWidth="124.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="148.0" />
       <Label fx:id="positionError" layoutX="230.0" layoutY="334.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="190.0" />
-      <AnchorPane fx:id="newPositionPane" layoutX="720.0" layoutY="190.0" prefHeight="90.0" prefWidth="140.0" AnchorPane.leftAnchor="737.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="175.0">
+      <AnchorPane fx:id="newPositionPane" layoutX="720.0" layoutY="190.0" prefHeight="157.0" prefWidth="138.0" AnchorPane.leftAnchor="737.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="175.0">
          <children>
             <TextField fx:id="newPositionField_" layoutX="2.0" layoutY="3.0" prefHeight="40.0" prefWidth="163.0" promptText="New Position" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="-2.0">
                <font>
@@ -64,8 +64,13 @@
                </font>
             </TextField>
             <Label fx:id="newpositionError" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="36.0" />
-            <Button fx:id="addPositionPaneBtn" layoutX="5.0" layoutY="71.0" mnemonicParsing="false" onAction="#addPosition" prefHeight="28.0" prefWidth="60.0" text="Add" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="55.0" />
-            <Button fx:id="hidePositionBtn" layoutX="110.0" layoutY="71.0" mnemonicParsing="false" onAction="#hidePositionPane" prefHeight="28.0" prefWidth="60.0" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0" />
+            <Button fx:id="addPositionPaneBtn" layoutX="5.0" layoutY="113.0" mnemonicParsing="false" onAction="#addPosition" prefHeight="28.0" prefWidth="60.0" text="Add" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="113.0" />
+            <Button fx:id="hidePositionBtn" layoutX="73.0" layoutY="113.0" mnemonicParsing="false" onAction="#hidePositionPane" prefHeight="28.0" prefWidth="60.0" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="113.0" />
+            <TextField fx:id="newDescriptionField_" layoutX="5.0" layoutY="58.0" prefHeight="40.0" prefWidth="163.0" promptText="Description" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
       <Button fx:id="addPositionBtn" layoutX="730.0" layoutY="161.0" mnemonicParsing="false" onAction="#showNewPositionPaneBtn" AnchorPane.leftAnchor="723.0" AnchorPane.topAnchor="160.0">

@@ -29,7 +29,7 @@ public class EmployeeActionsController implements Initializable {
     @FXML private Label empIdLabel;
     @FXML private ComboBox<String> positionComboBox_;
     @FXML private AnchorPane newPositionPane;
-    @FXML private TextField newPositionField_;
+    @FXML private TextField newPositionField_,newDescriptionField_;
     List<String> positionsList = new ArrayList<>();
 
 
@@ -121,17 +121,22 @@ public class EmployeeActionsController implements Initializable {
     }
 
     public void showNewPositionPaneBtn(ActionEvent event){
+        newPositionField_.setText("");
+        newDescriptionField_.setText("");
+
         newPositionPane.setVisible(true);
     }
     public void addPosition(ActionEvent event){
         String position = newPositionField_.getText();
+        String description = newDescriptionField_.getText();
+        System.out.println("descfiption = " + description);
         if(position.isEmpty()){
             newpositionError.setText("Invalid Position");
             return;
         }else {
             newpositionError.setText("");
         }
-        Position newPosition = new Position(position);
+        Position newPosition = new Position(position,description);
         PositionDao.insert(newPosition);
         hidePositionPane(event);
 
@@ -141,7 +146,7 @@ public class EmployeeActionsController implements Initializable {
             Position pos = (Position) positions.get(i);
             positionsList.add(pos.getEmpPosition());
         }
-
+        positionComboBox_.getItems().clear();
         positionComboBox_.getItems().addAll(positionsList);
     }
     public void hidePositionPane(ActionEvent event){
