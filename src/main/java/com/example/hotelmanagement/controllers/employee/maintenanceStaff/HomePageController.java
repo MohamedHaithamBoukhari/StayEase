@@ -103,7 +103,7 @@ public class HomePageController implements Initializable {
             rowSelectedError.setVisible(false);
             statusUpdatedMsg.setVisible(false);
             confirmActionPane.setVisible(false);
-//            loadDataOnTaskTable(new ArrayList<>(), "", "");
+            loadDataOnTaskTable(new ArrayList<>(), "", "");
         }else if (currentPage.equals("Complaint")) {
 
         }
@@ -120,7 +120,7 @@ public class HomePageController implements Initializable {
     }
     public void switchToCleaning(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Maintenance");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/maintenanceStaff/Cleaning-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/maintenanceStaff/Maintenance-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -137,157 +137,158 @@ public class HomePageController implements Initializable {
         stage.show();
     }
     //-------------------------------------Cleaning Tasks----------------------------------------------
-//    public void loadDataOnTaskTable(List<String> statusList, String  taskDateOrder, String taskDate){
-//        noRowsMsg.setVisible(false);
-//        List<TaskTableView> tasksList = new ArrayList<>();
-//        tasksTable.getItems().clear();
-//        TaskTableView.setNBR(1);
-//
-//        List<String> colToSelect =  new ArrayList<String>(List.of("t.taskId", "t.status","t.taskDate", "t.roomId"));
-//
-//        if(statusList.isEmpty() && taskDateOrder.isEmpty() && taskDate.isEmpty()){
-//            String whereClause = " WHERE e.employeeId = " + EmployeeManager.getInstance().getEmployee().getEmployeeId();
-//            List<Object[]> tasksDetails = CummonDbFcts.performJoinAndSelect(TaskDao.TABLE_NAME, "t", EmployeeDao.TABLE_NAME,"e","employeeId","employeeId", colToSelect, whereClause);
-//            for (Object[] row : tasksDetails) {
-//                TaskTableView taskRow = new TaskTableView(row[0],row[1],row[2],row[3]);
-//                System.out.println(taskRow);
-//                tasksList.add(taskRow);
-//            }
-//        }else{
-//            String col1 = "t.status", col2 = "t.taskDate";
-//            String whereClause= " WHERE e.employeeId = " + EmployeeManager.getInstance().getEmployee().getEmployeeId()+" AND ";
-//            if(!statusList.isEmpty()){
-//                whereClause += "(";
-//                for (String job: statusList){
-//                    whereClause =whereClause  + col1 + " = '" + job + "' OR ";
-//                }
-//                whereClause = whereClause .substring(0,whereClause .length() - 4); //delete last " OR "
-//                whereClause += ") AND ";
-//            }
-//            if(!taskDate.isEmpty()){
-//                whereClause += "("+ col2 + " LIKE '%" + taskDate + "%') AND ";
-//            }
-//
-//            if(!taskDateOrder.equals("")){
-//                whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-//                whereClause = whereClause + " ORDER BY t.taskDate " + taskDateOrder + " AND ";
-//            }
-//            whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last "AND "
-//            System.out.println(whereClause);
-//
-//
-//            List<Object[]> tasksDetails = CummonDbFcts.performJoinAndSelect(TaskDao.TABLE_NAME, "t", EmployeeDao.TABLE_NAME,"e","employeeId","employeeId", colToSelect, whereClause);
-//            for (Object[] row : tasksDetails) {
-//                TaskTableView taskRow = new TaskTableView(row[0],row[1],row[2],row[3]);
-//                System.out.println(taskRow);
-//                tasksList.add(taskRow);
-//            }
-//        }
-//
-//        idCol.setCellValueFactory(new PropertyValueFactory<>("i"));
-//        taskDateCol.setCellValueFactory(new PropertyValueFactory<>("taskDate"));
-//        taskStatusCol.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
-//        roomNbrCol.setCellValueFactory(new PropertyValueFactory<>("roomNbr"));
-//        tasksTable.getItems().addAll(tasksList);
-//
-//        if(tasksList.isEmpty()){
-//            noRowsMsg.setVisible(true);
-//        }
-//
-//    }
-//    public void filterTasks(ActionEvent event){
-//        List<String> statusList = new ArrayList<>();
-//        String taskDateOrder = "";
-//
-//        if(OnHold.isSelected()) statusList.add("On Hold");
-//        if(InProgress.isSelected()) statusList.add("In Progress");
-//        if(Completed.isSelected()) statusList.add("Completed");
-//
-//        if(TaskDateDesc.isSelected()) {
-//            taskDateOrder = "DESC";
-//            TaskDateAsc.setSelected(false);
-//        }
-//        if(TaskDateAsc.isSelected()) {
-//            taskDateOrder = "ASC";
-//            TaskDateDesc.setSelected(false);
-//        }
-//
-//        LocalDate taskDate__ = taskDatePicker.getValue();
-//        String taskDate="";
-//        if (taskDate__ != null){
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust the pattern as needed
-//            taskDate = taskDate__.format(formatter);
-//        }
-//
-//        loadDataOnTaskTable(statusList, taskDateOrder, taskDate);
-//    }
-//    public void confirmAction(ActionEvent event){
-//        completedStatusError.setVisible(false);
-//        inProgressStatusError.setVisible(false);
-//
-//        int taskId = (int) (tasksTable.getSelectionModel().getSelectedItem().getTaskId());
-//        TaskDao.update("status",newTasKStatus,"taskId",taskId);
-//        if(newTasKStatus.equals("Completed")){//the room is available
-//        int roomId = (int) (tasksTable.getSelectionModel().getSelectedItem().getRoomId());
-//            RoomDao.update("status","Available","roomId",roomId);
-//        }
-//        newTasKStatus = "";
-//        confirmActionPane.setVisible(false);
-//        actionPane.setVisible(true);
-//
-//        statusUpdatedMsg.setVisible(true);
-//        hideMsg(statusUpdatedMsg,4);
-//
-//        loadDataOnTaskTable(new ArrayList<>(),"","");
-//    }
-//    public void displayConfirmCompletedActionPane(ActionEvent event){
-//        completedStatusError.setVisible(false);
-//        inProgressStatusError.setVisible(false);
-//        rowSelectedError.setVisible(false);
-//
-//        if(tasksTable.getSelectionModel().getSelectedItem() == null){
-//            rowSelectedError.setVisible(true);
-//            return;
-//        }
-//        if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("On Hold") ){
-//            completedStatusError.setVisible(true);
-//            return;
-//        }
-//        actionPane.setVisible(false);
-//        confirmActionPane.setVisible(true);
-//        confirmActionMsg.setText("Change task Status from In Progress to Completed for room " + tasksTable.getSelectionModel().getSelectedItem().getRoomNbr());
-//        newTasKStatus = "Completed";
-//    }
-//    public void displayConfirmInProgressActionPane(ActionEvent event){
-//        completedStatusError.setVisible(false);
-//        inProgressStatusError.setVisible(false);
-//        rowSelectedError.setVisible(false);
-//
-//        if(tasksTable.getSelectionModel().getSelectedItem() == null){
-//            rowSelectedError.setVisible(true);
-//            return;
-//        }
-//        if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("In Progress") ){
-//            inProgressStatusError.setVisible(true);
-//            return;
-//        }
-//
-//        actionPane.setVisible(false);
-//        confirmActionPane.setVisible(true);
-//        confirmActionMsg.setText("Change task Status from ON HIDE to In Progress for room " + tasksTable.getSelectionModel().getSelectedItem().getRoomNbr());
-//        newTasKStatus = "In Progress";
-//    }
-//    public void hideConfirmActionPane(ActionEvent event){
-//        confirmActionPane.setVisible(false);
-//        actionPane.setVisible(true);
-//    }
-//    //-----------------------------------------------------------------------------------
-//    public void hideMsg(Label msg, double time){
-//        Duration duration = Duration.seconds(time);
-//        Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
-//        timeline.setCycleCount(1);
-//        timeline.play();
-//    }
+    public void loadDataOnTaskTable(List<String> statusList, String  taskDateOrder, String taskDate){
+        noRowsMsg.setVisible(false);
+        List<TaskTableView> tasksList = new ArrayList<>();
+        tasksTable.getItems().clear();
+        TaskTableView.setNBR(1);
+
+        List<String> colToSelect =  new ArrayList<String>(List.of("t.taskId", "t.status","t.taskDate", "t.roomId"));
+
+        if(statusList.isEmpty() && taskDateOrder.isEmpty() && taskDate.isEmpty()){
+            String whereClause = " WHERE e.employeeId = " + EmployeeManager.getInstance().getEmployee().getEmployeeId();
+            List<Object[]> tasksDetails = CummonDbFcts.performJoinAndSelect(TaskDao.TABLE_NAME, "t", EmployeeDao.TABLE_NAME,"e","employeeId","employeeId", colToSelect, whereClause);
+            for (Object[] row : tasksDetails) {
+                TaskTableView taskRow = new TaskTableView(row[0],row[1],row[2],row[3]);
+                System.out.println(taskRow);
+                tasksList.add(taskRow);
+            }
+        }else{
+            String col1 = "t.status", col2 = "t.taskDate";
+            String whereClause= " WHERE e.employeeId = " + EmployeeManager.getInstance().getEmployee().getEmployeeId()+" AND ";
+            if(!statusList.isEmpty()){
+                whereClause += "(";
+                for (String job: statusList){
+                    whereClause =whereClause  + col1 + " = '" + job + "' OR ";
+                }
+                whereClause = whereClause .substring(0,whereClause .length() - 4); //delete last " OR "
+                whereClause += ") AND ";
+            }
+            if(!taskDate.isEmpty()){
+                whereClause += "("+ col2 + " LIKE '%" + taskDate + "%') AND ";
+            }
+
+            if(!taskDateOrder.equals("")){
+                whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
+                whereClause = whereClause + " ORDER BY t.taskDate " + taskDateOrder + " AND ";
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last "AND "
+            System.out.println(whereClause);
+
+
+            List<Object[]> tasksDetails = CummonDbFcts.performJoinAndSelect(TaskDao.TABLE_NAME, "t", EmployeeDao.TABLE_NAME,"e","employeeId","employeeId", colToSelect, whereClause);
+            for (Object[] row : tasksDetails) {
+                TaskTableView taskRow = new TaskTableView(row[0],row[1],row[2],row[3]);
+                System.out.println(taskRow);
+                tasksList.add(taskRow);
+            }
+        }
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("i"));
+        taskDateCol.setCellValueFactory(new PropertyValueFactory<>("taskDate"));
+        taskStatusCol.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
+        roomNbrCol.setCellValueFactory(new PropertyValueFactory<>("roomNbr"));
+        tasksTable.getItems().addAll(tasksList);
+
+        if(tasksList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+
+    }
+    public void filterTasks(ActionEvent event){
+        List<String> statusList = new ArrayList<>();
+        String taskDateOrder = "";
+
+        if(OnHold.isSelected()) statusList.add("On Hold");
+        if(InProgress.isSelected()) statusList.add("In Progress");
+        if(Completed.isSelected()) statusList.add("Completed");
+
+        if(TaskDateDesc.isSelected()) {
+            taskDateOrder = "DESC";
+            TaskDateAsc.setSelected(false);
+        }
+        if(TaskDateAsc.isSelected()) {
+            taskDateOrder = "ASC";
+            TaskDateDesc.setSelected(false);
+        }
+
+        LocalDate taskDate__ = taskDatePicker.getValue();
+        String taskDate="";
+        if (taskDate__ != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust the pattern as needed
+            taskDate = taskDate__.format(formatter);
+        }
+
+        loadDataOnTaskTable(statusList, taskDateOrder, taskDate);
+    }
+    public void confirmAction(ActionEvent event){
+        completedStatusError.setVisible(false);
+        inProgressStatusError.setVisible(false);
+
+        int taskId = (int) (tasksTable.getSelectionModel().getSelectedItem().getTaskId());
+        TaskDao.update("status",newTasKStatus,"taskId",taskId);
+
+        if(newTasKStatus.equals("Completed")){//the room is available
+        int roomId = (int) (tasksTable.getSelectionModel().getSelectedItem().getRoomId());
+            RoomDao.update("status","Needs Cleaning","roomId",roomId);
+        }
+        newTasKStatus = "";
+        confirmActionPane.setVisible(false);
+        actionPane.setVisible(true);
+
+        statusUpdatedMsg.setVisible(true);
+        hideMsg(statusUpdatedMsg,4);
+
+        loadDataOnTaskTable(new ArrayList<>(),"","");
+    }
+    public void displayConfirmCompletedActionPane(ActionEvent event){
+        completedStatusError.setVisible(false);
+        inProgressStatusError.setVisible(false);
+        rowSelectedError.setVisible(false);
+
+        if(tasksTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("On Hold") ){
+            completedStatusError.setVisible(true);
+            return;
+        }
+        actionPane.setVisible(false);
+        confirmActionPane.setVisible(true);
+        confirmActionMsg.setText("Change task Status from In Progress to Completed for room " + tasksTable.getSelectionModel().getSelectedItem().getRoomNbr());
+        newTasKStatus = "Completed";
+    }
+    public void displayConfirmInProgressActionPane(ActionEvent event){
+        completedStatusError.setVisible(false);
+        inProgressStatusError.setVisible(false);
+        rowSelectedError.setVisible(false);
+
+        if(tasksTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("In Progress") ){
+            inProgressStatusError.setVisible(true);
+            return;
+        }
+
+        actionPane.setVisible(false);
+        confirmActionPane.setVisible(true);
+        confirmActionMsg.setText("Change task Status from ON HIDE to In Progress for room " + tasksTable.getSelectionModel().getSelectedItem().getRoomNbr());
+        newTasKStatus = "In Progress";
+    }
+    public void hideConfirmActionPane(ActionEvent event){
+        confirmActionPane.setVisible(false);
+        actionPane.setVisible(true);
+    }
+    //-----------------------------------------------------------------------------------
+    public void hideMsg(Label msg, double time){
+        Duration duration = Duration.seconds(time);
+        Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
     public void logout(ActionEvent event){
         EmployeeManager.getInstance().setManager(new Employee("","","","","","",0,"",""));
         HelloApplication.stage.close();
