@@ -16,8 +16,11 @@
 }
 
 .default-color0.chart-pie{
-    -fx-pie-color:#137390;
+    -fx-pie-color:#171c6f;
 }
 .default-color1.chart-pie{
+    -fx-pie-color:#137390;
+}
+.default-color2.chart-pie{
     -fx-pie-color:#76bec9;
 }

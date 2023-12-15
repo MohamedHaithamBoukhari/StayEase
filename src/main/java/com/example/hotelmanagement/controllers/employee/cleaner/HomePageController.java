@@ -46,7 +46,7 @@ public class HomePageController implements Initializable {
 
     @FXML private PieChart pieChart;
     @FXML private Label fullnameLabel;
-    @FXML private Label tasksNbr, completedTasksNbr, onHoldTasksNbr;
+    @FXML private Label tasksNbr, completedTasksNbr, onHoldTasksNbr, inProgressTasksNbr;
 
 
     @FXML private TableView<TaskTableView> tasksTable;
@@ -82,10 +82,16 @@ public class HomePageController implements Initializable {
             map4.put("employeeId", cleaner.getEmployeeId());
             String onHoldTasks = String.valueOf(TaskDao.select(map4, "*").size());
             onHoldTasksNbr.setText(onHoldTasks);
+            Map map5 = new HashMap<>();
+            map5.put("status", "In progress");
+            map5.put("employeeId", cleaner.getEmployeeId());
+            String inProgresTasks = String.valueOf(TaskDao.select(map5, "*").size());
+            inProgressTasksNbr.setText(inProgresTasks);
             ObservableList<PieChart.Data> pieChartData =
                     FXCollections.observableArrayList(
                             new PieChart.Data("Completed tasks", Double.parseDouble(completedTasks)),
-                            new PieChart.Data("On Hold tasks", Double.parseDouble(onHoldTasks)));
+                            new PieChart.Data("On Hold tasks", Double.parseDouble(onHoldTasks)),
+                            new PieChart.Data("In Progress tasks", Double.parseDouble(inProgresTasks)));
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(data.getName(), data.pieValueProperty())
