@@ -1,6 +1,6 @@
 package com.example.hotelmanagement.tablesView;
 
-public class TasksTableView {
+public class AffectedTasksTableView {
     private static Integer NBR=1;
     private Object i;
     private Object employeeId;
@@ -12,7 +12,7 @@ public class TasksTableView {
         NBR ++;
     }
 
-    public TasksTableView(Object employeeId, Object fullName, Object email, Object position, Object assignedRoomsNbr) {
+    public AffectedTasksTableView(Object employeeId, Object fullName, Object email, Object position, Object assignedRoomsNbr) {
         this.i = NBR;
         this.employeeId = employeeId;
         this.fullName = fullName;
@@ -27,7 +27,7 @@ public class TasksTableView {
     }
 
     public static void setNBR(Integer NBR) {
-        TasksTableView.NBR = NBR;
+        AffectedTasksTableView.NBR = NBR;
     }
 
     public Object getI() {

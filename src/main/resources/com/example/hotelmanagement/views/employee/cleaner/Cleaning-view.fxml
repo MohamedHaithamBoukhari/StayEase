@@ -2,14 +2,16 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.cleaner.HomePageController">
@@ -70,49 +72,86 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
-        <Label fx:id="title" alignment="CENTER" layoutX="452.0" layoutY="69.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="452.0" AnchorPane.rightAnchor="278.0">
+        <Label fx:id="title" alignment="CENTER" layoutX="448.0" layoutY="56.0" text="Cleaning Tasks" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="282.0">
             <font>
-                <Font name="System Bold" size="24.0" />
-            </font></Label>
-      <Label fx:id="stat6" alignment="CENTER" layoutX="431.0" layoutY="140.0" prefHeight="94.0" prefWidth="195.0" text="Tasks" textFill="#00ffed" />
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="485.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/tasksIcon.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="tasksNbr" contentDisplay="CENTER" layoutX="537.0" layoutY="190.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="stat7" alignment="CENTER" layoutX="301.0" layoutY="300.0" prefHeight="94.0" prefWidth="195.0" text="Completed Tasks" textFill="#00ffed" />
-      <Label fx:id="stat8" alignment="CENTER" layoutX="301.0" layoutY="418.0" prefHeight="94.0" prefWidth="195.0" text="Tasks On Hold" textFill="#00ffed" />
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="356.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/completedTaskIcon.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="completedTasksNbr" contentDisplay="CENTER" layoutX="408.0" layoutY="346.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="356.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/incompletedTasksIcon.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="onHoldTasksNbr" contentDisplay="CENTER" layoutX="408.0" layoutY="466.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font>
-      </Label>
-      <PieChart fx:id="pieChart" layoutX="552.0" layoutY="311.0" prefHeight="188.0" prefWidth="228.0" AnchorPane.rightAnchor="120.0" />
-      <Circle fill="#137390" layoutX="471.0" layoutY="360.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#76bec9" layoutX="471.0" layoutY="479.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="statusUpdatedMsg" alignment="CENTER" layoutX="443.0" layoutY="88.0" prefHeight="30.0" prefWidth="185.0" text="Status updated successfully" AnchorPane.rightAnchor="272.0" />
+        <AnchorPane fx:id="filters" layoutX="220.0" layoutY="126.0" prefHeight="63.0" prefWidth="623.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="126.0">
+            <children>
+                <CheckBox fx:id="OnHold" layoutX="26.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterTasks" text="On Hold" textFill="WHITE" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="8.0" />
+                <CheckBox fx:id="Completed" layoutX="26.0" layoutY="34.0" mnemonicParsing="false" onAction="#filterTasks" text="Completed" textFill="WHITE" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="34.0" />
+                <AnchorPane layoutX="227.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="5.0" />
+                <Label layoutX="410.0" layoutY="21.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="21.0" />
+                <AnchorPane layoutX="385.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.topAnchor="5.0" />
+                <CheckBox fx:id="TaskDateAsc" layoutX="257.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterTasks" text="Task date asc" textFill="WHITE" />
+                <CheckBox fx:id="TaskDateDesc" layoutX="257.0" layoutY="34.0" mnemonicParsing="false" onAction="#filterTasks" text="Task date desc" textFill="WHITE" />
+            <DatePicker fx:id="taskDatePicker" layoutX="457.0" layoutY="17.0" onAction="#filterTasks" prefHeight="25.0" prefWidth="149.0" />
+            <CheckBox fx:id="InProgress" layoutX="112.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterTasks" text="In Progress" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+        <TableView fx:id="tasksTable" layoutX="220.0" layoutY="198.0" prefHeight="294.0" prefWidth="624.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="198.0">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="85.0" text="#" />
+                <TableColumn fx:id="taskDateCol" prefWidth="182.0" text="Task Date" />
+                <TableColumn fx:id="taskStatusCol" prefWidth="188.0" text="Task Status" />
+                <TableColumn fx:id="roomNbrCol" prefWidth="168.0" text="Room Number" />
+            </columns>
+        </TableView>
+        <Label fx:id="rowSelectedError" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="222.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/errorIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <AnchorPane fx:id="actionPane" layoutX="645.0" layoutY="526.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="202.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="645.0">
+            <children>
+                <Button fx:id="inProgressBtn" alignment="CENTER" mnemonicParsing="false" onAction="#displayConfirmInProgressActionPane" prefHeight="30.0" prefWidth="106.0" text="In Progress" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../images/incompletedTasksIcon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            <Button fx:id="cleanedBtn" alignment="CENTER" layoutX="110.0" mnemonicParsing="false" onAction="#displayConfirmCompletedActionPane" prefHeight="30.0" prefWidth="100.0" text="Cleaned" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/completedTaskIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            </children>
+        </AnchorPane>
+        <Label fx:id="noRowsMsg" alignment="CENTER" layoutX="383.0" layoutY="344.0" prefHeight="30.0" prefWidth="317.0" text="No task match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="383.0" AnchorPane.topAnchor="344.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="inProgressStatusError" layoutX="211.0" layoutY="526.0" prefHeight="30.0" prefWidth="411.0" text="Task can only be marked as in progress when it's on hold" />
+        <Label fx:id="completedStatusError" layoutX="211.0" layoutY="526.0" prefHeight="30.0" prefWidth="432.0" text="Task can only be marked as completed when it's in progress" />
+        <AnchorPane fx:id="confirmActionPane" layoutX="211.0" layoutY="510.0" prefHeight="63.0" prefWidth="647.0">
+            <children>
+                <Label fx:id="confirmActionMsg" layoutX="10.0" layoutY="17.0" prefHeight="30.0" prefWidth="498.0" text="confirmation of action ( -&gt;in progress, -&gt;cleaned)" textFill="#fff200">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="confirmActionBtn" alignment="CENTER" layoutX="516.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#confirmAction" prefHeight="30.0" prefWidth="51.0" text="Yes" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="516.0" AnchorPane.topAnchor="16.0" />
+                <Button fx:id="cancelActionBtn" alignment="CENTER" layoutX="574.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hideConfirmActionPane" prefHeight="8.0" prefWidth="61.0" text="No" AnchorPane.bottomAnchor="17.0" AnchorPane.topAnchor="16.0" />
+            </children>
+        </AnchorPane>
     </children>
     <stylesheets>
         <URL value="@../../../css/HomePage.css" />
-        <URL value="@../../../css/statistics.css" />
+        <URL value="@../../../css/cleaner/cleaningTasks.css" />
+        <URL value="@../../../css/tableView.css" />
     </stylesheets>
 </AnchorPane>

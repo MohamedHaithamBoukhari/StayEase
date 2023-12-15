@@ -1,0 +1,42 @@
+
+#inProgressBtn{
+    -fx-padding: 0;
+    -fx-background-color: blue;
+    -fx-font-size: 15;
+}
+#cleanedBtn{
+    -fx-padding: 0;
+    -fx-background-color: green;
+    -fx-font-size: 15;
+}
+#confirmActionBtn{
+    -fx-padding: 0;
+    -fx-background-color: green;
+    -fx-font-size: 15;
+}
+#cancelActionBtn{
+    -fx-padding: 0;
+    -fx-background-color: red;
+    -fx-font-size: 15;
+}
+
+#inProgressStatusError, #completedStatusError, #confirmActionMsg{
+    -fx-font-size: 15;
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+    -fx-border-radius:9;
+    -fx-padding: 1px 2px 1px 2px;
+    -fx-border-color:yellow;
+}
+
+#confirmActionPane{
+    -fx-background-color: rgba(0,0,0,0.3);
+    -fx-background-radius: 10px;
+}
+#statusUpdatedMsg{
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-border-radius:10;
+    -fx-text-fill: #15ff00;
+    -fx-border-color:#15ff00;
+}

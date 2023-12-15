@@ -4,7 +4,7 @@ import com.example.hotelmanagement.beans.Task;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.VarsManager;
-import com.example.hotelmanagement.tablesView.TasksTableView;
+import com.example.hotelmanagement.tablesView.AffectedTasksTableView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,8 +24,8 @@ public class AssignRoomsController implements Initializable {
     @FXML private Label cleaningAssignError, maintenanceAssignError, confirmationMsg;
     @FXML private CheckBox Cleaner, MaintenanceStaff,assingedRoomnbrAsc,assingedRoomnbrDesc;
     @FXML private TextField fullnameField, emailField;
-    @FXML private TableView<TasksTableView> empsTable;
-    @FXML private TableColumn<TasksTableView, Object> idCol, fullNameCol, emailCol, positionCol, assignedRoomsNbrCol;
+    @FXML private TableView<AffectedTasksTableView> empsTable;
+    @FXML private TableColumn<AffectedTasksTableView, Object> idCol, fullNameCol, emailCol, positionCol, assignedRoomsNbrCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,9 +48,9 @@ public class AssignRoomsController implements Initializable {
 
     public void loadDataOnTaskTable(List<String> jobsList, String  fullname, String email, String assignedRoomNbrOrder){
         noRowsMsg.setVisible(false);
-        List<TasksTableView> empsList = new ArrayList<>();
+        List<AffectedTasksTableView> empsList = new ArrayList<>();
         empsTable.getItems().clear();
-        TasksTableView.setNBR(1);
+        AffectedTasksTableView.setNBR(1);
 
         String query = "SELECT e.employeeId, e.fullName, e.email, e.position, COUNT(t.roomId) AS total_tasks " +
                        "FROM employee e " +
@@ -62,7 +62,7 @@ public class AssignRoomsController implements Initializable {
             query += "GROUP BY e.employeeId, e.fullName, e.email, e.position";
             List<Object[]> empsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : empsDetails) {
-                TasksTableView empRow = new TasksTableView(row[0],row[1],row[2],row[3],row[4]);
+                AffectedTasksTableView empRow = new AffectedTasksTableView(row[0],row[1],row[2],row[3],row[4]);
                 System.out.println(empRow);
                 empsList.add(empRow);
             }
@@ -98,7 +98,7 @@ public class AssignRoomsController implements Initializable {
 
             List<Object[]> empsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : empsDetails) {
-                TasksTableView empRow = new TasksTableView(row[0],row[1],row[2],row[3],row[4]);
+                AffectedTasksTableView empRow = new AffectedTasksTableView(row[0],row[1],row[2],row[3],row[4]);
                 empsList.add(empRow);
             }
         }
@@ -110,6 +110,9 @@ public class AssignRoomsController implements Initializable {
         assignedRoomsNbrCol.setCellValueFactory(new PropertyValueFactory<>("assignedRoomsNbr"));
         System.out.println(empsList);
         System.out.println("-----"+empsTable.getItems().addAll(empsList));
+        // this line to verify because  i add it , because i don't trouve it
+        empsTable.getItems().addAll(empsList);
+
         if(empsList.isEmpty()){
             noRowsMsg.setVisible(true);
         }
