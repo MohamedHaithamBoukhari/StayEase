@@ -3,8 +3,13 @@
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -72,9 +77,82 @@
             <font>
                 <Font name="System Bold" size="24.0" />
             </font></Label>
+        <AnchorPane fx:id="filters" layoutX="220.0" layoutY="126.0" prefHeight="63.0" prefWidth="623.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="126.0">
+            <children>
+                <CheckBox fx:id="Replied" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterComplaints" text="Replied" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="8.0" />
+                <CheckBox fx:id="Unreplied" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#filterComplaints" text="Unreplied" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="34.0" />
+                <AnchorPane layoutX="99.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="5.0" />
+                <CheckBox fx:id="ComplaintDateAsc" layoutX="112.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterComplaints" text="Complaint date asc" textFill="WHITE" />
+                <CheckBox fx:id="ComplaintDateDesc" layoutX="112.0" layoutY="34.0" mnemonicParsing="false" onAction="#filterComplaints" text="Complaint date desc" textFill="WHITE" />
+                <AnchorPane layoutX="255.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.topAnchor="5.0" />
+            <Label layoutX="291.0" layoutY="7.0" text="Search by Object" textFill="WHITE" />
+            <TextField fx:id="complaintObjectField" layoutX="265.0" layoutY="29.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#filterComplaints" prefHeight="23.0" prefWidth="141.0" />
+            <AnchorPane layoutX="416.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.topAnchor="5.0" />
+                <Label layoutX="430.0" layoutY="21.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="21.0" />
+                <DatePicker fx:id="complaintDatePicker" layoutX="465.0" layoutY="17.0" onAction="#filterComplaints" prefHeight="25.0" prefWidth="149.0" />
+            </children>
+        </AnchorPane>
+        <TableView fx:id="complaintTable" layoutX="220.0" layoutY="198.0" prefHeight="294.0" prefWidth="624.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="198.0">
+            <columns>
+                <TableColumn fx:id="id_Col" prefWidth="85.0" text="#" />
+                <TableColumn fx:id="complaintDateCol" prefWidth="140.0" text="Complaint Date" />
+                <TableColumn fx:id="complaintObjectCol" prefWidth="252.0" text="Complaint Object" />
+            <TableColumn fx:id="responseStatusCol" prefWidth="146.0" text="Response Status" />
+            </columns>
+        </TableView>
+        <Label fx:id="rowSelectedError" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="222.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/errorIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <AnchorPane fx:id="actionPane" layoutX="645.0" layoutY="526.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="202.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="645.0">
+            <children>
+                <Button fx:id="inProgressBtn" alignment="CENTER" mnemonicParsing="false" onAction="#displayConfirmInProgressActionPane" prefHeight="30.0" prefWidth="106.0" text="In Progress" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../images/incompletedTasksIcon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="cleanedBtn" alignment="CENTER" layoutX="110.0" mnemonicParsing="false" onAction="#displayConfirmCompletedActionPane" prefHeight="30.0" prefWidth="100.0" text="Cleaned" AnchorPane.topAnchor="0.0">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../images/completedTaskIcon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Label fx:id="noRowsMsg" alignment="CENTER" layoutX="383.0" layoutY="344.0" prefHeight="30.0" prefWidth="317.0" text="No complaint match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="383.0" AnchorPane.topAnchor="344.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="inProgressStatusError" layoutX="211.0" layoutY="526.0" prefHeight="30.0" prefWidth="411.0" text="Task can only be marked as in progress when it's on hold" />
+        <Label fx:id="completedStatusError" layoutX="211.0" layoutY="526.0" prefHeight="30.0" prefWidth="432.0" text="Task can only be marked as completed when it's in progress" />
+        <AnchorPane fx:id="confirmActionPane" layoutX="211.0" layoutY="510.0" prefHeight="63.0" prefWidth="647.0">
+            <children>
+                <Label fx:id="confirmActionMsg" layoutX="10.0" layoutY="17.0" prefHeight="30.0" prefWidth="498.0" text="confirmation of action ( -&gt;in progress, -&gt;cleaned)" textFill="#fff200">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="confirmActionBtn" alignment="CENTER" layoutX="516.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#confirmAction" prefHeight="30.0" prefWidth="51.0" text="Yes" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="516.0" AnchorPane.topAnchor="16.0" />
+                <Button fx:id="cancelActionBtn" alignment="CENTER" layoutX="574.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hideConfirmActionPane" prefHeight="8.0" prefWidth="61.0" text="No" AnchorPane.bottomAnchor="17.0" AnchorPane.topAnchor="16.0" />
+            </children>
+        </AnchorPane>
     </children>
     <stylesheets>
         <URL value="@../../../css/HomePage.css" />
-        <URL value="@../../../css/statistics.css" />
-    </stylesheets>
+        <URL value="@../../../css/complaints.css" />
+        <URL value="@../../../css/tableView.css" />
+    </stylesheets>  
 </AnchorPane>

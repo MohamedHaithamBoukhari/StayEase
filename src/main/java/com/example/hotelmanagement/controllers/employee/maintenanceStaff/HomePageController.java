@@ -9,6 +9,7 @@ import com.example.hotelmanagement.dao.TaskDao;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.EmployeeManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
+import com.example.hotelmanagement.tablesView.ComplaintTableView;
 import com.example.hotelmanagement.tablesView.TaskTableView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -51,6 +52,12 @@ public class HomePageController implements Initializable {
     @FXML private CheckBox OnHold, Completed, InProgress, TaskDateDesc, TaskDateAsc;
     @FXML private DatePicker taskDatePicker;
     @FXML private Label noRowsMsg;
+
+    @FXML private TableView<ComplaintTableView> complaintTable;
+    @FXML private TableColumn<ComplaintTableView, Object> id_Col, complaintObjectCol, responseStatusCol, complaintDateCol;
+    @FXML private CheckBox Replied, Unreplied, ComplaintDateAsc, ComplaintDateDesc;
+    @FXML private DatePicker complaintDatePicker;
+    @FXML private TextField complaintObjectField;
 
     @FXML private AnchorPane actionPane,confirmActionPane;
     @FXML private Label rowSelectedError, confirmActionMsg, inProgressStatusError, completedStatusError;
@@ -105,7 +112,7 @@ public class HomePageController implements Initializable {
             confirmActionPane.setVisible(false);
             loadDataOnTaskTable(new ArrayList<>(), "", "");
         }else if (currentPage.equals("Complaint")) {
-
+            loadDataOnComplaintsTable(new ArrayList<>(),"","", "");
         }
     }
 
@@ -281,6 +288,103 @@ public class HomePageController implements Initializable {
     public void hideConfirmActionPane(ActionEvent event){
         confirmActionPane.setVisible(false);
         actionPane.setVisible(true);
+    }
+    //---------------------------------------Complaints--------------------------------------------
+    public void loadDataOnComplaintsTable(List<String> responseStatusList, String  complaintDateOrder, String complaintDate, String complaintObject){
+        noRowsMsg.setVisible(false);
+        List<ComplaintTableView> complaintsList = new ArrayList<>();
+        complaintTable.getItems().clear();
+        ComplaintTableView.setNBR(1);
+
+        List<String> colToSelect =  new ArrayList<String>(List.of("declarationId", "declarantId", "declarantStatus", "declarationObject", "declaration", "declarationDate", "response", "responseDate"));
+        String declarantStatus = "Employee";
+        String query = "SELECT declarationId, declarantId, declarantStatus, declarationObject, declaration, declarationDate, response, responseDate " +
+                       "FROM declaration " +
+                       "WHERE declarantId = " + EmployeeManager.getInstance().getEmployee().getEmployeeId() + " AND declarantStatus = '" + declarantStatus + "'";
+        if(responseStatusList.isEmpty() && complaintDateOrder.isEmpty() && complaintDate.isEmpty() && complaintObject.isEmpty()){
+            List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
+            for (Object[] row : complaintsDetails) {
+                ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                System.out.println(complaintRow);
+                complaintsList.add(complaintRow);
+            }
+        }else{
+            query += " AND ";
+
+            String col1 = "response", col2 = "declarationDate", col3 = "declarationObject";
+            if(!responseStatusList.isEmpty()){
+                query += "(";
+                for (String responseStatus: responseStatusList){
+                    if(responseStatus.equals("Replied")){
+                        query =query  + col1 + " IS NOT NULL OR ";
+                    } else if (responseStatus.equals("Unreplied")) {
+                        query =query  + col1 + " IS NULL OR ";
+                    }
+                }
+                query = query .substring(0,query .length() - 4); //delete last " OR "
+                query += ") AND ";
+            }
+            if(!complaintDate.isEmpty()){
+                query += "("+ col2 + " LIKE '%" + complaintDate + "%') AND ";
+            }
+
+            if(!complaintObject.equals("")){
+                query += "("+ col3 + " LIKE '%" + complaintObject + "%') AND ";
+            }
+
+            if(!complaintDateOrder.equals("")){
+                query = query.substring(0, query.length() - 5);//delete last " AND "
+                query = query + " ORDER BY declarationDate " + complaintDateOrder + " AND ";
+            }
+
+            query = query.substring(0, query.length() - 5);//delete last "AND "
+            System.out.println(query);
+
+
+            List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
+            for (Object[] row : complaintsDetails) {
+                ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+                System.out.println(complaintRow);
+                complaintsList.add(complaintRow);
+            }
+        }
+
+        id_Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        complaintDateCol.setCellValueFactory(new PropertyValueFactory<>("declarationDate"));
+        complaintObjectCol.setCellValueFactory(new PropertyValueFactory<>("declarationObject"));
+        responseStatusCol.setCellValueFactory(new PropertyValueFactory<>("responseStatus"));
+        complaintTable.getItems().addAll(complaintsList);
+
+        if(complaintsList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+
+    }
+    public void filterComplaints(ActionEvent event){
+        List<String> responseStatusList = new ArrayList<>();
+        String complaintDateOrder = "";
+        String complaintObject = complaintObjectField.getText();
+
+        if(Replied.isSelected()) responseStatusList.add("Replied");
+        if(Unreplied.isSelected()) responseStatusList.add("Unreplied");
+
+        if(ComplaintDateDesc.isSelected()) {
+            complaintDateOrder = "DESC";
+            ComplaintDateAsc.setSelected(false);
+        }
+        if(ComplaintDateAsc.isSelected()) {
+            complaintDateOrder = "ASC";
+            ComplaintDateDesc.setSelected(false);
+        }
+
+        LocalDate taskDate__ = complaintDatePicker.getValue();
+        String complaintDate="";
+        if (taskDate__ != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust the pattern as needed
+            complaintDate = taskDate__.format(formatter);
+        }
+
+        loadDataOnComplaintsTable(responseStatusList, complaintDateOrder, complaintDate, complaintObject);
     }
     //-----------------------------------------------------------------------------------
     public void hideMsg(Label msg, double time){

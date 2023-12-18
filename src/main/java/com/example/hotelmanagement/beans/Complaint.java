@@ -1,20 +1,20 @@
 package com.example.hotelmanagement.beans;
 
-import java.sql.Date;
-
-public class Declaration {
+public class Complaint {
     private int declarationId;
     private int declarantId;
     private String declarantStatus;
+    private String declarationObject;
     private String declaration;
     private String declarationDate;
     private String response;
     private String responseDate;
 
-    public Declaration(){}
-    public Declaration(int declarantId, String declarantStatus, String declaration, String declarationDate, String response, String responseDate) {
+    public Complaint(){}
+    public Complaint(int declarantId, String declarantStatus, String declarationObject, String declaration, String declarationDate, String response, String responseDate) {
         this.declarantId = declarantId;
         this.declarantStatus = declarantStatus;
+        this.declarationObject = declarationObject;
         this.declaration = declaration;
         this.declarationDate = declarationDate;
         this.response = response;
@@ -77,12 +77,21 @@ public class Declaration {
         this.responseDate = responseDate;
     }
 
+    public String getDeclarationObject() {
+        return declarationObject;
+    }
+
+    public void setDeclarationObject(String declarationObject) {
+        this.declarationObject = declarationObject;
+    }
+
     @Override
     public String toString() {
         return "Declaration{" +
                 "declarationId=" + declarationId +
                 ", declarantId=" + declarantId +
                 ", declarantStatus='" + declarantStatus + '\'' +
+                ", declarationObject='" + declarationObject + '\'' +
                 ", declaration='" + declaration + '\'' +
                 ", declarationDate='" + declarationDate + '\'' +
                 ", response='" + response + '\'' +

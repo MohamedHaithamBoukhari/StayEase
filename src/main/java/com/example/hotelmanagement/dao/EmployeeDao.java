@@ -1,7 +1,5 @@
 package com.example.hotelmanagement.dao;
 
-import com.example.hotelmanagement.beans.Customer;
-import com.example.hotelmanagement.beans.Declaration;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 

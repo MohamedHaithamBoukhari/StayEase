@@ -1,7 +1,6 @@
 package com.example.hotelmanagement.dao;
 
-import com.example.hotelmanagement.beans.Customer;
-import com.example.hotelmanagement.beans.Declaration;
+import com.example.hotelmanagement.beans.Complaint;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 
 import java.util.List;
@@ -9,12 +8,12 @@ import java.util.Map;
 
 public class DeclarationDao extends CummonDbFcts {
     public static final String TABLE_NAME = "declaration";
-    public static final String[] TABLE_COLUMNS = {"declarationId", "declarantId", "declarantStatus","declaration","declarationDate", "response", "responseDate"};
+    public static final String[] TABLE_COLUMNS = {"declarationId", "declarantId", "declarantStatus","declarationObject","declaration","declarationDate", "response", "responseDate"};
     public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
-        List<Object> rows = superSelect(Declaration.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
+        List<Object> rows = superSelect(Complaint.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);
         return rows;
     }
-    public static void insert(Declaration declaration){
+    public static void insert(Complaint declaration){
         superInsert(declaration, TABLE_COLUMNS, TABLE_NAME);
     }
 
@@ -28,7 +27,7 @@ public class DeclarationDao extends CummonDbFcts {
 
 
     public static List<Object> selectAll() {
-        List<Object> rows = superSelectAll(Declaration.class, TABLE_NAME, TABLE_COLUMNS);
+        List<Object> rows = superSelectAll(Complaint.class, TABLE_NAME, TABLE_COLUMNS);
         return rows;
     }
 }
