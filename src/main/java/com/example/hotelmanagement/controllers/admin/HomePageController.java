@@ -69,6 +69,7 @@ public class HomePageController implements Initializable{
     @FXML private TableColumn<ServiceTableView, Object> id____Col, serviceNameCol, tableCorreCol, descriptionCol;
     @FXML private TextField serviceNameField, corrTableField, descriptionField,serviceNameField1, corrTableField1, descriptionField1;
     @FXML private AnchorPane addServicePane, editServicePane, deleteServicePane;
+
     //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -118,8 +119,6 @@ public class HomePageController implements Initializable{
             monthEarning.setText(InvoiceDao.monthEarning() + " DH");
             yearEarning.setText(InvoiceDao.yearEarning()   + " DH");
             totalEarning.setText(InvoiceDao.totalEarning() + " DH");
-        } else if (currentPage.equals("Email")) {
-
         }
     }
 //------------------------------------------------------------------------------------------
@@ -162,15 +161,6 @@ public class HomePageController implements Initializable{
     public void switchToEarning(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Earning");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/Earning-view.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void switchToEmail(ActionEvent event) throws IOException {
-        SwitchedPageManager.getInstance().setSwitchedPage("Email");
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/admin/Email-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
