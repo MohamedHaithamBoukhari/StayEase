@@ -20,6 +20,14 @@ public class DeclarationDao extends CummonDbFcts {
     public static int update(String updatedColumn, Object newColumnValue, String testColumn,Object testColumnValue){
         return superUpdate(TABLE_NAME, updatedColumn, newColumnValue, testColumn, testColumnValue);
     }
+    public static int updateColumns(String[] updatedColumns, Object[] newColumnsValue, String testColumn, Object testColumnValue){
+        int i = updatedColumns.length;
+        int columnsUpdated = 0;
+        for (int j=0; j<i; j++){
+            columnsUpdated = superUpdate(TABLE_NAME, updatedColumns[j], newColumnsValue[j], testColumn, testColumnValue);
+        }
+        return columnsUpdated;
+    }
 
     public static int delete(String testColumn,Object testColumnValue){
         return superDelete(TABLE_NAME, testColumn, testColumnValue);

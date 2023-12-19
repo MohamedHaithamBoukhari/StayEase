@@ -1,12 +1,12 @@
 package com.example.hotelmanagement.controllers.employee.maintenanceStaff;
 
 import com.example.hotelmanagement.HelloApplication;
+import com.example.hotelmanagement.beans.Complaint;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.config.PathConfig;
-import com.example.hotelmanagement.dao.EmployeeDao;
-import com.example.hotelmanagement.dao.RoomDao;
-import com.example.hotelmanagement.dao.TaskDao;
+import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
+import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.localStorage.EmployeeManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.tablesView.ComplaintTableView;
@@ -16,6 +16,7 @@ import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.Declaration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,7 +58,12 @@ public class HomePageController implements Initializable {
     @FXML private TableColumn<ComplaintTableView, Object> id_Col, complaintObjectCol, responseStatusCol, complaintDateCol;
     @FXML private CheckBox Replied, Unreplied, ComplaintDateAsc, ComplaintDateDesc;
     @FXML private DatePicker complaintDatePicker;
-    @FXML private TextField complaintObjectField;
+    @FXML private TextField complaintObjectField, objectField;
+    @FXML private TextArea complaintField;
+    @FXML private AnchorPane addComplaintPane, confirmDeletePane, detailsPane;
+    @FXML private Button confirmAddBtn, saveBtn;
+    @FXML private Label detailResponseDate, detailResponse, detailComplaint, detailComplaintObject, detailDate;
+    @FXML private Label addDeleteLabel, editError, deleteError, addedMsg, updatedMsg, deletedMsg;
 
     @FXML private AnchorPane actionPane,confirmActionPane;
     @FXML private Label rowSelectedError, confirmActionMsg, inProgressStatusError, completedStatusError;
@@ -112,6 +118,18 @@ public class HomePageController implements Initializable {
             confirmActionPane.setVisible(false);
             loadDataOnTaskTable(new ArrayList<>(), "", "");
         }else if (currentPage.equals("Complaint")) {
+            noRowsMsg.setVisible(false);
+            addedMsg.setVisible(false);
+            updatedMsg.setVisible(false);
+            deletedMsg.setVisible(false);
+
+            rowSelectedError.setVisible(false);
+            editError.setVisible(false);
+            deleteError.setVisible(false);
+
+            addComplaintPane.setVisible(false);
+            confirmDeletePane.setVisible(false);
+            detailsPane.setVisible(false);
             loadDataOnComplaintsTable(new ArrayList<>(),"","", "");
         }
     }
@@ -386,6 +404,140 @@ public class HomePageController implements Initializable {
 
         loadDataOnComplaintsTable(responseStatusList, complaintDateOrder, complaintDate, complaintObject);
     }
+
+    public void displayAddComplaintPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        saveBtn.setVisible(false);
+        confirmAddBtn.setVisible(true);
+        objectField.setText("");
+        complaintField.setText("");
+        addDeleteLabel.setText("Add complaint");
+
+        addComplaintPane.setVisible(true);
+    }
+    public void addComplaint(ActionEvent event){
+        String object = objectField.getText();
+        String complaintBody = complaintField.getText();
+        if (!object.isEmpty()){
+            int declarantId = EmployeeManager.getInstance().getEmployee().getEmployeeId();
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String complaintDate = currentDate.format(formatter);
+
+            Complaint complaint = new Complaint(declarantId,"Employee",object,complaintBody,complaintDate,null,null);
+            DeclarationDao.insert(complaint);
+
+            addComplaintPane.setVisible(false);
+            loadDataOnComplaintsTable(new ArrayList<>(),"","","");
+            addedMsg.setVisible(true);
+            hideMsg(addedMsg,4);
+        }
+    }
+    public void displayEditComplaintPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        saveBtn.setVisible(true);
+        confirmAddBtn.setVisible(false);
+        addDeleteLabel.setText("Edit complaint");
+
+
+        if(complaintTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
+            editError.setVisible(true);
+            return;
+        }
+        objectField.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationObject()));
+        complaintField.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclaration()));
+        addComplaintPane.setVisible(true);
+    }
+    public void editComplaint(ActionEvent event){
+        String object = objectField.getText();
+        String complaintBody = complaintField.getText();
+        System.out.println("'''''''''''"+object);
+        System.out.println("'''''''''''"+complaintBody);
+
+        if (!object.isEmpty()){
+            String[] updatedColumns = {"declarationObject", "declaration"};
+            Object[] newColumnsValue = {object, complaintBody};
+            String testColumn = "declarationId";
+            Object testColumnValue = complaintTable.getSelectionModel().getSelectedItem().getDeclarationId();
+
+            DeclarationDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+
+            addComplaintPane.setVisible(false);
+            loadDataOnComplaintsTable(new ArrayList<>(),"","","");
+            updatedMsg.setVisible(true);
+            hideMsg(updatedMsg,4);
+        }
+    }
+    public void hideEditAddComplaintPane(ActionEvent event){
+        addComplaintPane.setVisible(false);
+    }
+
+    public void displayConfirmDeletePane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        addedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        deletedMsg.setVisible(false);
+
+        if(complaintTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
+            deleteError.setVisible(true);
+            return;
+        }
+        actionPane.setVisible(false);
+        confirmDeletePane.setVisible(true);
+    }
+    public void hideConfirmDeletePane(ActionEvent event){
+        confirmDeletePane.setVisible(false);
+        actionPane.setVisible(true);
+    }
+    public void confirmDelete(ActionEvent event){
+        DeclarationDao.delete("declarationId",complaintTable.getSelectionModel().getSelectedItem().getDeclarationId());
+        confirmDeletePane.setVisible(false);
+
+        loadDataOnComplaintsTable(new ArrayList<>(),"","","");
+        actionPane.setVisible(true);
+        deletedMsg.setVisible(true);
+        hideMsg(deletedMsg,4);
+    }
+
+    public void displayDetailPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        addedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        deletedMsg.setVisible(false);
+
+        if(complaintTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        detailDate.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationDate()));
+        detailComplaintObject.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationObject()));
+        detailComplaint.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclaration()));
+        String respDate = String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponseDate()).equals("null")?"_______________":String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponseDate());
+        String resp = String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).equals("null")?"_______________":String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse());
+        detailResponseDate.setText(respDate);
+        detailResponse.setText(resp);
+        detailsPane.setVisible(true);
+    }
+    public void hideDetailsComplaintPane(ActionEvent event){
+        detailsPane.setVisible(false);
+    }
+
     //-----------------------------------------------------------------------------------
     public void hideMsg(Label msg, double time){
         Duration duration = Duration.seconds(time);
