@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.customer.CustomerHomePageController">
+    <children>
+        <ImageView fitHeight="567.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+            <image>
+                <Image url="@../../images/hotel.jpg" />
+            </image>
+        </ImageView>
+      <Label fx:id="homeLabel" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="42.0" text="Customer Dashboard" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="fullnameLabel" alignment="CENTER" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="280.0" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" />
+      <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/user.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="logoutLink" focusTraversable="false" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
+      <Button fx:id="logoutBtn" layoutX="870.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" prefHeight="18.0" prefWidth="25.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
+         <graphic>
+            <ImageView fx:id="logoutBtn1" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <AnchorPane fx:id="sideBar" prefHeight="568.0" prefWidth="163.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="735.0" AnchorPane.topAnchor="32.0" />
+      <Button fx:id="homeBtn" layoutX="2.0" layoutY="39.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Home" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="40.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/homeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="2.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchToCustomerInfos" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="infos" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="100.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/userInfoIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="roomsBtn" layoutX="2.0" layoutY="160.0" mnemonicParsing="false" onAction="#switchToRoomsDetail" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Rooms detail" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="160.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/roomIcon.png" />
+               </image></ImageView>
+         </graphic></Button>
+      <Button fx:id="servicesBtn" layoutX="2.0" layoutY="220.0" mnemonicParsing="false" onAction="#switchToServices" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Services" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="220.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/servicesIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="invoiceBtn" layoutX="2.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToInvoices" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Invoices" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="280.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/invoiceIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="feedbackBtn" layoutX="2.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchToFeedback" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Feedback" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="340.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/feedbackIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button fx:id="ComplaintBtn" layoutX="10.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToComplaint" prefHeight="50.0" prefWidth="156.0" text="Complaints" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="400.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/complaintIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="aboutBtn" layoutX="2.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToAbout" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="About" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="460.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/aboutIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic></Button>
+        <ImageView fitHeight="86.0" fitWidth="89.0" layoutX="42.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="772.0">
+            <image>
+                <Image url="@../../images/hotelIcon.png" />
+            </image>
+        </ImageView>
+      <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="452.0" layoutY="41.0" text="Complaints" textFill="WHITE" AnchorPane.leftAnchor="452.0" AnchorPane.rightAnchor="278.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font></Label>
+        <AnchorPane fx:id="filters" layoutX="220.0" layoutY="76.0" prefHeight="63.0" prefWidth="623.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="76.0">
+            <children>
+                <CheckBox fx:id="Replied" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterComplaints" text="Replied" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="8.0" />
+                <CheckBox fx:id="Unreplied" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#filterComplaints" text="Unreplied" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="34.0" />
+                <AnchorPane layoutX="99.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="5.0" />
+                <CheckBox fx:id="ComplaintDateAsc" layoutX="112.0" layoutY="8.0" mnemonicParsing="false" onAction="#filterComplaints" text="Complaint date asc" textFill="WHITE" />
+                <CheckBox fx:id="ComplaintDateDesc" layoutX="112.0" layoutY="34.0" mnemonicParsing="false" onAction="#filterComplaints" text="Complaint date desc" textFill="WHITE" />
+                <AnchorPane layoutX="255.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.topAnchor="5.0" />
+                <Label layoutX="291.0" layoutY="7.0" text="Search by Object" textFill="WHITE" />
+                <TextField fx:id="complaintObjectField" layoutX="265.0" layoutY="29.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#filterComplaints" prefHeight="23.0" prefWidth="141.0" />
+                <AnchorPane layoutX="416.0" layoutY="5.0" opacity="0.22" prefHeight="50.0" prefWidth="1.0" style="-fx-background-color: white;" AnchorPane.topAnchor="5.0" />
+                <Label layoutX="430.0" layoutY="21.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="21.0" />
+                <DatePicker fx:id="complaintDatePicker" layoutX="465.0" layoutY="17.0" onAction="#filterComplaints" prefHeight="25.0" prefWidth="149.0" />
+            </children>
+        </AnchorPane>
+        <TableView fx:id="complaintTable" layoutX="220.0" layoutY="138.0" prefHeight="277.0" prefWidth="624.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="138.0">
+            <columns>
+                <TableColumn fx:id="id_Col" prefWidth="85.0" text="#" />
+                <TableColumn fx:id="complaintDateCol" prefWidth="140.0" text="Complaint Date" />
+                <TableColumn fx:id="complaintObjectCol" prefWidth="252.0" text="Complaint Object" />
+                <TableColumn fx:id="responseStatusCol" prefWidth="146.0" text="Response Status" />
+            </columns>
+        </TableView>
+        <Label fx:id="rowSelectedError" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="222.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/errorIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <AnchorPane fx:id="actionPane" layoutX="606.0" layoutY="526.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="255.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="606.0">
+            <children>
+                <Button fx:id="addBtn" alignment="CENTER" layoutX="-10.0" mnemonicParsing="false" onAction="#displayAddComplaintPane" prefHeight="30.0" prefWidth="61.0" text="Add" AnchorPane.leftAnchor="-10.0" AnchorPane.topAnchor="0.0">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/addIcon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="editBtn" alignment="CENTER" layoutX="54.0" mnemonicParsing="false" onAction="#displayEditComplaintPane" prefHeight="30.0" prefWidth="61.0" text="Edit" AnchorPane.topAnchor="0.0">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/editIcon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="deleteBtn" alignment="CENTER" layoutX="119.0" mnemonicParsing="false" onAction="#displayConfirmDeletePane" prefHeight="30.0" prefWidth="73.0" text="Delete">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/deleteIcon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="detailBtn" alignment="CENTER" layoutX="195.0" mnemonicParsing="false" onAction="#displayDetailPane" prefHeight="30.0" prefWidth="61.0" text="Details" />
+            </children>
+        </AnchorPane>
+        <Label fx:id="noRowsMsg" alignment="CENTER" layoutX="383.0" layoutY="288.0" prefHeight="30.0" prefWidth="317.0" text="No complaint match the selected filters" textFill="#02bfe3" AnchorPane.leftAnchor="383.0" AnchorPane.topAnchor="288.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="editError" layoutX="208.0" layoutY="526.0" prefHeight="30.0" prefWidth="386.0" text="You cannot edit a message that has already received a reply" />
+        <Label fx:id="deleteError" layoutX="208.0" layoutY="526.0" prefHeight="30.0" prefWidth="386.0" text="You cannot delete a message that has already received a reply" />
+        <AnchorPane fx:id="confirmDeletePane" layoutX="212.0" layoutY="509.0" prefHeight="63.0" prefWidth="650.0">
+            <children>
+                <Label fx:id="confirmActionMsg" layoutX="26.0" layoutY="17.0" prefHeight="30.0" prefWidth="498.0" text="Are you sure you want to delete the selected complaint?" textFill="#fff200">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="confirmDeleteBtn" alignment="CENTER" layoutX="506.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#confirmDelete" prefHeight="30.0" prefWidth="51.0" text="Yes" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="506.0" AnchorPane.topAnchor="16.0" />
+                <Button fx:id="cancelDeleteBtn" alignment="CENTER" layoutX="564.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hideConfirmDeletePane" prefHeight="8.0" prefWidth="61.0" text="No" AnchorPane.bottomAnchor="17.0" AnchorPane.topAnchor="16.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="addComplaintPane" layoutX="196.0" layoutY="432.0" prefHeight="144.0" prefWidth="664.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="35.0">
+            <children>
+                <Button fx:id="hidePaneBtn" layoutX="632.0" layoutY="2.0" mnemonicParsing="false" onAction="#hideEditAddComplaintPane" prefHeight="31.0" prefWidth="25.0" text="x" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                <Button fx:id="saveBtn" layoutX="582.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editComplaint" prefHeight="31.0" prefWidth="50.0" text="save" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="2.0">
+                    <font>
+                        <Font size="41.0" />
+                    </font>
+                </Button>
+                <Label fx:id="addDeleteLabel" alignment="CENTER" layoutX="163.0" layoutY="-6.0" prefHeight="45.0" prefWidth="336.0" text="add/delete complaint" textFill="#d6dcdd">
+                    <font>
+                        <Font name="System Bold" size="30.0" />
+                    </font>
+                </Label>
+                <Label layoutX="30.0" layoutY="45.0" text="Object :" textFill="#d6dcdd">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="objectField" layoutX="136.0" layoutY="45.0" prefHeight="25.0" prefWidth="498.0" />
+                <Label layoutX="30.0" layoutY="80.0" text="Complaint : " textFill="#d6dcdd">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="complaintField" layoutX="136.0" layoutY="77.0" prefHeight="63.0" prefWidth="498.0" wrapText="true" />
+                <Button fx:id="confirmAddBtn" layoutX="587.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addComplaint" prefHeight="31.0" prefWidth="50.0" text="add">
+                    <font>
+                        <Font size="41.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="detailsPane" layoutX="199.0" layoutY="424.0" prefHeight="152.0" prefWidth="664.0">
+            <children>
+                <Button fx:id="hideDetailsPaneBtn" layoutX="636.0" layoutY="4.0" mnemonicParsing="false" onAction="#hideDetailsComplaintPane" prefHeight="31.0" prefWidth="25.0" text="x" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="4.0" />
+                <Label layoutX="24.0" layoutY="4.0" text="Complaint Date:" textFill="#defffe">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Label fx:id="detailDate" layoutX="175.0" layoutY="4.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="24.0" layoutY="33.0" text="Complaint Object:" textFill="#defffe">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Label fx:id="detailComplaintObject" layoutX="175.0" layoutY="34.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="24.0" layoutY="64.0" text="Complaint:" textFill="#defffe">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Label fx:id="detailComplaint" layoutX="176.0" layoutY="65.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="24.0" layoutY="90.0" text="Response Date:" textFill="#defffe">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Label fx:id="detailResponseDate" layoutX="175.0" layoutY="91.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="25.0" layoutY="121.0" text="Response: " textFill="#defffe">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Label fx:id="detailResponse" layoutX="175.0" layoutY="123.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Label fx:id="addedMsg" layoutX="221.0" layoutY="526.0" prefHeight="30.0" prefWidth="200.0" text="Complaint added successfully" />
+        <Label fx:id="updatedMsg" layoutX="223.0" layoutY="526.0" prefHeight="30.0" prefWidth="207.0" text="Complaint update successfully" />
+        <Label fx:id="deletedMsg" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="213.0" text="Complaint deleted successfully" />
+    </children>
+    <stylesheets>
+        <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/complaints.css" />
+        <URL value="@../../css/tableView.css" />
+    </stylesheets>
+</AnchorPane>
