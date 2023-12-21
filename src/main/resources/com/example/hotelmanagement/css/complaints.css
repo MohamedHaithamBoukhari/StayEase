@@ -4,7 +4,7 @@
     -fx-background-color: blue;
     -fx-font-size: 15;
 }
-#editdBtn{
+#editdBtn, #replyBtn{
     -fx-padding: 0;
     -fx-background-color: green;
     -fx-font-size: 15;
@@ -20,7 +20,7 @@
     -fx-font-size: 15;
 }
 
-#confirmAddBtn{
+#confirmAddBtn, #confirmReplayBtn{
     -fx-padding: 0;
     -fx-background-color: blue;
     -fx-font-size: 15;

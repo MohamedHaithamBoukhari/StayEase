@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.customer.CustomerHomePageController">
     <children>
@@ -107,12 +108,83 @@
             </image>
         </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
-      <Label layoutX="163.0" layoutY="126.0" text="Welcome to [Your Hotel Management System]!" textFill="WHITE" />
-      <Label layoutX="151.0" layoutY="152.0" text="Make Managing Your Hotel Easier with Our App" textFill="WHITE" />
-      <Label layoutX="151.0" layoutY="177.0" text="LabAt [Your Hotel Management System], we want to change how hotels work. Our team knows hotels have lots to do and we're here to help.el" textFill="WHITE" />
-      <Label layoutX="151.0" layoutY="202.0" text="Our Goal:To give hotels a tool that's easy to use and makes guests happy while keeping things running smoothly." textFill="WHITE" />
+      <Label fx:id="title" alignment="CENTER" layoutX="448.0" layoutY="191.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="282.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font></Label>
+        <Label fx:id="stat1" alignment="CENTER" layoutX="288.0" layoutY="237.0" prefHeight="94.0" prefWidth="195.0" text="Reservations" textFill="#00ffed" AnchorPane.leftAnchor="288.0" AnchorPane.topAnchor="237.0" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="342.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="342.0">
+            <image>
+                <Image url="@../../images/reservationIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="reservationsNbr" contentDisplay="CENTER" layoutX="394.0" layoutY="287.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <Label fx:id="stat2" alignment="CENTER" layoutX="288.0" layoutY="347.0" prefHeight="94.0" prefWidth="195.0" text="Feedbacks" textFill="#00ffed" AnchorPane.leftAnchor="288.0" />
+        <Label fx:id="stat4" alignment="CENTER" layoutX="288.0" layoutY="455.0" prefHeight="94.0" prefWidth="195.0" text="Complaints" textFill="#00ffed" AnchorPane.leftAnchor="288.0" />
+        <Label fx:id="stat5" alignment="CENTER" layoutX="584.0" layoutY="294.0" prefHeight="94.0" prefWidth="195.0" text="Invoices" textFill="#00ffed" AnchorPane.topAnchor="294.0" />
+        <Label fx:id="stat6" alignment="CENTER" layoutX="584.0" layoutY="404.0" prefHeight="94.0" prefWidth="195.0" text="Unpaid Invoices" textFill="#00ffed" AnchorPane.topAnchor="404.0" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="343.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/feedbackIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="feedbacksNbr" contentDisplay="CENTER" layoutX="395.0" layoutY="393.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="343.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/complaintIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="ratingAverage" contentDisplay="CENTER" layoutX="395.0" layoutY="503.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="638.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/invoiceIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="roomsNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="344.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="638.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/invoiceIcon.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="occupiedRoomNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="454.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+            <font>
+                <Font name="Arial Bold" size="22.0" />
+            </font>
+        </Label>
+      <Label fx:id="title1" alignment="CENTER" layoutX="497.0" layoutY="47.0" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="437.0" layoutY="99.0" text="Welcome to our " textFill="#00ffed">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="378.0" layoutY="129.0" text="Hotel Management System" textFill="#00ffed">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />
+        <URL value="@../../css/statistics.css" />
     </stylesheets>
 </AnchorPane>

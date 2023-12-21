@@ -107,6 +107,10 @@
             </image>
         </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label layoutX="163.0" layoutY="126.0" text="Welcome to [Your Hotel Management System]!" textFill="WHITE" />
+        <Label layoutX="151.0" layoutY="152.0" text="Make Managing Your Hotel Easier with Our App" textFill="WHITE" />
+        <Label layoutX="151.0" layoutY="177.0" text="LabAt [Your Hotel Management System], we want to change how hotels work. Our team knows hotels have lots to do and we're here to help.el" textFill="WHITE" />
+        <Label layoutX="151.0" layoutY="202.0" text="Our Goal:To give hotels a tool that's easy to use and makes guests happy while keeping things running smoothly." textFill="WHITE" />
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />

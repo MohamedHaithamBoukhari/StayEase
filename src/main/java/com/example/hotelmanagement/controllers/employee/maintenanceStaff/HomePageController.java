@@ -315,7 +315,7 @@ public class HomePageController implements Initializable {
         ComplaintTableView.setNBR(1);
 
         List<String> colToSelect =  new ArrayList<String>(List.of("declarationId", "declarantId", "declarantStatus", "declarationObject", "declaration", "declarationDate", "response", "responseDate"));
-        String declarantStatus = "Employee";
+        String declarantStatus = "Maintenance Staff";
         String query = "SELECT declarationId, declarantId, declarantStatus, declarationObject, declaration, declarationDate, response, responseDate " +
                        "FROM declaration " +
                        "WHERE declarantId = " + EmployeeManager.getInstance().getEmployee().getEmployeeId() + " AND declarantStatus = '" + declarantStatus + "'";
@@ -426,7 +426,7 @@ public class HomePageController implements Initializable {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String complaintDate = currentDate.format(formatter);
 
-            Complaint complaint = new Complaint(declarantId,"Employee",object,complaintBody,complaintDate,null,null);
+            Complaint complaint = new Complaint(declarantId,"Maintenance Staff",object,complaintBody,complaintDate,null,null);
             DeclarationDao.insert(complaint);
 
             addComplaintPane.setVisible(false);

@@ -45,6 +45,8 @@ public class CustomerHomePageController implements Initializable{
     private Customer currentCustomer;
     private String currentPage;
 
+    @FXML private Label reservationsNbr, feedbacksNbr, complaintsNbr, invoicesNbr, unpaidInvoicesNbr;
+
     @FXML private Label succesMsg;
     @FXML private AnchorPane rootPane;
     @FXML private Label fullnameLabel;
@@ -95,7 +97,17 @@ public class CustomerHomePageController implements Initializable{
         System.out.println(currentPage.equals("CustomerInfos"));
         fullnameLabel.setText("- " + currentCustomer.getFullName() + " -");
         if(currentPage.equals("Home")){
-
+            Map map1 = new HashMap<>();
+            map1.put("customerId", CustomerManager.getInstance().getCustomer().getCustomerId());
+            reservationsNbr.setText(String.valueOf(ReservationDao.select(map1,"*").size()));
+            feedbacksNbr.setText(String.valueOf(FeedbackDao.select(map1,"*").size()));
+            Map map2 = new HashMap<>();
+            map2.put("declarantId", CustomerManager.getInstance().getCustomer().getCustomerId());
+            map2.put("declarantStatus", "Customer");
+            complaintsNbr.setText(String.valueOf(DeclarationDao.select(map2,"*").size()));
+            invoicesNbr.setText(String.valueOf(InvoiceDao.select(map1,"*").size()));
+            map1.put("status", "Unpaid");
+            unpaidInvoicesNbr.setText(String.valueOf(InvoiceDao.select(map1,"*").size()));
         } else if (currentPage.equals("CustomerInfos")){
             succesMsg.setVisible(false);
             initializeFields(currentCustomer);

@@ -1,5 +1,13 @@
 package com.example.hotelmanagement.tablesView;
 
+import com.example.hotelmanagement.beans.Customer;
+import com.example.hotelmanagement.beans.Employee;
+import com.example.hotelmanagement.dao.CustomerDao;
+import com.example.hotelmanagement.dao.EmployeeDao;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ComplaintTableView {
     private static Integer NBR=1;
     private Object i;
@@ -12,6 +20,7 @@ public class ComplaintTableView {
     private Object response;
     private Object responseDate;
     private Object responseStatus;
+    private Object email;
 
     public ComplaintTableView(Object declarationId, Object declarantId, Object declarantStatus, Object declarationObject, Object declaration, Object declarationDate, Object response, Object responseDate) {
         this.i = NBR;
@@ -24,6 +33,7 @@ public class ComplaintTableView {
         this.response = response;
         this.responseDate = responseDate;
         this.setResponseStatus(response);
+        this.setEmail(declarantId, declarantStatus);
         incrementId();
     }
 
@@ -119,6 +129,20 @@ public class ComplaintTableView {
         }
     }
 
+    public Object getEmail() {
+        return email;
+    }
+
+    public void setEmail(Object declarantId, Object declarantStatus) {
+        if(declarantStatus.equals("Customer")){
+            Map map = new HashMap<>();map.put("customerId", declarantId);
+            this.email = ((Customer)CustomerDao.select(map,"*").get(0)).getEmail();
+        }else {
+            Map map = new HashMap<>();map.put("employeeId", declarantId);
+            this.email = ((Employee) EmployeeDao.select(map,"*").get(0)).getEmail();
+        }
+    }
+
     public static void incrementId(){
         NBR ++;
     }
@@ -135,6 +159,7 @@ public class ComplaintTableView {
                 ", declarationDate=" + declarationDate +
                 ", response=" + response +
                 ", responseDate=" + responseDate +
+                ", email=" + email +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.example.hotelmanagement.controllers.employee.manager;
 
 import com.example.hotelmanagement.HelloApplication;
+import com.example.hotelmanagement.beans.Complaint;
 import com.example.hotelmanagement.beans.Employee;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
@@ -9,6 +10,7 @@ import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.localStorage.EmployeeManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
+import com.example.hotelmanagement.tablesView.ComplaintTableView;
 import com.example.hotelmanagement.tablesView.InvoicesTableView;
 import com.example.hotelmanagement.tablesView.ReservationTableView;
 import com.example.hotelmanagement.tablesView.RoomsTableView;
@@ -23,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -31,6 +34,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class HomePageController implements Initializable{
@@ -66,6 +70,18 @@ public class HomePageController implements Initializable{
     @FXML private TextField cinField, fullnameField;
     @FXML private DatePicker invoiceDate;
     @FXML private Button payBtn, confirmPayBtn, hideConfirmPayBtn;
+
+    @FXML private TableView<ComplaintTableView> complaintTable;
+    @FXML private TableColumn<ComplaintTableView, Object> complaintObjectCol, responseStatusCol, complaintDateCol,declarantStatusCol,declarantEmailCol;
+    @FXML private CheckBox Replied, Unreplied, ComplaintDateAsc, ComplaintDateDesc, Customer, MaintenanceStaff, Cleaner;
+    @FXML private DatePicker complaintDatePicker;
+    @FXML private TextField complaintObjectField, objectField;
+    @FXML private TextArea complaintField;
+    @FXML private AnchorPane addComplaintPane, confirmDeletePane, detailsPane;
+    @FXML private Button confirmAddBtn, saveBtn;
+    @FXML private Label detailResponseDate, detailResponse, detailComplaint, detailComplaintObject, detailDate;
+    @FXML private Label addDeleteLabel, editError, deleteError;
+    @FXML private AnchorPane actionPane;
 //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -135,7 +151,7 @@ public class HomePageController implements Initializable{
             hideConfirmPayBtn.setVisible(false);
         } else if (currentPage.equals("Complaint")) {
 
-        }
+            loadDataOnComplaintsTable(new ArrayList<>(), new ArrayList<>(),"","", "");        }
     }
 //------------------------------------------------------------------------------------------
     public void switchToHome(ActionEvent event) throws IOException {
@@ -785,7 +801,215 @@ public class HomePageController implements Initializable{
         loadDataOnInvoicesTable(new ArrayList<>(), "", "",null);
         hideConfirmation(event);
     }
-//-------------------------------------------------------------------------------
+//-------------------------------------- Complaints -----------------------------------------
+    public void loadDataOnComplaintsTable(List<String> responseStatusList, List<String> declarantStatusList, String  complaintDateOrder, String complaintDate, String complaintObject){
+//    noRowsMsg.setVisible(false);
+    List<ComplaintTableView> complaintsList = new ArrayList<>();
+    complaintTable.getItems().clear();
+    ComplaintTableView.setNBR(1);
+
+    List<String> colToSelect =  new ArrayList<String>(List.of("declarationId", "declarantId", "declarantStatus", "declarationObject", "declaration", "declarationDate", "response", "responseDate"));
+    String query = "SELECT declarationId, declarantId, declarantStatus, declarationObject, declaration, declarationDate, response, responseDate " +
+            "FROM declaration";
+    if(responseStatusList.isEmpty() && declarantStatusList.isEmpty() && complaintDateOrder.isEmpty() && complaintDate.isEmpty() && complaintObject.isEmpty()){
+        List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
+        for (Object[] row : complaintsDetails) {
+            ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+            System.out.println(complaintRow);
+            complaintsList.add(complaintRow);
+        }
+    }else{
+        query += " WHERE ";
+        int i =0;
+        String col1 = "response", col2 = "declarantStatus", col3 = "declarationDate", col4 = "declarationObject";
+        if(!responseStatusList.isEmpty()){
+            i++;
+            query += "(";
+            for (String responseStatus: responseStatusList){
+                if(responseStatus.equals("Replied")){
+                    query =query  + col1 + " IS NOT NULL OR ";
+                } else if (responseStatus.equals("Unreplied")) {
+                    query =query  + col1 + " IS NULL OR ";
+                }
+            }
+            query = query .substring(0,query .length() - 4); //delete last " OR "
+            query += ") AND ";
+        }
+        if(!declarantStatusList.isEmpty()){
+            i++;
+            query += "(";
+            for (String position: declarantStatusList){
+                query =query  + col2 + " = '" + position + "' OR ";
+            }
+            query = query .substring(0,query .length() - 4); //delete last " OR "
+            query += ") AND ";
+        }
+        if(!complaintDate.isEmpty()){
+            i++;
+            query += "("+ col3 + " LIKE '%" + complaintDate + "%') AND ";
+        }
+
+        if(!complaintObject.equals("")){
+            i++;
+            query += "("+ col4 + " LIKE '%" + complaintObject + "%') AND ";
+        }
+
+        if(!complaintDateOrder.equals("")){
+            if(i==0){
+                query = query.substring(0, query.length() - 7);//delete last " WHERE "
+            }else {
+                query = query.substring(0, query.length() - 5);//delete last " AND "
+            }
+            query = query + " ORDER BY declarationDate " + complaintDateOrder + " AND ";
+        }
+
+        query = query.substring(0, query.length() - 5);//delete last "AND "
+        System.out.println(query);
+
+
+        List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
+        for (Object[] row : complaintsDetails) {
+            ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
+            System.out.println(complaintRow);
+            complaintsList.add(complaintRow);
+        }
+    }
+
+    id_Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+    complaintDateCol.setCellValueFactory(new PropertyValueFactory<>("declarationDate"));
+    complaintObjectCol.setCellValueFactory(new PropertyValueFactory<>("declarationObject"));
+    declarantEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+    declarantStatusCol.setCellValueFactory(new PropertyValueFactory<>("declarantStatus"));
+    responseStatusCol.setCellValueFactory(new PropertyValueFactory<>("responseStatus"));
+        System.out.println(complaintsList);
+    complaintTable.getItems().addAll(complaintsList);
+
+    if(complaintsList.isEmpty()){
+//        noRowsMsg.setVisible(true);
+    }
+
+}
+    public void filterComplaints(ActionEvent event){
+        List<String> responseStatusList = new ArrayList<>();
+        List<String> declarantStatusList = new ArrayList<>();
+        String complaintDateOrder = "";
+        String complaintObject = complaintObjectField.getText();
+
+        if(Replied.isSelected()) responseStatusList.add("Replied");
+        if(Unreplied.isSelected()) responseStatusList.add("Unreplied");
+
+        if(Customer.isSelected()) declarantStatusList.add("Customer");
+        if(Cleaner.isSelected()) declarantStatusList.add("Cleaner");
+        if(MaintenanceStaff.isSelected()) declarantStatusList.add("Maintenance Staff");
+
+        if(ComplaintDateDesc.isSelected()) {
+            complaintDateOrder = "DESC";
+            ComplaintDateAsc.setSelected(false);
+        }
+        if(ComplaintDateAsc.isSelected()) {
+            complaintDateOrder = "ASC";
+            ComplaintDateDesc.setSelected(false);
+        }
+
+        LocalDate taskDate__ = complaintDatePicker.getValue();
+        String complaintDate="";
+        if (taskDate__ != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust the pattern as needed
+            complaintDate = taskDate__.format(formatter);
+        }
+
+        loadDataOnComplaintsTable(responseStatusList,declarantStatusList, complaintDateOrder, complaintDate, complaintObject);
+    }
+                            //-------------------------------------------------
+    public void displayReplyComplaintPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        saveBtn.setVisible(false);
+        confirmAddBtn.setVisible(true);
+        objectField.setText("");
+        complaintField.setText("");
+        addDeleteLabel.setText("Add complaint");
+
+        addComplaintPane.setVisible(true);
+    }
+    public void replyComplaint(ActionEvent event){
+        String object = objectField.getText();
+        String complaintBody = complaintField.getText();
+        if (!object.isEmpty()){
+            int declarantId = EmployeeManager.getInstance().getEmployee().getEmployeeId();
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String complaintDate = currentDate.format(formatter);
+
+            Complaint complaint = new Complaint(declarantId,"Customer",object,complaintBody,complaintDate,null,null);
+            DeclarationDao.insert(complaint);
+
+            addComplaintPane.setVisible(false);
+            loadDataOnComplaintsTable(new ArrayList<>(),"","","");
+            addedMsg.setVisible(true);
+            hideMsg(addedMsg,4);
+        }
+    }
+    public void hideReplyComplaintPane(ActionEvent event){
+        addComplaintPane.setVisible(false);
+    }
+
+    public void displayConfirmDeletePane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        addedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        deletedMsg.setVisible(false);
+
+        if(complaintTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+
+        actionPane.setVisible(false);
+        confirmDeletePane.setVisible(true);
+    }
+    public void hideConfirmDeletePane(ActionEvent event){
+        confirmDeletePane.setVisible(false);
+        actionPane.setVisible(true);
+    }
+    public void confirmDelete(ActionEvent event){
+        DeclarationDao.delete("declarationId",complaintTable.getSelectionModel().getSelectedItem().getDeclarationId());
+        confirmDeletePane.setVisible(false);
+
+        loadDataOnComplaintsTable(new ArrayList<>(),new ArrayList<>(),"","","");
+        actionPane.setVisible(true);
+        deletedMsg.setVisible(true);
+        hideMsg(deletedMsg,4);
+    }
+
+    public void displayDetailPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        editError.setVisible(false);
+        deleteError.setVisible(false);
+        addedMsg.setVisible(false);
+        updatedMsg.setVisible(false);
+        deletedMsg.setVisible(false);
+
+        if(complaintTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        detailDate.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationDate()));
+        detailComplaintObject.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationObject()));
+        detailComplaint.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclaration()));
+        String respDate = String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponseDate()).equals("null")?"_______________":String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponseDate());
+        String resp = String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).equals("null")?"_______________":String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse());
+        detailResponseDate.setText(respDate);
+        detailResponse.setText(resp);
+        detailsPane.setVisible(true);
+    }
+    public void hideDetailsComplaintPane(ActionEvent event){
+        detailsPane.setVisible(false);
+    }
+    //-------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){
         Duration duration = Duration.seconds(time);
         Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
