@@ -99,7 +99,7 @@ public class CummonDbFcts<T> {
             cols = cols.substring(0, cols.length() - 1);         // delete the last ,
             colsVal = colsVal.substring(0, colsVal.length() - 2);//delete the last ", " (comma and space)
 
-            preparedStatement = connection.prepareStatement("INSERT INTO "+tableName+"("+cols+")"+" VALUES("+colsVal+");");
+            preparedStatement = connection.prepareStatement("INSERT INTO "+tableName+" ("+cols+")"+" VALUES("+colsVal+");");
 
             for (int i=1; i<columns.length ; i++){
                 String columnGetter = "get"+columns[i].substring(0,1).toUpperCase() + columns[i].substring(1);

@@ -312,7 +312,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         VarsManager.actionStarted ="add";
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/NewRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/NewRoom-view.fxml"));
         Parent root = loader.load();
 
         scene = new Scene(root);
@@ -349,7 +349,7 @@ public class HomePageController implements Initializable{
         VarsManager.actionStarted = "update";
         VarsManager.selectedRoomId = (int) roomsTable.getSelectionModel().getSelectedItem().getRoomId();
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/EditRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/EditRoom-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();
@@ -383,7 +383,7 @@ public class HomePageController implements Initializable{
         VarsManager.actionStarted = "delete";
         VarsManager.selectedRoomId = (int) roomsTable.getSelectionModel().getSelectedItem().getRoomId();
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/DeleteRoom-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/DeleteRoom-view.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
         childStage = new Stage();

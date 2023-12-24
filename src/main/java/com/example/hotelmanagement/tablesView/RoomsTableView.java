@@ -19,6 +19,7 @@ public class RoomsTableView {
     private Object price_day;//price day of type
     private Object price;//price day of type+capacity
     private Object reservationPrice;//price day of type+capacity
+    private Object duration;//price day of type+capacity
 
     public RoomsTableView(Object roomId, Object numRoom, Object type, Object capacity, Object status, Object price_day, Object duration) {
         this.i = NBR;
@@ -27,10 +28,21 @@ public class RoomsTableView {
         this.type = type;
         this.capacity = capacity;
         this.status = status;
+        this.duration = duration;
 
         this.setPrice_day(price_day,type);
+        System.out.println("price_day"+this.price_day);
+
         this.price = (int)this.price_day*(1+(int)capacity) - ((int) capacity*40);
-        this.reservationPrice = (int)this.price * (Long)duration;
+        System.out.println("price"+this.price);
+        System.out.println(this.price.getClass());
+        System.out.println(this.capacity.getClass());
+        System.out.println("duration class "+duration.getClass()+" value "+duration );
+        if(duration instanceof Long){
+            this.reservationPrice = (int)this.price * (Long)this.duration;
+        }else if (duration instanceof  Integer){
+            this.reservationPrice = (int)this.price * (Integer)this.duration;
+        }
         incrementId();
     }
     public static void incrementId(){
