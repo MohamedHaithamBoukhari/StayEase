@@ -5,12 +5,14 @@ public class Service {
     private String serviceName;
     private String descreption;
     private String correspondingTable;
+    private String status;
 
     public Service(){}
-    public Service(String serviceName, String descreption, String correspondingTable) {
+    public Service(String serviceName, String descreption, String correspondingTable, String status) {
         this.serviceName = serviceName;
         this.descreption = descreption;
         this.correspondingTable = correspondingTable;
+        this.status = status;
     }
 
     public int getServiceId() {
@@ -45,6 +47,14 @@ public class Service {
         this.correspondingTable = correspondingTable;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Service{" +
@@ -52,6 +62,7 @@ public class Service {
                 ", serviceName='" + serviceName + '\'' +
                 ", descreption='" + descreption + '\'' +
                 ", correspondingTable='" + correspondingTable + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ServiceDao extends CummonDbFcts {
     public static final String TABLE_NAME = "service";
-    public static final String[] TABLE_COLUMNS = {"serviceId", "serviceName", "descreption","correspondingTable"};
+    public static final String[] TABLE_COLUMNS = {"serviceId", "serviceName", "descreption","correspondingTable", "status"};
 
     public static List<Object> select(Map<String, Object> whereMap, String selectedCols) {
         List<Object> rows = superSelect(Service.class, TABLE_NAME, selectedCols, TABLE_COLUMNS, whereMap);

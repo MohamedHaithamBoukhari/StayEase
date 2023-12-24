@@ -88,7 +88,7 @@ public class LoginController {
         } else if (empPosition.equals("Cleaner")) {
             loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/cleaner/HomePage-view.fxml"));
         }else {
-            loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/otherPosition/HomePage-view.fxml"));
+            loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/otherPosition/OtherPosition-view.fxml"));
         }
         root = loader.load();
 

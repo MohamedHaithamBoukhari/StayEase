@@ -7,13 +7,15 @@ public class ServiceTableView {
     private Object serviceName;
     private Object descreption;
     private Object correspondingTable;
+    private Object status;
 
-    public ServiceTableView(Object serviceId, Object serviceName, Object descreption, Object correspondingTable) {
+    public ServiceTableView(Object serviceId, Object serviceName, Object descreption, Object correspondingTable,Object status) {
         this.i = NBR;
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.descreption = descreption;
         this.correspondingTable = correspondingTable;
+        this.status = status;
         incrementId();
     }
     public static void incrementId(){
@@ -66,5 +68,13 @@ public class ServiceTableView {
 
     public void setCorrespondingTable(Object correspondingTable) {
         this.correspondingTable = correspondingTable;
+    }
+
+    public Object getStatus() {
+        return status;
+    }
+
+    public void setStatus(Object status) {
+        this.status = status;
     }
 }

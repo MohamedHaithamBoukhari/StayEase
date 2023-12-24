@@ -142,7 +142,7 @@
                 <Image url="@../../images/complaintIcon.png" />
             </image>
         </ImageView>
-        <Label fx:id="ratingAverage" contentDisplay="CENTER" layoutX="395.0" layoutY="503.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+        <Label fx:id="complaintsNbr" contentDisplay="CENTER" layoutX="395.0" layoutY="503.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
             <font>
                 <Font name="Arial Bold" size="22.0" />
             </font>
@@ -152,7 +152,7 @@
                 <Image url="@../../images/invoiceIcon.png" />
             </image>
         </ImageView>
-        <Label fx:id="roomsNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="344.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+        <Label fx:id="invoicesNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="344.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
             <font>
                 <Font name="Arial Bold" size="22.0" />
             </font>
@@ -162,7 +162,7 @@
                 <Image url="@../../images/invoiceIcon.png" />
             </image>
         </ImageView>
-        <Label fx:id="occupiedRoomNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="454.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
+        <Label fx:id="unpaidInvoicesNbr" contentDisplay="CENTER" layoutX="690.0" layoutY="454.0" prefHeight="27.0" prefWidth="76.0" text="12" textFill="WHITE">
             <font>
                 <Font name="Arial Bold" size="22.0" />
             </font>

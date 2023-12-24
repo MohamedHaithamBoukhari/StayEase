@@ -76,11 +76,10 @@ public class HomePageController implements Initializable{
     @FXML private CheckBox Replied, Unreplied, ComplaintDateAsc, ComplaintDateDesc, Customer, MaintenanceStaff, Cleaner;
     @FXML private DatePicker complaintDatePicker;
     @FXML private TextField complaintObjectField, objectField;
-    @FXML private TextArea complaintField;
-    @FXML private AnchorPane addComplaintPane, confirmDeletePane, detailsPane;
-    @FXML private Button confirmAddBtn, saveBtn;
-    @FXML private Label detailResponseDate, detailResponse, detailComplaint, detailComplaintObject, detailDate;
-    @FXML private Label addDeleteLabel, editError, deleteError;
+    @FXML private TextArea complaintField,responseField;
+    @FXML private AnchorPane replyComplaintPane, confirmDeletePane, detailsPane;
+    @FXML private Label detailResponseDate, detailResponse, detailComplaint, detailComplaintObject;
+    @FXML private Label replyError;
     @FXML private AnchorPane actionPane;
 //------------------------------------------------------------------------------------------
     @Override
@@ -150,7 +149,14 @@ public class HomePageController implements Initializable{
             confirmPayBtn.setVisible(false);
             hideConfirmPayBtn.setVisible(false);
         } else if (currentPage.equals("Complaint")) {
-
+            noRowsMsg.setVisible(false);
+            replyError.setVisible(false);
+            addedMsg.setVisible(false);
+            deletedMsg.setVisible(false);
+            rowSelectedError.setVisible(false);
+            replyComplaintPane.setVisible(false);
+            confirmDeletePane.setVisible(false);
+            detailsPane.setVisible(false);
             loadDataOnComplaintsTable(new ArrayList<>(), new ArrayList<>(),"","", "");        }
     }
 //------------------------------------------------------------------------------------------
@@ -803,7 +809,7 @@ public class HomePageController implements Initializable{
     }
 //-------------------------------------- Complaints -----------------------------------------
     public void loadDataOnComplaintsTable(List<String> responseStatusList, List<String> declarantStatusList, String  complaintDateOrder, String complaintDate, String complaintObject){
-//    noRowsMsg.setVisible(false);
+    noRowsMsg.setVisible(false);
     List<ComplaintTableView> complaintsList = new ArrayList<>();
     complaintTable.getItems().clear();
     ComplaintTableView.setNBR(1);
@@ -885,7 +891,7 @@ public class HomePageController implements Initializable{
     complaintTable.getItems().addAll(complaintsList);
 
     if(complaintsList.isEmpty()){
-//        noRowsMsg.setVisible(true);
+        noRowsMsg.setVisible(true);
     }
 
 }
@@ -920,48 +926,64 @@ public class HomePageController implements Initializable{
 
         loadDataOnComplaintsTable(responseStatusList,declarantStatusList, complaintDateOrder, complaintDate, complaintObject);
     }
-                            //-------------------------------------------------
+    //------     ------     -------       ------      ------       ------          -------
     public void displayReplyComplaintPane(ActionEvent event){
         rowSelectedError.setVisible(false);
-        editError.setVisible(false);
-        deleteError.setVisible(false);
-        saveBtn.setVisible(false);
-        confirmAddBtn.setVisible(true);
-        objectField.setText("");
-        complaintField.setText("");
-        addDeleteLabel.setText("Add complaint");
+        replyError.setVisible(false);
 
-        addComplaintPane.setVisible(true);
+        if(complaintTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+
+        Map map = new HashMap<>();
+        map.put("declarationId", complaintTable.getSelectionModel().getSelectedItem().getDeclarationId());
+        Complaint complaint = (Complaint)DeclarationDao.select(map,"*").get(0);
+
+        System.out.println("================"+complaintTable.getSelectionModel().getSelectedItem().getResponseStatus());
+        System.out.println("======bool======"+complaintTable.getSelectionModel().getSelectedItem().getResponseStatus().equals("Replied"));
+        if(complaintTable.getSelectionModel().getSelectedItem().getResponseStatus().equals("Replied")){
+            replyError.setVisible(true);
+            System.out.println("replyerro true");
+            return;
+        }
+
+        replyComplaintPane.setVisible(true);
+        objectField.setText(complaint.getDeclarationObject());
+        complaintField.setText(complaint.getDeclaration());
+        responseField.setText("");
     }
     public void replyComplaint(ActionEvent event){
-        String object = objectField.getText();
-        String complaintBody = complaintField.getText();
-        if (!object.isEmpty()){
-            int declarantId = EmployeeManager.getInstance().getEmployee().getEmployeeId();
+        String complaintResponse = responseField.getText();
+        if (!complaintResponse.isEmpty()){
+            int declarantionId = (int)complaintTable.getSelectionModel().getSelectedItem().getDeclarationId();
             LocalDate currentDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String complaintDate = currentDate.format(formatter);
+            String responseDate = currentDate.format(formatter);
 
-            Complaint complaint = new Complaint(declarantId,"Customer",object,complaintBody,complaintDate,null,null);
-            DeclarationDao.insert(complaint);
+            String[] updatedColumns = {"response", "responseDate"};
+            Object[] newColumnsValue = {complaintResponse,responseDate};
+            String testColumn = "declarationId";
+            Object testColumnValue = declarantionId;
 
-            addComplaintPane.setVisible(false);
-            loadDataOnComplaintsTable(new ArrayList<>(),"","","");
+            DeclarationDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+
+            replyComplaintPane.setVisible(false);
+            loadDataOnComplaintsTable(new ArrayList<>(),new ArrayList<>(),"","","");
             addedMsg.setVisible(true);
             hideMsg(addedMsg,4);
         }
     }
-    public void hideReplyComplaintPane(ActionEvent event){
-        addComplaintPane.setVisible(false);
-    }
 
+    public void hideReplyComplaintPane(ActionEvent event){
+        replyComplaintPane.setVisible(false);
+    }
     public void displayConfirmDeletePane(ActionEvent event){
         rowSelectedError.setVisible(false);
-        editError.setVisible(false);
-        deleteError.setVisible(false);
         addedMsg.setVisible(false);
-        updatedMsg.setVisible(false);
         deletedMsg.setVisible(false);
+        replyError.setVisible(false);
+
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
@@ -976,6 +998,7 @@ public class HomePageController implements Initializable{
         actionPane.setVisible(true);
     }
     public void confirmDelete(ActionEvent event){
+        replyError.setVisible(false);
         DeclarationDao.delete("declarationId",complaintTable.getSelectionModel().getSelectedItem().getDeclarationId());
         confirmDeletePane.setVisible(false);
 
@@ -987,21 +1010,23 @@ public class HomePageController implements Initializable{
 
     public void displayDetailPane(ActionEvent event){
         rowSelectedError.setVisible(false);
-        editError.setVisible(false);
-        deleteError.setVisible(false);
+        replyError.setVisible(false);
         addedMsg.setVisible(false);
-        updatedMsg.setVisible(false);
         deletedMsg.setVisible(false);
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
             return;
         }
-        detailDate.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationDate()));
-        detailComplaintObject.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationObject()));
-        detailComplaint.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclaration()));
-        String respDate = String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponseDate()).equals("null")?"_______________":String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponseDate());
-        String resp = String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).equals("null")?"_______________":String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse());
+
+        Map map = new HashMap<>();
+        map.put("declarationId", complaintTable.getSelectionModel().getSelectedItem().getDeclarationId());
+        Complaint complaint = (Complaint)DeclarationDao.select(map,"*").get(0);
+
+        detailComplaintObject.setText(String.valueOf(complaint.getDeclarationObject()));
+        detailComplaint.setText(String.valueOf(complaint.getDeclaration()));
+        String respDate = String.valueOf(complaint.getResponseDate()).equals("null")?"_______________":String.valueOf(complaint.getResponseDate());
+        String resp = String.valueOf(complaint.getResponse()).equals("null")?"_______________":String.valueOf(complaint.getResponse());
         detailResponseDate.setText(respDate);
         detailResponse.setText(resp);
         detailsPane.setVisible(true);

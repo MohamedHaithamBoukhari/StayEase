@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -173,8 +174,8 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="editError" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="170.0" text="Complaint already replied" />
-        <AnchorPane fx:id="confirmDeletePane" layoutX="212.0" layoutY="429.0" prefHeight="63.0" prefWidth="650.0">
+        <Label fx:id="replyError" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="170.0" text="Complaint already replied" />
+        <AnchorPane fx:id="confirmDeletePane" layoutX="212.0" layoutY="509.0" prefHeight="63.0" prefWidth="650.0">
             <children>
                 <Label fx:id="confirmActionMsg" layoutX="26.0" layoutY="17.0" prefHeight="30.0" prefWidth="498.0" text="Are you sure you want to delete the selected complaint?" textFill="#fff200">
                     <font>
@@ -185,10 +186,10 @@
                 <Button fx:id="cancelDeleteBtn" alignment="CENTER" layoutX="564.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hideConfirmDeletePane" prefHeight="8.0" prefWidth="61.0" text="No" AnchorPane.bottomAnchor="17.0" AnchorPane.topAnchor="16.0" />
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="addComplaintPane" layoutX="196.0" layoutY="312.0" prefHeight="144.0" prefWidth="664.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="35.0">
+        <AnchorPane fx:id="replyComplaintPane" layoutX="196.0" layoutY="352.0" prefHeight="220.0" prefWidth="669.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="35.0">
             <children>
                 <Button fx:id="hidePaneBtn" layoutX="632.0" layoutY="2.0" mnemonicParsing="false" onAction="#hideReplyComplaintPane" prefHeight="31.0" prefWidth="25.0" text="x" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
-                <Label fx:id="addDeleteLabel" alignment="CENTER" layoutX="163.0" layoutY="-6.0" prefHeight="45.0" prefWidth="336.0" text="Reply complaint" textFill="#d6dcdd">
+                <Label fx:id="addDeleteLabel" alignment="CENTER" layoutX="163.0" layoutY="-4.0" prefHeight="45.0" prefWidth="336.0" text="Reply complaint" textFill="#d6dcdd">
                     <font>
                         <Font name="System Bold" size="30.0" />
                     </font>
@@ -198,77 +199,87 @@
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <TextField fx:id="objectField" layoutX="136.0" layoutY="45.0" prefHeight="25.0" prefWidth="498.0" />
+                <TextField fx:id="objectField" editable="false" layoutX="136.0" layoutY="44.0" prefHeight="23.0" prefWidth="498.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
                 <Label layoutX="30.0" layoutY="80.0" text="Complaint : " textFill="#d6dcdd">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="complaintField" layoutX="136.0" layoutY="77.0" prefHeight="63.0" prefWidth="498.0" wrapText="true" />
-                <Button fx:id="confirmReplayBtn" layoutX="588.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#replyComplaint" prefHeight="31.0" prefWidth="50.0" text="Reply">
+                <TextArea fx:id="complaintField" editable="false" layoutX="136.0" layoutY="79.0" prefHeight="63.0" prefWidth="498.0" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font></TextArea>
+                <Button fx:id="confirmReplayBtn" layoutX="589.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#replyComplaint" prefHeight="31.0" prefWidth="50.0" text="Reply">
                     <font>
                         <Font size="41.0" />
                     </font>
                 </Button>
+            <Label layoutX="30.0" layoutY="150.0" text="Response :" textFill="#d6dcdd">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="responseField" layoutX="136.0" layoutY="147.0" prefHeight="63.0" prefWidth="498.0" promptText="Your response here" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextArea>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="detailsPane" layoutX="199.0" layoutY="374.0" prefHeight="152.0" prefWidth="664.0">
+        <AnchorPane fx:id="detailsPane" layoutX="199.0" layoutY="419.0" prefHeight="152.0" prefWidth="664.0">
             <children>
                 <Button fx:id="hideDetailsPaneBtn" layoutX="636.0" layoutY="4.0" mnemonicParsing="false" onAction="#hideDetailsComplaintPane" prefHeight="31.0" prefWidth="25.0" text="x" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="4.0" />
-                <Label layoutX="24.0" layoutY="4.0" text="Complaint Date:" textFill="#defffe">
+                <Label layoutX="24.0" layoutY="23.0" text="Complaint Object:" textFill="#defffe">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="detailDate" layoutX="175.0" layoutY="4.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                <Label fx:id="detailComplaintObject" layoutX="175.0" layoutY="24.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="24.0" layoutY="33.0" text="Complaint Object:" textFill="#defffe">
+                <Label layoutX="24.0" layoutY="55.0" text="Complaint:" textFill="#defffe">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="detailComplaintObject" layoutX="175.0" layoutY="34.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                <Label fx:id="detailComplaint" layoutX="176.0" layoutY="56.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="24.0" layoutY="64.0" text="Complaint:" textFill="#defffe">
+                <Label layoutX="24.0" layoutY="87.0" text="Response Date:" textFill="#defffe">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="detailComplaint" layoutX="176.0" layoutY="65.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                <Label fx:id="detailResponseDate" layoutX="175.0" layoutY="88.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="24.0" layoutY="90.0" text="Response Date:" textFill="#defffe">
+                <Label layoutX="25.0" layoutY="119.0" text="Response: " textFill="#defffe">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="detailResponseDate" layoutX="175.0" layoutY="91.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
+                <Label fx:id="detailResponse" layoutX="175.0" layoutY="121.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="25.0" layoutY="121.0" text="Response: " textFill="#defffe">
-                    <font>
-                        <Font name="System Bold" size="17.0" />
-                    </font>
-                </Label>
-                <Label fx:id="detailResponse" layoutX="175.0" layoutY="123.0" prefHeight="26.0" prefWidth="453.0" text="Label" textFill="#40baeb">
-                    <font>
-                        <Font size="17.0" />
-                    </font>
-                </Label>
+            <Label layoutX="305.0" layoutY="-1.0" text="Details" textFill="#defffe">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
-        <Label fx:id="addedMsg" layoutX="221.0" layoutY="526.0" prefHeight="30.0" prefWidth="200.0" text="Complaint added successfully" />
-        <Label fx:id="updatedMsg" layoutX="223.0" layoutY="526.0" prefHeight="30.0" prefWidth="207.0" text="Complaint update successfully" />
+        <Label fx:id="addedMsg" layoutX="221.0" layoutY="526.0" prefHeight="30.0" prefWidth="205.0" text="Complaint replied successfully" />
         <Label fx:id="deletedMsg" layoutX="222.0" layoutY="526.0" prefHeight="30.0" prefWidth="213.0" text="Complaint deleted successfully" />
     </children>
     <stylesheets>

@@ -58,7 +58,7 @@
     -fx-background-radius: 10px;
 }
 
-#addComplaintPane{
+#addComplaintPane, #replyComplaintPane{
     -fx-background-color:linear-gradient(to bottom, rgba(21,25,45), rgba(21,25,37));
     -fx-background-radius:6px;
 
@@ -79,7 +79,7 @@
     -fx-text-fill: #15ff00;
     -fx-border-color:#15ff00;
 }
-#deleteError, #editError{
+#deleteError, #editError, #replyError{
     -fx-font-size: 13;
     -fx-text-fill: yellow;
     -fx-font-weight: bold;

@@ -123,7 +123,7 @@ public class ComplaintTableView {
 
     public void setResponseStatus(Object response) {
         if (response!=null && !String.valueOf(response).equals("")){
-            this.responseStatus = "replied";
+            this.responseStatus = "Replied";
         }else {
             this.responseStatus = "Unreplied";
         }
