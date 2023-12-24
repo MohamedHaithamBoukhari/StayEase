@@ -142,9 +142,9 @@ public class ReservationActionsController implements Initializable {
                     query += "AND r.capacity <= '" + capacity +"' ";
                 }
                 if(!priceDay.isEmpty()){
-                    query += "AND " + "(SELECT price_day FROM roomType rT WHERE rT.type = r.type)" +" <= " + priceDay;
+                    query += "AND " + "(SELECT rT.price_day*(1+r.capacity) - (r.capacity*40) FROM roomtype rT WHERE rT.type = r.type)" +" <= " + priceDay;
                 }
-
+                System.out.println(query);
                 List<Object[]> roomsdetails = CummonDbFcts.querySelect(query, colToSelect);
                 for (Object[] row : roomsdetails) {
                     RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],null,duration);

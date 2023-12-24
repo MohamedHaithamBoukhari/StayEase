@@ -84,7 +84,7 @@
                 <Font size="14.0" />
             </font>
         </Button>
-      <Label fx:id="noRowsMsg" alignment="CENTER" layoutX="306.0" layoutY="356.0" prefHeight="30.0" prefWidth="287.0" text="No available room match the selected filters" textFill="#02bfe3">
+      <Label fx:id="noRowsMsg" alignment="CENTER" layoutX="255.0" layoutY="356.0" prefHeight="30.0" prefWidth="396.0" text="No available room match the selected filters" textFill="#02bfe3">
          <font>
             <Font size="18.0" />
          </font>

@@ -28,11 +28,9 @@ public class RoomsTableView {
         this.capacity = capacity;
         this.status = status;
 
-            this.setPrice_day(price_day,type);
-            System.out.println(this.price_day);
-
+        this.setPrice_day(price_day,type);
         this.price = (int)this.price_day*(1+(int)capacity) - ((int) capacity*40);
-        this.reservationPrice = (int)this.price * (int)duration;
+        this.reservationPrice = (int)this.price * (Long)duration;
         incrementId();
     }
     public static void incrementId(){
@@ -93,7 +91,7 @@ public class RoomsTableView {
             RoomType roomType = (RoomType)(RoomTypeDao.select(map, "*").get(0));
             this.price_day = roomType.getPrice_day();
             System.out.println( "price_day rom db  " + roomType.getPrice_day());
-            System.out.println( "priceday from setter"+this.getPrice_day());
+            System.out.println( "priceday from setter "+this.getPrice_day());
         }
 
     }

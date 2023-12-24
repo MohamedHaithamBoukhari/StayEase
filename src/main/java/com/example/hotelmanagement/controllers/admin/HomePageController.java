@@ -546,7 +546,7 @@ public class HomePageController implements Initializable{
             serviceList.add(serviceRow);
         }
     }else{
-        String query = "SELECT serviceId, serviceName, description, correspondingTable, status " +
+        String query = "SELECT serviceId, serviceName, descreption, correspondingTable, status " +
                        "FROM service";
         query += " WHERE ";
         int i = 0;
@@ -561,7 +561,7 @@ public class HomePageController implements Initializable{
             i++;
         }
         for (String vis: availibilityList){
-            query = query + "visibility = '" +vis +"' OR ";
+            query = query + "status = '" +vis +"' OR ";
         }
         if (i!=0){
             query = query.substring(0, query.length() - 4);//delete last " OR "
@@ -571,9 +571,11 @@ public class HomePageController implements Initializable{
             query = query + "serviceName LIKE '%" + serviceName + "%' AND ";
             i++;
         }
+        query = query.substring(0, query.length() - 5);//delete last " AND "
+
 
         System.out.println(query);
-        List<String> colToSelect =  new ArrayList<String>(List.of ("s.serviceId", "s.serviceName", "s.descreption", "s.correspondingTable", "s.status"));
+        List<String> colToSelect =  new ArrayList<String>(List.of ("serviceId", "serviceName", "descreption", "correspondingTable", "status"));
         List<Object[]> servicesDetails = CummonDbFcts.querySelect(query, colToSelect);
         for (Object[] row : servicesDetails) {
             ServiceTableView serviceRow = new ServiceTableView(row[0],row[1],row[2],row[3],row[4]);
