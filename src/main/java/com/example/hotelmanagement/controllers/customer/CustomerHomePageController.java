@@ -267,6 +267,7 @@ public class CustomerHomePageController implements Initializable{
             initializeFields(CustomerManager.getInstance().getCustomer());
             succesMsg.setVisible(true);
             hideMsg(succesMsg, 4);
+            updated = false;
         }
 
     }
@@ -702,6 +703,7 @@ public class CustomerHomePageController implements Initializable{
             updatedMsg.setVisible(false);
             addedMsg.setVisible(true);
             hideMsg(addedMsg,4);
+            VarsManager.actionCompleted = "";
         }
         loadDataOnFeedbackTable("",null,false,"");
     }
@@ -745,6 +747,7 @@ public class CustomerHomePageController implements Initializable{
             addedMsg.setVisible(false);
             updatedMsg.setVisible(true);
             hideMsg(updatedMsg,4);
+            VarsManager.actionCompleted = "";
         }
         loadDataOnFeedbackTable("",null,false,"");
     }
@@ -789,7 +792,7 @@ public class CustomerHomePageController implements Initializable{
             updatedMsg.setVisible(false);
             deletedMsg.setVisible(true);
             hideMsg(deletedMsg,4);
-
+            VarsManager.actionCompleted = "";
         }
         loadDataOnFeedbackTable("",null,false,"");
     }
@@ -919,6 +922,7 @@ public class CustomerHomePageController implements Initializable{
             loadDataOnComplaintsTable(new ArrayList<>(),"","","");
             addedMsg.setVisible(true);
             hideMsg(addedMsg,4);
+
         }
     }
     public void displayEditComplaintPane(ActionEvent event){

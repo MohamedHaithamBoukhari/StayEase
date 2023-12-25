@@ -337,6 +337,7 @@ public class HomePageController implements Initializable{
             roomDeletedMsg.setVisible(false);
             roomAddedMsg.setVisible(true);
             hideMsg(roomAddedMsg,4);
+            VarsManager.actionCompleted = "";
         }
         loadDataOnTable(new ArrayList<>(), "", "");
     }
@@ -370,6 +371,7 @@ public class HomePageController implements Initializable{
             roomAddedMsg.setVisible(false);
             roomUpdatedMsg.setVisible(true);
             hideMsg(roomUpdatedMsg,4);
+            VarsManager.actionCompleted = "";
         }
         loadDataOnTable(new ArrayList<>(), "", "");
     }
@@ -404,7 +406,7 @@ public class HomePageController implements Initializable{
             roomUpdatedMsg.setVisible(false);
             roomDeletedMsg.setVisible(true);
             hideMsg(roomDeletedMsg,4);
-
+            VarsManager.actionCompleted = "";
         }
         loadDataOnTable(new ArrayList<>(), "", "");
     }
