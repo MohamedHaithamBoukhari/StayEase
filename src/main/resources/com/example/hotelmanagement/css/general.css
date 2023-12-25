@@ -28,3 +28,7 @@
 .button:selected{
     -fx-background-color: lightgreen;
 }
+#goHomeBtn {
+-fx-background-color:#08dfff;
+-fx-background-radius:10px;
+}

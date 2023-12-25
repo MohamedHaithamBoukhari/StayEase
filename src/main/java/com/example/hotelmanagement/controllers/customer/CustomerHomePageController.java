@@ -1031,9 +1031,19 @@ public class CustomerHomePageController implements Initializable{
         timeline.setCycleCount(1);
         timeline.play();
     }
-    public void logout(ActionEvent event){
+    public void logout(ActionEvent event) throws IOException {
+        System.out.println(CustomerManager.getInstance().getCustomer());
         CustomerManager.getInstance().setCustomer(new Customer("","","","","",""));
-        HelloApplication.stage.close();
+        switchToWelcomePage(event);
     }
 
+    public void switchToWelcomePage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/welcome-view.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println(CustomerManager.getInstance().getCustomer());
+    }
 }

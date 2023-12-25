@@ -742,7 +742,17 @@ public class HomePageController implements Initializable{
     timeline.play();
 }
     public void logout(ActionEvent event) throws IOException {
+        System.out.println(AdminManager.getInstance().getAdmin());
         AdminManager.getInstance().setAdmin(new Employee("", "", "", "", "", "", 0, "", ""));
-        HelloApplication.stage.close();
+        switchToWelcomePage(event);
+    }
+    public void switchToWelcomePage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/welcome-view.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println(AdminManager.getInstance().getAdmin());
     }
 }

@@ -2,6 +2,7 @@ package com.example.hotelmanagement.controllers;
 
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.config.PathConfig;
+import com.example.hotelmanagement.localStorage.EmployeeManager;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
