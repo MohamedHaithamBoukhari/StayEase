@@ -23,6 +23,9 @@ TextField{
     -fx-text-fill: white;
     -fx-font-size: 16;
 }
+.combo-box .list-cell:selected .text {
+    -fx-fill: white;
+}
 
 .spinner,
 .spinner .text-field,

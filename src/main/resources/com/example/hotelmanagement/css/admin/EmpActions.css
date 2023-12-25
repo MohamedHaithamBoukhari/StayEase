@@ -60,6 +60,10 @@ TextField:focused{
     -fx-font-size: 16;
 }
 
+.combo-box .list-cell:selected .text {
+    -fx-fill: white;
+}
+
 #addPositionBtn {
     -fx-marging:0px;
     -fx-padding:0px;

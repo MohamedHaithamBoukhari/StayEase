@@ -156,7 +156,7 @@ public class RoomActionsController implements Initializable {
             RoomType rT = (RoomType) roomTypes.get(i);
             roomTypesList.add(rT.getType());
         }
-        roomStatusComboBox_.getItems().clear();
+        roomTypeComboBox_.getItems().clear();
         roomTypeComboBox_.getItems().addAll(roomTypesList);
     }
     public void hideRoomTypePane(ActionEvent event){
