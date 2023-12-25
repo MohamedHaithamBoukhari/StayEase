@@ -3,6 +3,7 @@ package com.example.hotelmanagement.controllers.employee.manager;
 import com.example.hotelmanagement.beans.Room;
 import com.example.hotelmanagement.beans.RoomType;
 import com.example.hotelmanagement.config.Validation;
+import com.example.hotelmanagement.dao.EmployeeDao;
 import com.example.hotelmanagement.dao.RoomDao;
 import com.example.hotelmanagement.dao.RoomTypeDao;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
@@ -12,17 +13,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.*;
 
 public class RoomActionsController implements Initializable {
-    @FXML private Label roomNumberError = new Label(), roomCapacityError = new Label(), roomTypeError = new Label(), roomStatusError = new Label(), newRoomTypeError = new Label(), newPriceDayError = new Label();
+    @FXML private Label roomNumberError = new Label(), roomCapacityError = new Label(), roomTypeError = new Label(), roomStatusError = new Label(), newRoomTypeError = new Label(), newPriceDayError = new Label(), editedRoomTypeError = new Label(), editedPriceDayError = new Label();
     @FXML private Spinner<Integer> roomNumberSpinner_, roomCapacitySpinner_;
-    @FXML private ComboBox<String> roomTypeComboBox_, roomStatusComboBox_;
+    @FXML private ComboBox<String> roomTypeComboBox_, roomStatusComboBox_,editedRoomTypeComboBox_;
     @FXML private Label roomIdLabel;
-    @FXML private AnchorPane newRoomTypePane;
-    @FXML private TextField newRoomTypeField_,newDescriptionField_, newPriceDayField_;
+    @FXML private AnchorPane newRoomTypePane, editRoomTypePane;
+    @FXML private TextField newRoomTypeField_,newDescriptionField_, newPriceDayField_, editedPriceDayField_, editedDescriptionField_, editedTypeNameField_;
     List<String> roomTypesList = new ArrayList<>();
 
     int roomNbr, capacity;
@@ -37,6 +39,9 @@ public class RoomActionsController implements Initializable {
         }else {
             if (newRoomTypePane!=null){
                 newRoomTypePane.setVisible(false);
+            }
+            if (editRoomTypePane!=null){
+                editRoomTypePane.setVisible(false);
             }
             List<Object> roomTypes = RoomTypeDao.selectAll();
             System.out.println(roomTypes);
@@ -121,6 +126,7 @@ public class RoomActionsController implements Initializable {
         newPriceDayField_.setText("");
 
         newRoomTypePane.setVisible(true);
+        editRoomTypePane.setVisible(false);
     }
     public void addRoomType(ActionEvent event){
         String roomType = newRoomTypeField_.getText();
@@ -162,6 +168,97 @@ public class RoomActionsController implements Initializable {
     public void hideRoomTypePane(ActionEvent event){
         newRoomTypePane.setVisible(false);
     }
+
+    public void showEditRoomTypePaneBtn(ActionEvent event){
+        editedTypeNameField_.setText("");
+        editedDescriptionField_.setText("");
+        editedPriceDayField_.setText("");
+        editedRoomTypeComboBox_.getItems().clear();
+
+        List<String> types = new ArrayList<>();
+        List<Object> roomTypes = RoomTypeDao.selectAll();
+        System.out.println(roomTypes);
+        for (int i=0; i<roomTypes.size(); i++){
+            RoomType room = (RoomType)roomTypes.get(i);
+            types.add(room.getType());
+        }
+        editedRoomTypeComboBox_.getItems().addAll(types);
+
+        editRoomTypePane.setVisible(true);
+        newRoomTypePane.setVisible(false);
+    }
+    public void fillFieldsWithOldValues(ActionEvent event){
+        String selectedType = editedRoomTypeComboBox_.getValue();
+        if(selectedType == null){
+            editedRoomTypeError.setVisible(true);
+        }else{
+            editedRoomTypeError.setVisible(false);
+            Map map = new HashMap<>();
+            map.put("type", selectedType);
+            RoomType roomType = (RoomType) (RoomTypeDao.select(map,"*").get(0));
+            System.out.println(roomType);
+            editedTypeNameField_.setText(roomType.getType());
+            editedDescriptionField_.setText(roomType.getDescription());
+            editedPriceDayField_.setText(String.valueOf(roomType.getPrice_day()));
+        }
+    }
+    public void editRoomType(ActionEvent event){
+
+        String roomType = editedTypeNameField_.getText();
+        String description = editedDescriptionField_.getText();
+        String priceDayString = editedPriceDayField_.getText();
+        int priceDay = 0;
+        try {
+            priceDay = Integer.parseInt(priceDayString);
+            if(priceDay <= 0){
+                editedPriceDayError.setText("Invalid price");
+                return;
+            }
+            editedPriceDayError.setText("");
+        } catch (NumberFormatException e) {
+            editedPriceDayError.setText("Invalid price");
+            editedPriceDayError.setVisible(true);
+        }
+
+        if(roomType.isEmpty()){
+            roomType = editedRoomTypeComboBox_.getValue();
+        }
+        if(priceDay == 0){
+            editedPriceDayError.setText("Invalid price");
+            editedPriceDayError.setTextFill(Color.RED);
+            return;
+        }
+
+
+        String[] updatedColumns = {"description", "price_day", "type"};
+        Object[] newColumnsValue = {description, priceDay,roomType};
+        String testColumn = "type";
+        Object testColumnValue = editedRoomTypeComboBox_.getValue();
+        RoomTypeDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
+
+        //change values of the roomType combobox after edit combobox name
+        roomTypeComboBox_.getItems().clear();
+        types.clear();
+        List<Object> roomTypes = RoomTypeDao.selectAll();
+        System.out.println(roomTypes);
+        for (int i=0; i<roomTypes.size(); i++){
+            RoomType room = (RoomType)roomTypes.get(i);
+            types.add(room.getType());
+        }
+        roomTypeComboBox_.getItems().addAll(types);
+
+        //update roomsType if we change the name of type
+        if(roomType != editedRoomTypeComboBox_.getValue()){
+            String[] updatedColumns_ = {"type"};
+            Object[] newColumnsValue_ = {roomType};
+            String testColumn_ = "type";
+            Object testColumnValue_ = editedRoomTypeComboBox_.getValue();
+            RoomDao.updateColumns(updatedColumns_, newColumnsValue_, testColumn_, testColumnValue_);
+
+        }
+        hideEditRoomTypePane(event);
+    }
+    public void hideEditRoomTypePane(ActionEvent event){editRoomTypePane.setVisible(false);}
     //----------------- verification-------------------------------------
     public boolean verifyFields(ActionEvent event, int roomNbr, int capacity, String type, String status, String action){
         int i = 0;

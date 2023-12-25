@@ -65,22 +65,26 @@ TextField:focused{
     -fx-border-color:white;
 }
 
-#addRoomTypeBtn {
+#addRoomTypeBtn, #editRoomTypeBtn{
     -fx-marging:0px;
     -fx-padding:0px;
     -fx-background-color:transparent;
 }
 
-#newRoomTypePane {
+#newRoomTypePane , #editRoomTypePane{
     -fx-background-color: #1572a4;
     -fx-background-radius:0 10 10 10;
 
 }
-#hideRoomTypeBtn{
+#hideRoomTypeBtn, #hideEditRoomTypeBtn{
     -fx-background-color: grey;
     -fx-text-fill: white;
 }
 #addRoomTypePaneBtn{
     -fx-background-color: #3AD2CD;
     -fx-text-fill: black;
+}
+#editRoomTypePaneBtn{
+    -fx-background-color: #09e82e;
+    -fx-text-fill: white;
 }

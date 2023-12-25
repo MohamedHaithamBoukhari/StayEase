@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1E253C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.manager.RoomActionsController">
     <children>
-        <ImageView fitHeight="600.0" fitWidth="915.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.83966064453125" AnchorPane.topAnchor="4.0">
+        <ImageView fitHeight="600.0" fitWidth="915.0" layoutX="-2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.83966064453125" AnchorPane.topAnchor="4.0">
             <image>
                 <Image url="@../../../images/hotel.jpg" />
             </image>
@@ -90,6 +90,44 @@
             </font>
         </Button>
       <Label fx:id="roomCapacityError" layoutX="490.0" layoutY="252.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="252.0" />
+      <Button fx:id="editRoomTypeBtn" layoutX="737.0" layoutY="301.0" mnemonicParsing="false" onAction="#showEditRoomTypePaneBtn">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/editIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <AnchorPane fx:id="editRoomTypePane" layoutX="734.0" layoutY="325.0" prefHeight="256.0" prefWidth="148.0">
+         <children>
+            <ComboBox fx:id="editedRoomTypeComboBox_" layoutX="-5.0" layoutY="7.0" onAction="#fillFieldsWithOldValues" prefHeight="40.0" prefWidth="148.0" promptText="Type to edit" />
+            <TextField disable="true" layoutX="5.0" layoutY="11.0" prefHeight="37.0" prefWidth="138.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label fx:id="editedRoomTypeError" layoutX="5.0" layoutY="48.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="48.0" />
+            <Button fx:id="editRoomTypePaneBtn" layoutX="5.0" layoutY="220.0" mnemonicParsing="false" onAction="#editRoomType" prefHeight="28.0" prefWidth="60.0" text="Save" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="220.0" />
+            <Button fx:id="hideEditRoomTypeBtn" layoutX="83.0" layoutY="220.0" mnemonicParsing="false" onAction="#hideEditRoomTypePane" prefHeight="28.0" prefWidth="60.0" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="220.0" />
+            <TextField fx:id="editedPriceDayField_" layoutX="5.0" layoutY="114.0" prefHeight="40.0" prefWidth="163.0" promptText="Price_Day" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <Label fx:id="editedPriceDayError" layoutX="5.0" layoutY="154.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+            <TextField fx:id="editedDescriptionField_" layoutX="5.0" layoutY="168.0" prefHeight="40.0" prefWidth="163.0" promptText="Description" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="editedTypeNameField_" layoutX="5.0" layoutY="62.0" prefHeight="40.0" prefWidth="150.0" promptText="New Type Name" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
     </children>
     <stylesheets>
         <URL value="@../../../css/general.css" />
