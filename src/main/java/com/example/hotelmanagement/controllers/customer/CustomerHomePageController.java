@@ -1037,7 +1037,7 @@ public class CustomerHomePageController implements Initializable{
     }
     public void logout(ActionEvent event) throws IOException {
         System.out.println(CustomerManager.getInstance().getCustomer());
-        CustomerManager.getInstance().setCustomer(new Customer("","","","","",""));
+        CustomerManager.getInstance().setCustomer(new Customer("","","","","","",""));
         switchToWelcomePage(event);
     }
 

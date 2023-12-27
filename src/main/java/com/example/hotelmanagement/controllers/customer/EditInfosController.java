@@ -13,10 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class EditInfosController implements Initializable {
     private List<String> errors = new ArrayList<>((Collections.nCopies(6, "")));
@@ -53,8 +50,10 @@ public class EditInfosController implements Initializable {
             int i = CustomerDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
             if(i == 1){
                 CustomerHomePageController.updated = true;
-                Customer customer = new Customer(fullName, cin, phone, emailAddress, password, address);
-                CustomerManager.getInstance().setCustomer(customer);
+                Map map = new HashMap<>();
+                map.put(testColumn, testColumnValue);
+                Customer updatedCustomer = (Customer)(CustomerDao.select(map,"*").get(0));
+                CustomerManager.getInstance().setCustomer(updatedCustomer);
                 closeStage(event);
 
             }

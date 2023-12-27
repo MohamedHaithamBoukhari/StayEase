@@ -29,5 +29,6 @@ public class CustomerManager {
         this.customer.setPassword(customer.getPassword());
         this.customer.setPhone(customer.getPhone());
         this.customer.setAddress(customer.getAddress());
+        this.customer.setAccount_status(customer.getAccount_status());
     }
 }

@@ -72,17 +72,31 @@ public class CustomerLoginController {
             if(custumers.size() == 1){
                 Customer customer = (Customer) custumers.get(0);
                 CustomerManager.getInstance().setCustomer(customer);
+                if(customer.getAccount_status().equals("Active")){
+                    switchToCustumerHomePage(event);
+                } else if (customer.getAccount_status().equals("Blocked")) {
+                    switchToCustumerBlockedAccountPage(event);
+                }
 
-                switchToCustumerHomePage(event, customer.getCustomerId(), customer.getFullName());
             }else {
                 errorInfoLabel.setText("Email or password is incorrect :(");
             }
         }
 
     }
-    public void switchToCustumerHomePage(ActionEvent event, int customerId, String fullname) throws IOException {
+    public void switchToCustumerHomePage(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/customerHomePage-view.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToCustumerBlockedAccountPage(ActionEvent event) throws IOException {
+        SwitchedPageManager.getInstance().setSwitchedPage("Home");
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/customer/BlockedAccountPage-view.fxml"));
         root = loader.load();
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

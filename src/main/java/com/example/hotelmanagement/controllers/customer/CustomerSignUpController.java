@@ -84,7 +84,7 @@ public class CustomerSignUpController implements Initializable {
         String address = addressField.getText();
 
         if(verifyFields(event,fullName, cin, emailAddress, password, phone, address)){
-            CustomerDao.insert(new Customer(fullName, cin, phone, emailAddress, password, address));
+            CustomerDao.insert(new Customer(fullName, cin, phone, emailAddress, password, address, "Active"));
 
             fullNameField.setDisable(true);
             cinField.setDisable(true);
