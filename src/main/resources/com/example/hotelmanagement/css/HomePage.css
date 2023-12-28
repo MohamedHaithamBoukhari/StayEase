@@ -43,3 +43,10 @@ Button{
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
+#customersBtn:hover {
+    -fx-scale-X: 1.10;
+    -fx-scale-y: 1.05;
+}
+#customersBtn:pressed {
+    -fx-scale-y: .95;
+}

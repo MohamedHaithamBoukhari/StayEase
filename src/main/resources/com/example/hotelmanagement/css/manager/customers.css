@@ -1,0 +1,40 @@
+#blockAccountPane, #unblockAccountPane {
+    -fx-background-color: rgba(0,0,0,0.3);
+    -fx-background-radius: 10px;
+}
+#confirmBlockBtn, #confirmUnblockBtn {
+    -fx-padding: 0;
+    -fx-background-color: green;
+    -fx-font-size: 15;
+}
+#cancelBtn1, #cancelBtn2 {
+    -fx-padding: 0;
+    -fx-background-color: red;
+    -fx-font-size: 15;
+}
+#blockBtn {
+    -fx-background-color: #FF0000;
+    -fx-font-width: bold;
+    -fx-padding:0px;
+
+
+}
+#unblockBtn {
+    -fx-background-color: #00FF00;
+    -fx-font-width: bold;
+    -fx-padding:0px;
+
+}
+#accountUnblockedError, #accountBlockedError {
+    -fx-font-size: 15;
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-border-radius:9;
+    -fx-padding: 1px 2px 1px 2px;
+    -fx-border-color:red;
+}
+#blockedMsg, #unblockedMsg {
+    -fx-text-fill: #15ff00;
+    -fx-border-color:#15ff00;
+    -fx-border-radius:10px;
+}

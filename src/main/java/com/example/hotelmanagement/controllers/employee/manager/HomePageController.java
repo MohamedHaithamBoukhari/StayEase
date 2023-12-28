@@ -3,6 +3,7 @@ package com.example.hotelmanagement.controllers.employee.manager;
 import com.example.hotelmanagement.HelloApplication;
 import com.example.hotelmanagement.beans.Complaint;
 import com.example.hotelmanagement.beans.Employee;
+import com.example.hotelmanagement.beans.Service;
 import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.CustomerManager;
@@ -10,10 +11,7 @@ import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.localStorage.EmployeeManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
-import com.example.hotelmanagement.tablesView.ComplaintTableView;
-import com.example.hotelmanagement.tablesView.InvoicesTableView;
-import com.example.hotelmanagement.tablesView.ReservationTableView;
-import com.example.hotelmanagement.tablesView.RoomsTableView;
+import com.example.hotelmanagement.tablesView.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -81,6 +79,15 @@ public class HomePageController implements Initializable{
     @FXML private Label detailResponseDate, detailResponse, detailComplaint, detailComplaintObject;
     @FXML private Label replyError;
     @FXML private AnchorPane actionPane;
+
+    @FXML private TableView<CustomerTableView> customersTable;
+    @FXML private TableColumn<CustomerTableView, Object> id___Col, emailCol, cin_Col, unpaid_invoicesCol, cancelled_reservationsCol, account_statusCol;
+    @FXML private Label accountBlockedError, accountUnblockedError;
+    @FXML private Button blockBtn, unblockBtn;
+    @FXML private AnchorPane blockAccountPane, unblockAccountPane;
+    @FXML private CheckBox Active, Blocked;
+    @FXML private TextField cin_Field, emailField;
+    @FXML private Label blockedMsg, unblockedMsg;
 //------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -117,7 +124,18 @@ public class HomePageController implements Initializable{
             Map map7 = new HashMap<>();
             map7.put("status", "Needs Cleaning");
             roomNeedsCleaningNbr.setText(String.valueOf((RoomDao.select(map7,"*")).size()));
-        } else if (currentPage.equals("RoomsDetail")) {
+        } else if (currentPage.equals("Customers")) {
+            noRowsMsg.setVisible(false);
+            rowSelectedError.setVisible(false);
+            accountBlockedError.setVisible(false);
+            accountUnblockedError.setVisible(false);
+            blockAccountPane.setVisible(false);
+            unblockAccountPane.setVisible(false);
+            blockedMsg.setVisible(false);
+            unblockedMsg.setVisible(false);
+            loadDataOnCustomersTable(new ArrayList<>(),"","");
+
+        }else if (currentPage.equals("RoomsDetail")) {
             roomAddedMsg.setVisible(false);
             roomUpdatedMsg.setVisible(false);
             roomDeletedMsg.setVisible(false);
@@ -157,12 +175,22 @@ public class HomePageController implements Initializable{
             replyComplaintPane.setVisible(false);
             confirmDeletePane.setVisible(false);
             detailsPane.setVisible(false);
-            loadDataOnComplaintsTable(new ArrayList<>(), new ArrayList<>(),"","", "");        }
+            loadDataOnComplaintsTable(new ArrayList<>(), new ArrayList<>(),"","", "");
+        }
     }
 //------------------------------------------------------------------------------------------
     public void switchToHome(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Home");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/HomePage-view.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToCustomers(ActionEvent event) throws IOException {
+        SwitchedPageManager.getInstance().setSwitchedPage("Customers");
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/CustomersPage-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -222,6 +250,153 @@ public class HomePageController implements Initializable{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+//----------------------------------- customers fcts--------------------------------------------
+    public void loadDataOnCustomersTable(List<String> statusList, String cin, String email){
+        noRowsMsg.setVisible(false);
+        rowSelectedError.setVisible(false);
+        accountBlockedError.setVisible(false);
+        accountUnblockedError.setVisible(false);
+        blockAccountPane.setVisible(false);
+        unblockAccountPane.setVisible(false);
+        blockedMsg.setVisible(false);
+        unblockedMsg.setVisible(false);
+
+        List<CustomerTableView> customersList = new ArrayList<>();
+        customersTable.getItems().clear();
+        CustomerTableView.setNBR(1);
+
+        String query = "SELECT customerId, cin, email, account_status " +
+                       "FROM customer ";
+        List<String> colToSelect =  new ArrayList<String>(List.of("customerId", "cin", "email", "account_status"));
+        if(statusList.isEmpty() && cin.isEmpty() && email.isEmpty()){
+            List<Object[]> customersdetails = CummonDbFcts.querySelect(query,colToSelect);
+            for (Object[] row : customersdetails) {
+                CustomerTableView customerRow = new CustomerTableView(row[0],row[1],row[2],row[3]);
+                customersList.add(customerRow);
+            }
+        }else{
+            String col1 = "account_status", col2 = "cin", col3 = "email";
+            query += "WHERE ";
+            if(!statusList.isEmpty()){
+                query += "(";
+                for (String status: statusList){
+                    query = query + col1 + " = '" + status + "' OR ";
+                }
+                query = query.substring(0, query.length() - 4); //delete last " OR "
+                query += ") AND ";
+            }
+            if(!cin.isEmpty()){
+                query += "("+ col2 + " LIKE '%" + cin + "%') AND ";
+            }
+            if(!email.isEmpty()){
+                query += "("+ col3 + " LIKE '%" + email + "%') AND ";
+            }
+            query = query.substring(0, query.length() - 5);//delete last " AND "
+            System.out.println(query);
+
+            List<Object[]> customersdetails = CummonDbFcts.querySelect(query,colToSelect);
+            for (Object[] row : customersdetails) {
+                CustomerTableView customerRow = new CustomerTableView(row[0],row[1],row[2],row[3]);
+                customersList.add(customerRow);
+            }
+        }
+
+        id___Col.setCellValueFactory(new PropertyValueFactory<>("i"));
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        cin_Col.setCellValueFactory(new PropertyValueFactory<>("cin"));
+        unpaid_invoicesCol.setCellValueFactory(new PropertyValueFactory<>("unpaid_invoices"));
+        cancelled_reservationsCol.setCellValueFactory(new PropertyValueFactory<>("cancelled_reservations"));
+        account_statusCol.setCellValueFactory(new PropertyValueFactory<>("account_status"));
+        customersTable.getItems().addAll(customersList);
+        if(customersList.isEmpty()){
+            noRowsMsg.setVisible(true);
+        }
+    }
+    public void filterCustomers(ActionEvent event){
+        List<String> statusList = new ArrayList<>();
+
+        if(Active.isSelected()) statusList.add("Active");
+
+        if(Blocked.isSelected()) statusList.add("Blocked");
+
+        String cin = cin_Field.getText();
+        String email = emailField.getText();
+
+        loadDataOnCustomersTable(statusList, cin, email);
+    }
+    public void displayBlockAccountPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        accountBlockedError.setVisible(false);
+        accountUnblockedError.setVisible(false);
+        unblockAccountPane.setVisible(false);
+        blockedMsg.setVisible(false);
+        unblockedMsg.setVisible(false);
+        accountUnblockedError.setVisible(false);
+
+        if(customersTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(customersTable.getSelectionModel().getSelectedItem().getAccount_status().equals("Blocked")){
+            accountBlockedError.setVisible(true);
+            hideMsg(accountBlockedError,4);
+            return;
+        }
+        blockBtn.setVisible(false);
+        unblockBtn.setVisible(false);
+        blockAccountPane.setVisible(true);
+    }
+    public void displayUnblockAccountPane(ActionEvent event){
+        rowSelectedError.setVisible(false);
+        accountBlockedError.setVisible(false);
+        accountUnblockedError.setVisible(false);
+        blockAccountPane.setVisible(false);
+        blockedMsg.setVisible(false);
+        unblockedMsg.setVisible(false);
+        accountBlockedError.setVisible(false);
+
+        if(customersTable.getSelectionModel().getSelectedItem() == null){
+            rowSelectedError.setVisible(true);
+            return;
+        }
+        if(customersTable.getSelectionModel().getSelectedItem().getAccount_status().equals("Active")){
+            accountUnblockedError.setVisible(true);
+            hideMsg(accountUnblockedError,4);
+            return;
+        }
+        blockBtn.setVisible(false);
+        unblockBtn.setVisible(false);
+        unblockAccountPane.setVisible(true);
+    }
+    public void hideBlockPane(ActionEvent event){
+        blockBtn.setVisible(true);
+        unblockBtn.setVisible(true);
+        blockAccountPane.setVisible(false);
+    }
+    public void hideUnblockPane(ActionEvent event){
+        blockBtn.setVisible(true);
+        unblockBtn.setVisible(true);
+        unblockAccountPane.setVisible(false);
+    }
+
+    public void confirmBlockAccount(ActionEvent event) throws IOException {
+        int customerId = (int)customersTable.getSelectionModel().getSelectedItem().getCustomerId();
+        CustomerDao.update("account_status","Blocked","customerId",customerId);
+
+        hideBlockPane(event);
+        loadDataOnCustomersTable(new ArrayList<>(),"","");
+        blockedMsg.setVisible(true);
+        hideMsg(blockedMsg,4);
+    }
+    public void confirmUnblockAccount(ActionEvent event) throws IOException {
+        int customerId = (int)customersTable.getSelectionModel().getSelectedItem().getCustomerId();
+        CustomerDao.update("account_status","Active","customerId",customerId);
+
+        hideUnblockPane(event);
+        loadDataOnCustomersTable(new ArrayList<>(),"","");
+        unblockedMsg.setVisible(true);
+        hideMsg(unblockedMsg,4);
     }
 //----------------------------------- room details fcts--------------------------------------------
     public void loadDataOnTable(List<String> statusList, String price, String capacity){
