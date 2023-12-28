@@ -22,7 +22,7 @@ import java.util.*;
 
 public class EmployeeActionsController implements Initializable {
     @FXML private Label fullNameError = new Label(), cinError = new Label(), phoneError = new Label(), emailAddressError = new Label(), passwordError = new Label(), positionError = new Label(), salaryError = new Label(), workingHoursError = new Label(), workingDaysError = new Label(), newpositionError = new Label();
-    @FXML TextField fullNameField_, cinField_, phoneField_, emailAddressField_, passwordField_, positionField_, salaryField_, workingHoursField_, workingDaysField_;
+    @FXML TextField fullNameField_, cinField_, phoneField_, emailAddressField_, passwordField_, positionField_, salaryField_;
     @FXML private Label empIdLabel;
     @FXML private ComboBox<String> positionComboBox_;
     @FXML private AnchorPane newPositionPane;
@@ -64,8 +64,9 @@ public class EmployeeActionsController implements Initializable {
                 passwordField_.setText(employeeSelected.getPassword());
                 positionComboBox_.getSelectionModel().select(employeeSelected.getPosition());
                 salaryField_.setText(String.valueOf(employeeSelected.getSalary()));
-                workingHoursField_.setText(employeeSelected.getWorkingHours());
-                workingDaysField_.setText(employeeSelected.getWorkingDays());
+
+                getAndSetWorkingHours(new ActionEvent(), employeeSelected.getWorkingHours());
+                getAndSetWorkingDays(new ActionEvent(), employeeSelected.getWorkingDays());
             }
         }
     }
@@ -97,14 +98,19 @@ public class EmployeeActionsController implements Initializable {
         String phone = phoneField_.getText();
         String emailAddress = emailAddressField_.getText();
         String password = passwordField_.getText();
-        String position = positionField_.getText();
+        String position = positionComboBox_.getValue();
         String salary = salaryField_.getText();
-        String workingHours = workingHoursField_.getText();
-        String workingDays = workingDaysField_.getText();
 
-        if(verifyFields(event,fullName, cin, phone, emailAddress, password, position, salary, workingHours, working_days)){
+        working_hours = "";
+        setWorkingHours(event);
+        working_days.clear();
+        setWorkingDays(event, working_days);
+
+        if(verifyFields(event,fullName, cin, phone, emailAddress, password, salary, position, working_hours, working_days)){
+            String workingDays = String.join(", ", working_days);
+
             String[] updatedColumns = {"fullName", "cin", "phone", "emailAddress", "password", "position", "salary", "workingHours", "workingDays"};
-            Object[] newColumnsValue = {fullName, cin, phone, emailAddress, password, position, salary, workingHours, workingDays};
+            Object[] newColumnsValue = {fullName, cin, phone, emailAddress, password, position, salary, working_hours, workingDays};
             String testColumn = "employeeId";
             Object testColumnValue = VarsManager.selectedEmpId;
             int i = EmployeeDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
@@ -124,6 +130,7 @@ public class EmployeeActionsController implements Initializable {
         }
     }
 
+    //-----       ------      -----       ------      -----       ------
     public void setWorkingHours(ActionEvent event){
         if(from00to08.isSelected()) working_hours = "00:00 -> 08:00";
         if(from08to16.isSelected()) working_hours = "08:00 -> 16:00";
@@ -138,7 +145,23 @@ public class EmployeeActionsController implements Initializable {
         if(Saturday.isSelected()) daysList.add("Saturday");
         if(Sunday.isSelected()) daysList.add("Sunday");
     }
+    public void getAndSetWorkingHours(ActionEvent event, String working_hours){
+        if(working_hours.equals("00:00 -> 08:00")) from00to08.setSelected(true);
+        if(working_hours.equals("08:00 -> 16:00")) from08to16.setSelected(true);
+        if(working_hours.equals("16:00 -> 00:00")) from16to00.setSelected(true);
+    }
+    public void getAndSetWorkingDays(ActionEvent event, String working_days){
+        List<String> daysList = Arrays.asList(working_days.split(", "));
+        if(daysList.contains("Monday")) Monday.setSelected(true);
+        if(daysList.contains("Tuesday")) Tuesday.setSelected(true);
+        if(daysList.contains("Wednesday")) Wednesday.setSelected(true);
+        if(daysList.contains("Thursday")) Thursday.setSelected(true);
+        if(daysList.contains("Friday")) Friday.setSelected(true);
+        if(daysList.contains("Saturday")) Saturday.setSelected(true);
+        if(daysList.contains("Sunday")) Sunday.setSelected(true);
+    }
 
+    //-----       ------      -----       ------      -----       ------
     public void showNewPositionPaneBtn(ActionEvent event){
         newPositionField_.setText("");
         newDescriptionField_.setText("");

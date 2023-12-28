@@ -1,5 +1,11 @@
 #workingHours, #workingDays{
     -fx-border-color:rgba(255,255,255,.5);
     -fx-border-radius:10px;
+}
 
+#from00to08:disabled, #from08to16:disabled, #from16to00:disabled {
+    -fx-opacity:1;
+}
+#Monday:disabled, #Tuesday:disabled, #Wednesday:disabled, #Thursday:disabled, #Friday:disabled, #Saturday:disabled, #Sunday:disabled {
+    -fx-opacity: 1;
 }

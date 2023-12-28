@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -101,13 +102,16 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="grp1" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="from08to16" layoutX="51.0" layoutY="48.0" mnemonicParsing="false" onAction="#setWorkingHours" text="08:00  -&gt;  16:00" textFill="WHITE">
+            <RadioButton fx:id="from08to16" layoutX="51.0" layoutY="48.0" mnemonicParsing="false" onAction="#setWorkingHours" text="08:00  -&gt;  16:00" textFill="WHITE" toggleGroup="$grp1">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="from16to00" layoutX="51.0" layoutY="67.0" mnemonicParsing="false" onAction="#setWorkingHours" text="16:00  -&gt;  00:00" textFill="WHITE">
+            <RadioButton fx:id="from16to00" layoutX="51.0" layoutY="67.0" mnemonicParsing="false" onAction="#setWorkingHours" text="16:00  -&gt;  00:00" textFill="WHITE" toggleGroup="$grp1">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
