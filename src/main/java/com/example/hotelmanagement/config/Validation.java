@@ -40,10 +40,10 @@ public class Validation {
         return !position.isEmpty();
     }
     public static boolean isValidWorkingHours(String workingHours) {
-        return true;
+        return !workingHours.isEmpty();
     }
-    public static boolean isValidWorkingDays(String workingDays) {
-        return true;
+    public static boolean isValidWorkingDays(List workingDays) {
+        return !workingDays.isEmpty();
     }
 
     public static boolean isValidRoomNbr(int roomNbr, String action){

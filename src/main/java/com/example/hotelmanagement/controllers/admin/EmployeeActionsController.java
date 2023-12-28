@@ -14,10 +14,7 @@ import com.example.hotelmanagement.localStorage.VarsManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -30,7 +27,11 @@ public class EmployeeActionsController implements Initializable {
     @FXML private ComboBox<String> positionComboBox_;
     @FXML private AnchorPane newPositionPane;
     @FXML private TextField newPositionField_,newDescriptionField_;
+    @FXML private RadioButton from00to08, from08to16, from16to00;
+    @FXML private CheckBox Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
     List<String> positionsList = new ArrayList<>();
+    private String working_hours="";
+    private List working_days = new ArrayList<>();
 
 
     @Override
@@ -75,13 +76,16 @@ public class EmployeeActionsController implements Initializable {
         String phone = phoneField_.getText();
         String emailAddress = emailAddressField_.getText();
         String password = passwordField_.getText();
-        String position = positionField_.getText();
+        String position = positionComboBox_.getValue();
         String salary = salaryField_.getText();
-        String workingHours = workingHoursField_.getText();
-        String workingDays = workingDaysField_.getText();
+        working_hours = "";
+        setWorkingHours(event); //to set value of workingHours, if any radioBtn is selected, working-hours is empty -> errorMsg
+        working_days.clear();//when we click add btn we clear the list and reset
+        setWorkingDays(event, working_days);
 
-        if(verifyFields(event,fullName, cin, phone, emailAddress, password, salary, position, workingHours, workingDays)){
-            Employee newEmployee = new Employee(fullName, cin, phone, emailAddress, password, position, Integer.parseInt(salary), workingHours, workingDays);
+        if(verifyFields(event,fullName, cin, phone, emailAddress, password, salary, position, working_hours, working_days)){
+            String workingDays = String.join(", ", working_days);
+            Employee newEmployee = new Employee(fullName, cin, phone, emailAddress, password, position, Integer.parseInt(salary), working_hours, workingDays);
             EmployeeDao.insert(newEmployee);
             VarsManager.actionCompleted = "add";
             closeStage(event);
@@ -98,7 +102,7 @@ public class EmployeeActionsController implements Initializable {
         String workingHours = workingHoursField_.getText();
         String workingDays = workingDaysField_.getText();
 
-        if(verifyFields(event,fullName, cin, phone, emailAddress, password, position, salary, workingHours, workingDays)){
+        if(verifyFields(event,fullName, cin, phone, emailAddress, password, position, salary, workingHours, working_days)){
             String[] updatedColumns = {"fullName", "cin", "phone", "emailAddress", "password", "position", "salary", "workingHours", "workingDays"};
             Object[] newColumnsValue = {fullName, cin, phone, emailAddress, password, position, salary, workingHours, workingDays};
             String testColumn = "employeeId";
@@ -118,6 +122,21 @@ public class EmployeeActionsController implements Initializable {
             VarsManager.actionCompleted = "delete";
             closeStage(event);
         }
+    }
+
+    public void setWorkingHours(ActionEvent event){
+        if(from00to08.isSelected()) working_hours = "00:00 -> 08:00";
+        if(from08to16.isSelected()) working_hours = "08:00 -> 16:00";
+        if(from16to00.isSelected()) working_hours = "16:00 -> 00:00";
+    }
+    public void setWorkingDays(ActionEvent event, List daysList){
+        if(Monday.isSelected()) daysList.add("Monday");
+        if(Tuesday.isSelected()) daysList.add("Tuesday");
+        if(Wednesday.isSelected()) daysList.add("Wednesday");
+        if(Thursday.isSelected()) daysList.add("Thursday");
+        if(Friday.isSelected()) daysList.add("Friday");
+        if(Saturday.isSelected()) daysList.add("Saturday");
+        if(Sunday.isSelected()) daysList.add("Sunday");
     }
 
     public void showNewPositionPaneBtn(ActionEvent event){
@@ -153,7 +172,7 @@ public class EmployeeActionsController implements Initializable {
         newPositionPane.setVisible(false);
     }
     //----------------- verification-------------------------------------
-    public boolean verifyFields(ActionEvent event, String fullName, String cin, String phone, String emailAddress, String password, String salary, String position, String workingHours, String workingDays){
+    public boolean verifyFields(ActionEvent event, String fullName, String cin, String phone, String emailAddress, String password, String salary, String position, String workingHours, List workingDays){
 
         fullNameError.setText("");
         cinError.setText("");
@@ -202,12 +221,12 @@ public class EmployeeActionsController implements Initializable {
         }
 
         if (!Validation.isValidWorkingHours(workingHours)) {
-            workingHoursError.setText("iiiiiiiiiiiiiiiiiiiiiiii");
+            workingHoursError.setText("-Select working hours");
             i++;
         }
 
         if (!Validation.isValidWorkingDays(workingDays)) {
-            workingDaysError.setText("iiiiiiiiiiiiiiiiiiiiiiii");
+            workingDaysError.setText("-Select working hours");
             i++;
         }
 
