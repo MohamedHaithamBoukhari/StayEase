@@ -113,16 +113,16 @@
             <Font size="20.0" />
          </font>
       </Label>
-        <Label layoutX="294.4" layoutY="316.0" prefHeight="74.0" prefWidth="512.0" text="Our hotel management system aims to make everything in a hotel work smoothly, from booking rooms to handling payments, to ensure customers are happy and things run efficiently." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.4">
+        <Label layoutX="294.4" layoutY="338.0" prefHeight="74.0" prefWidth="512.0" text="Our hotel management system aims to make everything in a hotel work smoothly, from booking rooms to handling payments, to ensure customers are happy and things run efficiently." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.4">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="235.2" layoutY="422.0" text="Contact Us" textFill="WHITE" AnchorPane.leftAnchor="235.2">
+      <Label layoutX="235.2" layoutY="432.0" text="Contact Us" textFill="WHITE" AnchorPane.leftAnchor="235.2">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="294.4" layoutY="458.0" text="For inquiries or support, our dedicated team is ready to assist you. Reach out to us at :" textFill="WHITE" AnchorPane.leftAnchor="294.4">
+      <Label layoutX="294.4" layoutY="463.0" prefHeight="40.0" prefWidth="414.0" text="For inquiries or support, our dedicated team is ready to assist you. Reach out to us at :" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.0">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -136,22 +136,22 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="293.0" layoutY="236.0" prefHeight="40.0" prefWidth="502.0" text="- You can cancel your reservation up to 24 hours before your check-in date " textFill="WHITE" wrapText="true">
+      <Label layoutX="293.0" layoutY="222.0" prefHeight="40.0" prefWidth="502.0" text="- You can cancel your reservation up to 24 hours before your check-in date " textFill="WHITE" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="293.0" layoutY="193.0" prefHeight="40.0" prefWidth="512.0" text="- You can cancel the invoice by cancelling the corresponding reservation at least one day before the check-in date " textFill="WHITE" wrapText="true">
+      <Label layoutX="293.0" layoutY="186.0" prefHeight="40.0" prefWidth="512.0" text="- You can cancel the invoice by cancelling the corresponding reservation at least one day before the check-in date " textFill="WHITE" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="235.2" layoutY="294.0" text="Goal" textFill="WHITE" AnchorPane.leftAnchor="235.2">
+      <Label layoutX="235.2" layoutY="318.0" text="Goal" textFill="WHITE" AnchorPane.leftAnchor="235.2">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="414.0" layoutY="479.0" text="hotelManagementSystem@gmail.com" textFill="WHITE">
+      <Label layoutX="420.0" layoutY="502.0" text="hotelManagementSystem@gmail.com" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -163,7 +163,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="414.0" layoutY="498.0" text="05 12 45 78 45" textFill="WHITE">
+      <Label layoutX="420.0" layoutY="521.0" text="05 12 45 78 45" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -171,6 +171,11 @@
                </image>
             </ImageView>
          </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="292.8" layoutY="258.0" prefHeight="40.0" prefWidth="502.0" text="- We operate on a unique time system where a day starts at 12:00 PM and ends at 11:59 AM the following day" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="292.8">
          <font>
             <Font size="14.0" />
          </font>
