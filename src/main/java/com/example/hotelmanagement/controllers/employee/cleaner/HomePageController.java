@@ -73,6 +73,14 @@ public class HomePageController implements Initializable {
     @FXML private Label statusUpdatedMsg;
     private String newTasKStatus;
 
+    @FXML private ComboBox<String> positionComboBox_;
+    @FXML TextField fullNameField_, cinField_, phoneField_, emailAddressField_, passwordField_, positionField_, salaryField_;
+    @FXML private RadioButton from00to08, from08to16, from16to00;
+    @FXML private CheckBox Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
+    List<String> positionsList = new ArrayList<>();
+    private String working_hours="";
+    private List working_days = new ArrayList<>();
+
     //-------------------------------------------------------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -134,6 +142,20 @@ public class HomePageController implements Initializable {
             confirmDeletePane.setVisible(false);
             detailsPane.setVisible(false);
             loadDataOnComplaintsTable(new ArrayList<>(),"","", "");
+        }else if (currentPage.equals("Profile")){
+            Map<String, Object> map = new HashMap<>();
+            map.put("employeeId", EmployeeManager.getInstance().getEmployee().getEmployeeId());
+            Employee employeeSelected = (Employee) EmployeeDao.select(map, "*").get(0);
+            fullNameField_.setText(employeeSelected.getFullName());
+            cinField_.setText(employeeSelected.getCin());
+            phoneField_.setText(employeeSelected.getPhone());
+            emailAddressField_.setText(employeeSelected.getEmail());
+            passwordField_.setText(employeeSelected.getPassword());
+            positionComboBox_.getSelectionModel().select(employeeSelected.getPosition());
+            salaryField_.setText(String.valueOf(employeeSelected.getSalary()));
+
+            getAndSetWorkingHours(new ActionEvent(), employeeSelected.getWorkingHours());
+            getAndSetWorkingDays(new ActionEvent(), employeeSelected.getWorkingDays());
         }
     }
 
@@ -158,6 +180,15 @@ public class HomePageController implements Initializable {
     public void switchToComplaint(ActionEvent event) throws IOException {
         SwitchedPageManager.getInstance().setSwitchedPage("Complaint");
         FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/cleaner/Complaint-view.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToProfile(ActionEvent event) throws IOException {
+        SwitchedPageManager.getInstance().setSwitchedPage("Profile");
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/cleaner/Profile-view.fxml"));
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -539,6 +570,24 @@ public class HomePageController implements Initializable {
     public void hideDetailsComplaintPane(ActionEvent event){
         detailsPane.setVisible(false);
     }
+    //-----       ------      -----       ------      -----       ------
+    public void getAndSetWorkingHours(ActionEvent event, String working_hours){
+        if(working_hours.equals("00:00 -> 08:00")) from00to08.setSelected(true);
+        if(working_hours.equals("08:00 -> 16:00")) from08to16.setSelected(true);
+        if(working_hours.equals("16:00 -> 00:00")) from16to00.setSelected(true);
+    }
+    public void getAndSetWorkingDays(ActionEvent event, String working_days){
+        List<String> daysList = Arrays.asList(working_days.split(", "));
+        if(daysList.contains("Monday")) Monday.setSelected(true);
+        if(daysList.contains("Tuesday")) Tuesday.setSelected(true);
+        if(daysList.contains("Wednesday")) Wednesday.setSelected(true);
+        if(daysList.contains("Thursday")) Thursday.setSelected(true);
+        if(daysList.contains("Friday")) Friday.setSelected(true);
+        if(daysList.contains("Saturday")) Saturday.setSelected(true);
+        if(daysList.contains("Sunday")) Sunday.setSelected(true);
+    }
+
+    //-----       ------      -----       ------      -----       ------
 
     //-----------------------------------------------------------------------------------
     public void hideMsg(Label msg, double time){
