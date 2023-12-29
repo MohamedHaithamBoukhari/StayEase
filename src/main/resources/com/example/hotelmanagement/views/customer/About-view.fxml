@@ -113,22 +113,68 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="225.0" layoutY="180.0" text="Features and Benefits" textFill="WHITE">
+        <Label layoutX="294.4" layoutY="316.0" prefHeight="74.0" prefWidth="512.0" text="Our hotel management system aims to make everything in a hotel work smoothly, from booking rooms to handling payments, to ensure customers are happy and things run efficiently." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.4">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="235.2" layoutY="422.0" text="Contact Us" textFill="WHITE" AnchorPane.leftAnchor="235.2">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="320.0" layoutY="230.0" text="LabeStreamlined Reservation Systeml" textFill="WHITE" />
-        <Label layoutX="151.0" layoutY="518.0" text="Our Goal:To give hotels a tool that's easy to use and makes customers happy while keeping things running smoothly." textFill="WHITE" />
-      <Label layoutX="319.0" layoutY="256.0" text="Inventory and Resource Management" textFill="WHITE" />
-      <Label layoutX="319.0" layoutY="281.0" text="Customer Relationship Management" textFill="WHITE" />
-      <Label layoutX="319.0" layoutY="311.0" text="Analytics and Reporting" textFill="WHITE" />
-      <Label layoutX="229.0" layoutY="321.0" text="Contact Us" textFill="WHITE">
+      <Label layoutX="294.4" layoutY="458.0" text="For inquiries or support, our dedicated team is ready to assist you. Reach out to us at :" textFill="WHITE" AnchorPane.leftAnchor="294.4">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="294.4" layoutY="154.0" prefHeight="31.0" prefWidth="402.0" text="- To pay the invoice, you should proceed to the reception desk" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="294.4">
+         <font>
+            <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="199.0" layoutY="351.0" text="For inquiries or support, our dedicated team is ready to assist you. Reach out to us at [Contact Email or Phone Number]." textFill="WHITE" />
+      <Label layoutX="235.2" layoutY="129.0" text="Policies" textFill="WHITE" AnchorPane.leftAnchor="235.2">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="236.0" prefHeight="40.0" prefWidth="502.0" text="- You can cancel your reservation up to 24 hours before your check-in date " textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="193.0" prefHeight="40.0" prefWidth="512.0" text="- You can cancel the invoice by cancelling the corresponding reservation at least one day before the check-in date " textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="235.2" layoutY="294.0" text="Goal" textFill="WHITE" AnchorPane.leftAnchor="235.2">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="414.0" layoutY="479.0" text="hotelManagementSystem@gmail.com" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/emailIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="414.0" layoutY="498.0" text="05 12 45 78 45" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/phoneIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />

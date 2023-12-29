@@ -290,7 +290,11 @@ public class ReservationActionsController implements Initializable {
         Object[] newColumnsValue = {"Cancelled"};
         String testColumn = "reservationId";
         Object testColumnValue = VarsManager.selectedResId;
+        //When the reservation is cancelled, automaticly its invoice is cancelled
         ReservationDao.updateColumns(updatedColumns,newColumnsValue,testColumn,testColumnValue);
+        InvoiceDao.updateColumns(updatedColumns,newColumnsValue,testColumn,testColumnValue);
+
+
         VarsManager.actionCompleted = "delete";
         CustomerHomePageController.childStage.close();
     }

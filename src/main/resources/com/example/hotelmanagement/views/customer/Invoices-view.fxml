@@ -141,7 +141,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="changeStatusError" layoutX="303.0" layoutY="504.0" prefHeight="69.0" prefWidth="452.0" text="- To pay the invoice, you should proceed to the reception desk - You can cancel the invoice by cancelling the corresponding reservation at least one day before the date " textFill="#ff9900" wrapText="true" />
+        <Label fx:id="changeStatusError" layoutX="303.0" layoutY="504.0" prefHeight="69.0" prefWidth="452.0" text="- To pay the invoice, you should proceed to the reception desk - You can cancel the invoice by cancelling the corresponding reservation at least one day before the check-in date " textFill="#ff9900" wrapText="true" />
     </children>
     <stylesheets>
         <URL value="@../../css/HomePage.css" />

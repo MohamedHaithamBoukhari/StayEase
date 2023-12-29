@@ -453,7 +453,7 @@ public class CustomerHomePageController implements Initializable{
         Map map = new HashMap<>();
         map.put("reservationId", VarsManager.selectedResId);
         Reservation reservation = (Reservation) (ReservationDao.select(map,"*").get(0));
-        if(LocalDate.now().plusDays(1).isBefore(LocalDate.parse(reservation.getCheck_inDate()))){
+        if(!LocalDate.now().plusDays(1).isBefore(LocalDate.parse(reservation.getCheck_inDate()))){
             editNotAllowedError.setVisible(true);
             return;
         }
