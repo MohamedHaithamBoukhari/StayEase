@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.controllers.employee.manager.HomePageController">
+    <children>
+        <ImageView fitHeight="567.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+            <image>
+                <Image url="@../../../images/hotel.jpg" />
+            </image>
+        </ImageView>
+      <Label fx:id="homeLabel" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="42.0" text="Manager Dashboard" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="fullnameLabel" alignment="CENTER" layoutX="310.0" layoutY="3.0" prefHeight="25.0" prefWidth="280.0" textFill="WHITE" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" />
+      <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/user.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="logoutLink" focusTraversable="false" layoutX="827.0" layoutY="2.0" onAction="#logout" text="Logout" />
+      <Button fx:id="logoutBtn" layoutX="870.0" layoutY="3.0" mnemonicParsing="false" onAction="#logout" prefHeight="18.0" prefWidth="25.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
+         <graphic>
+            <ImageView fx:id="logoutBtn1" accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <AnchorPane fx:id="sideBar" prefHeight="568.0" prefWidth="163.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="735.0" AnchorPane.topAnchor="32.0" />
+      <Button fx:id="homeBtn" layoutX="2.0" layoutY="39.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="50.0" prefWidth="156.0" text="Home" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="40.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/homeIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="roomsBtn" layoutX="2.0" layoutY="160.0" mnemonicParsing="false" onAction="#switchToRoomsDetail" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Rooms detail" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="100.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/roomIcon.png" />
+               </image></ImageView>
+         </graphic></Button>
+      <Button fx:id="reservationBtn" layoutX="2.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchToReservation" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Reservations" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="160.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/reservationIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="cleaningBtn" layoutX="2.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchToCleaning" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="room cleaning" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="220.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/cleaningIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="maintenanceBtn" layoutX="2.0" layoutY="220.0" mnemonicParsing="false" onAction="#switchToMaintenance" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="room maintenance" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="280.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/maintenanceIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="invoiceBtn" layoutX="2.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToInvoices" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Invoices" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="340.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/invoiceIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="complaintBtn" layoutX="2.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToComplaint" opacity="0.5" prefHeight="50.0" prefWidth="156.0" text="Complaints" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="400.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/complaintIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="32.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="768.0">
+         <image>
+            <Image url="@../../../images/hotelIcon.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
+        <Label fx:id="title" alignment="CENTER" layoutX="452.0" layoutY="72.0" text="Profile" textFill="WHITE" AnchorPane.leftAnchor="452.0" AnchorPane.rightAnchor="278.4">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font></Label>
+        <Button layoutX="202.0" layoutY="62.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="37.0" prefWidth="36.0">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/backIcon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <TextField fx:id="fullNameField_" disable="true" layoutX="359.2" layoutY="152.0" prefHeight="40.0" prefWidth="135.0" promptText="Full Name" AnchorPane.leftAnchor="359.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <Label fx:id="fullNameError" layoutX="273.6" layoutY="197.2" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="273.6" AnchorPane.topAnchor="197.2" />
+        <TextField fx:id="cinField_" disable="true" layoutX="370.4" layoutY="230.0" prefHeight="40.0" prefWidth="124.0" promptText="CIN" AnchorPane.leftAnchor="370.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <Label fx:id="cinError" layoutX="273.6" layoutY="272.6" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="273.6" AnchorPane.topAnchor="272.6" />
+        <TextField fx:id="phoneField_" disable="true" layoutX="370.4" layoutY="309.0" prefHeight="40.0" prefWidth="124.0" promptText="Phone" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="309.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <Label fx:id="phoneError" layoutX="273.6" layoutY="351.4" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="273.6" AnchorPane.topAnchor="351.4" />
+        <TextField fx:id="emailAddressField_" disable="true" layoutX="340.0" layoutY="383.2" prefHeight="40.0" prefWidth="154.0" promptText="Email Address" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="383.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <Label fx:id="emailAddressError" layoutX="273.6" layoutY="425.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="273.6" AnchorPane.topAnchor="425.0" />
+        <TextField fx:id="passwordField_" disable="true" layoutX="370.4" layoutY="458.4" prefHeight="40.0" prefWidth="124.0" promptText="Password" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="458.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <Label fx:id="passwordError" layoutX="273.6" layoutY="497.8" prefHeight="17.0" prefWidth="220.0" AnchorPane.leftAnchor="273.6" AnchorPane.topAnchor="497.8" />
+        <TextField disable="true" layoutX="593.6" layoutY="150.8" prefHeight="35.0" prefWidth="220.0" promptText="Position" AnchorPane.leftAnchor="593.6" AnchorPane.rightAnchor="90.39999999999998" AnchorPane.topAnchor="150.8">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <ComboBox fx:id="positionComboBox_" disable="true" layoutX="685.6" layoutY="150.8" prefHeight="40.0" prefWidth="124.0" AnchorPane.rightAnchor="90.39999999999998" AnchorPane.topAnchor="150.8" />
+        <Label fx:id="positionError" layoutX="589.6" layoutY="191.6" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="90.39999999999998" AnchorPane.topAnchor="191.6" />
+        <TextField fx:id="salaryField_" disable="true" layoutX="589.6" layoutY="214.4" prefHeight="40.0" prefWidth="114.0" promptText="Salary" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="214.0">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <Label fx:id="salaryError" layoutX="589.6" layoutY="253.2" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="90.39999999999998" AnchorPane.topAnchor="253.2" />
+        <AnchorPane fx:id="workingHours" layoutX="591.0" layoutY="274.0" prefHeight="91.0" prefWidth="220.0">
+            <children>
+                <Label layoutX="15.0" layoutY="1.0" text="Working Hours" textFill="WHITE" AnchorPane.topAnchor="1.0">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <RadioButton fx:id="from00to08" disable="true" layoutX="51.0" layoutY="29.0" mnemonicParsing="false" text="00:00  -&gt;  08:00" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="grp1" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="from08to16" disable="true" layoutX="51.0" layoutY="48.0" mnemonicParsing="false" text="08:00  -&gt;  16:00" textFill="WHITE" toggleGroup="$grp1">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </RadioButton>
+                <RadioButton fx:id="from16to00" disable="true" layoutX="51.0" layoutY="67.0" mnemonicParsing="false" text="16:00  -&gt;  00:00" textFill="WHITE" toggleGroup="$grp1">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </RadioButton>
+            </children></AnchorPane>
+        <Label fx:id="workingHoursError" layoutX="593.6" layoutY="366.0" prefHeight="18.0" prefWidth="192.0" AnchorPane.leftAnchor="593.6" AnchorPane.rightAnchor="90.39999999999998" />
+        <AnchorPane fx:id="workingDays" layoutX="591.0" layoutY="389.0" prefHeight="121.0" prefWidth="220.0">
+            <children>
+                <CheckBox fx:id="Monday" disable="true" layoutX="34.0" layoutY="31.0" mnemonicParsing="false" text="Monday" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="31.0" />
+                <Label layoutX="15.0" layoutY="3.0" text="Working Days" textFill="WHITE" AnchorPane.topAnchor="1.0">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <CheckBox fx:id="Tuesday" disable="true" layoutX="127.0" layoutY="31.0" mnemonicParsing="false" text="Tuesday" textFill="WHITE" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="31.0" />
+                <CheckBox fx:id="Wednesday" disable="true" layoutX="35.0" layoutY="53.8" mnemonicParsing="false" text="Wednesday" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="53.8" />
+                <CheckBox fx:id="Thursday" layoutX="127.0" layoutY="53.8" mnemonicParsing="false" text="Thursday" textFill="WHITE" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="53.8" />
+                <CheckBox fx:id="Friday" disable="true" layoutX="34.0" layoutY="83.0" mnemonicParsing="false" text="Friday" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="75.0" />
+                <CheckBox fx:id="Sunday" disable="true" layoutX="79.0" layoutY="109.0" mnemonicParsing="false" text="Sunday" textFill="WHITE" AnchorPane.topAnchor="97.0" />
+                <CheckBox fx:id="Saturday" disable="true" layoutX="127.0" layoutY="83.0" mnemonicParsing="false" text="Saturday" textFill="WHITE" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="75.0" />
+            </children>
+        </AnchorPane>
+        <Label fx:id="workingDaysError" layoutX="589.6" layoutY="512.4" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="90.39999999999998" AnchorPane.topAnchor="512.4" />
+        <TextField fx:id="salaryField_1" disable="true" layoutX="589.6" layoutY="214.2" prefHeight="35.0" prefWidth="220.0" promptText="Salary">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="cinField_1" disable="true" layoutX="274.6" layoutY="230.0" prefHeight="35.0" prefWidth="220.0" promptText="CIN">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="phoneField_1" disable="true" layoutX="274.6" layoutY="309.0" prefHeight="35.0" prefWidth="220.0" promptText="Phone">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="emailAddressField_1" disable="true" layoutX="274.6" layoutY="383.4" prefHeight="35.0" prefWidth="220.0" promptText="Email">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="passwordField_1" disable="true" layoutX="274.6" layoutY="457.8" prefHeight="35.0" prefWidth="220.0" promptText="Password">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="fullNameField_1" disable="true" layoutX="274.6" layoutY="152.0" prefHeight="35.0" prefWidth="220.0" promptText="Full Name">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </TextField>
+
+    </children>
+    <stylesheets>
+        <URL value="@../../../css/HomePage.css" />
+        <URL value="@../../../css/general.css" />
+        <URL value="@../../../css/admin/EmpActions.css" />
+        <URL value="@../../../css/admin/workingDays_Hours.css" />
+    </stylesheets>
+</AnchorPane>

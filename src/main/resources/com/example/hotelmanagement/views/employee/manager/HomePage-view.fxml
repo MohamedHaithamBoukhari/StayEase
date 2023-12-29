@@ -99,7 +99,7 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="back" opacity="0.71" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0" />
-        <Label fx:id="title" alignment="CENTER" layoutX="448.0" layoutY="69.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="282.0">
+        <Label fx:id="title" alignment="CENTER" layoutX="448.0" layoutY="69.0" text="Home" textFill="WHITE" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="282.0">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font></Label>
@@ -240,6 +240,15 @@
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/customersIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="profileBtn" layoutX="223.0" layoutY="67.0" mnemonicParsing="false" onAction="#switchToProfile" prefHeight="38.0" prefWidth="100.0" text="Profile">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/userInfoIcon.png" />
                </image>
             </ImageView>
          </graphic>
