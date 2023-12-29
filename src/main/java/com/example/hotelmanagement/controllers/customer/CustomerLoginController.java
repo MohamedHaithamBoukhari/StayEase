@@ -61,14 +61,11 @@ public class CustomerLoginController {
         String password = passwordField.getText();
 
         if(verifyFields(event, username, password)){
-            System.out.println("verivied");
             Map<String, Object> map = new HashMap<>();
             map.put("email", username);
             map.put("password", password);
-            System.out.println(username+ " "+password);
 
             List<Object> custumers = CustomerDao.select(map, "*");
-            System.out.println(custumers);
             if(custumers.size() == 1){
                 Customer customer = (Customer) custumers.get(0);
                 CustomerManager.getInstance().setCustomer(customer);

@@ -11,7 +11,6 @@ import com.example.hotelmanagement.config.PathConfig;
 import com.example.hotelmanagement.localStorage.CustomerManager;
 import com.example.hotelmanagement.localStorage.SwitchedPageManager;
 import com.example.hotelmanagement.localStorage.VarsManager;
-import com.example.hotelmanagement.scenes.Welcome;
 import com.example.hotelmanagement.tablesView.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -74,9 +73,6 @@ public class HomePageController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
         admin = AdminManager.getInstance().getAdmin();
-        System.out.println(admin);
-        System.out.println(currentPage);
-        System.out.println(currentPage.equals("CustomerInfos"));
         fullnameLabel.setText("- " + admin.getFullName() + " -");
 
         if(currentPage.equals("Home")){
@@ -209,12 +205,10 @@ public class HomePageController implements Initializable{
                 whereClause += "("+ col5 + " LIKE '%" + cin + "%') AND ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-            System.out.println(whereClause);
 
             List<Object[]> empsDetails = CummonDbFcts.performJoinAndSelect(EmployeeDao.TABLE_NAME, "emp", PositionDao.TABLE_NAME,"pos", "position","empPosition", colToSelect, whereClause);
             for (Object[] row : empsDetails) {
                 EmployeesTableView empRow = new EmployeesTableView(row[0],row[1],row[2],row[3],row[4],row[5]);
-                //System.out.println(roomRow);
                 empsList.add(empRow);
             }
         }
@@ -384,14 +378,11 @@ public class HomePageController implements Initializable{
         FeedbackTableView.setNBR(1);
 
         List<String> colToSelect =  new ArrayList<String>(List.of ("f.feedbackId", "f.customerId", "cust.fullName", "f.visibility", "f.priority", "f.customerService_rate", "f.cleanliness_rate", "f.roomComfort_rate", "f.location_rate", "f.safety_rate", "f.environnement_rate", "f.view_rate", "f.serviceVSprice_rate", "f.review_rate", "f.feedback_date"));
-        System.out.println(fullname);
-        System.out.println(rateOrder);
-        System.out.println(fbDate);
+
         if(fullname.isEmpty() && rateOrder.isEmpty() && fbDate == null && visible == false && invisible == false){
             List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, "");
             for (Object[] row : feedbackdetails) {
                 FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
-                System.out.println(feedbackRow);
                 feedbackList.add(feedbackRow);
             }
         }else{
@@ -432,11 +423,9 @@ public class HomePageController implements Initializable{
                 whereClause = whereClause + " ORDER BY f.totalRate " + rateOrder;
             }
 
-            System.out.println(whereClause);
             List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
             for (Object[] row : feedbackdetails) {
                 FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
-                System.out.println(feedbackRow);
                 feedbackList.add(feedbackRow);
             }
         }
@@ -576,12 +565,10 @@ public class HomePageController implements Initializable{
         query = query.substring(0, query.length() - 5);//delete last " AND "
 
 
-        System.out.println(query);
         List<String> colToSelect =  new ArrayList<String>(List.of ("serviceId", "serviceName", "descreption", "correspondingTable", "status"));
         List<Object[]> servicesDetails = CummonDbFcts.querySelect(query, colToSelect);
         for (Object[] row : servicesDetails) {
             ServiceTableView serviceRow = new ServiceTableView(row[0],row[1],row[2],row[3],row[4]);
-            System.out.println(serviceRow);
             serviceList.add(serviceRow);
         }
     }
@@ -633,8 +620,7 @@ public class HomePageController implements Initializable{
         Map map = new HashMap<>();
         map.put("serviceId",selectedServiceId);
         Service selectedService = (Service) (ServiceDao.select(map, "*").get(0));
-        //traitement
-        System.out.println(selectedService);
+
         serviceNameField1.setText(selectedService.getServiceName());
         corrTableField1.setText(selectedService.getCorrespondingTable());
         descriptionField1.setText(selectedService.getDescreption());
@@ -683,7 +669,6 @@ public class HomePageController implements Initializable{
 
             if(!serviceStatus.toLowerCase().equals("available") && !serviceStatus.toLowerCase().equals("unavailable")){
                 statusField.setStyle("-fx-border-color: red;");
-                System.out.println(serviceStatus + "----------------");
                 return;
             }
             Service service = new Service(serviceName, serviceDesc, serviceTable, serviceStatus);
@@ -716,9 +701,7 @@ public class HomePageController implements Initializable{
             Object[] newColumnsValue = {serviceName, serviceTable, serviceDesc, serviceStatus};
             String testColumn = "serviceId";
             Object testColumnValue = servicesTable.getSelectionModel().getSelectedItem().getServiceId();
-            System.out.println("testColumnValue = "+testColumnValue);
             int i =ServiceDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
-            System.out.println("i = "+i);
         }else{
             serviceNameField1.setStyle("-fx-border-color: red;");
             return;
@@ -744,7 +727,6 @@ public class HomePageController implements Initializable{
     timeline.play();
 }
     public void logout(ActionEvent event) throws IOException {
-        System.out.println(AdminManager.getInstance().getAdmin());
         AdminManager.getInstance().setAdmin(new Employee("", "", "", "", "", "", 0, "", ""));
         switchToWelcomePage(event);
     }
@@ -755,6 +737,5 @@ public class HomePageController implements Initializable{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        System.out.println(AdminManager.getInstance().getAdmin());
     }
 }

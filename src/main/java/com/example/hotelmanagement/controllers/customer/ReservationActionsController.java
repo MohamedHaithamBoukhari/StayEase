@@ -62,7 +62,6 @@ public class ReservationActionsController implements Initializable {
             rowSelectedError.setVisible(false);
             datesError.setVisible(false);
             List<Object> roomTypes = RoomTypeDao.selectAll();
-            System.out.println(roomTypes);
             for (int i=0; i<roomTypes.size(); i++){
                 RoomType room = (RoomType)roomTypes.get(i);
                 types.add(room.getType());
@@ -131,7 +130,6 @@ public class ReservationActionsController implements Initializable {
                 List<Object[]> roomsdetails = CummonDbFcts.querySelect(query, colToSelect);
                 for (Object[] row : roomsdetails) {
                     RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],null,duration);
-                    System.out.println("from if loadData...  roomrow = "+ roomRow);
                     roomsList.add(roomRow);
                 }
             }else{
@@ -144,11 +142,9 @@ public class ReservationActionsController implements Initializable {
                 if(!priceDay.isEmpty()){
                     query += "AND " + "(SELECT rT.price_day*(1+r.capacity) - (r.capacity*40) FROM roomtype rT WHERE rT.type = r.type)" +" <= " + priceDay;
                 }
-                System.out.println(query);
                 List<Object[]> roomsdetails = CummonDbFcts.querySelect(query, colToSelect);
                 for (Object[] row : roomsdetails) {
                     RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],null,duration);
-                    System.out.println("from else loadData... with filters  roomrow = "+ roomRow);
                     roomsList.add(roomRow);
                 }
             }
@@ -209,7 +205,6 @@ public class ReservationActionsController implements Initializable {
                 datesError.setVisible(true);
             }else {
                 datesError.setVisible(false);
-                System.out.println(checkIn + "---------"+checkOut);
             }
         }catch (Exception e) {
             datesError.setText("Enter a valid check in and check out date");

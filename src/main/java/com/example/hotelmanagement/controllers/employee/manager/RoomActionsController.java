@@ -44,13 +44,11 @@ public class RoomActionsController implements Initializable {
                 editRoomTypePane.setVisible(false);
             }
             List<Object> roomTypes = RoomTypeDao.selectAll();
-            System.out.println(roomTypes);
             for (int i=0; i<roomTypes.size(); i++){
                 RoomType room = (RoomType)roomTypes.get(i);
                 types.add(room.getType());
             }
 
-            System.out.println(types);
             int maxRoomNbr = CummonDbFcts.selectMaxVal(RoomDao.TABLE_NAME, "numRoom");
             SpinnerValueFactory<Integer> valueFactoryNbr = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,maxRoomNbr+1, maxRoomNbr+1);
             SpinnerValueFactory<Integer> valueFactoryCapacity = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,7);
@@ -65,7 +63,6 @@ public class RoomActionsController implements Initializable {
                 Map<String, Object> map = new HashMap<>();
                 map.put("roomId", VarsManager.selectedRoomId);
                 Object room = RoomDao.select(map, "*").get(0);
-                System.out.println(room);
 
                 roomNumberSpinner_.getValueFactory().setValue(((Room)room).getNumRoom());
                 roomCapacitySpinner_.getValueFactory().setValue(((Room)room).getCapacity());
@@ -177,7 +174,6 @@ public class RoomActionsController implements Initializable {
 
         List<String> types = new ArrayList<>();
         List<Object> roomTypes = RoomTypeDao.selectAll();
-        System.out.println(roomTypes);
         for (int i=0; i<roomTypes.size(); i++){
             RoomType room = (RoomType)roomTypes.get(i);
             types.add(room.getType());
@@ -196,7 +192,6 @@ public class RoomActionsController implements Initializable {
             Map map = new HashMap<>();
             map.put("type", selectedType);
             RoomType roomType = (RoomType) (RoomTypeDao.select(map,"*").get(0));
-            System.out.println(roomType);
             editedTypeNameField_.setText(roomType.getType());
             editedDescriptionField_.setText(roomType.getDescription());
             editedPriceDayField_.setText(String.valueOf(roomType.getPrice_day()));
@@ -240,7 +235,6 @@ public class RoomActionsController implements Initializable {
         roomTypeComboBox_.getItems().clear();
         types.clear();
         List<Object> roomTypes = RoomTypeDao.selectAll();
-        System.out.println(roomTypes);
         for (int i=0; i<roomTypes.size(); i++){
             RoomType room = (RoomType)roomTypes.get(i);
             types.add(room.getType());

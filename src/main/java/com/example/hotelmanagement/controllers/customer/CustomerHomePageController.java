@@ -92,9 +92,6 @@ public class CustomerHomePageController implements Initializable{
 
         currentPage = SwitchedPageManager.getInstance().getSwitchedPage();
         currentCustomer = CustomerManager.getInstance().getCustomer();
-        System.out.println(currentCustomer);
-        System.out.println(currentPage);
-        System.out.println(currentPage.equals("CustomerInfos"));
         fullnameLabel.setText("- " + currentCustomer.getFullName() + " -");
         if(currentPage.equals("Home")){
             Map map1 = new HashMap<>();
@@ -284,7 +281,6 @@ public class CustomerHomePageController implements Initializable{
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, "");
             for (Object[] row : roomsdetails) {
                 RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-                //System.out.println(roomRow);
                 roomsList.add(roomRow);
             }
         }else{
@@ -306,12 +302,10 @@ public class CustomerHomePageController implements Initializable{
                 whereClause += "("+ col3 + " <= " + capacity +") AND ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-            System.out.println(whereClause);
 
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
             for (Object[] row : roomsdetails) {
                 RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-                //System.out.println(roomRow);
                 roomsList.add(roomRow);
             }
         }
@@ -352,10 +346,6 @@ public class CustomerHomePageController implements Initializable{
 
         loadDataOnRoomTable(statusList, price, capacity);
 
-        System.out.println(statusList.toString());
-        System.out.println(price);
-        System.out.println(capacity);
-
     }
 //----------------------------------- services(Reservations) fcts--------------------------------------------
     public void loadDataOnReservationTable(List<String> statusList){
@@ -373,7 +363,6 @@ public class CustomerHomePageController implements Initializable{
             List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, whereClause);
             for (Object[] row : reservationsDetail) {
                 ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                //System.out.println(roomRow);
                 reservationList.add(resRow);
             }
         }else{
@@ -384,7 +373,6 @@ public class CustomerHomePageController implements Initializable{
                 whereClause = whereClause + col1 + " = '" + status + "' OR ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
-            System.out.println(whereClause);
 
             List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, whereClause);
             for (Object[] row : reservationsDetail) {
@@ -506,7 +494,6 @@ public class CustomerHomePageController implements Initializable{
             List<Object[]> invoicesdetails = CummonDbFcts.performJoinAndSelect(InvoiceDao.TABLE_NAME, "inv", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, " WHERE cust.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId());
             for (Object[] row : invoicesdetails) {
                 InvoicesTableView invoiceRow = new InvoicesTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                //System.out.println(roomRow);
                 invoiceList.add(invoiceRow);
             }
         }else{
@@ -525,12 +512,10 @@ public class CustomerHomePageController implements Initializable{
                 whereClause += "("+ col2 + " LIKE '%" + invDate + "%') AND ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-            System.out.println(whereClause);
 
             List<Object[]> invoicesdetails = CummonDbFcts.performJoinAndSelect(InvoiceDao.TABLE_NAME, "inv", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
             for (Object[] row : invoicesdetails) {
                 InvoicesTableView invoiceRow = new InvoicesTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                //System.out.println(roomRow);
                 invoiceList.add(invoiceRow);
             }
         }
@@ -541,8 +526,6 @@ public class CustomerHomePageController implements Initializable{
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         status_Col.setCellValueFactory(new PropertyValueFactory<>("status"));
         invoicesTable.getItems().addAll(invoiceList);
-
-        System.out.println(invoiceList);
 
         if(invoiceList.isEmpty()){
             noRowsMsg.setVisible(true);
@@ -570,15 +553,11 @@ public class CustomerHomePageController implements Initializable{
         FeedbackTableView.setNBR(1);
 
         List<String> colToSelect =  new ArrayList<String>(List.of ("f.feedbackId", "f.customerId", "cust.fullName", "f.visibility", "f.priority", "f.customerService_rate", "f.cleanliness_rate", "f.roomComfort_rate", "f.location_rate", "f.safety_rate", "f.environnement_rate", "f.view_rate", "f.serviceVSprice_rate", "f.review_rate", "f.feedback_date"));
-            System.out.println(fullname);
-            System.out.println(rateOrder);
-            System.out.println(fbDate);
-            System.out.println(myFeedback);
+
         if(fullname.isEmpty() && rateOrder.isEmpty() && fbDate == null && myFeedback == false){
             List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, "");
             for (Object[] row : feedbackdetails) {
                 FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
-                System.out.println(feedbackRow);
                 feedbackList.add(feedbackRow);
             }
         }else{
@@ -606,11 +585,9 @@ public class CustomerHomePageController implements Initializable{
                 whereClause = whereClause + " ORDER BY f.totalRate " + rateOrder;
             }
 
-            System.out.println(whereClause);
             List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
             for (Object[] row : feedbackdetails) {
                 FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
-                System.out.println(feedbackRow);
                 feedbackList.add(feedbackRow);
             }
         }
@@ -812,7 +789,6 @@ public class CustomerHomePageController implements Initializable{
             List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : complaintsDetails) {
                 ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                System.out.println(complaintRow);
                 complaintsList.add(complaintRow);
             }
         }else{
@@ -845,13 +821,11 @@ public class CustomerHomePageController implements Initializable{
             }
 
             query = query.substring(0, query.length() - 5);//delete last "AND "
-            System.out.println(query);
 
 
             List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : complaintsDetails) {
                 ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                System.out.println(complaintRow);
                 complaintsList.add(complaintRow);
             }
         }
@@ -949,8 +923,6 @@ public class CustomerHomePageController implements Initializable{
     public void editComplaint(ActionEvent event){
         String object = objectField.getText();
         String complaintBody = complaintField.getText();
-        System.out.println("'''''''''''"+object);
-        System.out.println("'''''''''''"+complaintBody);
 
         if (!object.isEmpty()){
             String[] updatedColumns = {"declarationObject", "declaration"};
@@ -1036,7 +1008,6 @@ public class CustomerHomePageController implements Initializable{
         timeline.play();
     }
     public void logout(ActionEvent event) throws IOException {
-        System.out.println(CustomerManager.getInstance().getCustomer());
         CustomerManager.getInstance().setCustomer(new Customer("","","","","","",""));
         switchToWelcomePage(event);
     }
@@ -1048,6 +1019,5 @@ public class CustomerHomePageController implements Initializable{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        System.out.println(CustomerManager.getInstance().getCustomer());
     }
 }

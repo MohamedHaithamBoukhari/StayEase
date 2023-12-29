@@ -342,7 +342,6 @@ public class HomePageController implements Initializable{
                 query += "("+ col3 + " LIKE '%" + email + "%') AND ";
             }
             query = query.substring(0, query.length() - 5);//delete last " AND "
-            System.out.println(query);
 
             List<Object[]> customersdetails = CummonDbFcts.querySelect(query,colToSelect);
             for (Object[] row : customersdetails) {
@@ -459,7 +458,6 @@ public class HomePageController implements Initializable{
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, "");
             for (Object[] row : roomsdetails) {
                     RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-                    //System.out.println(roomRow);
                     roomsList.add(roomRow);
             }
         }else{
@@ -481,12 +479,10 @@ public class HomePageController implements Initializable{
                 whereClause += "("+ col3 + " <= " + capacity +") AND ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-            System.out.println(whereClause);
 
             List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
             for (Object[] row : roomsdetails) {
                 RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-                //System.out.println(roomRow);
                 roomsList.add(roomRow);
             }
         }
@@ -526,10 +522,6 @@ public class HomePageController implements Initializable{
         String capacity = capacityField.getText();
 
         loadDataOnTable(statusList, price, capacity);
-
-        System.out.println(statusList.toString());
-        System.out.println(price);
-        System.out.println(capacity);
 
     }
     public void newRoomWindow(ActionEvent event) throws IOException {
@@ -648,7 +640,6 @@ public class HomePageController implements Initializable{
             List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, "");
             for (Object[] row : reservationsDetail) {
                 ReservationTableView resRow = new ReservationTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                //System.out.println(roomRow);
                 reservationList.add(resRow);
             }
         }else{
@@ -659,7 +650,6 @@ public class HomePageController implements Initializable{
                 whereClause = whereClause + col1 + " = '" + status + "' OR ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 4); //delete last " OR "
-            System.out.println(whereClause);
 
             List<Object[]> reservationsDetail = CummonDbFcts.performJoinAndSelect(ReservationDao.TABLE_NAME, "res", RoomDao.TABLE_NAME,"r","roomId","roomId", colToSelect, whereClause);
             for (Object[] row : reservationsDetail) {
@@ -708,7 +698,6 @@ public class HomePageController implements Initializable{
         List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, " WHERE r.status IN ('Needs Cleaning', 'Under Cleaning')");
         for (Object[] row : roomsdetails) {
             RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-            //System.out.println(roomRow);
             roomsList.add(roomRow);
         }
     }else{
@@ -732,12 +721,10 @@ public class HomePageController implements Initializable{
             whereClause += "("+ col3 + " <= " + capacity +") AND ";
         }
         whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-        System.out.println(whereClause);
 
         List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
         for (Object[] row : roomsdetails) {
             RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-            //System.out.println(roomRow);
             roomsList.add(roomRow);
         }
     }
@@ -816,7 +803,6 @@ public class HomePageController implements Initializable{
         List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, " WHERE r.status IN ('Needs Maintenance', 'Under Maintenance')");
         for (Object[] row : roomsdetails) {
             RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-            //System.out.println(roomRow);
             roomsList.add(roomRow);
         }
     }else{
@@ -840,12 +826,10 @@ public class HomePageController implements Initializable{
             whereClause += "("+ col3 + " <= " + capacity +") AND ";
         }
         whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-        System.out.println(whereClause);
 
         List<Object[]> roomsdetails = CummonDbFcts.performJoinAndSelect(RoomDao.TABLE_NAME, "r", RoomTypeDao.TABLE_NAME,"rT","type","type", colToSelect, whereClause);
         for (Object[] row : roomsdetails) {
             RoomsTableView roomRow = new RoomsTableView(row[0],row[1],row[2],row[3],row[4],row[5],0);
-            //System.out.println(roomRow);
             roomsList.add(roomRow);
         }
     }
@@ -930,7 +914,6 @@ public class HomePageController implements Initializable{
             List<Object[]> invoicesdetails = CummonDbFcts.performJoinAndSelect(InvoiceDao.TABLE_NAME, "inv", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, "");
             for (Object[] row : invoicesdetails) {
                 InvoicesTableView invoiceRow = new InvoicesTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                //System.out.println(roomRow);
                 invoiceList.add(invoiceRow);
             }
         }else{
@@ -955,12 +938,10 @@ public class HomePageController implements Initializable{
                 whereClause += "("+ col4 + " LIKE '%" + invDate + "%') AND ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
-            System.out.println(whereClause);
 
             List<Object[]> invoicesdetails = CummonDbFcts.performJoinAndSelect(InvoiceDao.TABLE_NAME, "inv", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
             for (Object[] row : invoicesdetails) {
                 InvoicesTableView invoiceRow = new InvoicesTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                //System.out.println(roomRow);
                 invoiceList.add(invoiceRow);
             }
         }
@@ -1047,7 +1028,6 @@ public class HomePageController implements Initializable{
         List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
         for (Object[] row : complaintsDetails) {
             ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-            System.out.println(complaintRow);
             complaintsList.add(complaintRow);
         }
     }else{
@@ -1096,13 +1076,11 @@ public class HomePageController implements Initializable{
         }
 
         query = query.substring(0, query.length() - 5);//delete last "AND "
-        System.out.println(query);
 
 
         List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
         for (Object[] row : complaintsDetails) {
             ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-            System.out.println(complaintRow);
             complaintsList.add(complaintRow);
         }
     }
@@ -1113,7 +1091,6 @@ public class HomePageController implements Initializable{
     declarantEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
     declarantStatusCol.setCellValueFactory(new PropertyValueFactory<>("declarantStatus"));
     responseStatusCol.setCellValueFactory(new PropertyValueFactory<>("responseStatus"));
-        System.out.println(complaintsList);
     complaintTable.getItems().addAll(complaintsList);
 
     if(complaintsList.isEmpty()){
@@ -1166,11 +1143,8 @@ public class HomePageController implements Initializable{
         map.put("declarationId", complaintTable.getSelectionModel().getSelectedItem().getDeclarationId());
         Complaint complaint = (Complaint)DeclarationDao.select(map,"*").get(0);
 
-        System.out.println("================"+complaintTable.getSelectionModel().getSelectedItem().getResponseStatus());
-        System.out.println("======bool======"+complaintTable.getSelectionModel().getSelectedItem().getResponseStatus().equals("Replied"));
         if(complaintTable.getSelectionModel().getSelectedItem().getResponseStatus().equals("Replied")){
             replyError.setVisible(true);
-            System.out.println("replyerro true");
             return;
         }
 
@@ -1268,7 +1242,6 @@ public class HomePageController implements Initializable{
         timeline.play();
     }
     public void logout(ActionEvent event) throws IOException {
-        System.out.println(EmployeeManager.getInstance().getEmployee());
         EmployeeManager.getInstance().setManager(new Employee("","","","","","",0,"",""));
         switchToWelcomePage(event);
     }
@@ -1279,6 +1252,5 @@ public class HomePageController implements Initializable{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        System.out.println(EmployeeManager.getInstance().getEmployee());
     }
 }

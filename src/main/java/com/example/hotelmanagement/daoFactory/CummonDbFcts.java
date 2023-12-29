@@ -57,7 +57,6 @@ public class CummonDbFcts<T> {
             connection = DaoFactory.getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT " + selectedCols +" FROM " + tableName + " WHERE " + whereClause);
-            System.out.println("SELECT "+ selectedCols + " FROM " + tableName + " WHERE " + whereClause);
             while (resultSet.next()) {
                 Object obj = objectClass.getDeclaredConstructor().newInstance();
 
@@ -107,7 +106,6 @@ public class CummonDbFcts<T> {
                 Object value = getter.invoke(obj);
                 preparedStatement.setObject(i, value);
             }
-            System.out.println(preparedStatement);
 
             preparedStatement.executeUpdate();
 
@@ -221,7 +219,6 @@ public class CummonDbFcts<T> {
                     " INNER JOIN " + table2 + " "  + alias2 +
                     " ON " + alias1 + "." + column1 + " = " + alias2 + "." + column2
                     + whereClause;
-            System.out.println(query);
             resultSet = statement.executeQuery(query);
 
                 while (resultSet.next()) {
@@ -243,7 +240,6 @@ public class CummonDbFcts<T> {
             connection = DaoFactory.getConnection();
             statement = connection.createStatement();
             String query = selectQuery;
-            System.out.println(query);
             resultSet = statement.executeQuery(query);
 
                 while (resultSet.next()) {

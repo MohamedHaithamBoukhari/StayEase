@@ -31,13 +31,7 @@ public class RoomsTableView {
         this.duration = duration;
 
         this.setPrice_day(price_day,type);
-        System.out.println("price_day"+this.price_day);
-
         this.price = (int)this.price_day*(1+(int)capacity) - ((int) capacity*40);
-        System.out.println("price"+this.price);
-        System.out.println(this.price.getClass());
-        System.out.println(this.capacity.getClass());
-        System.out.println("duration class "+duration.getClass()+" value "+duration );
         if(duration instanceof Long){
             this.reservationPrice = (int)this.price * (Long)this.duration;
         }else if (duration instanceof  Integer){
@@ -96,14 +90,11 @@ public class RoomsTableView {
     public void setPrice_day(Object price_day, Object type) {
         if(price_day != null){ // if we pass a value of priceDay we assigned it, else we select it from roomType dao
             this.price_day = price_day;
-            System.out.println(price_day);
         }else {
             Map map = new HashMap<>();
             map.put("type", type);
             RoomType roomType = (RoomType)(RoomTypeDao.select(map, "*").get(0));
             this.price_day = roomType.getPrice_day();
-            System.out.println( "price_day rom db  " + roomType.getPrice_day());
-            System.out.println( "priceday from setter "+this.getPrice_day());
         }
 
     }

@@ -49,7 +49,6 @@ public class EmployeeActionsController implements Initializable {
                 Position position = (Position) positions.get(i);
                 positionsList.add(position.getEmpPosition());
             }
-            System.out.println(positionsList);
 
             positionComboBox_.getItems().addAll(positionsList);
 
@@ -171,7 +170,6 @@ public class EmployeeActionsController implements Initializable {
     public void addPosition(ActionEvent event){
         String position = newPositionField_.getText();
         String description = newDescriptionField_.getText();
-        System.out.println("descfiption = " + description);
         if(position.isEmpty()){
             newpositionError.setText("Invalid Position");
             return;

@@ -63,10 +63,8 @@ public class AssignRoomsController implements Initializable {
             List<Object[]> empsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : empsDetails) {
                 AffectedTasksTableView empRow = new AffectedTasksTableView(row[0],row[1],row[2],row[3],row[4]);
-                System.out.println(empRow);
                 empsList.add(empRow);
             }
-            System.out.println(empsList);
         }else{
             String col1 = "e.position", col2 = "e.fullName", col3 = "e.email";
             query += " WHERE ";
@@ -93,8 +91,6 @@ public class AssignRoomsController implements Initializable {
                 query = query.substring(0, query.length() - 5);//delete last " AND "
                 query = query + " ORDER BY total_tasks " + assignedRoomNbrOrder;
             }
-            System.out.println(query);
-
 
             List<Object[]> empsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : empsDetails) {
@@ -108,8 +104,6 @@ public class AssignRoomsController implements Initializable {
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
         assignedRoomsNbrCol.setCellValueFactory(new PropertyValueFactory<>("assignedRoomsNbr"));
-        System.out.println(empsList);
-        System.out.println("-----"+empsTable.getItems().addAll(empsList));
         // this line to verify because  i add it , because i don't trouve it
         empsTable.getItems().addAll(empsList);
 

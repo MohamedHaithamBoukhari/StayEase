@@ -12,9 +12,8 @@ public class DaoFactory {
         String URL = DbConfig.DB_HOST + "/" + DbConfig.DB_NAME;
         try {
             conn = DriverManager.getConnection(URL,DbConfig.DB_USERNAME,DbConfig.DB_PASSWORD);
-            System.out.println("::connected::");
         } catch (SQLException e){
-            System.out.println("::not connected::" + e);
+            System.out.println("::not connected:" + e);
         }
         return conn;
     }

@@ -48,7 +48,6 @@ public class FeedbackActionsController implements Initializable {
                 map.put("feedbackId", VarsManager.selectedFeedbackId);
 
                 Object feedback = FeedbackDao.select(map, "*").get(0);
-                System.out.println(feedback);
 
                 customerService_rateSpinner_.getValueFactory().setValue(((Feedback)feedback).getServiceVSprice_rate());
                 cleanliness_rateSpinner_.getValueFactory().setValue(((Feedback)feedback).getCleanliness_rate());
@@ -76,15 +75,12 @@ public class FeedbackActionsController implements Initializable {
         List<Integer> ratesList =  new ArrayList<Integer>(List.of (rate1, rate2, rate3, rate4, rate5, rate6, rate7, rate8));
         String comment = commentField_.getText();
 
-        System.out.println("boolean verify fields" +verifyFields(event, ratesList));
-        System.out.println("list of rats" +ratesList);
         if(verifyFields(event, ratesList)){
             int customerId = CustomerManager.getInstance().getCustomer().getCustomerId();
             int totalRate = (rate1+ rate2+ rate3+ rate4+ rate5+ rate6+ rate7+ rate8) / 8;
             LocalDate currentDate = LocalDate.now();
 
             Feedback feedback = new Feedback(customerId, "Invisible", 100, rate1, rate2, rate3, rate4, rate5, rate6, rate7, rate8, comment,totalRate,currentDate);
-            System.out.println("inserted feedback : " +feedback);
             FeedbackDao.insert(feedback);
             VarsManager.actionCompleted = "add";
             closeStage(event);

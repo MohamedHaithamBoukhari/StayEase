@@ -206,7 +206,6 @@ public class HomePageController implements Initializable {
             List<Object[]> tasksDetails = CummonDbFcts.performJoinAndSelect(TaskDao.TABLE_NAME, "t", EmployeeDao.TABLE_NAME,"e","employeeId","employeeId", colToSelect, whereClause);
             for (Object[] row : tasksDetails) {
                 TaskTableView taskRow = new TaskTableView(row[0],row[1],row[2],row[3]);
-                System.out.println(taskRow);
                 tasksList.add(taskRow);
             }
         }else{
@@ -229,13 +228,11 @@ public class HomePageController implements Initializable {
                 whereClause = whereClause + " ORDER BY t.taskDate " + taskDateOrder + " AND ";
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last "AND "
-            System.out.println(whereClause);
 
 
             List<Object[]> tasksDetails = CummonDbFcts.performJoinAndSelect(TaskDao.TABLE_NAME, "t", EmployeeDao.TABLE_NAME,"e","employeeId","employeeId", colToSelect, whereClause);
             for (Object[] row : tasksDetails) {
                 TaskTableView taskRow = new TaskTableView(row[0],row[1],row[2],row[3]);
-                System.out.println(taskRow);
                 tasksList.add(taskRow);
             }
         }
@@ -354,7 +351,6 @@ public class HomePageController implements Initializable {
             List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : complaintsDetails) {
                 ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                System.out.println(complaintRow);
                 complaintsList.add(complaintRow);
             }
         }else{
@@ -387,13 +383,11 @@ public class HomePageController implements Initializable {
             }
 
             query = query.substring(0, query.length() - 5);//delete last "AND "
-            System.out.println(query);
 
 
             List<Object[]> complaintsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : complaintsDetails) {
                 ComplaintTableView complaintRow = new ComplaintTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]);
-                System.out.println(complaintRow);
                 complaintsList.add(complaintRow);
             }
         }
@@ -490,8 +484,6 @@ public class HomePageController implements Initializable {
     public void editComplaint(ActionEvent event){
         String object = objectField.getText();
         String complaintBody = complaintField.getText();
-        System.out.println("'''''''''''"+object);
-        System.out.println("'''''''''''"+complaintBody);
 
         if (!object.isEmpty()){
             String[] updatedColumns = {"declarationObject", "declaration"};
@@ -595,7 +587,6 @@ public class HomePageController implements Initializable {
         timeline.play();
     }
     public void logout(ActionEvent event) throws IOException {
-        System.out.println(EmployeeManager.getInstance().getEmployee());
         EmployeeManager.getInstance().setManager(new Employee("","","","","","",0,"",""));
         switchToWelcomePage(event);
     }
@@ -606,7 +597,6 @@ public class HomePageController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        System.out.println(EmployeeManager.getInstance().getEmployee());
     }
 
 }

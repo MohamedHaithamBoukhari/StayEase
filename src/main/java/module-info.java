@@ -18,16 +18,10 @@ module com.example.hotelmanagement {
     opens com.example.hotelmanagement.tablesView to javafx.fxml;
     exports com.example.hotelmanagement.scenes;
     opens com.example.hotelmanagement.scenes to javafx.fxml;
-    exports com.example.hotelmanagement.scenes.customer;
-    opens com.example.hotelmanagement.scenes.customer to javafx.fxml;
     exports com.example.hotelmanagement.controllers.customer;
     opens com.example.hotelmanagement.controllers.customer to javafx.fxml;
-    exports com.example.hotelmanagement.scenes.admin;
-    opens com.example.hotelmanagement.scenes.admin to javafx.fxml;
     exports com.example.hotelmanagement.controllers.admin;
     opens com.example.hotelmanagement.controllers.admin to javafx.fxml;
-    exports com.example.hotelmanagement.scenes.manager;
-    opens com.example.hotelmanagement.scenes.manager to javafx.fxml;
     exports com.example.hotelmanagement.controllers.employee;
     opens com.example.hotelmanagement.controllers.employee to javafx.fxml;
     exports com.example.hotelmanagement.controllers.employee.manager;

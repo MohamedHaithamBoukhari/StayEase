@@ -120,9 +120,7 @@ public class InvoicesTableView {
     public void setReservationDuration(Object reservationId) {
         Map<String, Object> map = new HashMap<>();
         map.put("reservationId",(int)reservationId);
-        System.out.println(ReservationDao.select(map,"*"));
         Reservation reservation = (Reservation) (ReservationDao.select(map,"*").get(0));
-        System.out.println(reservation);
         this.reservationDuration = " From " + reservation.getCheck_inDate() + " to " + reservation.getCheck_outDate();
     }
 
