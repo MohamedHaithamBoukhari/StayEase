@@ -108,7 +108,7 @@ public class EmployeeActionsController implements Initializable {
         if(verifyFields(event,fullName, cin, phone, emailAddress, password, salary, position, working_hours, working_days)){
             String workingDays = String.join(", ", working_days);
 
-            String[] updatedColumns = {"fullName", "cin", "phone", "emailAddress", "password", "position", "salary", "workingHours", "workingDays"};
+            String[] updatedColumns = {"fullName", "cin", "phone", "email", "password", "position", "salary", "workingHours", "workingDays"};
             Object[] newColumnsValue = {fullName, cin, phone, emailAddress, password, position, salary, working_hours, workingDays};
             String testColumn = "employeeId";
             Object testColumnValue = VarsManager.selectedEmpId;

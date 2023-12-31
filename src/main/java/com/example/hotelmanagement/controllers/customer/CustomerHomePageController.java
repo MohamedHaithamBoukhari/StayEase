@@ -444,6 +444,7 @@ public class CustomerHomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(reservationTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -555,13 +556,14 @@ public class CustomerHomePageController implements Initializable{
         List<String> colToSelect =  new ArrayList<String>(List.of ("f.feedbackId", "f.customerId", "cust.fullName", "f.visibility", "f.priority", "f.customerService_rate", "f.cleanliness_rate", "f.roomComfort_rate", "f.location_rate", "f.safety_rate", "f.environnement_rate", "f.view_rate", "f.serviceVSprice_rate", "f.review_rate", "f.feedback_date"));
 
         if(fullname.isEmpty() && rateOrder.isEmpty() && fbDate == null && myFeedback == false){
-            List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, "");
+            String whereClause = " WHERE (f.visibility = 'visible' OR f.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId() + ")";
+            List<Object[]> feedbackdetails = CummonDbFcts.performJoinAndSelect(FeedbackDao.TABLE_NAME, "f", CustomerDao.TABLE_NAME,"cust","customerId","customerId", colToSelect, whereClause);
             for (Object[] row : feedbackdetails) {
                 FeedbackTableView feedbackRow = new FeedbackTableView(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11], row[12], row[13], row[14]);
                 feedbackList.add(feedbackRow);
             }
         }else{
-            String whereClause = " WHERE ";
+            String whereClause = " WHERE " ;
             int i = 0;
             if(!fullname.isEmpty()){
                 whereClause = whereClause + "cust.fullName LIKE '%" + fullname + "%' AND ";
@@ -573,6 +575,9 @@ public class CustomerHomePageController implements Initializable{
             }
             if(myFeedback == true){
                 whereClause = whereClause + "f.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId() + " AND ";
+                i++;
+            }else{
+                whereClause = whereClause + "(f.visibility = 'visible' OR f.customerId = " + CustomerManager.getInstance().getCustomer().getCustomerId() + ") AND ";
                 i++;
             }
             whereClause = whereClause.substring(0, whereClause.length() - 5);//delete last " AND "
@@ -631,6 +636,7 @@ public class CustomerHomePageController implements Initializable{
 
         if(feedbackTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
@@ -690,6 +696,7 @@ public class CustomerHomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(feedbackTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.actionStarted = "update";
@@ -734,6 +741,7 @@ public class CustomerHomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(feedbackTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -910,6 +918,7 @@ public class CustomerHomePageController implements Initializable{
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
@@ -952,6 +961,7 @@ public class CustomerHomePageController implements Initializable{
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
@@ -985,6 +995,7 @@ public class CustomerHomePageController implements Initializable{
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         detailDate.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationDate()));

@@ -301,6 +301,7 @@ public class HomePageController implements Initializable {
 
         if(tasksTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("On Hold") ){
@@ -319,6 +320,7 @@ public class HomePageController implements Initializable {
 
         if(tasksTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("In Progress") ){
@@ -471,6 +473,7 @@ public class HomePageController implements Initializable {
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
@@ -513,6 +516,7 @@ public class HomePageController implements Initializable {
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
@@ -546,6 +550,7 @@ public class HomePageController implements Initializable {
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         detailDate.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationDate()));

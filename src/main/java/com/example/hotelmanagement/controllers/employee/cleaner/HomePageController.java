@@ -303,6 +303,7 @@ public class HomePageController implements Initializable {
 
         if(tasksTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("On Hold") ){
@@ -321,6 +322,7 @@ public class HomePageController implements Initializable {
 
         if(tasksTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("Completed") || tasksTable.getSelectionModel().getSelectedItem().getTaskStatus().equals("In Progress") ){
@@ -453,7 +455,7 @@ public class HomePageController implements Initializable {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String complaintDate = currentDate.format(formatter);
 
-            Complaint complaint = new Complaint(declarantId,"Customer",object,complaintBody,complaintDate,null,null);
+            Complaint complaint = new Complaint(declarantId,"Cleaner",object,complaintBody,complaintDate,null,null);
             DeclarationDao.insert(complaint);
 
             addComplaintPane.setVisible(false);
@@ -473,6 +475,7 @@ public class HomePageController implements Initializable {
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
@@ -515,6 +518,7 @@ public class HomePageController implements Initializable {
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(!String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getResponse()).toLowerCase().equals("null")){
@@ -548,6 +552,7 @@ public class HomePageController implements Initializable {
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         detailDate.setText(String.valueOf(complaintTable.getSelectionModel().getSelectedItem().getDeclarationDate()));

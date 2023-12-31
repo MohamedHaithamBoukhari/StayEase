@@ -45,9 +45,9 @@
             <Font size="17.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="roomStatusComboBox_" layoutX="605.0" layoutY="289.0" prefHeight="40.0" prefWidth="115.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="289.0" />
+      <ComboBox fx:id="roomStatusComboBox_" layoutX="597.8" layoutY="288.0" prefHeight="40.0" prefWidth="124.0" AnchorPane.rightAnchor="178.20000000000005" AnchorPane.topAnchor="288.0" />
       <Label fx:id="roomStatusError" layoutX="500.0" layoutY="328.0" prefHeight="17.0" prefWidth="220.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="328.0" />
-        <Button fx:id="editBtn" layoutX="340.0" layoutY="420.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="38.0" prefWidth="86.0" text="Add">
+        <Button fx:id="editBtn" layoutX="340.0" layoutY="420.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="38.0" prefWidth="86.0" text="Save">
             <font>
                 <Font size="17.0" />
             </font>

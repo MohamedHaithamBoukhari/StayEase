@@ -5,12 +5,15 @@ import com.example.hotelmanagement.dao.*;
 import com.example.hotelmanagement.daoFactory.CummonDbFcts;
 import com.example.hotelmanagement.localStorage.VarsManager;
 import com.example.hotelmanagement.tablesView.AffectedTasksTableView;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,11 +90,11 @@ public class AssignRoomsController implements Initializable {
             query = query.substring(0, query.length() - 5);//delete last "AND "
 
             query += " GROUP BY e.employeeId, e.fullName, e.email, e.position AND ";
+            query = query.substring(0, query.length() - 5);//delete last " AND "
             if(!assignedRoomNbrOrder.equals("")){
-                query = query.substring(0, query.length() - 5);//delete last " AND "
                 query = query + " ORDER BY total_tasks " + assignedRoomNbrOrder;
             }
-
+            System.out.println(query);
             List<Object[]> empsDetails = CummonDbFcts.querySelect(query, colToSelect);
             for (Object[] row : empsDetails) {
                 AffectedTasksTableView empRow = new AffectedTasksTableView(row[0],row[1],row[2],row[3],row[4]);
@@ -157,6 +160,7 @@ public class AssignRoomsController implements Initializable {
 
         if(empsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -179,7 +183,12 @@ public class AssignRoomsController implements Initializable {
         confirmAssigningPane.setVisible(false);
         assignPane.setVisible(true);
     }
-
+    public void hideMsg(Label msg,double time){
+        Duration duration = Duration.seconds(time);
+        Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
     public void closeStage(ActionEvent event){
         HomePageController.childStage.close();
         VarsManager.actionStarted = "";

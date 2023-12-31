@@ -384,6 +384,7 @@ public class HomePageController implements Initializable{
 
         if(customersTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(customersTable.getSelectionModel().getSelectedItem().getAccount_status().equals("Blocked")){
@@ -406,6 +407,7 @@ public class HomePageController implements Initializable{
 
         if(customersTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(customersTable.getSelectionModel().getSelectedItem().getAccount_status().equals("Active")){
@@ -561,6 +563,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(roomsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.actionStarted = "update";
@@ -595,6 +598,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(roomsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -757,6 +761,7 @@ public class HomePageController implements Initializable{
         cleaningAssigningError.setVisible(false);
         if(cleaningTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(cleaningTable.getSelectionModel().getSelectedItem().getStatus().equals("Under Cleaning")){
@@ -767,7 +772,7 @@ public class HomePageController implements Initializable{
         VarsManager.selectedRoomId = (int) cleaningTable.getSelectionModel().getSelectedItem().getRoomId();
         VarsManager.actionStarted ="assignCleaningTask";
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignRooms-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/AssignRooms-view.fxml"));
         Parent root = loader.load();
 
         scene = new Scene(root);
@@ -862,6 +867,7 @@ public class HomePageController implements Initializable{
         maintenanceAssigningError.setVisible(false);
         if(maintenanceTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         if(maintenanceTable.getSelectionModel().getSelectedItem().getStatus().equals("Under Maintenance")){
@@ -872,7 +878,7 @@ public class HomePageController implements Initializable{
         VarsManager.selectedRoomId = (int) maintenanceTable.getSelectionModel().getSelectedItem().getRoomId();
         VarsManager.actionStarted ="assignMaintenanceTask";
 
-        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/manager/AssignRooms-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL(PathConfig.RESSOURCES_ABS_PATH + "views/employee/manager/AssignRooms-view.fxml"));
         Parent root = loader.load();
 
         scene = new Scene(root);
@@ -982,6 +988,7 @@ public class HomePageController implements Initializable{
 
         if(invoicesTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -993,6 +1000,7 @@ public class HomePageController implements Initializable{
             hideConfirmPayBtn.setVisible(true);
         } else {
             changeStatusError.setVisible(true);
+            hideMsg(changeStatusError,4);
         }
     }
     public void hideConfirmation (ActionEvent event){
@@ -1136,6 +1144,7 @@ public class HomePageController implements Initializable{
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -1187,6 +1196,7 @@ public class HomePageController implements Initializable{
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -1216,6 +1226,7 @@ public class HomePageController implements Initializable{
 
         if(complaintTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 

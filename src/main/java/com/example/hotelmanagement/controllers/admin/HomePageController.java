@@ -249,6 +249,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(empsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.selectedEmpId = (int) empsTable.getSelectionModel().getSelectedItem().getEmployeeId();
@@ -304,6 +305,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(empsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.actionStarted = "update";
@@ -338,6 +340,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(empsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -471,6 +474,7 @@ public class HomePageController implements Initializable{
 
         if(feedbackTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
@@ -497,6 +501,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(feedbackTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
         VarsManager.selectedFeedbackId = (int) feedbackTable.getSelectionModel().getSelectedItem().getFeedbackId();
@@ -613,6 +618,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(servicesTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -634,6 +640,7 @@ public class HomePageController implements Initializable{
         rowSelectedError.setVisible(false);
         if(servicesTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -721,11 +728,11 @@ public class HomePageController implements Initializable{
     }
 //-------------------------------------------------------------------------------
     public void hideMsg(Label msg,double time){
-    Duration duration = Duration.seconds(time);
-    Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
-    timeline.setCycleCount(1);
-    timeline.play();
-}
+        Duration duration = Duration.seconds(time);
+        Timeline timeline = new Timeline(new KeyFrame(duration, e -> msg.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
     public void logout(ActionEvent event) throws IOException {
         AdminManager.getInstance().setAdmin(new Employee("", "", "", "", "", "", 0, "", ""));
         switchToWelcomePage(event);

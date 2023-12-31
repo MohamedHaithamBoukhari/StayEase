@@ -224,6 +224,7 @@ public class ReservationActionsController implements Initializable {
         rowSelectedError.setVisible(false);
         if(availableRoomsTable.getSelectionModel().getSelectedItem() == null){
             rowSelectedError.setVisible(true);
+            hideMsg(rowSelectedError,4);
             return;
         }
 
@@ -264,12 +265,6 @@ public class ReservationActionsController implements Initializable {
         //insert reservation
         Reservation reservation = new Reservation(currentDate,customerId,selectedRoom.getRoomId(),checkInDate,checkOutDate,"Upcoming");
         ReservationDao.insert(reservation);
-        //update room status
-        String[] updatedColumns = {"status"};
-        Object[] newColumnsValue = {"Occupied"};
-        String testColumn = "roomId";
-        Object testColumnValue = VarsManager.selectedAvailableRoomId;
-        RoomDao.updateColumns(updatedColumns, newColumnsValue, testColumn, testColumnValue);
         //generate invoice
         Map priceMap = new HashMap<>();
         priceMap.put("type",selectedRoom.getType());
@@ -290,10 +285,9 @@ public class ReservationActionsController implements Initializable {
         Object[] newColumnsValue = {"Cancelled"};
         String testColumn = "reservationId";
         Object testColumnValue = VarsManager.selectedResId;
-        //When the reservation is cancelled, automaticly its invoice is cancelled
         ReservationDao.updateColumns(updatedColumns,newColumnsValue,testColumn,testColumnValue);
+        //When the reservation is cancelled, automaticly its invoice is cancelled
         InvoiceDao.updateColumns(updatedColumns,newColumnsValue,testColumn,testColumnValue);
-
 
         VarsManager.actionCompleted = "delete";
         CustomerHomePageController.childStage.close();

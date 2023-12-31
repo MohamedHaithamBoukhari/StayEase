@@ -57,7 +57,7 @@ public class Validation {
             }
             return true;
         } else if (action.equals("update")) {
-            if(roomNbr == VarsManager.selectedRoomId || rooms.size() != 1){
+            if(roomNbr == VarsManager.selectedRoomId || rooms.size() == 0){
                 return true;
             }else{
                 return false;

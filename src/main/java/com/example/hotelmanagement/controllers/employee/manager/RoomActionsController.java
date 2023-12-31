@@ -63,7 +63,6 @@ public class RoomActionsController implements Initializable {
                 Map<String, Object> map = new HashMap<>();
                 map.put("roomId", VarsManager.selectedRoomId);
                 Object room = RoomDao.select(map, "*").get(0);
-
                 roomNumberSpinner_.getValueFactory().setValue(((Room)room).getNumRoom());
                 roomCapacitySpinner_.getValueFactory().setValue(((Room)room).getCapacity());
                 roomTypeComboBox_.getSelectionModel().select(((Room) room).getType());
@@ -93,7 +92,7 @@ public class RoomActionsController implements Initializable {
         status = roomStatusComboBox_.getValue();
 
         if(verifyFields(event,roomNbr, capacity, type, status, "update")){
-            String[] updatedColumns = {"roomNbr", "capacity", "type", "status"};
+            String[] updatedColumns = {"numRoom", "capacity", "type", "status"};
             Object[] newColumnsValue = {roomNbr, capacity, type, status};
             String testColumn = "roomId";
             Object testColumnValue = VarsManager.selectedRoomId;

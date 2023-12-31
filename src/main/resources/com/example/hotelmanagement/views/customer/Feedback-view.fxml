@@ -144,7 +144,7 @@
                 <TableColumn fx:id="fullNameCol" prefWidth="111.0" text="Full Name" />
                 <TableColumn fx:id="feedbackDateCol" prefWidth="115.0" text="Feedback Date" />
                 <TableColumn fx:id="rateCol" text="Rate" />
-            <TableColumn fx:id="commentCol" prefWidth="256.0" text="Comment" />
+            <TableColumn fx:id="commentCol" prefWidth="255.199951171875" text="Comment" />
             </columns>
         </TableView>
         <Label fx:id="rowSelectedError" layoutX="219.0" layoutY="542.0" prefHeight="30.0" prefWidth="213.0" text="No row has been selected" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="219.0">
