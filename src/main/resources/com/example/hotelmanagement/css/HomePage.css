@@ -50,3 +50,14 @@ Button{
 #customersBtn:pressed {
     -fx-scale-y: .95;
 }
+
+#homeBtn:hover, #profileBtn:hover, #roomsBtn:hover, #servicesBtn:hover, #invoiceBtn:hover, #feedbackBtn:hover, #ComplaintBtn:hover, #aboutBtn:hover, #employeeBtn:hover, #feedbackBtn:hover, #earningBtn:hover, #cleaningBtn:hover, #complaintBtn:hover, #reservationBtn:hover, #maintenanceBtn:hover{
+    -fx-scale-X: 1.0;
+    -fx-scale-y: 1.05;
+    -fx-border-color: rgba(255,255,255,0.5);
+    -fx-border-radius: 10px;
+}
+#homeBtn:pressed, #profileBtn:pressed, #roomsBtn:pressed, #servicesBtn:pressed, #invoiceBtn:pressed, #feedbackBtn:pressed, #ComplaintBtn:pressed, #aboutBtn:pressed, #employeeBtn:pressed, #feedbackBtn:pressed, #earningBtn:pressed, #cleaningBtn:pressed, #complaintBtn:pressed, #reservationBtn:pressed, #maintenanceBtn:pressed, #invoiceBtn:pressed{
+    -fx-scale-y: .98;
+}
+
