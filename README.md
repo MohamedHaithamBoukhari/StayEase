@@ -15,3 +15,20 @@ This innovative system prioritizes customer satisfaction and operational efficie
 
 
 ## Project Showcase
+
+##### Home
+![Home](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/Home%20Menu.png)
+##### Admin Dashboard
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/adminDashboard.png)
+##### Manager Dashboard
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/managerDashboard.png)
+##### Cleaner Dashboard
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/cleanerDashboard.png)
+##### MaintenanceStaff Dashboard
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/maintenanceStaffDashboard.png)
+##### Customer Dashboard
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/customerDashboard.png)
+##### Login
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/login.png)
+##### SignIn
+![](https://github.com/MohamedHaithamBoukhari/StayEase/blob/master/projectPreview/signIn.png)
